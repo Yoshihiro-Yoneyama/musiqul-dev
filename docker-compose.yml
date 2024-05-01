@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    ports:
+      - "34961:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: msqdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+  app:
+    image: gradle:8.7.0-jdk21
+    working_dir: /app
+    volumes:
+      - ./workspace/musiqul-api:/app
+    ports:
+      - "34962:8080"
+    command: ./gradlew clean bootRun -x test
+volumes:
+  db-data:
+    name: db-data
+

@@ -8,11 +8,15 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: msqdb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: user
-  app:
+      POSTGRES_USER: pgadmin
+      POSTGRES_PASSWORD: pgadmin
+  api:
     image: gradle:8.7.0-jdk21
     working_dir: /app
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://db:34961/msqdb
+      - DATASOURCE_USERNAME=pgadmin
+      - DATASOURCE_PASSWORD=pgadmin
     volumes:
       - ./workspace/musiqul-api:/app
     ports:

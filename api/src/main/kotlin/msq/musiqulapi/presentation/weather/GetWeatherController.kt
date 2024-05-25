@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class GetWeatherController {
-  @GetMapping("/weather")
-  fun getPerson(): GetWeatherResponse {
+  @GetMapping("api/weather")
+  fun get(): GetWeatherResponse {
     return GetWeatherResponse(
       weatherId = "123",
       label = "label",

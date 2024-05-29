@@ -14,7 +14,7 @@ class WebConfig : WebFluxConfigurer {
   @Bean
   fun corsWebFilter(): CorsWebFilter {
     val corsConfig = CorsConfiguration()
-    corsConfig.allowedOrigins = listOf("http://localhost:3000")
+    corsConfig.allowedOrigins = listOf("http://localhost:34963")
     corsConfig.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH")
     corsConfig.allowedHeaders = listOf("*")
 

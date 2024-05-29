@@ -17,6 +17,9 @@ type WeatherComponentProps = {
 export default function WeatherComponent({initialResponse}: WeatherComponentProps) {
   const [weatherData, setWeatherData] = useState<WeatherDataResponse | null>(initialResponse);
 
+  // ボタンクリックの通知を返す
+  // ボタンのfunctionを受け取る
+
   const handleButtonClick = async () => {
     if (weatherData) {
       // データが表示されている場合、クリアする

@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:16-alpine
+    container_name: db
     restart: always
     ports:
       - "34961:5432"
@@ -10,8 +11,17 @@ services:
       POSTGRES_DB: msqdb
       POSTGRES_USER: pgadmin
       POSTGRES_PASSWORD: pgadmin
+  flyway:
+    image: flyway/flyway:10
+    container_name: flyway
+    depends_on:
+      - db
+    volumes:
+      - ./workspace/musiqul-flyway/migration:/flyway/sql
+      - ./workspace/musiqul-flyway/conf:/flyway/conf
   api:
     image: gradle:8.7.0-jdk21
+    container_name: api
     working_dir: /app
     environment:
       - DATASOURCE_URL=jdbc:postgresql://db:34961/msqdb
@@ -24,6 +34,7 @@ services:
     command: ./gradlew clean bootRun -x test
   web:
     image: node:22
+    container_name: web
     working_dir: /app
     volumes:
       - ./workspace/musiqul-web:/app
@@ -37,4 +48,3 @@ services:
 volumes:
   db-data:
     name: db-data
-

@@ -1,0 +1,14 @@
+/*text-2xl mb-4*/
+.title {
+  font-size: 10px;
+  margin-bottom: 4rem;
+}
+
+/*container mx-auto p-8 text-center max-w-2xl*/
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  text-align: center;
+  max-width: 2rem;
+}

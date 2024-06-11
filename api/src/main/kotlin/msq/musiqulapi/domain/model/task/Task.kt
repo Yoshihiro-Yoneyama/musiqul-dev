@@ -1,7 +1,5 @@
 package msq.musiqulapi.domain.model.task
 
-import java.util.Optional
-
 class Task private constructor(
   val id: TaskId,
   val title: TaskTitle,

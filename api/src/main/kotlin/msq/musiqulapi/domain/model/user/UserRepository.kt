@@ -1,4 +1,4 @@
-package msq.musiqulapi.domain.user
+package msq.musiqulapi.domain.model.user
 
 interface UserRepository {
   fun save(user: User)

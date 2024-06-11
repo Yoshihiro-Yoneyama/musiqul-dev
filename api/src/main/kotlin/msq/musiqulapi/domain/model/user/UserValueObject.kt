@@ -1,4 +1,4 @@
-package msq.musiqulapi.domain.user
+package msq.musiqulapi.domain.model.user
 
 import lombok.Value
 import java.util.*
@@ -11,7 +11,7 @@ value class MailAddress(val value: String) {
   init {
     require(value.isNotBlank()) { "Mail address is required" }
     require(value.length <= MAIL_ADDRESS_MAX_LENGTH) {
-      "Mail address must be ${MAIL_ADDRESS_MAX_LENGTH} characters or less"
+      "Mail address must be $MAIL_ADDRESS_MAX_LENGTH characters or less"
     }
   }
 }

@@ -29,10 +29,9 @@ dependencies {
   implementation("org.projectlombok:lombok")
   implementation("org.springframework.boot:spring-boot-starter-jooq")
   jooqGenerator("org.postgresql:postgresql:42.5.4")
-  implementation("org.jooq:jooq:3.19.1")
-  implementation("org.jooq:jooq-meta:3.19.1")
-  implementation("org.jooq:jooq-codegen:3.19.1")
-  implementation("org.jooq:jooq-meta-jaxb:3.19.1")
+  implementation("org.jooq:jooq")
+  implementation("org.jooq:jooq-meta")
+  implementation("org.jooq:jooq-codegen")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 }

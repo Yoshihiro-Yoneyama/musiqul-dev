@@ -40,6 +40,7 @@ const TodoList = () => {
         onKeyDown={(e) => e.key === 'Enter' && addTask()}
         className="p-2 border rounded w-full mb-8"
       />
+      <button>test</button>
       {/* タスクリストをレンダリング */}
       <div>
         {tasks.map((task, index) => (

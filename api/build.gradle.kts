@@ -27,11 +27,12 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.projectlombok:lombok")
+  // jooq
   implementation("org.springframework.boot:spring-boot-starter-jooq")
   jooqGenerator("org.postgresql:postgresql:42.5.4")
-  implementation("org.jooq:jooq")
-  implementation("org.jooq:jooq-meta")
-  implementation("org.jooq:jooq-codegen")
+  // Arrow Kt
+  implementation("io.arrow-kt:arrow-core:1.2.4")
+  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 }

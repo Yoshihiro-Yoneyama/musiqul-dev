@@ -1,4 +1,4 @@
-package msq.musiqulapi.domain.model.task
+package msq.musiqulapi.domain.model.test_task
 
 import lombok.NonNull
 import lombok.Value
@@ -8,7 +8,7 @@ private const val TASK_TITLE_MAX_LENGTH = 50
 private const val TASK_DESCRIPTION_MAX_LENGTH = 300
 
 @Value(staticConstructor = "of")
-data class TaskId(@NonNull val value: String) {
+data class TaskId(val value: String) {
   companion object {
     fun generate(): TaskId {
       return TaskId(UUID.randomUUID().toString())
@@ -18,7 +18,7 @@ data class TaskId(@NonNull val value: String) {
 
 @JvmInline
 @Value
-value class TaskTitle(@NonNull val value: String) {
+value class TaskTitle(val value: String) {
   init {
     require(value.length <= TASK_TITLE_MAX_LENGTH) {
       "Task title must be $TASK_TITLE_MAX_LENGTH characters or less"
@@ -28,7 +28,7 @@ value class TaskTitle(@NonNull val value: String) {
 
 @JvmInline
 @Value
-value class TaskDescription(@NonNull val value: String) {
+value class TaskDescription(val value: String) {
   init {
     require(value.length <= TASK_DESCRIPTION_MAX_LENGTH) {
       "Task description must be $TASK_DESCRIPTION_MAX_LENGTH characters or less"

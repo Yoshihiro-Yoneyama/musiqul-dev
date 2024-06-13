@@ -1,7 +1,6 @@
-package msq.musiqulapi.domain.model.task
+package msq.musiqulapi.domain.model.test_task
 
 import lombok.Value
-import lombok.experimental.Accessors
 
 @Value(staticConstructor = "of")
 class Task private constructor(

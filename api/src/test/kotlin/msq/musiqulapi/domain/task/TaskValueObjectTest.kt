@@ -1,7 +1,7 @@
 package msq.musiqulapi.domain.task
 
-import msq.musiqulapi.domain.model.task.TaskId
-import msq.musiqulapi.domain.model.task.TaskTitle
+import msq.musiqulapi.domain.model.test_task.TaskId
+import msq.musiqulapi.domain.model.test_task.TaskTitle
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*

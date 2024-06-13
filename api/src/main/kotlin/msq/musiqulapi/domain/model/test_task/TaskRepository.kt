@@ -1,4 +1,4 @@
-package msq.musiqulapi.domain.model.task
+package msq.musiqulapi.domain.model.test_task
 
 interface TaskRepository {
   fun find(id: TaskId): Task

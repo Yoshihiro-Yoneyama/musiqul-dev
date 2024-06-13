@@ -1,4 +1,4 @@
-package msq.musiqulapi.domain.model.user
+package msq.musiqulapi.domain.model.test_user
 
 import lombok.Value
 import java.util.*

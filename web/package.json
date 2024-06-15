@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "tsc --noEmit && next dev",
+    "build": "tsc --noEmit && next build",
+    "start": "tsc --noEmit && next start",
     "lint": "next lint"
   },
   "dependencies": {

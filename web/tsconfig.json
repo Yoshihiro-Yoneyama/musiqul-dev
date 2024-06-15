@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "strict": true,
     "strictFunctionTypes": true,
+    "noEmitOnError": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",

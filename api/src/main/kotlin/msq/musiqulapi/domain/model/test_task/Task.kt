@@ -1,6 +1,7 @@
 package msq.musiqulapi.domain.model.test_task
 
 import lombok.Value
+import msq.musiqulapi.lib.IdFactory
 
 @Value(staticConstructor = "of")
 class Task private constructor(
@@ -13,12 +14,13 @@ class Task private constructor(
 ) {
   companion object {
     fun create(
+      idFactory: IdFactory<TaskId>,
       title: TaskTitle,
       description: TaskDescription,
       due: TaskDue,
     ): Task {
       return Task(
-        TaskId.generate(),
+        idFactory.generate(),
         title,
         description,
         TaskStatus.UNDONE,

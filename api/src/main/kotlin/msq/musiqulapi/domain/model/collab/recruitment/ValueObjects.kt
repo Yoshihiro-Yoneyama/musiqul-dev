@@ -7,7 +7,7 @@ import java.time.Instant
 import java.util.*
 
 @JvmInline
-value class RecruitmentId(val value: UUID) {
+value class RecruitmentId private constructor(val value: UUID) {
   companion object {
     fun reconstruct(id: UUID): RecruitmentId {
       return RecruitmentId(id)

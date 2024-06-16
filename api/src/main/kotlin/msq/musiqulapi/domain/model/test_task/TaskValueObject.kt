@@ -7,11 +7,11 @@ import java.util.*
 private const val TASK_TITLE_MAX_LENGTH = 50
 private const val TASK_DESCRIPTION_MAX_LENGTH = 300
 
-@Value(staticConstructor = "of")
-data class TaskId(val value: String) {
+@JvmInline
+value class TaskId private constructor(val value: UUID) {
   companion object {
-    fun generate(): TaskId {
-      return TaskId(UUID.randomUUID().toString())
+    fun reconstruct(id: UUID): TaskId {
+      return TaskId(id)
     }
   }
 }

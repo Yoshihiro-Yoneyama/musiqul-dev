@@ -27,6 +27,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.projectlombok:lombok")
+  implementation("org.postgresql:postgresql")
   // jooq
   implementation("org.springframework.boot:spring-boot-starter-jooq")
   jooqGenerator("org.postgresql:postgresql:42.5.4")
@@ -47,6 +48,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
   useJUnitPlatform()
 }
+
+project.gradle.startParameter.excludedTaskNames.add("generatejooq")
 
 jooq {
   version.set("3.19.1")  // default (can be omitted)

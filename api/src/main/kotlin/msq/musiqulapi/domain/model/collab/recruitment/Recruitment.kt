@@ -3,6 +3,7 @@ package msq.musiqulapi.domain.model.collab.recruitment
 import arrow.core.Option
 import msq.musiqulapi.domain.DomainEvent
 import msq.musiqulapi.domain.DomainEventId
+import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
 
 
@@ -25,7 +26,7 @@ class Recruitment private constructor(
   val occurredEvents: List<DomainEvent>,
   val id: RecruitmentId,
   val name: RecruitmentName,
-//  val owner: PlayerId,
+  val owner: PlayerId,
   val genre: List<MusicGenre>,
   val songTitle: Option<SongTitle>,
   val ownerInstruments: List<Instrument>,

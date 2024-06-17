@@ -24,7 +24,7 @@ services:
     container_name: api
     working_dir: /app
     environment:
-      - DATASOURCE_URL=jdbc:postgresql://db:34961/msqdb
+      - DATASOURCE_URL=jdbc:postgresql://db:5432/msqdb
       - DATASOURCE_USERNAME=pgadmin
       - DATASOURCE_PASSWORD=pgadmin
     volumes:

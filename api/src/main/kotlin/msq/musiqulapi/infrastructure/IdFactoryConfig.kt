@@ -27,7 +27,6 @@ class IdFactoryConfig {
 
   @Bean
   fun taskId(): IdFactory<TaskId> {
-//    return uuidFactory { id -> TaskId(id) }
     return uuidFactory(TaskId::reconstruct)
   }
 

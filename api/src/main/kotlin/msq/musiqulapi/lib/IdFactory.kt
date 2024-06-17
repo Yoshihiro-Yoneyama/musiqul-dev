@@ -1,5 +1,5 @@
 package msq.musiqulapi.lib
 
-fun interface IdFactory<T> {
+interface IdFactory<T> {
   fun generate(): T
 }

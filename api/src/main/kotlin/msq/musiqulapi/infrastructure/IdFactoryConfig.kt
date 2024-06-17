@@ -1,5 +1,6 @@
 package msq.musiqulapi.infrastructure
 
+import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentId
 import msq.musiqulapi.domain.model.test_task.TaskId
 import msq.musiqulapi.lib.IdFactory
@@ -11,7 +12,11 @@ import java.util.*
 class IdFactoryConfig {
   companion object {
     private fun <T> uuidFactory(f: (UUID) -> T): IdFactory<T> {
-      return IdFactory { f(UUID.randomUUID())}
+      return object : IdFactory<T> {
+        override fun generate(): T {
+          return f(UUID.randomUUID())
+        }
+      }
     }
   }
 
@@ -24,5 +29,10 @@ class IdFactoryConfig {
   fun taskId(): IdFactory<TaskId> {
 //    return uuidFactory { id -> TaskId(id) }
     return uuidFactory(TaskId::reconstruct)
+  }
+
+  @Bean
+  fun playerId(): IdFactory<PlayerId> {
+    return uuidFactory(PlayerId::reconstruct)
   }
 }

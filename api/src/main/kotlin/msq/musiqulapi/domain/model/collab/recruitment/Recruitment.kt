@@ -7,21 +7,6 @@ import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
 
 
-data class Dog(
-  val dogId: Int,
-  val name: String
-) {
-  companion object {
-    fun f(recruitment: Recruitment) {
-      recruitment.name
-    }
-  }
-
-  fun updateName(name: String): Dog {
-    return this.copy(name = name)
-  }
-}
-
 class Recruitment private constructor(
   val occurredEvents: List<DomainEvent>,
   val id: RecruitmentId,
@@ -50,6 +35,7 @@ class Recruitment private constructor(
         eventId,
         id,
         command.name,
+        command.owner,
         command.genre,
         command.songTitle,
         command.ownerInstruments,
@@ -63,6 +49,7 @@ class Recruitment private constructor(
         listOf(recruitedEvent),
         id,
         command.name,
+        command.owner,
         command.genre,
         command.songTitle,
         command.ownerInstruments,
@@ -81,10 +68,12 @@ class Recruitment private constructor(
   fun close(eventIdFactory: IdFactory<DomainEventId>): Recruitment {
     val eventId = eventIdFactory.generate()
     val event = RecruitmentClosedEvent(eventId)
+    
     return Recruitment(
       this.occurredEvents.plus(event),
       this.id,
       this.name,
+      this.owner,
       this.genre,
       this.songTitle,
       this.ownerInstruments,
@@ -107,6 +96,7 @@ class Recruitment private constructor(
 
 data class RecruitCommand(
   val name: RecruitmentName,
+  val owner: PlayerId,
   val genre: List<MusicGenre>,
   val songTitle: Option<SongTitle>,
   val ownerInstruments: List<Instrument>,
@@ -121,6 +111,7 @@ data class RecruitedEvent(
   override val eventId: DomainEventId,
   val id: RecruitmentId,
   val name: RecruitmentName,
+  val owner: PlayerId,
   val genre: List<MusicGenre>,
   val songTitle: Option<SongTitle>,
   val ownerInstruments: List<Instrument>,

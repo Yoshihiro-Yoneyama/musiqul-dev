@@ -31,6 +31,9 @@ enum class MusicGenre {
 @JvmInline
 value class SongTitle(val value: NonEmptyString)
 
+@JvmInline
+value class Artist(val value: NonEmptyString)
+
 enum class Instrument {
   VOCAL,
   GITTER,
@@ -48,11 +51,18 @@ value class RequiredInstrumentsAndCounts(val value: NonEmptyMap<Instrument, Int>
 @JvmInline
 value class RequiredAgeRange private constructor(val value: IntRange) {
   companion object {
-    fun create(value: IntRange): Either<IllegalArgumentException, RequiredAgeRange> {
+    fun create2(value: IntRange): Either<IllegalArgumentException, RequiredAgeRange> {
       return if (value.first < 0 || value.last > 120)
         Either.Left(IllegalArgumentException("age is out of range"))
       else
         Either.Right(RequiredAgeRange(value))
+    }
+
+    fun create(value: IntRange): RequiredAgeRange {
+      if (value.first < 0 || value.last > 120)
+        throw IllegalArgumentException("age is out of range")
+      else
+        return RequiredAgeRange(value)
     }
   }
 }

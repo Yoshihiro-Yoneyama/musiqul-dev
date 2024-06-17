@@ -1,5 +1,6 @@
 package msq.musiqulapi.infrastructure
 
+import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentId
 import msq.musiqulapi.domain.model.test_task.TaskId
@@ -21,17 +22,22 @@ class IdFactoryConfig {
   }
 
   @Bean
-  fun recruitmentId(): IdFactory<RecruitmentId> {
+  fun domainEventIdFactory(): IdFactory<DomainEventId> {
+    return uuidFactory{id -> DomainEventId(id)}
+  }
+
+  @Bean
+  fun recruitmentIdFactory(): IdFactory<RecruitmentId> {
     return uuidFactory(RecruitmentId::reconstruct)
   }
 
   @Bean
-  fun taskId(): IdFactory<TaskId> {
+  fun taskIdFactory(): IdFactory<TaskId> {
     return uuidFactory(TaskId::reconstruct)
   }
 
   @Bean
-  fun playerId(): IdFactory<PlayerId> {
+  fun playerIdFactory(): IdFactory<PlayerId> {
     return uuidFactory(PlayerId::reconstruct)
   }
 }

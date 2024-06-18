@@ -24,8 +24,8 @@ class RecruitCommandService(
       RecruitmentName(input.name),
       PlayerId.reconstruct(input.owner),
       input.genre.map { g -> MusicGenre.valueOf(g.name) },
-      input.songTitle.map { t -> SongTitle(NonEmptyString(t)) },
-      input.artist.map { a -> Artist(NonEmptyString(a)) },
+      SongTitle(input.songTitle),
+      Artist(input.artist),
       input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
       RequiredInstrumentsAndCounts(
         NonEmptyMap(
@@ -53,8 +53,8 @@ data class RecruitCommandInput(
   val name: String,
   val owner: UUID,
   val genre: List<MusicGenreType>,
-  val songTitle: Option<String>,
-  val artist: Option<String>,
+  val songTitle: String,
+  val artist: String,
   val ownerInstruments: List<InstrumentType>,
   val recruitedInstruments: Map<InstrumentType, Int>,
   val requiredAgeRange: Option<IntRange>,

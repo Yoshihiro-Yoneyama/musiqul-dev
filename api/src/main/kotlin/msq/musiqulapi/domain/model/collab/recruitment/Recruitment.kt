@@ -13,14 +13,14 @@ class Recruitment private constructor(
   val name: RecruitmentName,
   val owner: PlayerId,
   val genre: List<MusicGenre>,
-  val songTitle: Option<SongTitle>,
-  val artist: Option<Artist>,
+  val songTitle: SongTitle, //デフォルト空文字列
+  val artist: Artist, //デフォルト空文字列
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val requiredAgeRange: Option<RequiredAgeRange>,
   val requiredGender: RequiredGender,
   val deadline: DeadLine,
-  val memo: Memo,
+  val memo: Memo, //デフォルト空文字列
   val recruitmentStatus: RecruitmentStatus,
   val deleted: Boolean
 ) {
@@ -39,7 +39,6 @@ class Recruitment private constructor(
         command.owner,
         command.genre,
         command.songTitle,
-
         command.ownerInstruments,
         command.recruitedInstruments,
         command.requiredAgeRange,
@@ -102,8 +101,8 @@ data class RecruitCommand(
   val name: RecruitmentName,
   val owner: PlayerId,
   val genre: List<MusicGenre>,
-  val songTitle: Option<SongTitle>,
-  val artist: Option<Artist>,
+  val songTitle: SongTitle,
+  val artist: Artist,
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val requiredAgeRange: Option<RequiredAgeRange>,
@@ -118,7 +117,7 @@ data class RecruitedEvent(
   val name: RecruitmentName,
   val owner: PlayerId,
   val genre: List<MusicGenre>,
-  val songTitle: Option<SongTitle>,
+  val songTitle: SongTitle,
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val requiredAgeRange: Option<RequiredAgeRange>,

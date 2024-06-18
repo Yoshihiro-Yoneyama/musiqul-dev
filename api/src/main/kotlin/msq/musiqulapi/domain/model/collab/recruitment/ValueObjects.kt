@@ -2,7 +2,6 @@ package msq.musiqulapi.domain.model.collab.recruitment
 
 import arrow.core.Either
 import msq.musiqulapi.lib.NonEmptyMap
-import msq.musiqulapi.lib.NonEmptyString
 import java.time.Instant
 import java.util.*
 
@@ -16,7 +15,17 @@ value class RecruitmentId private constructor(val value: UUID) {
 }
 
 @JvmInline
-value class RecruitmentName(val value: String)
+value class RecruitmentName(val value: String) {
+  companion object {
+    private const val MAX_LENGTH = 100
+  }
+
+  init {
+    require(value.length <= MAX_LENGTH) {
+      "Recruitment name must be $MAX_LENGTH characters or less"
+    }
+  }
+}
 
 enum class MusicGenre {
   ROCK,
@@ -29,10 +38,30 @@ enum class MusicGenre {
 }
 
 @JvmInline
-value class SongTitle(val value: NonEmptyString)
+value class SongTitle(val value: String) {
+  companion object {
+    private const val MAX_LENGTH = 500
+  }
+
+  init {
+    require(value.length <= MAX_LENGTH) {
+      "Song title must be $MAX_LENGTH characters or less"
+    }
+  }
+}
 
 @JvmInline
-value class Artist(val value: NonEmptyString)
+value class Artist(val value: String) {
+  companion object {
+    private const val MAX_LENGTH = 100
+  }
+
+  init {
+    require(value.length <= MAX_LENGTH) {
+      "artist must be $MAX_LENGTH characters or less"
+    }
+  }
+}
 
 enum class Instrument {
   VOCAL,
@@ -77,7 +106,17 @@ enum class RequiredGender {
 value class DeadLine(val value: Instant)
 
 @JvmInline
-value class Memo(val value: String)
+value class Memo(val value: String) {
+  companion object {
+    private const val MAX_LENGTH = 2000
+  }
+
+  init {
+    require(value.length <= MAX_LENGTH) {
+      "Memo must be $MAX_LENGTH characters or less"
+    }
+  }
+}
 
 enum class RecruitmentStatus {
   OPEN,

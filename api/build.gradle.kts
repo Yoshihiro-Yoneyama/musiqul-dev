@@ -49,7 +49,7 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-project.gradle.startParameter.excludedTaskNames.add("generatejooq")
+//project.gradle.startParameter.excludedTaskNames.add("generatejooq")
 
 jooq {
   version.set("3.19.1")  // default (can be omitted)
@@ -71,7 +71,7 @@ jooq {
           name = "org.jooq.codegen.KotlinGenerator"
           database.apply {
             name = "org.jooq.meta.postgres.PostgresDatabase"
-            inputSchema = "musiqul"
+            inputSchema = "musiqul_command"
             forcedTypes.addAll(listOf(
               ForcedType().apply {
                 name = "varchar"

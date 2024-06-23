@@ -29,7 +29,7 @@ const Container = (props: { title: string; children: React.ReactElement }) => {
 
 const Parent = () => {
   return (
-    <Container2 title='Hello'>
+    <Container2 title={"Hello"}>
       <p>ここに背景色が現れます</p>
     </Container2>
   )

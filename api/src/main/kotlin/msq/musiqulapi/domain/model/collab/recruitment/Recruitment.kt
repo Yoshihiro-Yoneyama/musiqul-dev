@@ -6,6 +6,7 @@ import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
 
+// TODO sealed interface で書き直す
 
 class Recruitment private constructor(
   val occurredEvents: List<DomainEvent>,

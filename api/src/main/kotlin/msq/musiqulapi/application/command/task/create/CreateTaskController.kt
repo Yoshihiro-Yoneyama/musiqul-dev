@@ -1,4 +1,4 @@
-package msq.musiqulapi.application.service.task.create
+package msq.musiqulapi.application.command.task.create
 
 class CreateTaskController {
 }

@@ -7,3 +7,8 @@ docker compose run --rm flyway migrate
 ```shell
 docker compose run --rm flyway info
 ```
+
+DBのclean
+```shell
+docker compose run --rm flyway clean
+```

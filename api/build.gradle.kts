@@ -49,7 +49,10 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-//project.gradle.startParameter.excludedTaskNames.add("generatejooq")
+
+// 以下のコマンドはmusiqul-apiを起動する場合はコメントアウトを外す
+// generateJooqを実行する場合はコメントアウトする
+project.gradle.startParameter.excludedTaskNames.add("generatejooq")
 
 jooq {
   version.set("3.19.1")  // default (can be omitted)
@@ -93,7 +96,7 @@ jooq {
           }
           target.apply {
             packageName = "nu.studer.sample"
-            directory = "build/generated-src/jooq/main"  // default (can be omitted)
+            directory = "jooq/generated-src/jooq/main"  // default (can be omitted)
           }
           strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
         }

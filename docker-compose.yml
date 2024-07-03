@@ -40,6 +40,8 @@ services:
       - ./workspace/musiqul-web:/app
     ports:
       - "34963:3000"
+    environment:
+      - WATCHPACK_POLLING=true
     command: >
       /bin/sh -c '
         npm install &&

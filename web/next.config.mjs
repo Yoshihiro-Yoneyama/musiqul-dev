@@ -3,5 +3,6 @@ const nextConfig = {};
 
 export default {
   nextConfig,
-  reactStrictMode: true
+  reactStrictMode: true,
+  ignoreBuildErrors: false,
 };

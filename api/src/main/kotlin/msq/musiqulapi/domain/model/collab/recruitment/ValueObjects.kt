@@ -77,23 +77,13 @@ enum class Instrument {
 @JvmInline
 value class RequiredInstrumentsAndCounts(val value: NonEmptyMap<Instrument, Int>)
 
-@JvmInline
-value class RequiredAgeRange private constructor(val value: IntRange) {
-  companion object {
-    fun create2(value: IntRange): Either<IllegalArgumentException, RequiredAgeRange> {
-      return if (value.first < 0 || value.last > 120)
-        Either.Left(IllegalArgumentException("age is out of range"))
-      else
-        Either.Right(RequiredAgeRange(value))
-    }
-
-    fun create(value: IntRange): RequiredAgeRange {
-      if (value.first < 0 || value.last > 120)
-        throw IllegalArgumentException("age is out of range")
-      else
-        return RequiredAgeRange(value)
-    }
-  }
+enum class RequiredGeneration {
+  HIGH_SCHOOL_STUDENT,
+  COLLEGE_STUDENT,
+  THIRTIES,
+  FORTIES,
+  FIFTIES,
+  MORE_THAN_SIXTIES,
 }
 
 enum class RequiredGender {

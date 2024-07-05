@@ -8,23 +8,23 @@ import msq.musiqulapi.lib.IdFactory
 
 // TODO sealed interface で書き直す
 
-class Recruitment private constructor(
-  val occurredEvents: List<DomainEvent>,
-  val id: RecruitmentId,
-  val name: RecruitmentName,
-  val owner: PlayerId,
-  val genre: List<MusicGenre>,
-  val songTitle: SongTitle, //デフォルト空文字列
-  val artist: Artist, //デフォルト空文字列
-  val ownerInstruments: List<Instrument>,
-  val recruitedInstruments: RequiredInstrumentsAndCounts,
-  val requiredAgeRange: Option<RequiredAgeRange>,
-  val requiredGender: RequiredGender,
-  val deadline: DeadLine,
-  val memo: Memo, //デフォルト空文字列
-  val recruitmentStatus: RecruitmentStatus,
+sealed interface Recruitment {
+  val occurredEvents: List<DomainEvent>
+  val id: RecruitmentId
+  val name: RecruitmentName
+  val owner: PlayerId
+  val genre: List<MusicGenre>
+  val songTitle: SongTitle //デフォルト空文字列
+  val artist: Artist //デフォルト空文字列
+  val ownerInstruments: List<Instrument>
+  val recruitedInstruments: RequiredInstrumentsAndCounts
+  val requiredAgeRange: Option<RequiredAgeRange>
+  val requiredGender: RequiredGender
+  val deadline: DeadLine
+  val memo: Memo //デフォルト空文字列
+  val recruitmentStatus: RecruitmentStatus
   val deleted: Boolean
-) {
+
   companion object {
     fun recruit(
       eventIdFactory: IdFactory<DomainEventId>,
@@ -47,7 +47,7 @@ class Recruitment private constructor(
         command.deadline,
         command.memo
       )
-      return Recruitment(
+      return Data(
         listOf(recruitedEvent),
         id,
         command.name,
@@ -67,28 +67,16 @@ class Recruitment private constructor(
     }
   }
 
-
   fun close(eventIdFactory: IdFactory<DomainEventId>): Recruitment {
     val eventId = eventIdFactory.generate()
     val event = RecruitmentClosedEvent(eventId)
-    
-    return Recruitment(
-      this.occurredEvents.plus(event),
-      this.id,
-      this.name,
-      this.owner,
-      this.genre,
-      this.songTitle,
-      this.artist,
-      this.ownerInstruments,
-      this.recruitedInstruments,
-      this.requiredAgeRange,
-      this.requiredGender,
-      this.deadline,
-      this.memo,
-      RecruitmentStatus.CLOSE,
-      this.deleted
-    )
+
+    return when (this) {
+      is Data -> copy(
+        occurredEvents = this.occurredEvents.plus(event),
+        recruitmentStatus = RecruitmentStatus.CLOSE
+      )
+    }
   }
 
   fun edit() {}
@@ -96,6 +84,25 @@ class Recruitment private constructor(
 //  fun reopen() {}
 
   fun delete() {}
+
+  private data class Data(
+    override val occurredEvents: List<DomainEvent>,
+    override val id: RecruitmentId,
+    override val name: RecruitmentName,
+    override val owner: PlayerId,
+    override val genre: List<MusicGenre>,
+    override val songTitle: SongTitle, //デフォルト空文字列
+    override val artist: Artist, //デフォルト空文字列
+    override val ownerInstruments: List<Instrument>,
+    override val recruitedInstruments: RequiredInstrumentsAndCounts,
+    override val requiredAgeRange: Option<RequiredAgeRange>,
+    override val requiredGender: RequiredGender,
+    override val deadline: DeadLine,
+    override val memo: Memo, //デフォルト空文字列
+    override val recruitmentStatus: RecruitmentStatus,
+    override val deleted: Boolean
+  ) : Recruitment
+
 }
 
 data class RecruitCommand(

@@ -78,8 +78,8 @@ enum class Instrument {
 value class RequiredInstrumentsAndCounts(val value: NonEmptyMap<Instrument, Int>)
 
 enum class RequiredGeneration {
-  HIGH_SCHOOL_STUDENT,
-  COLLEGE_STUDENT,
+  TEEN,
+  TWENTIES,
   THIRTIES,
   FORTIES,
   FIFTIES,

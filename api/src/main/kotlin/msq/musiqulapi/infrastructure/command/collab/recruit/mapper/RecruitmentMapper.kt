@@ -1,6 +1,5 @@
 package msq.musiqulapi.infrastructure.command.collab.recruit.mapper
 
-import arrow.core.Option
 import nu.studer.sample.enums.GenderType
 import nu.studer.sample.enums.RecruitmentStatusType
 import nu.studer.sample.tables.references.RECRUITMENT
@@ -20,7 +19,6 @@ class RecruitmentMapper(val dslContext: DSLContext) {
       RECRUITMENT.OWNER_ID,
       RECRUITMENT.SONG_TITLE,
       RECRUITMENT.ARTIST,
-      RECRUITMENT.REQUIRED_AGE_RANGE,
       RECRUITMENT.REQUIRED_GENDER,
       RECRUITMENT.DEADLINE,
       RECRUITMENT.MEMO,
@@ -33,7 +31,6 @@ class RecruitmentMapper(val dslContext: DSLContext) {
         recruitment.owner,
         recruitment.songTitle,
         recruitment.artist,
-        recruitment.requiredAgeRange.getOrNull(),
         recruitment.requiredGender,
         recruitment.deadline,
         recruitment.memo,
@@ -46,7 +43,6 @@ class RecruitmentMapper(val dslContext: DSLContext) {
       .set(RECRUITMENT.OWNER_ID, excluded(RECRUITMENT.OWNER_ID))
       .set(RECRUITMENT.SONG_TITLE, excluded(RECRUITMENT.SONG_TITLE))
       .set(RECRUITMENT.ARTIST, excluded(RECRUITMENT.ARTIST))
-//      .set(RECRUITMENT.REQUIRED_AGE_RANGE, excluded(RECRUITMENT.REQUIRED_AGE_RANGE))
       .set(RECRUITMENT.REQUIRED_GENDER, excluded(RECRUITMENT.REQUIRED_GENDER))
       .set(RECRUITMENT.DEADLINE, excluded(RECRUITMENT.DEADLINE))
       .set(RECRUITMENT.MEMO, excluded(RECRUITMENT.MEMO))
@@ -62,7 +58,6 @@ data class RecruitmentRecord(
   val owner: UUID,
   val songTitle: String,
   val artist: String,
-  val requiredAgeRange: Option<IntRange>,
   val requiredGender: GenderType,
   val deadline: LocalDateTime,
   val memo: String,

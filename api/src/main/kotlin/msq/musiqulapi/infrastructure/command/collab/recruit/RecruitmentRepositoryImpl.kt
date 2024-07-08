@@ -29,7 +29,6 @@ class RecruitmentRepositoryImpl(
       recruitment.owner.value,
       recruitment.songTitle.value,
       recruitment.artist.value,
-      recruitment.requiredAgeRange.map { r -> r.value },
       when (recruitment.requiredGender) {
         RequiredGender.MALE_ONLY -> GenderType.MALE_ONLY
         RequiredGender.FEMALE_ONLY -> GenderType.FEMALE_ONLY

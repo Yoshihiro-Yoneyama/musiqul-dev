@@ -1,12 +1,10 @@
 package msq.musiqulapi.application.command.collab.recruitment
 
-import arrow.core.Option
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.domain.model.collab.recruitment.*
 import msq.musiqulapi.lib.IdFactory
 import msq.musiqulapi.lib.NonEmptyMap
-import msq.musiqulapi.lib.NonEmptyString
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import java.time.Instant
@@ -32,7 +30,18 @@ class RecruitCommandService(
           input.recruitedInstruments.entries.associate { e -> Pair(Instrument.valueOf(e.key.name), e.value) }
         )
       ),
-      input.requiredAgeRange.map { r -> RequiredAgeRange.create(r) },
+      input.requiredGenerations
+        .map { r ->
+          when (r) {
+            RecruitCommandInput.RequiredGeneration.TEEN -> RequiredGeneration.TEEN
+            RecruitCommandInput.RequiredGeneration.TWENTIES -> RequiredGeneration.TWENTIES
+            RecruitCommandInput.RequiredGeneration.THIRTIES -> RequiredGeneration.THIRTIES
+            RecruitCommandInput.RequiredGeneration.FORTIES -> RequiredGeneration.FORTIES
+            RecruitCommandInput.RequiredGeneration.FIFTIES -> RequiredGeneration.FIFTIES
+            RecruitCommandInput.RequiredGeneration.MORE_THAN_SIXTIES -> RequiredGeneration.MORE_THAN_SIXTIES
+          }
+        }
+        .toSet(),
       RequiredGender.valueOf(input.requiredGender.name),
       DeadLine(input.deadline),
       Memo(input.memo)
@@ -57,7 +66,7 @@ data class RecruitCommandInput(
   val artist: String,
   val ownerInstruments: List<InstrumentType>,
   val recruitedInstruments: Map<InstrumentType, Int>,
-  val requiredAgeRange: Option<IntRange>,
+  val requiredGenerations: Set<RequiredGeneration>,
   val requiredGender: GenderType,
   val deadline: Instant,
   val memo: String
@@ -71,6 +80,7 @@ data class RecruitCommandInput(
     METAL,
     OTHER
   }
+
   enum class InstrumentType {
     VOCAL,
     GITTER,
@@ -81,6 +91,16 @@ data class RecruitCommandInput(
     VIOLIN,
     OTHER
   }
+
+  enum class RequiredGeneration {
+    TEEN,
+    TWENTIES,
+    THIRTIES,
+    FORTIES,
+    FIFTIES,
+    MORE_THAN_SIXTIES,
+  }
+
   enum class GenderType {
     MALE_ONLY,
     FEMALE_ONLY,

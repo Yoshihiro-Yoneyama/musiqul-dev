@@ -1,0 +1,1 @@
+ALTER TABLE musiqul_command.recruitment DROP COLUMN required_age_range

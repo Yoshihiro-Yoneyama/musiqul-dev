@@ -75,7 +75,7 @@ enum class Instrument {
 }
 
 @JvmInline
-value class RequiredInstrumentsAndCounts(val value: NonEmptyMap<Instrument, Int>)
+value class RequiredInstrumentsAndCounts(val value: NonEmptyMap<Instrument, Short>)
 
 enum class RequiredGeneration {
   TEEN,

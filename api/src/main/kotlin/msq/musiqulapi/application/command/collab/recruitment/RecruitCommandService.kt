@@ -65,13 +65,13 @@ data class RecruitCommandInput(
   val songTitle: String,
   val artist: String,
   val ownerInstruments: List<InstrumentType>,
-  val recruitedInstruments: Map<InstrumentType, Int>,
+  val recruitedInstruments: Map<InstrumentType, Short>,
   val requiredGenerations: Set<RequiredGeneration>,
   val requiredGender: GenderType,
   val deadline: Instant,
   val memo: String
 ) {
-  enum class MusicGenreType {
+    enum class MusicGenreType {
     ROCK,
     J_POP,
     ANIME,

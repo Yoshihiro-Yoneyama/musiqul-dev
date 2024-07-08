@@ -1,12 +1,9 @@
 package msq.musiqulapi.domain.model.collab.recruitment
 
-import arrow.core.Option
 import msq.musiqulapi.domain.DomainEvent
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
-
-// TODO sealed interface で書き直す
 
 sealed interface Recruitment {
   val occurredEvents: List<DomainEvent>
@@ -18,7 +15,7 @@ sealed interface Recruitment {
   val artist: Artist //デフォルト空文字列
   val ownerInstruments: List<Instrument>
   val recruitedInstruments: RequiredInstrumentsAndCounts
-  val requiredAgeRange: Option<RequiredAgeRange>
+  val requiredGenerations: Set<RequiredGeneration>
   val requiredGender: RequiredGender
   val deadline: DeadLine
   val memo: Memo //デフォルト空文字列
@@ -95,7 +92,7 @@ sealed interface Recruitment {
     override val artist: Artist, //デフォルト空文字列
     override val ownerInstruments: List<Instrument>,
     override val recruitedInstruments: RequiredInstrumentsAndCounts,
-    override val requiredAgeRange: Option<RequiredAgeRange>,
+    override val requiredGenerations: Set<RequiredGeneration>,
     override val requiredGender: RequiredGender,
     override val deadline: DeadLine,
     override val memo: Memo, //デフォルト空文字列
@@ -113,7 +110,7 @@ data class RecruitCommand(
   val artist: Artist,
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
-  val requiredAgeRange: Option<RequiredAgeRange>,
+  val requiredAgeRange: Set<RequiredGeneration>,
   val requiredGender: RequiredGender,
   val deadline: DeadLine,
   val memo: Memo
@@ -128,7 +125,7 @@ data class RecruitedEvent(
   val songTitle: SongTitle,
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
-  val requiredAgeRange: Option<RequiredAgeRange>,
+  val requiredAgeRange: Set<RequiredGeneration>,
   val requiredGender: RequiredGender,
   val deadline: DeadLine,
   val memo: Memo

@@ -14,13 +14,14 @@ const Fizz = (props: FizzProps) => {
 
 type BuzzProps = {
   isBuzz: boolean
+  onClick: () => void
 }
 
 const Buzz = memo<BuzzProps>((props) => {
-  const { isBuzz } = props
+  const { isBuzz, onClick } = props
   console.log(`Buzz: isBuzz = ${isBuzz}`)
   return (
-    <span>
+    <span onClick={onClick}>
       {isBuzz ? 'Buzz' : ''}
     </span>
   )
@@ -31,15 +32,18 @@ export const Parent2 = () => {
   const isFizz = count % 3 == 0
   const isBuzz = count % 5 == 0
 
-
+  const onBuzzClick = () => {
+    console.log(`Buzz click isBuzz = ${isBuzz}`)
+  }
   console.log(`Parent count=${count}`)
+
   return (
     <div>
       <button onClick={() => setCount((c) => c + 1)}>+ 1</button>
       <p>{`current count: ${count}`}</p>
       <p>
         <Fizz isFizz={isFizz}/>
-        <Buzz isBuzz={isBuzz}/>
+        <Buzz isBuzz={isBuzz} onClick={onBuzzClick}/>
       </p>
     </div>
   )

@@ -35,8 +35,13 @@ dependencies {
   // Arrow Kt
   implementation("io.arrow-kt:arrow-core:1.2.4")
   implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
+  // test
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
+  testImplementation("org.junit.jupiter:junit-jupiter-api")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+  testImplementation("org.mockito:mockito-inline:5.1.0")
 }
 
 tasks.withType<KotlinCompile> {

@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")

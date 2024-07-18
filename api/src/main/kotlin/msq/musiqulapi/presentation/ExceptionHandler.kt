@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 @Slf4j
 class ExceptionHandler {
-  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   @ExceptionHandler
   fun exception(e: Exception) {
     val log: Logger = LoggerFactory.getLogger(this::class.java)

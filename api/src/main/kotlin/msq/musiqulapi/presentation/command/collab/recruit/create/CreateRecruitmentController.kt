@@ -12,7 +12,6 @@ import java.util.UUID
 class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandService) {
   @PostMapping("/recruitment")
   fun create(@RequestBody request: CreateRecruitCommandRequest): CreateRecruitmentResponse {
-    println(request)
     val input = RecruitCommandInput(
       request.name,
       request.owner,

@@ -4,7 +4,6 @@ import msq.musiqulapi.domain.model.test_task.TaskId
 import msq.musiqulapi.lib.IdFactory
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.concurrent.locks.Lock
 
 @RestController
 class GetWeatherController(val factory: IdFactory<TaskId>) {

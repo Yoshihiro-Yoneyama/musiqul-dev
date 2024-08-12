@@ -4,7 +4,7 @@ import arrow.core.Option
 import msq.musiqulapi.domain.model.collab.recruitment.Recruitment
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentId
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentRepository
-import msq.musiqulapi.infrastructure.command.collab.recruit.mapper.*
+import msq.musiqulapi.infrastructure.mapper.collab.recruitment.*
 import org.springframework.stereotype.Repository
 
 @Repository

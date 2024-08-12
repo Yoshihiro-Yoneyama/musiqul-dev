@@ -64,9 +64,13 @@ sealed interface Recruitment {
     }
   }
 
+  fun edit() {
+
+  }
+
   fun close(eventIdFactory: IdFactory<DomainEventId>): Recruitment {
     val eventId = eventIdFactory.generate()
-    val event = RecruitmentClosedEvent(eventId)
+    val event = RecruitmentClosedEvent(eventId, this.id)
 
     return when (this) {
       is Data -> copy(
@@ -75,8 +79,6 @@ sealed interface Recruitment {
       )
     }
   }
-
-  fun edit() {}
 
 //  fun reopen() {}
 
@@ -131,6 +133,21 @@ data class RecruitedEvent(
   val memo: Memo
 ) : DomainEvent
 
+data class RecruitmentEditedEvent(
+  override val eventId: DomainEventId,
+  val id: RecruitmentId,
+  val name: RecruitmentName,
+  val genre: List<MusicGenre>,
+  val songTitle: SongTitle,
+  val ownerInstruments: List<Instrument>,
+  val recruitedInstruments: RequiredInstrumentsAndCounts,
+  val requiredAgeRange: Set<RequiredGeneration>,
+  val requiredGender: RequiredGender,
+  val deadline: DeadLine,
+  val memo: Memo
+) : DomainEvent
+
 data class RecruitmentClosedEvent(
-  override val eventId: DomainEventId
+  override val eventId: DomainEventId,
+  val id: RecruitmentId,
 ) : DomainEvent

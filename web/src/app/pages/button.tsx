@@ -22,7 +22,9 @@ const Page2: NextPage = () => {
   return (
     <div>
       <Button background="transparent" color="#FF0000">
-        Hello
+        <div>Hello
+          <div>hello2</div>
+        </div>
       </Button>
       <Button color="white" background="#1E90FF">
         World!

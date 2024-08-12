@@ -1,0 +1,7 @@
+type Recruitment = {
+
+}
+
+const createRecruitment = () => {
+
+}

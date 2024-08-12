@@ -1,4 +1,4 @@
-import styles from '../ui/home.module.css'
+import styles from '../Home.module.css'
 export default function Page() {
   return <main className="flex min-h-scren flex-col p-1">
     <p>Dashboard Page</p>

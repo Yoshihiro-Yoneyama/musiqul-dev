@@ -16,6 +16,19 @@ const Button = styled.button<ButtonProps>`
     padding: 0.25em 1em;
     border-radius: 8px;
     cursor: pointer;
+    
+    div {
+        border: 2px solid blue;
+        font-size: 50px;
+    }
+    
+    &:hover {
+        font-size: 3em;      
+    }
+    
+    @transform {
+        
+    }
 `
 
 const Page2: NextPage = () => {

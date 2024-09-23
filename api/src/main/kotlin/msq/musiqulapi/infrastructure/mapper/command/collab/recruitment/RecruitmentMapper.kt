@@ -1,4 +1,4 @@
-package msq.musiqulapi.infrastructure.mapper.collab.recruitment
+package msq.musiqulapi.infrastructure.mapper.command.collab.recruitment
 
 import nu.studer.sample.enums.GenderType
 import nu.studer.sample.enums.RecruitmentStatusType

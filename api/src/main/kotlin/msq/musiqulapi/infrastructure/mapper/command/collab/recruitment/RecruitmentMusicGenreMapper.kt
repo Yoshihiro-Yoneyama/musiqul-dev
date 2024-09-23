@@ -1,4 +1,4 @@
-package msq.musiqulapi.infrastructure.mapper.collab.recruitment
+package msq.musiqulapi.infrastructure.mapper.command.collab.recruitment
 
 import nu.studer.sample.enums.MusicGenreType
 import nu.studer.sample.tables.references.RECRUITMENT_MUSIC_GENRE

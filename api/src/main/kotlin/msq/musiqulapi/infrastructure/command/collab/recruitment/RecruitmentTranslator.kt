@@ -1,7 +1,7 @@
 package msq.musiqulapi.infrastructure.command.collab.recruitment
 
 import msq.musiqulapi.domain.model.collab.recruitment.*
-import msq.musiqulapi.infrastructure.mapper.collab.recruitment.RecruitmentRecord
+import msq.musiqulapi.infrastructure.mapper.command.collab.recruitment.RecruitmentRecord
 import nu.studer.sample.enums.*
 import nu.studer.sample.tables.references.RECRUITMENT_MUSIC_GENRE
 import nu.studer.sample.tables.references.RECRUITMENT_OWNER_INSTRUMENT

@@ -1,4 +1,3 @@
-import styles from '../Home.module.css'
 export default function Page() {
   return <main className="flex min-h-scren flex-col p-1">
     <p>Dashboard Page</p>
@@ -6,6 +5,6 @@ export default function Page() {
     <div
       className="h-0 w-0 border-b-[100px] border-l-[20px] border-r-[20px] border-b-black border-l-transparent border-r-transparent">div2
     </div>
-    <div className={styles.shape} />
+    <div/>
   </main>;
 }

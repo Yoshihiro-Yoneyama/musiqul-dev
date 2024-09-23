@@ -1,6 +1,5 @@
 import styled, {css} from "styled-components";
 import {NextPage} from "next";
-import styles from "./Home.module.css"
 
 const Text = styled.p`
     color: blue;
@@ -24,8 +23,8 @@ const Page4: NextPage = () => {
     <Width>
       {/*<Text>Hello</Text>*/}
       <BorderText>World!</BorderText>
-      <div className={styles.box}>
-        <p className={styles.box}>Hoge</p>
+      <div>
+        <p>Hoge</p>
       </div>
     </Width>
   )

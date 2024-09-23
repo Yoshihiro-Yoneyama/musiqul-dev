@@ -42,7 +42,7 @@ class RecruitmentTranslator(
   }
 
   fun toRecruitmentMusicGenreRecord(recruitment: Recruitment): List<Record2<UUID?, MusicGenreType?>> {
-    return recruitment.genre.map { r ->
+    return recruitment.genres.map { r ->
       val genre = when (r) {
         MusicGenre.ROCK -> MusicGenreType.ROCK
         MusicGenre.J_POP -> MusicGenreType.J_POP

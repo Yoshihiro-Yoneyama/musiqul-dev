@@ -15,6 +15,7 @@ class RecruitCommandService(
   val domainEventIdFactory: IdFactory<DomainEventId>,
   val recruitmentIdFactory: IdFactory<RecruitmentId>,
   val repository: RecruitmentRepository,
+  // ドメインイベント発行
   val eventPublisher: ApplicationEventPublisher
 ) {
   fun recruit(input: RecruitCommandInput): RecruitCommandOutput {
@@ -52,6 +53,8 @@ class RecruitCommandService(
       recruitCommand
     )
     repository.save(recruitment)
+
+    // ドメインイベントを発行する
     recruitment.occurredEvents.forEach { e -> eventPublisher.publishEvent(e) }
 
     return RecruitCommandOutput(recruitment.id.value)

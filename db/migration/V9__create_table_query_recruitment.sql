@@ -1,14 +1,14 @@
 CREATE TABLE musiqul_query.recruitment
 (
-    recruitment_id uuid primary key ,
-    recruitment_name text,
-    owner_id uuid UNIQUE ,
-    song_title text,
-    artist text,
-    genre text[],
-    gender text[],
-    generation text[],
-    instrument text[]
+    recruitment_id uuid PRIMARY KEY ,
+    recruitment_name TEXT,
+    owner_id uuid UNIQUE,
+    genres TEXT[],
+    song_title TEXT,
+    artist TEXT,
+    gender TEXT,
+    generations TEXT[],
+    instruments TEXT[]
 );
 
 CREATE TABLE musiqul_query.recruitment_owner

@@ -1,4 +1,4 @@
-package msq.musiqulapi.infrastructure.command.collab.recruit
+package msq.musiqulapi.infrastructure.command.collab.recruitment
 
 import arrow.core.Option
 import msq.musiqulapi.domain.model.collab.recruitment.Recruitment

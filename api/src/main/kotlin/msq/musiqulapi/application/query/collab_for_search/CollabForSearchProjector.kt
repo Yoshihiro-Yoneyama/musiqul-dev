@@ -28,6 +28,8 @@ class CollabForSearchProjector(val repository: CollabForSearchQueryRepository) {
       event.recruitedInstruments.value.map.keys.map(Instrument::name),
       event.requiredGender.name
     )
+    println("**************イベント検知****************")
+
     repository.saveRecruitment(recruitmentReadModel)
   }
 

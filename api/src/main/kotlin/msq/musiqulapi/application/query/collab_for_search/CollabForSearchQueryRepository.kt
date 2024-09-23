@@ -13,6 +13,7 @@ interface CollabForSearchQueryRepository {
   fun deleteRecruitment(recruitment: Recruitment) {}
 
   // なんのメソッドか分かり次第再実装？
+  // ownerのidと名前を紐付けるメソッド
 //  fun putRecruitmentOwner(recruitmentOwner: RecruitmentOwner) {}
 
   // なんのメソッドか分かり次第再実装

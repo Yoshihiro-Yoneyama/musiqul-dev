@@ -3,7 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import {useRouter} from "next/navigation";
-import Button2 from "@/components/atoms/Button2";
+import Button from "@/components/atoms/Button";
 
 const HomePageStyle = styled.div`
     display: flex;
@@ -31,7 +31,7 @@ const HomePage = () => {
   return (
     <HomePageStyle>
       <h1>Welcome to My Web App!</h1>
-      <Button2
+      <Button
         color="white"
         background="blue"
         label="Go to Page"

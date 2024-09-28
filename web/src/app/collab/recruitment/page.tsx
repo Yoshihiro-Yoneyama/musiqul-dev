@@ -1,27 +1,8 @@
 "use client"
 
 import React from "react";
-import Button2 from "@/components/atoms/Button2";
 import {useRouter} from "next/navigation";
-
-const NavigateButton = () => {
-  const router = useRouter()
-
-  const onSubmit = () => {
-    router.push('/')
-  }
-
-  return (
-    <Button2
-      color="white"
-      background="#123456"
-      label="Go to Page"
-      onClick={onSubmit}
-    />
-  );
-};
-
-
+import Button from "@/components/atoms/Button";
 
 const Recruitment = () => {
 
@@ -69,7 +50,7 @@ const Recruitment = () => {
         {/*<NavigateButton/>*/}
         {/*<button type="submit">Submit form</button>*/}
       </form>
-      <Button2
+      <Button
         color="white"
         background="blue"
         label="Go to Page"

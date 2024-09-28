@@ -13,10 +13,3 @@ type t = {
   bar: number;
   buzz: boolean;
 }
-
-export function f(): any {
-  const obj1: t = { foo: 'foo1', bar: 42, buzz: true };
-  const { foo, bar } = obj1;
-  console.log(foo)
-  console.log(obj1.foo)
-}

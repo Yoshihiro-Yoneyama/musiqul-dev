@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import SideMenu from "@/app/side-menu";
+import SideMenu from "@/app/sideMenu";
 
 const BodyLayout = styled.body`
   background-color: #000000;

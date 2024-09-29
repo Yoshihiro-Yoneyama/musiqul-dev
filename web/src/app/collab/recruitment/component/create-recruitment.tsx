@@ -1,7 +1,0 @@
-type Recruitment = {
-
-}
-
-const createRecruitment = () => {
-
-}

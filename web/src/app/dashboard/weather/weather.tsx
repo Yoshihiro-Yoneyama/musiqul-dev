@@ -15,7 +15,7 @@ export async function getWeatherResponse(): Promise<WeatherDataResponse | null> 
         `{
         "name": "フロントからtest2",
         "owner": "d39c9cdb-759c-479e-94c7-2ddc0a3044e8",
-        "genre": ["ROCK", "ANIME"],
+        "genres": ["ROCK", "ANIME"],
         "songTitle": "title",
         "artist": "artist",
         "ownerInstruments": ["VOCAL", "ELECTRIC_BASE"],

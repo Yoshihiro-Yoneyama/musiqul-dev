@@ -15,7 +15,7 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
     val input = RecruitCommandInput(
       request.name,
       request.owner,
-      request.genre.map { r ->
+      request.genres.map { r ->
         when (r) {
           CreateRecruitCommandRequest.MusicGenreType.ROCK -> RecruitCommandInput.MusicGenreType.ROCK
           CreateRecruitCommandRequest.MusicGenreType.J_POP -> RecruitCommandInput.MusicGenreType.J_POP
@@ -79,7 +79,7 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
 data class CreateRecruitCommandRequest(
   val name: String,
   val owner: UUID,
-  val genre: List<MusicGenreType>,
+  val genres: List<MusicGenreType>,
   val songTitle: String,
   val artist: String,
   val ownerInstruments: List<InstrumentType>,

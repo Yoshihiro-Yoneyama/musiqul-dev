@@ -1,12 +1,10 @@
+import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
+
+const withVanillaExtract = createVanillaExtractPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  compiler: {
-    styledComponents: true
-  }
+  reactStrictMode: true
 };
 
-export default {
-  nextConfig,
-  ignoreBuildErrors: false,
-};
+export default withVanillaExtract(nextConfig);

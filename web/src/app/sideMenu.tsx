@@ -1,32 +1,7 @@
 "use client";
 
-import styled from "styled-components";
 import { useRouter } from "next/navigation";
-
-const SideMenuContainer = styled.div`
-  height: 100vh;
-  width: 250px;
-  background-color: #222222;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  position: fixed;
-  align-content: center;
-  border-radius: 20px;
-`;
-
-const MenuItem = styled.div`
-  color: #ffffff;
-  margin: 10px 0;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  align-content: center;
-
-  &:hover {
-    background-color: #444;
-  }
-`;
+import * as styles from "./styles.css"
 
 const SideMenu = () => {
   const router = useRouter();
@@ -36,14 +11,14 @@ const SideMenu = () => {
   };
 
   return (
-    <SideMenuContainer>
-      <MenuItem onClick={() => handleNavigation("/collab/recruitment")}>
+    <div className={styles.SideMenu}>
+      <div className={styles.SideMenuItem} onClick={() => handleNavigation("/collab/recruitment")}>
         コラボメンバーを募集する
-      </MenuItem>
-      <MenuItem onClick={() => handleNavigation("/")}>
+      </div>
+      <div className={styles.SideMenuItem} onClick={() => handleNavigation("/")}>
         コラボに応募する
-      </MenuItem>
-    </SideMenuContainer>
+      </div>
+    </div>
   );
 };
 

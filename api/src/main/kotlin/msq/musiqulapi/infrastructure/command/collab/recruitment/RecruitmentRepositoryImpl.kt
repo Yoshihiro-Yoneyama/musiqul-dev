@@ -1,6 +1,7 @@
 package msq.musiqulapi.infrastructure.command.collab.recruitment
 
-import arrow.core.Option
+import arrow.core.Either
+import msq.musiqulapi.domain.error.NotFound
 import msq.musiqulapi.domain.model.collab.recruitment.Recruitment
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentId
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentRepository
@@ -28,8 +29,7 @@ class RecruitmentRepositoryImpl(
     recruitmentRequiredGenerationMapper.insert(recruitmentTranslator.toRecruitmentRequiredGenerationRecord(recruitment))
   }
 
-  override fun findById(recruitmentId: RecruitmentId): Option<Recruitment> {
+  override fun findById(recruitmentId: RecruitmentId): Either<NotFound, Recruitment> {
     TODO("Not yet implemented")
   }
-
 }

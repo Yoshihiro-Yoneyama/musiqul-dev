@@ -38,7 +38,6 @@ class CollabForSearchProjector(
   @EventListener
   fun editRecruitmentReadModel(event: RecruitmentEditedEvent) {
     recruitmentRepository.findById(event.id)
-      .toEither { "Recruitment not found for ID: ${event.id.value}" }
       .map { recruitment ->
         Recruitment(
           event.id.value,
@@ -53,7 +52,7 @@ class CollabForSearchProjector(
         )
       }
       .fold(
-        { error -> throw RuntimeException(error) },  // Left の場合は例外をスロー
+        { error -> throw RuntimeException(error.error) },  // Left の場合は例外をスロー
         { recruitmentReadModel -> collabForSearchQueryRepository.saveRecruitment(recruitmentReadModel) }
       )
   }

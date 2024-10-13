@@ -3,6 +3,7 @@
 import React from "react";
 import {createRecruitment} from "@/app/collab/recruitment/component/createRecruitment";
 import Button from "@/components/atoms/button/Button";
+import BorderButton from "@/components/atoms/button/BorderButton";
 
 const Recruitment = () => {
   const onSubmit = () => {}
@@ -62,9 +63,13 @@ const Recruitment = () => {
         {/*</label>*/}
         {/*<hr/>*/}
         {/*<input type="submit" defaultValue={"登録する"}/>*/}
-        <Button variant={"danger"} onClick={onSubmit}>
+        <Button variant={"default"} onClick={onSubmit}>
           登録する
         </Button>
+        <hr/>
+        <BorderButton variant={"default"} onClick={onSubmit}>
+           登録する
+        </BorderButton>
       </form>
     </h1>
   );

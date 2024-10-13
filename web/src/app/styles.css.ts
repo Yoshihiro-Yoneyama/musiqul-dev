@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
 export const Container = style({
-  padding: 20,
+  padding: "20px",
   backgroundColor: "pink",
-  fontSize: 50,
+  fontSize: "50px",
   color: "#fff",
 });
 

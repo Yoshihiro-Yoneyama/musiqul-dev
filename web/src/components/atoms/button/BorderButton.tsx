@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react";
-import * as styles from "@/components/atoms/button/button.css";
 import {ButtonContent, ButtonWrapper} from "@/components/atoms/button/border.button.css";
 
 type ButtonProps = {

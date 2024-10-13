@@ -13,8 +13,8 @@ const HomePage = () => {
   }
   
   return (
-    <main className={styles.container}>
-      <div className={styles.container}>Hello World🙌</div>
+    <main className={styles.Container}>
+      <div className={styles.Container}>Hello World🙌</div>
       <button onClick={onSubmit}/>
     </main>
   );

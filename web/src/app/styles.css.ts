@@ -27,26 +27,3 @@ export const ChildrenContainer = style({
   padding: "100px"
 })
 
-export const SideMenu = style({
-  height: "100vh",
-  width: "250px",
-  backgroundColor: "#222222",
-  display: "flex",
-  flexDirection: "column",
-  padding: "20px",
-  position: "fixed",
-  alignContent: "center",
-  borderRadius: "20px"
-})
-
-export const SideMenuItem = style({
-  color: "#ffffff",
-  margin: "10px 0",
-  padding: "10px",
-  cursor: "pointer",
-  borderRadius: "4px",
-  alignContent: "center",
-  ":hover": {
-    backgroundColor: "#444"
-  },
-})

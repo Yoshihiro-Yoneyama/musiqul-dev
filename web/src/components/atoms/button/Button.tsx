@@ -4,7 +4,7 @@ import React from "react";
 import * as styles from "./button.css"
 
 type ButtonProps = {
-  variant: "primary" | "secondary" | "success" | "danger";
+  variant: "default" | "success" | "danger";
   children: React.ReactNode;
   onClick: () => void;
 }

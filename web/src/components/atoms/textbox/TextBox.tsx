@@ -1,13 +1,15 @@
 "use client"
 
 import React, {useState} from "react";
-import {inputStyles} from "@/components/atoms/input-text/text.box.css";
+import {inputStyles} from "@/components/atoms/textbox/text.box.css";
 
 interface TextBoxProps {
-  disabled?: boolean;
+  id: string,
+  name: string,
+  disabled: boolean,
 }
 
-const TextBox: React.FC<TextBoxProps> = ({disabled = false}) => {
+const TextBox: React.FC<TextBoxProps> = ({ id, name, disabled = false }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -29,6 +31,8 @@ const TextBox: React.FC<TextBoxProps> = ({disabled = false}) => {
   
   return (
     <input
+      id={id}
+      name={name}
       type="text"
       value={inputValue}
       onChange={handleChange}

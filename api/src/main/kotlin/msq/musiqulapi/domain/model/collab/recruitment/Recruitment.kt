@@ -7,6 +7,7 @@ import msq.musiqulapi.lib.IdFactory
 
 sealed interface Recruitment {
   // イベントをリストで作成する理由？
+  // イベントは複数個発生する可能性があるから
   val occurredEvents: List<DomainEvent>
   val id: RecruitmentId
   val name: RecruitmentName

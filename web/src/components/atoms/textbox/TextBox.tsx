@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import {inputStyles} from "@/components/atoms/textbox/text.box.css";
 
-interface TextBoxProps {
+type TextBoxProps = {
   id: string,
   name: string,
   disabled: boolean,

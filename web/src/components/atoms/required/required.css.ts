@@ -5,5 +5,7 @@ export const Label = style({
   height: "20px",
   backgroundColor: "#BF2A37",
   color: "#FFFFFF",
-  fontSize: "12px"
+  fontSize: "12px",
+  textAlign: "center",
+  alignItems: "center",
 })

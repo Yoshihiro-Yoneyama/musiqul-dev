@@ -5,14 +5,20 @@ import {createRecruitment} from "@/app/collab/recruitment/component/createRecrui
 import Button from "@/components/atoms/button/Button";
 import BorderButton from "@/components/atoms/button/BorderButton";
 import Form from "@/components/molecules/form/Form";
+import * as styles from "./collab.css"
 
 const Recruitment = () => {
   const onSubmit = () => {}
   return (
-    <h1>コラボを登録する
+    <div>
+      <p className={styles.headline1}>メンバーを募集する</p>
+      <p className={styles.headline2}>募集するコラボの基本情報</p>
       <form onSubmit={event => createRecruitment(event)}>
-        <Form id={"name"} name={"name"} title={"コラボ名"} disabled={false}/>
-        <hr/>
+        <div className={styles.itemsSetSideBySide}>
+          <Form id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false}/>
+          <Form id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}/>
+        </div>
+        <br/>
         {/*チェックボックスの選択肢を自動で表示したい*/}
         <label>
           ジャンル:
@@ -41,36 +47,36 @@ const Recruitment = () => {
             Pop
           </label>
         </label>
-        <hr/>
+        <br/>
         <label>
           曲名: <input name="songTitle"/>
         </label>
-        <hr/>
-          <label>
-            アーティスト名: <input name="artist"/>
-          </label>
-        <hr/>
+        <br/>
+        <label>
+          アーティスト名: <input name="artist"/>
+        </label>
+        <br/>
         {/*<label>*/}
         {/*  コラボ元の楽器: <input name="ownerInstruments"/>*/}
         {/*</label>*/}
-        {/*<hr/>*/}
+        {/*<br/>*/}
         {/*<label>*/}
         {/*  募集楽器: <input name="recruitedInstruments"/>*/}
         {/*</label>*/}
         {/*<label>*/}
         {/*  人数: <input name="countOfInstruments"/>*/}
         {/*</label>*/}
-        {/*<hr/>*/}
+        {/*<br/>*/}
         {/*<input type="submit" defaultValue={"登録する"}/>*/}
         <Button variant={"default"} onClick={onSubmit}>
           登録する
         </Button>
-        <hr/>
+        <br/>
         <BorderButton variant={"default"} onClick={onSubmit}>
-           登録する
+          登録する
         </BorderButton>
       </form>
-    </h1>
+    </div>
   );
 };
 

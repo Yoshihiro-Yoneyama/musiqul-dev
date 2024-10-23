@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {createRecruitment} from "@/app/collab/recruitment/component/createRecruitment";
 import Button from "@/components/atoms/button/Button";
 import BorderButton from "@/components/atoms/button/BorderButton";
-import Form from "@/components/molecules/form/Form";
+import InputForm from "@/components/molecules/input-form/InputForm";
 import * as styles from "./collab.css"
 import Selector from "@/components/atoms/selector/Selector";
 
@@ -36,8 +36,8 @@ const Recruitment = () => {
       <p className={styles.headline2}>募集するコラボの基本情報</p>
       <form onSubmit={event => createRecruitment(event)}>
         <div className={styles.itemsSetSideBySide}>
-          <Form id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false}/>
-          <Form id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}/>
+          <InputForm id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false}/>
+          <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}/>
         </div>
         <br/>
         {/*チェックボックスの選択肢を自動で表示したい*/}

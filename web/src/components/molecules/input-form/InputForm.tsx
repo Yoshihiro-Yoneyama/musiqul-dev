@@ -1,7 +1,7 @@
 import React from "react";
 import Required from "@/components/atoms/required/Required";
 import TextBox from "@/components/atoms/textbox/TextBox";
-import * as styles from "./from.css"
+import * as styles from "./InputFrom.css"
 
 type FormProps = {
   title: string
@@ -10,7 +10,7 @@ type FormProps = {
   disabled: boolean
 }
 
-const Form: React.FC<FormProps> = ({title, id, name, disabled}) => {
+const InputForm: React.FC<FormProps> = ({title, id, name, disabled}) => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.titleContainer}>
@@ -22,4 +22,4 @@ const Form: React.FC<FormProps> = ({title, id, name, disabled}) => {
   )
 }
 
-export default Form
+export default InputForm

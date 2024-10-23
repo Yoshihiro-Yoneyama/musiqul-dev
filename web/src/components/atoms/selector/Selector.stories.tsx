@@ -1,6 +1,5 @@
 import Selector from "@/components/atoms/selector/Selector";
 import {Meta, StoryObj} from "@storybook/react";
-import {useState} from "react";
 
 const meta: Meta<typeof Selector> = {
   title: "atoms/selector/Selector",

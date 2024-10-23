@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from "react";
-import {selectorStyles} from "@/components/atoms/selector/selector.css";
+import {selectorStyles} from "@/components/atoms/selector/Selector.css";
 
 type Option = {
   value: string;

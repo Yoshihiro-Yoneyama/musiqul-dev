@@ -1,4 +1,4 @@
-import * as styles from "./required.css"
+import * as styles from "./Required.css"
 
 const Required = () => {
   return (

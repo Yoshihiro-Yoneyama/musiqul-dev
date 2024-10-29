@@ -7,6 +7,7 @@ import BorderButton from "@/components/atoms/button/BorderButton";
 import InputForm from "@/components/molecules/input-form/InputForm";
 import * as styles from "./collab.css"
 import InputSelector from "@/components/molecules/input-selector/InputSelector";
+import DateCalendar from "@/components/atoms/datepicker/DateCalendar";
 
 type Option = {
   value: string;
@@ -54,6 +55,7 @@ const Recruitment = () => {
             />
             <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false}/>
           </div>
+          <DateCalendar name={"deadline"} disabled={false}/>
         </div>
         
         

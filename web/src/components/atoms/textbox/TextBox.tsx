@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from "react";
-import {inputStyles} from "@/components/atoms/textbox/text.box.css";
+import {inputStyles} from "@/components/util/Input.css";
 
 type TextBoxProps = {
   id: string,

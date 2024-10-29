@@ -7,11 +7,11 @@ type RecruitmentRequest = {
   artist: string,
   name: string,
   genre: string,
+  deadline: Date
   // ownerInstruments: string[],
   // recruitedInstruments: string[],
   // requiredGenerations: string[],
   // requiredGender: string,
-  deadline: Date
 }
 
 

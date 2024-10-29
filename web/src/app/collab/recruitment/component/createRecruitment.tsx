@@ -2,16 +2,16 @@ import {FormEvent} from "react";
 import api from "@/utils/axios/axios.config";
 
 type RecruitmentRequest = {
-  name: string,
   owner: string,
-  genre: string,
   songTitle: string,
   artist: string,
+  name: string,
+  genre: string,
   // ownerInstruments: string[],
   // recruitedInstruments: string[],
   // requiredGenerations: string[],
   // requiredGender: string,
-  // deadline: Date
+  deadline: Date
 }
 
 
@@ -24,16 +24,16 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
   
   // Recruitment型に翻訳
   const recruitmentData: RecruitmentRequest = {
-    name: formData.get("name") as string,  // 必須フィールドなので型アサーション
-    owner: formData.get("owner") as string, // 必須フィールドなので型アサーション
-    genre: formData.get("genre") as string,
+    owner: formData.get("owner") as string,
     songTitle: formData.get("songTitle") as string,
     artist: formData.get("artist") as string,
+    name: formData.get("name") as string,
+    genre: formData.get("genre") as string,
+    deadline: new Date(formData.get("deadline") as string) // Date型に変換
     // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     // recruitedInstruments: (formData.get("recruitedInstruments") as string).split(","),
     // requiredGenerations: (formData.get("requiredGenerations") as string).split(","),
     // requiredGender: formData.get("requiredGender") as string,
-    // deadline: new Date(formData.get("deadline") as string) // Date型に変換
   };
   
   // APIリクエスト送信

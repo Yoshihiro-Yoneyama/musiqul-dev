@@ -11,7 +11,6 @@ export default meta
 
 type Story = StoryObj<typeof meta>;
 
-
 type Option = {
   value: string;
   label: string;
@@ -27,6 +26,6 @@ const options: Option[] = [
 export const Story = () => (
   <div>
     <Selector name={"test"} onChange={() => {
-    }} value={""} options={options} disabled={false}/>
+    }} selectedValue={""} options={options} disabled={false}/>
   </div>
 )

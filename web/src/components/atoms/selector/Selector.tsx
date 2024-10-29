@@ -12,17 +12,11 @@ type SelectorProps = {
   name: string;
   options: Option[]; // Option型の配列を渡す
   onChange: (value: string) => void; // 選択された要素のコールバック
-  value: string; // 現在選択されている値
+  selectedValue: string; // 現在選択されている値
   disabled?: boolean; // オプショナルなdisabledプロパティ
 };
 
-const SelectComponent = ({
-                                                      name,
-                                                      options,
-                                                      onChange,
-                                                      value,
-                                                      disabled, // disabledのデフォルト値をfalseに設定
-                                                    }: SelectorProps) => {
+const SelectComponent = ({name, options, onChange, selectedValue, disabled}: SelectorProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -41,7 +35,7 @@ const SelectComponent = ({
   return (
     <select
       name={name}
-      value={value}
+      value={selectedValue}
       onChange={(e) => onChange(e.target.value as string)}
       onFocus={handleFocus}
       onBlur={handleBlur}

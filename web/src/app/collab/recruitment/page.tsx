@@ -6,14 +6,14 @@ import Button from "@/components/atoms/button/Button";
 import BorderButton from "@/components/atoms/button/BorderButton";
 import InputForm from "@/components/molecules/input-form/InputForm";
 import * as styles from "./collab.css"
-import Selector from "@/components/atoms/selector/Selector";
+import InputSelector from "@/components/molecules/input-selector/InputSelector";
 
 type Option = {
   value: string;
   label: string;
 }
 
-const options: Option[] = [
+const genres: Option[] = [
   { value: '', label: '' },
   { value: 'Rock', label: 'ロック' },
   { value: 'Jazz', label: 'ジャズ' },
@@ -41,7 +41,20 @@ const Recruitment = () => {
         </div>
         <br/>
         {/*チェックボックスの選択肢を自動で表示したい*/}
-        <Selector name={"genre"} options={options.map(value => value)} onChange={handleChange} value={selectedValue} disabled={false}/>
+        {/*選択解除後も文字を白で表示したい*/}
+        {/*ドロップダウンリストの下矢印を白で表示したい*/}
+        <div className={styles.itemsSetSideBySide}>
+          <InputSelector
+            title={"ジャンル"}
+            name={"genre"}
+            options={genres.map(value => value)}
+            onChange={handleChange}
+            selectedValue={selectedValue}
+            disabled={false}
+          />
+          <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false}/>
+        </div>
+        
         {/*<label>*/}
         {/*  ジャンル:*/}
         {/*  <label>*/}
@@ -69,15 +82,6 @@ const Recruitment = () => {
         {/*    Pop*/}
         {/*  </label>*/}
         {/*</label>*/}
-        <br/>
-        <label>
-          曲名: <input name="songTitle"/>
-        </label>
-        <br/>
-        <label>
-          アーティスト名: <input name="artist"/>
-        </label>
-        <br/>
         {/*<label>*/}
         {/*  コラボ元の楽器: <input name="ownerInstruments"/>*/}
         {/*</label>*/}

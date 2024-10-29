@@ -11,5 +11,5 @@ export const headline2 = style({
 
 export const itemsSetSideBySide = style({
   display: "flex",
-  gap: '16px',
+  gap: '4%',
 })

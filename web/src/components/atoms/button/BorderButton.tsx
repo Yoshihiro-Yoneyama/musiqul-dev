@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import {ButtonContent, ButtonWrapper} from "@/components/atoms/button/border.button.css";
+import {ButtonContent, ButtonWrapper} from "@/components/atoms/button/Border.button.css";
 
 type ButtonProps = {
   variant: "default" | "secondary" | "success" | "danger";

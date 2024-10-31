@@ -1,6 +1,6 @@
 "use client"
 
-import * as styles from "./error.message.css"
+import * as styles from "./Error.message.css"
 import React from "react";
 
 type errorMessageProps = {

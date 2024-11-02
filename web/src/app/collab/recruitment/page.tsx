@@ -7,7 +7,8 @@ import BorderButton from "@/components/atoms/button/BorderButton";
 import InputForm from "@/components/molecules/input-form/InputForm";
 import * as styles from "./collab.css"
 import InputSelector from "@/components/molecules/input-selector/InputSelector";
-import DateCalendar from "@/components/atoms/datepicker/DateCalendar";
+import DateCalendar from "@/components/atoms/date-calendar/DateCalendar";
+import InputCalendar from "@/components/molecules/input-calendar/InputCalendar";
 
 type Option = {
   value: string;
@@ -15,10 +16,10 @@ type Option = {
 }
 
 const genres: Option[] = [
-  { value: '', label: '' },
-  { value: 'Rock', label: 'ロック' },
-  { value: 'Jazz', label: 'ジャズ' },
-  { value: 'Pop', label: 'ポップ' },
+  {value: '', label: ''},
+  {value: 'Rock', label: 'ロック'},
+  {value: 'Jazz', label: 'ジャズ'},
+  {value: 'Pop', label: 'ポップ'},
 ];
 
 
@@ -29,7 +30,8 @@ const Recruitment = () => {
     setSelectedValue(value); // 値を更新して表示する
   };
   
-  const onSubmit = () => {}
+  const onSubmit = () => {
+  }
   
   return (
     <div>
@@ -55,7 +57,9 @@ const Recruitment = () => {
             />
             <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false}/>
           </div>
-          <DateCalendar name={"deadline"} disabled={false}/>
+          <div className={styles.itemsSetSideBySide}>
+            <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}/>
+          </div>
         </div>
         
         

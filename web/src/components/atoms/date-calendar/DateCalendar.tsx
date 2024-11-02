@@ -6,11 +6,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 type DatePickerProps = {
+  id: string,
   name: string,
   disabled: boolean,
 }
 
-const DateCalendar: React.FC<DatePickerProps> = ({name, disabled}) => {
+const DateCalendar: React.FC<DatePickerProps> = ({id, name, disabled}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -34,6 +35,7 @@ const DateCalendar: React.FC<DatePickerProps> = ({name, disabled}) => {
   
   return (
     <DatePicker
+      id={id}
       name={name}
       selected={startDate}
       onChange={(date: Date | null) => setStartDate(date)}

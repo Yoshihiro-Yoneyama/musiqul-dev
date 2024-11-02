@@ -1,7 +1,7 @@
 import React from "react";
 import Required from "@/components/atoms/required/Required";
 import TextBox from "@/components/atoms/textbox/TextBox";
-import * as styles from "./InputFrom.css";
+import * as styles from "./InputForm.css";
 
 type FormProps = {
   title: string

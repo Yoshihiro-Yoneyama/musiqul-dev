@@ -7,7 +7,6 @@ import BorderButton from "@/components/atoms/button/BorderButton";
 import InputForm from "@/components/molecules/input-form/InputForm";
 import * as styles from "./collab.css"
 import InputSelector from "@/components/molecules/input-selector/InputSelector";
-import DateCalendar from "@/components/atoms/date-calendar/DateCalendar";
 import InputCalendar from "@/components/molecules/input-calendar/InputCalendar";
 
 type Option = {
@@ -67,25 +66,25 @@ const Recruitment = () => {
               <input
                 type="checkbox"
                 name="requiredGenerations"
-                value="Rock"
+                value="TEEN"
               />
-              Rock
+              <p>10代</p>
             </label>
             <label>
               <input
                 type="checkbox"
                 name="requiredGenerations"
-                value="Jazz"
+                value="TWENTIES"
               />
-              Jazz
+              <p>20代</p>
             </label>
             <label>
               <input
                 type="checkbox"
                 name="requiredGenerations"
-                value="Pop"
+                value="THIRTIES"
               />
-              Pop
+              <p>30代</p>
             </label>
           </label>
         </div>

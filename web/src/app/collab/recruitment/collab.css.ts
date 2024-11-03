@@ -9,7 +9,7 @@ export const headline2 = style({
   fontWeight: "bold",
 })
 
-export const itemsSetSideBySide = style({
+export const itemsSetHorizontal = style({
   display: "flex",
   gap: '4%',
   margin: '4px 0 4px 0'

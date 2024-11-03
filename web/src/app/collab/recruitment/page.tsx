@@ -60,6 +60,7 @@ const Recruitment = () => {
           <div className={styles.itemsSetSideBySide}>
             <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}/>
           </div>
+          <p className={styles.headline2}>応募するメンバー</p>
         </div>
         
         

@@ -38,13 +38,13 @@ const Recruitment = () => {
       <p className={styles.headline2}>募集するコラボの基本情報</p>
       <form onSubmit={event => createRecruitment(event)}>
         <div className={styles.itemsSetVertical}>
-          <div className={styles.itemsSetSideBySide}>
+          <div className={styles.itemsSetHorizontal}>
             <InputForm id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false}/>
             <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}/>
           </div>
           {/*選択解除後も文字を白で表示したい*/}
           {/*ドロップダウンリストの下矢印を白で表示したい*/}
-          <div className={styles.itemsSetSideBySide}>
+          <div className={styles.itemsSetHorizontal}>
             <InputSelector
               title={"ジャンル"}
               name={"genre"}
@@ -55,7 +55,7 @@ const Recruitment = () => {
             />
             <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false}/>
           </div>
-          <div className={styles.itemsSetSideBySide}>
+          <div className={styles.itemsSetHorizontal}>
             <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}/>
           </div>
           <p className={styles.headline2}>応募するメンバー</p>

@@ -10,11 +10,11 @@ sealed interface Recruitment {
   // イベントは複数個発生する可能性があるから
   val occurredEvents: List<DomainEvent>
   val id: RecruitmentId
-  val name: RecruitmentName
   val owner: PlayerId
-  val genres: List<MusicGenre>
   val songTitle: SongTitle //デフォルト空文字列
   val artist: Artist //デフォルト空文字列
+  val name: RecruitmentName
+  val genres: List<MusicGenre>
   val ownerInstruments: List<Instrument>
   val recruitedInstruments: RequiredInstrumentsAndCounts
   val requiredGenerations: Set<RequiredGeneration>
@@ -35,11 +35,11 @@ sealed interface Recruitment {
       val recruitedEvent = RecruitedEvent(
         eventId,
         id,
-        command.name,
         command.owner,
-        command.genres,
         command.songTitle,
         command.artist,
+        command.name,
+        command.genres,
         command.ownerInstruments,
         command.recruitedInstruments,
         command.requiredGenerations,
@@ -50,11 +50,11 @@ sealed interface Recruitment {
       return Data(
         listOf(recruitedEvent),
         id,
-        command.name,
         command.owner,
-        command.genres,
         command.songTitle,
         command.artist,
+        command.name,
+        command.genres,
         command.ownerInstruments,
         command.recruitedInstruments,
         command.requiredGenerations,
@@ -91,11 +91,11 @@ sealed interface Recruitment {
   private data class Data(
     override val occurredEvents: List<DomainEvent>,
     override val id: RecruitmentId,
-    override val name: RecruitmentName,
     override val owner: PlayerId,
-    override val genres: List<MusicGenre>,
     override val songTitle: SongTitle, //デフォルト空文字列
     override val artist: Artist, //デフォルト空文字列
+    override val name: RecruitmentName,
+    override val genres: List<MusicGenre>,
     override val ownerInstruments: List<Instrument>,
     override val recruitedInstruments: RequiredInstrumentsAndCounts,
     override val requiredGenerations: Set<RequiredGeneration>,
@@ -110,11 +110,11 @@ sealed interface Recruitment {
 // IDを除く集約のデータモデル
 // 集約の新規作成に使用する
 data class RecruitCommand(
-  val name: RecruitmentName,
   val owner: PlayerId,
-  val genres: List<MusicGenre>,
   val songTitle: SongTitle,
   val artist: Artist,
+  val name: RecruitmentName,
+  val genres: List<MusicGenre>,
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val requiredGenerations: Set<RequiredGeneration>,
@@ -126,11 +126,11 @@ data class RecruitCommand(
 data class RecruitedEvent(
   override val eventId: DomainEventId,
   val id: RecruitmentId,
-  val name: RecruitmentName,
   val owner: PlayerId,
-  val genres: List<MusicGenre>,
   val songTitle: SongTitle,
   val artist: Artist,
+  val name: RecruitmentName,
+  val genres: List<MusicGenre>,
   val ownerInstruments: List<Instrument>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val requiredGenerations: Set<RequiredGeneration>,

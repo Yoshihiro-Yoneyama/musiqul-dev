@@ -20,11 +20,11 @@ class RecruitCommandService(
 ) {
   fun recruit(input: RecruitCommandInput): RecruitCommandOutput {
     val recruitCommand = RecruitCommand(
-      RecruitmentName(input.name),
       PlayerId.reconstruct(input.owner),
-      input.genre.map { g -> MusicGenre.valueOf(g.name) },
       SongTitle(input.songTitle),
       Artist(input.artist),
+      RecruitmentName(input.name),
+      input.genre.map { g -> MusicGenre.valueOf(g.name) },
       input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
       RequiredInstrumentsAndCounts(
         NonEmptyMap(

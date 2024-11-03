@@ -139,19 +139,6 @@ const Recruitment = () => {
             </label>
           </label>
         </div>
-        
-        {/*<label>*/}
-        {/*  コラボ元の楽器: <input name="ownerInstruments"/>*/}
-        {/*</label>*/}
-        {/*<br/>*/}
-        {/*<label>*/}
-        {/*  募集楽器: <input name="recruitedInstruments"/>*/}
-        {/*</label>*/}
-        {/*<label>*/}
-        {/*  人数: <input name="countOfInstruments"/>*/}
-        {/*</label>*/}
-        {/*<br/>*/}
-        {/*<input type="submit" defaultValue={"登録する"}/>*/}
         <Button variant={"default"} onClick={onSubmit}>
           登録する
         </Button>

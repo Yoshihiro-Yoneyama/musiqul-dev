@@ -9,9 +9,9 @@ type RecruitmentRequest = {
   genre: string,
   deadline: Date,
   requiredGenerations: string[],
+  requiredGender: string[],
   // ownerInstruments: string[],
   // recruitedInstruments: string[],
-  // requiredGender: string,
 }
 
 
@@ -31,9 +31,9 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
     genre: formData.get("genre") as string,
     deadline: new Date(formData.get("deadline") as string), // Date型に変換
     requiredGenerations: (formData.getAll("requiredGenerations").map(String)),
+    requiredGender: (formData.getAll("requiredGender").map(String)),
     // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     // recruitedInstruments: (formData.get("recruitedInstruments") as string).split(","),
-    // requiredGender: formData.get("requiredGender") as string,
   };
   
   // APIリクエスト送信

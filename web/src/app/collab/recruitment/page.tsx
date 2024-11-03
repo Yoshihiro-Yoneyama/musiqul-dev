@@ -111,6 +111,33 @@ const Recruitment = () => {
               <p>60代以上</p>
             </label>
           </label>
+          <label>
+            <p>性別:</p>
+            <label>
+              <input
+                type="checkbox"
+                name="requiredGenerations"
+                value="MALE_ONLY"
+              />
+              <p>男性</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="requiredGenerations"
+                value="FEMALE_ONLY"
+              />
+              <p>女性</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="requiredGenerations"
+                value="ALL"
+              />
+              <p>不問</p>
+            </label>
+          </label>
         </div>
         
         {/*<label>*/}

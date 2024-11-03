@@ -43,7 +43,6 @@ const Recruitment = () => {
             <InputForm id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false}/>
             <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}/>
           </div>
-          {/*チェックボックスの選択肢を自動で表示したい*/}
           {/*選択解除後も文字を白で表示したい*/}
           {/*ドロップダウンリストの下矢印を白で表示したい*/}
           <div className={styles.itemsSetSideBySide}>
@@ -61,36 +60,36 @@ const Recruitment = () => {
             <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}/>
           </div>
           <p className={styles.headline2}>応募するメンバー</p>
+          {/*チェックボックスの選択肢を自動で表示したい*/}
+          <label>
+            <p>年齢:</p>
+            <label>
+              <input
+                type="checkbox"
+                name="requiredGenerations"
+                value="Rock"
+              />
+              Rock
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="requiredGenerations"
+                value="Jazz"
+              />
+              Jazz
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="requiredGenerations"
+                value="Pop"
+              />
+              Pop
+            </label>
+          </label>
         </div>
         
-        
-        {/*<label>*/}
-        {/*  ジャンル:*/}
-        {/*  <label>*/}
-        {/*    <input*/}
-        {/*      type="checkbox"*/}
-        {/*      name="genre"*/}
-        {/*      value="Rock"*/}
-        {/*    />*/}
-        {/*    Rock*/}
-        {/*  </label>*/}
-        {/*  <label>*/}
-        {/*    <input*/}
-        {/*      type="checkbox"*/}
-        {/*      name="genre"*/}
-        {/*      value="Jazz"*/}
-        {/*    />*/}
-        {/*    Jazz*/}
-        {/*  </label>*/}
-        {/*  <label>*/}
-        {/*    <input*/}
-        {/*      type="checkbox"*/}
-        {/*      name="genre"*/}
-        {/*      value="Pop"*/}
-        {/*    />*/}
-        {/*    Pop*/}
-        {/*  </label>*/}
-        {/*</label>*/}
         {/*<label>*/}
         {/*  コラボ元の楽器: <input name="ownerInstruments"/>*/}
         {/*</label>*/}

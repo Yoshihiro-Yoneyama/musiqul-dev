@@ -7,10 +7,10 @@ type RecruitmentRequest = {
   artist: string,
   name: string,
   genre: string,
-  deadline: Date
+  deadline: Date,
+  requiredGenerations: string[],
   // ownerInstruments: string[],
   // recruitedInstruments: string[],
-  // requiredGenerations: string[],
   // requiredGender: string,
 }
 
@@ -19,8 +19,8 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
   // フォームデータの取得
   const formData = new FormData(event.currentTarget);
   
-  // チェックボックスの値を取得（`genre` の配列を正しく取得するため）
-  // const genres: string[] = formData.getAll("genre").map(String);
+  // チェックボックスの値を取得（`requiredGenerations` の配列を正しく取得するため）
+  // const requiredGenerations: string[] = formData.getAll("requiredGenerations").map(String);
   
   // Recruitment型に翻訳
   const recruitmentData: RecruitmentRequest = {
@@ -29,10 +29,10 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
     artist: formData.get("artist") as string,
     name: formData.get("name") as string,
     genre: formData.get("genre") as string,
-    deadline: new Date(formData.get("deadline") as string) // Date型に変換
+    deadline: new Date(formData.get("deadline") as string), // Date型に変換
+    requiredGenerations: (formData.getAll("requiredGenerations").map(String)),
     // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     // recruitedInstruments: (formData.get("recruitedInstruments") as string).split(","),
-    // requiredGenerations: (formData.get("requiredGenerations") as string).split(","),
     // requiredGender: formData.get("requiredGender") as string,
   };
   

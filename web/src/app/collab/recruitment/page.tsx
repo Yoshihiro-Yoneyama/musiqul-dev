@@ -8,18 +8,39 @@ import InputForm from "@/components/molecules/input-form/InputForm";
 import * as styles from "./collab.css"
 import InputSelector from "@/components/molecules/input-selector/InputSelector";
 import InputCalendar from "@/components/molecules/input-calendar/InputCalendar";
+import Checkbox from "@/components/atoms/checkbox/Checkbox";
 
-type Option = {
+type SelectorOption = {
   value: string;
   label: string;
 }
 
-const genres: Option[] = [
+const genres: SelectorOption[] = [
   {value: '', label: ''},
   {value: 'Rock', label: 'ロック'},
   {value: 'Jazz', label: 'ジャズ'},
   {value: 'Pop', label: 'ポップ'},
 ];
+
+type CheckboxOption = {
+  value: string;
+  label: string;
+};
+
+const requiredGenders: CheckboxOption[] = [
+  {value: 'MALE_ONLY', label: '男性'},
+  {value: 'MALE_ONLY', label: '女性'},
+  {value: 'ALL', label: '不問'},
+];
+
+const requiredGenerations: CheckboxOption[] = [
+  {value: 'TEEN', label: '10代'},
+  {value: 'TWENTIES', label: '20代'},
+  {value: 'THIRTIES', label: '30代'},
+  {value: 'FORTIES', label: '40代'},
+  {value: 'FIFTIES', label: '50代'},
+  {value: 'MORE_THAN_SIXTIES', label: '60代以上'},
+]
 
 
 const Recruitment = () => {
@@ -61,64 +82,22 @@ const Recruitment = () => {
           <p className={styles.headline2}>応募するメンバー</p>
           {/*チェックボックスの選択肢を自動で表示したい*/}
           <div className={styles.itemsSetHorizontal}>
-            <p>年齢:</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="TEEN"
-            />
-            <p>10代</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="TWENTIES"
-            />
-            <p>20代</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="THIRTIES"
-            />
-            <p>30代</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="FORTIES"
-            />
-            <p>40代</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="FIFTIES"
-            />
-            <p>50代</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="MORE_THAN_SIXTIES"
-            />
-            <p>60代以上</p>
+            <div className={styles.itemsSetHorizontal}>
+              <Checkbox
+                id={'requiredGenerations'}
+                title={'年齢'}
+                name={'requiredGenerations'}
+                options={requiredGenerations}
+              />
+            </div>
           </div>
           <div className={styles.itemsSetHorizontal}>
-            <p>性別:</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="MALE_ONLY"
+            <Checkbox
+              id={'requiredGenders'}
+              title={'性別'}
+              name={'requiredGenders'}
+              options={requiredGenders}
             />
-            <p>男性</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="FEMALE_ONLY"
-            />
-            <p>女性</p>
-            <input
-              type="checkbox"
-              name="requiredGenerations"
-              value="ALL"
-            />
-            <p>不問</p>
           </div>
         </div>
         <Button variant={"default"} onClick={onSubmit}>

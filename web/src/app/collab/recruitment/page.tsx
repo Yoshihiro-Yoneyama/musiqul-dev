@@ -9,6 +9,7 @@ import * as styles from "./collab.css"
 import InputSelector from "@/components/molecules/input-selector/InputSelector";
 import InputCalendar from "@/components/molecules/input-calendar/InputCalendar";
 import Checkbox from "@/components/atoms/checkbox/Checkbox";
+import Selector from "@/components/atoms/selector/Selector";
 
 type SelectorOption = {
   value: string;
@@ -20,6 +21,13 @@ const genres: SelectorOption[] = [
   {value: 'Rock', label: 'ロック'},
   {value: 'Jazz', label: 'ジャズ'},
   {value: 'Pop', label: 'ポップ'},
+];
+
+const recruitedInstruments: SelectorOption[] = [
+  {value: '', label: ''},
+  {value: 'VOCAL', label: 'ボーカル'},
+  {value: 'GITTER', label: 'ギター'},
+  {value: 'ELECTRIC_BASE', label: 'エレキベース'},
 ];
 
 type CheckboxOption = {
@@ -93,6 +101,25 @@ const Recruitment = () => {
               title={'性別'}
               name={'requiredGenders'}
               options={requiredGenders}
+            />
+          </div>
+          <div className={styles.itemsSetHorizontal}>
+            <InputSelector
+              title={"楽器"}
+              name={"recruitedInstruments"}
+              options={recruitedInstruments.map(value => value)}
+              onChange={handleChange}
+              selectedValue={selectedValue}
+              disabled={false}
+            />
+            <Selector
+              name={"numberOfPeople"}
+              options={[
+                {value: '0', label: '0'},
+                {value: '1', label: '1'},
+              ]}
+              onChange={handleChange}
+              selectedValue={selectedValue}
             />
           </div>
           <div className={styles.itemsSetHorizontal}>

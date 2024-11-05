@@ -95,15 +95,15 @@ const Recruitment = () => {
               options={requiredGenders}
             />
           </div>
-        </div>
-        <div className={styles.itemsSetHorizontal}>
-          <BorderButton variant={"default"} onClick={onSubmit}>
-            下書きに保存する
-          </BorderButton>
-          <Button variant={"default"} onClick={onSubmit}>
-            内容を確認する→
-          </Button>
-          <br/>
+          <div className={styles.itemsSetHorizontal}>
+            <BorderButton variant={"default"} onClick={onSubmit}>
+              下書きに保存する
+            </BorderButton>
+            <Button variant={"default"} onClick={onSubmit}>
+              内容を確認する→
+            </Button>
+            <br/>
+          </div>
         </div>
       </form>
     </div>

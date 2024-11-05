@@ -80,14 +80,12 @@ const Recruitment = () => {
           </div>
           <p className={styles.headline2}>応募するメンバー</p>
           <div className={styles.itemsSetHorizontal}>
-            <div className={styles.itemsSetHorizontal}>
-              <Checkbox
-                id={'requiredGenerations'}
-                title={'年齢'}
-                name={'requiredGenerations'}
-                options={requiredGenerations}
-              />
-            </div>
+            <Checkbox
+              id={'requiredGenerations'}
+              title={'年齢'}
+              name={'requiredGenerations'}
+              options={requiredGenerations}
+            />
           </div>
           <div className={styles.itemsSetHorizontal}>
             <Checkbox
@@ -98,13 +96,15 @@ const Recruitment = () => {
             />
           </div>
         </div>
-        <Button variant={"default"} onClick={onSubmit}>
-          登録する
-        </Button>
-        <br/>
-        <BorderButton variant={"default"} onClick={onSubmit}>
-          登録する
-        </BorderButton>
+        <div className={styles.itemsSetHorizontal}>
+          <BorderButton variant={"default"} onClick={onSubmit}>
+            下書きに保存する
+          </BorderButton>
+          <Button variant={"default"} onClick={onSubmit}>
+            内容を確認する→
+          </Button>
+          <br/>
+        </div>
       </form>
     </div>
   );

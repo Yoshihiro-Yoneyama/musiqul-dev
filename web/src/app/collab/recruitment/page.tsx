@@ -42,7 +42,6 @@ const requiredGenerations: CheckboxOption[] = [
   {value: 'MORE_THAN_SIXTIES', label: '60代以上'},
 ]
 
-
 const Recruitment = () => {
   const [selectedValue, setSelectedValue] = useState<string>("");
   
@@ -80,7 +79,6 @@ const Recruitment = () => {
             <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}/>
           </div>
           <p className={styles.headline2}>応募するメンバー</p>
-          {/*チェックボックスの選択肢を自動で表示したい*/}
           <div className={styles.itemsSetHorizontal}>
             <div className={styles.itemsSetHorizontal}>
               <Checkbox

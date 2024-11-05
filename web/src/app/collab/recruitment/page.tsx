@@ -18,9 +18,9 @@ type SelectorOption = {
 
 const genres: SelectorOption[] = [
   {value: '', label: ''},
-  {value: 'Rock', label: 'ロック'},
-  {value: 'Jazz', label: 'ジャズ'},
-  {value: 'Pop', label: 'ポップ'},
+  {value: 'ROCK', label: 'ロック'},
+  {value: 'JAZZ', label: 'ジャズ'},
+  {value: 'POP', label: 'ポップ'},
 ];
 
 const recruitedInstruments: SelectorOption[] = [

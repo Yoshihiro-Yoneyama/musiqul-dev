@@ -104,6 +104,7 @@ const Recruitment = () => {
             />
           </div>
           <div className={styles.itemsSetHorizontal}>
+            {/*選択項目が消える*/}
             <InputSelector
               title={"楽器"}
               name={"recruitedInstruments"}

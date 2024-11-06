@@ -7,15 +7,16 @@ type FormProps = {
   title: string
   id: string,
   name: string,
-  disabled: boolean
+  disabled: boolean,
+  displayedRequired: boolean,
 }
 
-const InputForm: React.FC<FormProps> = ({title, id, name, disabled}) => {
+const InputForm: React.FC<FormProps> = ({title, id, name, disabled, displayedRequired}) => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.titleContainer}>
         {title}
-        <Required/>
+        <Required displayed={displayedRequired}/>
       </div>
       <TextBox id={id} name={name} disabled={disabled}/>
     </div>

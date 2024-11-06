@@ -16,15 +16,16 @@ type selectorProps = {
   options: Option[],
   onChange: (value: string) => void;
   selectedValue: string,
-  disabled: boolean
+  disabled: boolean,
+  displayedRequired: boolean,
 }
 
-const InputSelector: React.FC<selectorProps> = ({title, name, options, onChange, selectedValue, disabled}) => {
+const InputSelector: React.FC<selectorProps> = ({title, name, options, onChange, selectedValue, disabled, displayedRequired}) => {
   return (
     <div className={styles.selectorContainer}>
       <div className={styles.titleContainer}>
         {title}
-        <Required/>
+        <Required displayed={displayedRequired}/>
       </div>
       <Selector
         name={name}

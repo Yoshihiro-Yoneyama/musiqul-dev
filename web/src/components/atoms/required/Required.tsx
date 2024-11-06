@@ -1,8 +1,15 @@
-import * as styles from "./Required.css"
+"use client"
 
-const Required = () => {
+import * as styles from "./Required.css"
+import React from "react";
+
+type RequiredProps = {
+  displayed: boolean,
+}
+
+const Required: React.FC<RequiredProps> = ({displayed}) => {
   return (
-    <div className={styles.Label}>必須</div>
+    !displayed && <div className={styles.Label}>必須</div>
   )
 }
 

@@ -10,14 +10,15 @@ type calendarProps = {
   id: string,
   name: string,
   disabled: boolean,
+  displayedRequired: boolean,
 };
 
-const InputCalendar: React.FC<calendarProps> = ({id, title, name, disabled}) => {
+const InputCalendar: React.FC<calendarProps> = ({id, title, name, disabled, displayedRequired}) => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.titleContainer}>
         {title}
-        <Required/>
+        <Required displayed={displayedRequired}/>
       </div>
       <DateCalendar id={id} name={name} disabled={disabled}/>
     </div>

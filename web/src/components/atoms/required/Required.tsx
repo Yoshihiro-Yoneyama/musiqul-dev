@@ -9,7 +9,7 @@ type RequiredProps = {
 
 const Required: React.FC<RequiredProps> = ({displayed}) => {
   return (
-    !displayed && <div className={styles.Label}>必須</div>
+    displayed && <div className={styles.Label}>必須</div>
   )
 }
 

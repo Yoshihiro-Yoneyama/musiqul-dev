@@ -67,8 +67,8 @@ const Recruitment = () => {
       <form onSubmit={event => createRecruitment(event)}>
         <div className={styles.itemsSetVertical}>
           <div className={styles.itemsSetHorizontal}>
-            <InputForm id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false}/>
-            <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}/>
+            <InputForm id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false} displayedRequired={false}/>
+            <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false} displayedRequired={false}/>
           </div>
           {/*選択解除後も文字を白で表示したい*/}
           {/*ドロップダウンリストの下矢印を白で表示したい*/}
@@ -80,11 +80,12 @@ const Recruitment = () => {
               onChange={handleChange}
               selectedValue={selectedValue}
               disabled={false}
+              displayedRequired={true}
             />
-            <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false}/>
+            <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false} displayedRequired={true}/>
           </div>
           <div className={styles.itemsSetHorizontal}>
-            <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}/>
+            <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false} displayedRequired={true}/>
           </div>
           <p className={styles.headline2}>応募するメンバー</p>
           <div className={styles.itemsSetHorizontal}>
@@ -112,6 +113,7 @@ const Recruitment = () => {
               onChange={handleChange}
               selectedValue={selectedValue}
               disabled={false}
+              displayedRequired={true}
             />
             <Selector
               name={"numberOfPeople"}

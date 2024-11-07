@@ -3,6 +3,7 @@ import api from "@/utils/axios/axios.config";
 
 type RecruitmentRequest = {
   owner: string,
+  // ownerInstruments: string[],
   songTitle: string,
   artist: string,
   name: string,
@@ -10,7 +11,7 @@ type RecruitmentRequest = {
   deadline: Date,
   requiredGenerations: string[],
   requiredGender: string[],
-  // ownerInstruments: string[],
+  // map形式
   // recruitedInstruments: string[],
 }
 
@@ -25,6 +26,7 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
   // Recruitment型に翻訳
   const recruitmentData: RecruitmentRequest = {
     owner: formData.get("owner") as string,
+    // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     songTitle: formData.get("songTitle") as string,
     artist: formData.get("artist") as string,
     name: formData.get("name") as string,
@@ -32,7 +34,6 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
     deadline: new Date(formData.get("deadline") as string), // Date型に変換
     requiredGenerations: (formData.getAll("requiredGenerations").map(String)),
     requiredGender: (formData.getAll("requiredGender").map(String)),
-    // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     // recruitedInstruments: (formData.get("recruitedInstruments") as string).split(","),
   };
   

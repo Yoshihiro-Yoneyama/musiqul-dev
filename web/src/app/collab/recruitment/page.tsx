@@ -10,6 +10,7 @@ import InputSelector from "@/components/molecules/input-selector/InputSelector";
 import InputCalendar from "@/components/molecules/input-calendar/InputCalendar";
 import Checkbox from "@/components/atoms/checkbox/Checkbox";
 import Selector from "@/components/atoms/selector/Selector";
+import ComboInput from "@/components/molecules/combo-input/ComboInput";
 
 type SelectorOption = {
   value: string;
@@ -68,7 +69,8 @@ const Recruitment = () => {
         <div className={styles.itemsSetVertical}>
           <div className={styles.itemsSetHorizontal}>
             <InputForm id={"songTitle"} name={"songTitle"} title={"曲名"} disabled={false} displayedRequired={false}/>
-            <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false} displayedRequired={false}/>
+            <InputForm id={"artist"} name={"artist"} title={"アーティスト名"} disabled={false}
+                       displayedRequired={false}/>
           </div>
           {/*選択解除後も文字を白で表示したい*/}
           {/*ドロップダウンリストの下矢印を白で表示したい*/}
@@ -85,7 +87,8 @@ const Recruitment = () => {
             <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false} displayedRequired={true}/>
           </div>
           <div className={styles.itemsSetHorizontal}>
-            <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false} displayedRequired={true}/>
+            <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}
+                           displayedRequired={true}/>
           </div>
           <p className={styles.headline2}>応募するメンバー</p>
           <div className={styles.itemsSetHorizontal}>
@@ -126,18 +129,39 @@ const Recruitment = () => {
             />
           </div>
           <div className={styles.itemsSetHorizontal}>
-            <BorderButton variant={"default"} onClick={onSubmit}>
-              下書きに保存する
-            </BorderButton>
-            <Button variant={"default"} onClick={onSubmit}>
-              内容を確認する→
-            </Button>
-            <br/>
+            <ComboInput
+              id={"recruitedInstruments"}
+              name={"recruitedInstruments"}
+              options1={recruitedInstruments.map(value => value)}
+              options2={[
+                {value: '0', label: '0'},
+                {value: '1', label: '1'},
+                {value: '2', label: '2'},
+                {value: '3', label: '3'},
+                {value: '4', label: '4'},
+                {value: '5', label: '5'},
+                {value: '6', label: '6'},
+                {value: '7', label: '7'},
+                {value: '8', label: '8'},
+                {value: '9', label: '9'},
+                {value: '10', label: '10'},
+              ]}
+              disabled={false}
+            />
           </div>
-        </div>
+            <div className={styles.itemsSetHorizontal}>
+              <BorderButton variant={"default"} onClick={onSubmit}>
+                下書きに保存する
+              </BorderButton>
+              <Button variant={"default"} onClick={onSubmit}>
+                内容を確認する→
+              </Button>
+              <br/>
+            </div>
+          </div>
       </form>
     </div>
-  );
+);
 };
 
 export default Recruitment;

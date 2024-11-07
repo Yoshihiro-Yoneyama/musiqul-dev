@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from "react";
-import {createRecruitment} from "@/app/collab/recruitment/component/createRecruitment";
+import {createRecruitment} from "@/app/collab/recruitment/CreateRecruitment";
 import Button from "@/components/atoms/button/Button";
 import BorderButton from "@/components/atoms/button/BorderButton";
 import InputForm from "@/components/molecules/input-form/InputForm";

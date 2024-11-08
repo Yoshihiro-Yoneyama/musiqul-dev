@@ -1,7 +1,7 @@
 import {FormEvent} from "react";
 import api from "@/utils/axios/axios.config";
 
-type RecruitmentRequest = {
+export type CreateRecruitmentRequest = {
   owner: string,
   // ownerInstruments: string[],
   songTitle: string,
@@ -24,7 +24,7 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
   // const requiredGenerations: string[] = formData.getAll("requiredGenerations").map(String);
   
   // Recruitment型に翻訳
-  const recruitmentData: RecruitmentRequest = {
+  const recruitmentData: CreateRecruitmentRequest = {
     owner: formData.get("owner") as string,
     // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     songTitle: formData.get("songTitle") as string,

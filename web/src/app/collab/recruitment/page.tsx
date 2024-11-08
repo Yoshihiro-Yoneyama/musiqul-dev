@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from "react";
-import {createRecruitment} from "@/app/collab/recruitment/CreateRecruitment";
+import {createRecruitment, CreateRecruitmentRequest} from "@/app/collab/recruitment/CreateRecruitment";
 import Button from "@/components/atoms/button/Button";
 import BorderButton from "@/components/atoms/button/BorderButton";
 import InputForm from "@/components/molecules/input-form/InputForm";
@@ -65,11 +65,13 @@ const requiredGenerations: CheckboxOption[] = [
   {value: 'MORE_THAN_SIXTIES', label: '60代以上'},
 ]
 
-const Recruitment = () => {
-  const [selectedValue, setSelectedValue] = useState<string>("");
+const Recruitment = (props: CreateRecruitmentRequest) => {
+  const [songTitle, setSongTitle] = useState(props.songTitle)
+  const [artist, setArtist] = useState(props.artist)
+  const [genre, setGenre] = useState(props.genre)
   
-  const handleChange = (value: string) => {
-    setSelectedValue(value); // 値を更新して表示する
+  const handleGenreChange = (value: string) => {
+    setGenre(value); // 値を更新して表示する
   };
   
   const onSubmit = () => {
@@ -93,8 +95,8 @@ const Recruitment = () => {
               title={"ジャンル"}
               name={"genre"}
               options={genres.map(value => value)}
-              onChange={handleChange}
-              selectedValue={selectedValue}
+              onChange={handleGenreChange}
+              selectedValue={genre}
               disabled={false}
               displayedRequired={true}
             />
@@ -127,8 +129,8 @@ const Recruitment = () => {
               title={"楽器"}
               name={"recruitedInstruments"}
               options={recruitedInstruments.map(value => value)}
-              onChange={handleChange}
-              selectedValue={selectedValue}
+              onChange={handleGenreChange}
+              selectedValue={genre}
               disabled={false}
               displayedRequired={true}
             />
@@ -138,8 +140,8 @@ const Recruitment = () => {
                 {value: '0', label: '0'},
                 {value: '1', label: '1'},
               ]}
-              onChange={handleChange}
-              selectedValue={selectedValue}
+              onChange={handleGenreChange}
+              selectedValue={genre}
             />
           </div>
           <div className={styles.itemsSetHorizontal}>

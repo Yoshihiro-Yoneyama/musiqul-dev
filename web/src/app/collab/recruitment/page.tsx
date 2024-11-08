@@ -68,7 +68,9 @@ const requiredGenerations: CheckboxOption[] = [
 const Recruitment = (props: CreateRecruitmentRequest) => {
   const [songTitle, setSongTitle] = useState(props.songTitle)
   const [artist, setArtist] = useState(props.artist)
+  const [name, setName] = useState(props.name)
   const [genre, setGenre] = useState(props.genre)
+  
   
   const handleGenreChange = (value: string) => {
     setGenre(value); // 値を更新して表示する

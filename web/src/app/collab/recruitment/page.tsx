@@ -70,6 +70,7 @@ const Recruitment = (props: CreateRecruitmentRequest) => {
   const [artist, setArtist] = useState(props.artist)
   const [name, setName] = useState(props.name)
   const [genre, setGenre] = useState(props.genre)
+  const [deadline, setDeadline] = useState(props.deadline)
   
   
   const handleGenreChange = (value: string) => {

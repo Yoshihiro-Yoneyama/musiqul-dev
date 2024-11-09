@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from "../../../shared/config/axios";
+import api from "@/shared/lib/axios";
 
 type WeatherDataResponse = {
   weatherId: string;

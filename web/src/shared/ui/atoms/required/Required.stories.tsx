@@ -12,6 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Story = () => (
   <div>
-    <Required/>
+    <Required displayed={true}/>
   </div>
 )

@@ -32,8 +32,9 @@ export const Story = () => {
       title={"テスト"}
       selectedValue={""}
       options={options}
-      onChange={() => {}}
+      onChange={() => {
+      }}
       disabled={false}
-    />
+      displayedRequired={false}/>
   </div>
 }

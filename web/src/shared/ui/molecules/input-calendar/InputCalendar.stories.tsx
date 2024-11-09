@@ -13,6 +13,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Story = () => {
   <div>
-    <InputCalendar title={"テスト"} id={"test"} name={"test"} disabled={false}/>
+    <InputCalendar
+      title={"テスト"}
+      id={"test"}
+      name={"test"}
+      disabled={false}
+      displayedRequired={false}/>
   </div>
 }

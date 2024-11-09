@@ -1,5 +1,5 @@
 import {FormEvent} from "react";
-import api from "@/utils/axios/axios.config";
+import api from "@/shared/config/axios";
 
 export type CreateRecruitmentRequest = {
   owner: string,

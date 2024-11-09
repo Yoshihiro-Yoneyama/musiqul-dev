@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import SideMenu from "@/components/organisms/side-menu/sideMenu";
+import SideMenu from "@/shared/ui/organisms/side-menu/sideMenu";
 import * as styles from "./styles.css"
 
 export default function RootLayout({

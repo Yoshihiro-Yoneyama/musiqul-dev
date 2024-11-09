@@ -1,5 +1,5 @@
 import {style, styleVariants} from "@vanilla-extract/css";
-import {linearGradient} from "@/utils/linear-gradient/linearGradient";
+import {linearGradient} from "@/shared/ui/linear-gradient/linearGradient";
 
 
 const buttonBase = style({

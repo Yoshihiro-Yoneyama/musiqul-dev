@@ -1,14 +1,14 @@
-import {createRecruitment, CreateRecruitmentRequest} from "../../../../../../app/collab/recruitment/CreateRecruitment";
-import * as styles from "../../../../../../app/collab/recruitment/collab.css";
+import * as styles from "./createRecruitment.css";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import InputSelector from "@/shared/ui/molecules/input-selector/InputSelector";
 import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar";
 import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
-import Selector from "@/shared/ui/atoms/selector/Selector";
 import ComboInput from "@/shared/ui/molecules/combo-input/ComboInput";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
+import {createRecruitment} from "@/pages/collab/recruitment/CreateRecruitment";
+import {type RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
 
 type SelectorOption = {
   value: string;
@@ -63,19 +63,33 @@ const requiredGenerations: CheckboxOption[] = [
   {value: 'MORE_THAN_SIXTIES', label: '60代以上'},
 ]
 
-const CreateRecruitmentForm = (props: CreateRecruitmentRequest) => {
-  const [songTitle, setSongTitle] = useState(props.songTitle)
-  const [artist, setArtist] = useState(props.artist)
-  const [name, setName] = useState(props.name)
-  const [genre, setGenre] = useState(props.genre)
-  const [deadline, setDeadline] = useState(props.deadline)
+const CreateRecruitmentForm: FC = () => {
+  const [owner, setOwner] = useState('')
+  const [songTitle, setSongTitle] = useState('')
+  const [artist, setArtist] = useState('')
+  const [name, setName] = useState('')
+  const [genre, setGenre] = useState([])
+  const [deadline, setDeadline] = useState('')
+  const [requiredGenerations, setRequiredGenerations] = useState([])
+  const [requiredGender, setRequiredGender] = useState('')
   
+  const postData: RecruitmentSchema = {
+    owner,
+    songTitle,
+    artist,
+    name,
+    genre,
+    deadline,
+    requiredGenerations,
+    requiredGender
+  }
   
-  const handleGenreChange = (value: string) => {
-    setGenre(value); // 値を更新して表示する
-  };
-  
-  const onSubmit = () => {}
+  const handleSongTitleChange = (value: string) => {
+    setSongTitle(value)
+  }
+  const handleArtistChange = (value: string) => {
+    setArtist(value)
+  }
   
   return (
     <form onSubmit={event => createRecruitment(event)}>
@@ -103,8 +117,8 @@ const CreateRecruitmentForm = (props: CreateRecruitmentRequest) => {
             title={"ジャンル"}
             name={"genre"}
             options={genres.map(value => value)}
-            onChange={handleGenreChange}
-            selectedValue={genre}
+            onChange={handleSongTitleChange}
+            selectedValue={""}
             disabled={false}
             displayedRequired={true}
           />
@@ -133,24 +147,24 @@ const CreateRecruitmentForm = (props: CreateRecruitmentRequest) => {
         </div>
         <div className={styles.itemsSetHorizontal}>
           {/*選択項目が消える*/}
-          <InputSelector
-            title={"楽器"}
-            name={"recruitedInstruments"}
-            options={recruitedInstruments.map(value => value)}
-            onChange={handleGenreChange}
-            selectedValue={genre}
-            disabled={false}
-            displayedRequired={true}
-          />
-          <Selector
-            name={"numberOfPeople"}
-            options={[
-              {value: '0', label: '0'},
-              {value: '1', label: '1'},
-            ]}
-            onChange={handleGenreChange}
-            selectedValue={genre}
-          />
+          {/*<InputSelector*/}
+          {/*  title={"楽器"}*/}
+          {/*  name={"recruitedInstruments"}*/}
+          {/*  options={recruitedInstruments.map(value => value)}*/}
+          {/*  onChange={handleGenreChange}*/}
+          {/*  selectedValue={genre}*/}
+          {/*  disabled={false}*/}
+          {/*  displayedRequired={true}*/}
+          {/*/>*/}
+          {/*<Selector*/}
+          {/*  name={"numberOfPeople"}*/}
+          {/*  options={[*/}
+          {/*    {value: '0', label: '0'},*/}
+          {/*    {value: '1', label: '1'},*/}
+          {/*  ]}*/}
+          {/*  onChange={handleGenreChange}*/}
+          {/*  selectedValue={genre}*/}
+          {/*/>*/}
         </div>
         <div className={styles.itemsSetHorizontal}>
           <ComboInput
@@ -162,10 +176,10 @@ const CreateRecruitmentForm = (props: CreateRecruitmentRequest) => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          <BorderButton variant={"default"} onClick={onSubmit}>
+          <BorderButton variant={"default"} onClick={() => {}}>
             下書きに保存する
           </BorderButton>
-          <Button variant={"default"} onClick={onSubmit}>
+          <Button variant={"default"} onClick={() => {}}>
             内容を確認する→
           </Button>
           <br/>

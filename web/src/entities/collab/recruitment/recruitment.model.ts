@@ -1,4 +1,4 @@
-import {array, date, object, string} from "yup";
+import {array, date, InferType, object, string} from "yup";
 
 export const recruitmentSchema = object({
   owner: string().required(),
@@ -7,9 +7,11 @@ export const recruitmentSchema = object({
   artist: string().optional(),
   name: string().required(),
   genre: array().optional(),
-  deadline: date(),
+  deadline: string(),
   requiredGenerations: array().optional(),
   requiredGender: string(),
   // map形式
   // recruitedInstruments: string[],
 })
+
+export type RecruitmentSchema = InferType<typeof recruitmentSchema>

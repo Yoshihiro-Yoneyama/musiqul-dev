@@ -8,7 +8,7 @@ import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
 import ComboInput from "@/shared/ui/molecules/combo-input/ComboInput";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
-import React, {FC, useState} from "react";
+import React, {FC, useCallback, useState} from "react";
 import {createRecruitment} from "@/pages/collab/recruitment/CreateRecruitment";
 import {type RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
 
@@ -75,6 +75,8 @@ const CreateRecruitmentForm: FC = () => {
   const [requiredGenerations, setRequiredGenerations] = useState([])
   const [requiredGender, setRequiredGender] = useState('')
   
+  const [submitting, setSubmitting] = useState(false)
+  
   const postData: RecruitmentSchema = {
     owner,
     songTitle,
@@ -85,6 +87,40 @@ const CreateRecruitmentForm: FC = () => {
     requiredGenerations,
     requiredGender
   }
+  
+  const handleSubmit = useCallback(async () => {
+    if (submitting) return
+    setSubmitting(true)
+    
+    const postData: RecruitmentSchema = {
+      owner,
+      songTitle,
+      artist,
+      name,
+      genre,
+      deadline,
+      requiredGenerations,
+      requiredGender,
+    }
+    
+    try {
+      setSongTitle('')
+      setArtist('')
+      setName('')
+    } finally {
+      setSubmitting(false)
+    }
+    
+  }, [
+    owner,
+    songTitle,
+    artist,
+    name,
+    genre,
+    deadline,
+    requiredGenerations,
+    requiredGender,
+  ])
   
   const handleSongTitleChange = (value: string) => {
     setSongTitle(value)
@@ -178,10 +214,12 @@ const CreateRecruitmentForm: FC = () => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          <BorderButton variant={"default"} onClick={() => {}}>
+          <BorderButton variant={"default"} onClick={() => {
+          }}>
             下書きに保存する
           </BorderButton>
-          <Button variant={"default"} onClick={() => {}}>
+          <Button variant={"default"} onClick={() => {
+          }}>
             内容を確認する→
           </Button>
           <br/>

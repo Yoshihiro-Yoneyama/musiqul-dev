@@ -5,3 +5,5 @@ export const recruitment = async (
   recruitment: RecruitmentSchema,
   client: AxiosInstance
 ) => {}
+
+// api作成

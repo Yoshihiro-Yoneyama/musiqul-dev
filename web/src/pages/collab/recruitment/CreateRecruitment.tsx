@@ -20,9 +20,6 @@ export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
   // フォームデータの取得
   const formData = new FormData(event.currentTarget);
   
-  // チェックボックスの値を取得（`requiredGenerations` の配列を正しく取得するため）
-  // const requiredGenerations: string[] = formData.getAll("requiredGenerations").map(String);
-  
   // Recruitment型に翻訳
   const recruitmentData: CreateRecruitmentRequest = {
     owner: formData.get("owner") as string,

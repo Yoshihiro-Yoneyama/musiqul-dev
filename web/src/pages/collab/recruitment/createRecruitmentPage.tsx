@@ -2,7 +2,7 @@
 
 import * as styles from "./createRecruitmentPage.css"
 import React from "react";
-import CreateRecruitmentForm from "@/features/collab/recruitment/create/ui/createRecruitment";
+import CreateRecruitmentForm from "@/features/collab/recruitment/ui/create/createRecruitment";
 
 export const CreateRecruitmentPage = () => {
   return (

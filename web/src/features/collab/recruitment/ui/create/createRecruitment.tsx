@@ -75,6 +75,31 @@ const CreateRecruitmentForm: FC = () => {
   const [requiredGenerations, setRequiredGenerations] = useState([])
   const [requiredGender, setRequiredGender] = useState('')
   
+  const updateRecruitment = (updates: Partial<RecruitmentSchema>) => {
+    const newItem: RecruitmentSchema = {
+      owner,
+      songTitle,
+      artist,
+      name,
+      genre,
+      deadline,
+      requiredGenerations,
+      requiredGender,
+    }
+    updateRecruitment(newItem)
+  }
+  
+  const handleSongTitleChange = (value: string) => {
+    setSongTitle(value)
+    updateRecruitment({songTitle: value})
+  }
+  const handleArtistChange = (value: string) => {
+    setArtist(value)
+    updateRecruitment({artist: value})
+  }
+  
+  
+  
   const [submitting, setSubmitting] = useState(false)
   
   const postData: RecruitmentSchema = {
@@ -122,12 +147,7 @@ const CreateRecruitmentForm: FC = () => {
     requiredGender,
   ])
   
-  const handleSongTitleChange = (value: string) => {
-    setSongTitle(value)
-  }
-  const handleArtistChange = (value: string) => {
-    setArtist(value)
-  }
+
   
   return (
     <form onSubmit={event => createRecruitment(event)}>

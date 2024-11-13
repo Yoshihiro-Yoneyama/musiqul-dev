@@ -11,6 +11,7 @@ import Button from "@/shared/ui/atoms/button/Button";
 import React, {FC, useCallback, useState} from "react";
 import {createRecruitment} from "@/pages/collab/recruitment/CreateRecruitment";
 import {type RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
+import {TextField} from "@mui/material";
 
 type SelectorOption = {
   value: string;
@@ -180,6 +181,12 @@ const CreateRecruitmentForm: FC = () => {
           {/*  disabled={false}*/}
           {/*  displayedRequired={false}*/}
           {/*/>*/}
+          <TextField
+            label="曲名"
+            name="songTitle"
+            value={songTitle}
+            onChange={(e => setSongTitle(e.target.value))}
+          />
           <InputForm
             id={"artist"}
             name={"artist"}

@@ -4,6 +4,8 @@ import * as styles from "./createRecruitmentPage.css"
 import React from "react";
 import CreateRecruitmentForm from "@/features/collab/recruitment/ui/create/createRecruitment";
 
+// 募集ページ
+
 export const CreateRecruitmentPage = () => {
   return (
     <div>

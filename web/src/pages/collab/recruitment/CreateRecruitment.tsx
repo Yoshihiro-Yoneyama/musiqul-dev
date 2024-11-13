@@ -1,6 +1,8 @@
 import {FormEvent} from "react";
 import api from "@/shared/lib/axios";
 
+// 移行中
+
 export type CreateRecruitmentRequest = {
   owner: string,
   // ownerInstruments: string[],

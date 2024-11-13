@@ -70,7 +70,7 @@ const CreateRecruitmentForm: FC = () => {
   const [songTitle, setSongTitle] = useState('')
   const [artist, setArtist] = useState('')
   const [name, setName] = useState('')
-  const [genre, setGenre] = useState([])
+  const [genre, setGenre] = useState<string[]>([])
   const [deadline, setDeadline] = useState('')
   const [requiredGenerations, setRequiredGenerations] = useState([])
   const [requiredGender, setRequiredGender] = useState('')
@@ -96,6 +96,26 @@ const CreateRecruitmentForm: FC = () => {
   const handleArtistChange = (value: string) => {
     setArtist(value)
     updateRecruitment({artist: value})
+  }
+  const handleNameChange = (value: string) => {
+    setName(value)
+    updateRecruitment({name: value})
+  }
+  const handleGenre = (values: string[]) => {
+    setGenre(values)
+    updateRecruitment({genre: values})
+  }
+  const handleDeadline = (value: string) => {
+    setDeadline(value)
+    updateRecruitment({deadline: value})
+  }
+  // const handleRequiredGenerations = (values: string[]) => {
+  //   setRequiredGenerations(values)
+  //   updateRecruitment({requiredGenerations: values})
+  // }
+  const handleRequiredGender = (value: string) => {
+    setRequiredGender(value)
+    updateRecruitment({requiredGender: value})
   }
   
   

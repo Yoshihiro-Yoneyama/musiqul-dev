@@ -3,6 +3,8 @@ import Required from "@/shared/ui/atoms/required/Required";
 import TextBox from "@/shared/ui/atoms/textbox/TextBox";
 import * as styles from "./InputForm.css";
 
+//　入力フォーム
+
 type FormProps = {
   title: string
   id: string,

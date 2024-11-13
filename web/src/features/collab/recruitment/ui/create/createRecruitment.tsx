@@ -173,13 +173,13 @@ const CreateRecruitmentForm: FC = () => {
     <form onSubmit={event => createRecruitment(event)}>
       <div className={styles.itemsSetVertical}>
         <div className={styles.itemsSetHorizontal}>
-          <InputForm
-            id={"songTitle"}
-            name={"songTitle"}
-            title={"曲名"}
-            disabled={false}
-            displayedRequired={false}
-          />
+          {/*<InputForm*/}
+          {/*  id={"songTitle"}*/}
+          {/*  name={"songTitle"}*/}
+          {/*  title={"曲名"}*/}
+          {/*  disabled={false}*/}
+          {/*  displayedRequired={false}*/}
+          {/*/>*/}
           <InputForm
             id={"artist"}
             name={"artist"}

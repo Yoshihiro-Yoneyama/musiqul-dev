@@ -163,6 +163,14 @@ const CreateRecruitmentForm: FC = () => {
           {/*  disabled={false}*/}
           {/*  displayedRequired={false}*/}
           {/*/>*/}
+          {/*<InputForm*/}
+          {/*  id={"artist"}*/}
+          {/*  name={"artist"}*/}
+          {/*  title={"アーティスト名"}*/}
+          {/*  disabled={false}*/}
+          {/*  displayedRequired={false}*/}
+          {/*/>*/}
+          {/*<InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false} displayedRequired={true}/>*/}
           <TextField
             label="曲名"
             name="songTitle"
@@ -175,13 +183,6 @@ const CreateRecruitmentForm: FC = () => {
             value={artist}
             onChange={(e => setArtist(e.target.value))}
           />
-          {/*<InputForm*/}
-          {/*  id={"artist"}*/}
-          {/*  name={"artist"}*/}
-          {/*  title={"アーティスト名"}*/}
-          {/*  disabled={false}*/}
-          {/*  displayedRequired={false}*/}
-          {/*/>*/}
         </div>
         {/*選択解除後も文字を白で表示したい*/}
         {/*ドロップダウンリストの下矢印を白で表示したい*/}
@@ -195,7 +196,12 @@ const CreateRecruitmentForm: FC = () => {
             disabled={false}
             displayedRequired={true}
           />
-          <InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false} displayedRequired={true}/>
+          <TextField
+            label="コラボ名"
+            name="name"
+            value={name}
+            onChange={(e => setName(e.target.value))}
+          />
         </div>
         <div className={styles.itemsSetHorizontal}>
           <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}

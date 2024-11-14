@@ -1,5 +1,10 @@
 import {z} from "zod";
 
+export const RequiredGenerationOption = z.object({
+  label: z.string(),
+  value: z.string()
+})
+
 export const recruitmentSchema = z.object({
   owner: z.string(),
   // ownerInstruments: string[],
@@ -8,7 +13,7 @@ export const recruitmentSchema = z.object({
   name: z.string().min(1),
   genre: z.string().array(),
   deadline: z.string(),
-  requiredGenerations: z.string().array().optional(),
+  requiredGenerations: RequiredGenerationOption.array(),
   requiredGender: z.string(),
   // map形式
   // recruitedInstruments: string[],

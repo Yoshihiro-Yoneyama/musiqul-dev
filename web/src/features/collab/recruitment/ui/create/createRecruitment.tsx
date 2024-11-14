@@ -57,7 +57,7 @@ const requiredGenders: CheckboxOption[] = [
   {value: 'ALL', label: '不問'},
 ];
 
-const requiredGenerations: CheckboxOption[] = [
+const requiredGenerationOptions: CheckboxOption[] = [
   {value: 'TEEN', label: '10代'},
   {value: 'TWENTIES', label: '20代'},
   {value: 'THIRTIES', label: '30代'},
@@ -73,7 +73,7 @@ const CreateRecruitmentForm: FC = () => {
   const [name, setName] = useState('')
   const [genre, setGenre] = useState<string[]>([])
   const [deadline, setDeadline] = useState('')
-  const [requiredGenerations, setRequiredGenerations] = useState([])
+  const [requiredGenerations, setRequiredGenerations] = useState<CheckboxOption[]>([])
   const [requiredGender, setRequiredGender] = useState('')
   
   const updateRecruitment = (updates: Partial<RecruitmentSchema>) => {
@@ -110,53 +110,35 @@ const CreateRecruitmentForm: FC = () => {
     setDeadline(value)
     updateRecruitment({deadline: value})
   }
-  // const handleRequiredGenerations = (values: string[]) => {
-  //   setRequiredGenerations(values)
-  //   updateRecruitment({requiredGenerations: values})
-  // }
+  const handleRequiredGenerations = (values: CheckboxOption[]) => {
+    setRequiredGenerations(values)
+    updateRecruitment({requiredGenerations: values})
+  }
   const handleRequiredGender = (value: string) => {
     setRequiredGender(value)
     updateRecruitment({requiredGender: value})
   }
   
-  
-  
   const [submitting, setSubmitting] = useState(false)
   
-  const postData: RecruitmentSchema = {
-    owner,
-    songTitle,
-    artist,
-    name,
-    genre,
-    deadline,
-    requiredGenerations,
-    requiredGender
-  }
-  
+  /**
+   * 確認ボタン押下時のハンドラ
+   */
   const handleSubmit = useCallback(async () => {
     if (submitting) return
     setSubmitting(true)
-    
-    const postData: RecruitmentSchema = {
-      owner,
-      songTitle,
-      artist,
-      name,
-      genre,
-      deadline,
-      requiredGenerations,
-      requiredGender,
-    }
     
     try {
       setSongTitle('')
       setArtist('')
       setName('')
+      setGenre([])
+      setDeadline('')
+      setRequiredGenerations([])
+      setGenre([])
     } finally {
       setSubmitting(false)
     }
-    
   }, [
     owner,
     songTitle,
@@ -168,7 +150,6 @@ const CreateRecruitmentForm: FC = () => {
     requiredGender,
   ])
   
-
   
   return (
     <form onSubmit={event => createRecruitment(event)}>
@@ -219,7 +200,7 @@ const CreateRecruitmentForm: FC = () => {
             id={'requiredGenerations'}
             title={'年齢'}
             name={'requiredGenerations'}
-            options={requiredGenerations}
+            options={requiredGenerationOptions}
           />
         </div>
         <div className={styles.itemsSetHorizontal}>

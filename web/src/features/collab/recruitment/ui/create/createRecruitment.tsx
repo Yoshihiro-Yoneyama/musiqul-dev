@@ -90,34 +90,34 @@ const CreateRecruitmentForm: FC = () => {
     updateRecruitment(newItem)
   }
   
-  const handleSongTitleChange = (value: string) => {
-    setSongTitle(value)
-    updateRecruitment({songTitle: value})
-  }
-  const handleArtistChange = (value: string) => {
-    setArtist(value)
-    updateRecruitment({artist: value})
-  }
-  const handleNameChange = (value: string) => {
-    setName(value)
-    updateRecruitment({name: value})
-  }
-  const handleGenre = (values: string[]) => {
-    setGenre(values)
-    updateRecruitment({genre: values})
-  }
-  const handleDeadline = (value: string) => {
-    setDeadline(value)
-    updateRecruitment({deadline: value})
-  }
-  const handleRequiredGenerations = (values: CheckboxOption[]) => {
-    setRequiredGenerations(values)
-    updateRecruitment({requiredGenerations: values})
-  }
-  const handleRequiredGender = (value: string) => {
-    setRequiredGender(value)
-    updateRecruitment({requiredGender: value})
-  }
+  // const handleSongTitleChange = (value: string) => {
+  //   setSongTitle(value)
+  //   updateRecruitment({songTitle: value})
+  // }
+  // const handleArtistChange = (value: string) => {
+  //   setArtist(value)
+  //   updateRecruitment({artist: value})
+  // }
+  // const handleNameChange = (value: string) => {
+  //   setName(value)
+  //   updateRecruitment({name: value})
+  // }
+  // const handleGenre = (values: string[]) => {
+  //   setGenre(values)
+  //   updateRecruitment({genre: values})
+  // }
+  // const handleDeadline = (value: string) => {
+  //   setDeadline(value)
+  //   updateRecruitment({deadline: value})
+  // }
+  // const handleRequiredGenerations = (values: CheckboxOption[]) => {
+  //   setRequiredGenerations(values)
+  //   updateRecruitment({requiredGenerations: values})
+  // }
+  // const handleRequiredGender = (value: string) => {
+  //   setRequiredGender(value)
+  //   updateRecruitment({requiredGender: value})
+  // }
   
   const [submitting, setSubmitting] = useState(false)
   
@@ -191,7 +191,7 @@ const CreateRecruitmentForm: FC = () => {
             title={"ジャンル"}
             name={"genre"}
             options={genres.map(value => value)}
-            onChange={handleSongTitleChange}
+            onChange={() => {}}
             selectedValue={""}
             disabled={false}
             displayedRequired={true}

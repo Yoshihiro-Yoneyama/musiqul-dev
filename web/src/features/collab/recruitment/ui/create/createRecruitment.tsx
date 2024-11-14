@@ -152,7 +152,8 @@ const CreateRecruitmentForm: FC = () => {
   
   
   return (
-    <form onSubmit={event => createRecruitment(event)}>
+    // <form onSubmit={event => createRecruitment(event)}>
+    <>
       <div className={styles.itemsSetVertical}>
         <div className={styles.itemsSetHorizontal}>
           {/*<InputForm*/}
@@ -168,13 +169,19 @@ const CreateRecruitmentForm: FC = () => {
             value={songTitle}
             onChange={(e => setSongTitle(e.target.value))}
           />
-          <InputForm
-            id={"artist"}
-            name={"artist"}
-            title={"アーティスト名"}
-            disabled={false}
-            displayedRequired={false}
+          <TextField
+            label="アーティスト名"
+            name="artist"
+            value={artist}
+            onChange={(e => setArtist(e.target.value))}
           />
+          {/*<InputForm*/}
+          {/*  id={"artist"}*/}
+          {/*  name={"artist"}*/}
+          {/*  title={"アーティスト名"}*/}
+          {/*  disabled={false}*/}
+          {/*  displayedRequired={false}*/}
+          {/*/>*/}
         </div>
         {/*選択解除後も文字を白で表示したい*/}
         {/*ドロップダウンリストの下矢印を白で表示したい*/}
@@ -253,8 +260,9 @@ const CreateRecruitmentForm: FC = () => {
           <br/>
         </div>
       </div>
-    </form>
-  )
+    </>
+  // </form>
+)
 }
 
 export default CreateRecruitmentForm;

@@ -76,19 +76,19 @@ const CreateRecruitmentForm: FC = () => {
   const [requiredGenerations, setRequiredGenerations] = useState<CheckboxOption[]>([])
   const [requiredGender, setRequiredGender] = useState('')
   
-  const updateRecruitment = (updates: Partial<RecruitmentSchema>) => {
-    const newItem: RecruitmentSchema = {
-      owner,
-      songTitle,
-      artist,
-      name,
-      genre,
-      deadline,
-      requiredGenerations,
-      requiredGender,
-    }
-    updateRecruitment(newItem)
-  }
+  // const updateRecruitment = (updates: Partial<RecruitmentSchema>) => {
+  //   const newItem: RecruitmentSchema = {
+  //     owner,
+  //     songTitle,
+  //     artist,
+  //     name,
+  //     genre,
+  //     deadline,
+  //     requiredGenerations,
+  //     requiredGender,
+  //   }
+  //   updateRecruitment(newItem)
+  // }
   
   // const handleSongTitleChange = (value: string) => {
   //   setSongTitle(value)
@@ -122,11 +122,13 @@ const CreateRecruitmentForm: FC = () => {
   const [submitting, setSubmitting] = useState(false)
   
   /**
-   * 確認ボタン押下時のハンドラ
+   * handler of confirm
    */
   const handleSubmit = useCallback(async () => {
     if (submitting) return
     setSubmitting(true)
+    
+    // createRecruitment()
     
     try {
       setSongTitle('')
@@ -135,7 +137,7 @@ const CreateRecruitmentForm: FC = () => {
       setGenre([])
       setDeadline('')
       setRequiredGenerations([])
-      setGenre([])
+      setRequiredGender('')
     } finally {
       setSubmitting(false)
     }

@@ -6,7 +6,7 @@ import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
  *
  * @param recruitment Recruitment Status Component
  */
-export const recruitment = async (
+export const createRecruitment = async (
   recruitment: RecruitmentSchema
 ) => {
   const newRecruit: RecruitmentSchema = {

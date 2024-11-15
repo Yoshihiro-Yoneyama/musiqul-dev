@@ -2,7 +2,7 @@ import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model
 import api from "@/shared/lib/axios";
 import ErrorData from "@/shared/classes/ErrorData";
 
-export const recruitment = async (
+export const postRecruitment = async (
   recruitment: RecruitmentSchema
 ) => {
   try {
@@ -10,6 +10,7 @@ export const recruitment = async (
   } catch (error) {
     if (error instanceof ErrorData && error.data.status === 400) {
       console.error("Error sending recruitment data:", error);
-    }
+      // TODO バックエンドから返却さたエラーを表示する
+    } throw error
   }
 }

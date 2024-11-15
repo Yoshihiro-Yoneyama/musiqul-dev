@@ -2,11 +2,16 @@ import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model
 import api from "@/shared/lib/axios";
 import ErrorData from "@/shared/classes/ErrorData";
 
+/**
+ * Send a new Post Recruitment Request
+ *
+ * @param recruitmentRequest request
+ */
 export const postRecruitment = async (
-  recruitment: RecruitmentSchema
+  recruitmentRequest: RecruitmentSchema
 ) => {
   try {
-    await api.post('/recruitment', recruitment)
+    await api.post('/recruitment', recruitmentRequest)
   } catch (error) {
     if (error instanceof ErrorData && error.data.status === 400) {
       console.error("Error sending recruitment data:", error);

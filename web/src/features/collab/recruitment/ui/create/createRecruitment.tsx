@@ -1,7 +1,6 @@
 'use client'
 
 import * as styles from "./createRecruitment.css";
-import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import InputSelector from "@/shared/ui/molecules/input-selector/InputSelector";
 import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar";
 import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
@@ -9,9 +8,14 @@ import ComboInput from "@/shared/ui/molecules/combo-input/ComboInput";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
 import React, {FC, useCallback, useState} from "react";
-import {createRecruitment} from "@/pages/collab/recruitment/CreateRecruitment";
-import {type RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
 import {TextField} from "@mui/material";
+import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
+import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
+
+type Props = {
+  onPress?: () => void
+  isDisabled: boolean
+}
 
 type SelectorOption = {
   value: string;
@@ -66,8 +70,7 @@ const requiredGenerationOptions: CheckboxOption[] = [
   {value: 'MORE_THAN_SIXTIES', label: '60代以上'},
 ]
 
-const CreateRecruitmentForm: FC = () => {
-  const [owner, setOwner] = useState('')
+const CreateRecruitmentForm = (props: Props) => {
   const [songTitle, setSongTitle] = useState('')
   const [artist, setArtist] = useState('')
   const [name, setName] = useState('')
@@ -119,16 +122,25 @@ const CreateRecruitmentForm: FC = () => {
   //   updateRecruitment({requiredGender: value})
   // }
   
+  const {recruitment, updateRecruitment} = useRecruitment()
   const [submitting, setSubmitting] = useState(false)
   
   /**
    * handler of confirm
    */
   const handleSubmit = useCallback(async () => {
+    
+    // Defence duplicate submission
     if (submitting) return
     setSubmitting(true)
+    if (props.onPress) {
+      props.onPress()
+    }
     
-    // createRecruitment()
+    updateRecruitment(recruitment)
+    
+    // TODO Document the error handling
+    const processedRecruitment = await createRecruitment(recruitment)
     
     try {
       setSongTitle('')
@@ -142,7 +154,6 @@ const CreateRecruitmentForm: FC = () => {
       setSubmitting(false)
     }
   }, [
-    owner,
     songTitle,
     artist,
     name,
@@ -151,7 +162,6 @@ const CreateRecruitmentForm: FC = () => {
     requiredGenerations,
     requiredGender,
   ])
-  
   
   return (
     // <form onSubmit={event => createRecruitment(event)}>
@@ -261,8 +271,12 @@ const CreateRecruitmentForm: FC = () => {
           }}>
             下書きに保存する
           </BorderButton>
-          <Button variant={"default"} onClick={() => {
-          }}>
+          <Button
+            appearance="primary"
+            type="button"
+            onPress={handleSubmit}
+            isDisabled={submitting || props.isDisabled}
+          >
             内容を確認する→
           </Button>
           <br/>

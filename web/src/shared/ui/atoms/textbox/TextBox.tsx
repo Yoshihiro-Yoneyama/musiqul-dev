@@ -1,53 +1,67 @@
 "use client"
 
-import React, {useState} from "react";
-import {inputStyles} from "@/shared/ui/util/Input.css";
+import React, {ChangeEvent, useState} from "react"
+import {Input as AriaInput} from "react-aria-components"
+import {inputStyles} from "@/shared/ui/util/Input.css"
+import {clsx} from "clsx";
+import namedMemo from "@/shared/hooks/namedMemo";
 
-type TextBoxProps = {
-  id: string,
-  name: string,
-  disabled: boolean,
+export type TextBoxProps = {
+  readonly name?: string
+  readonly type?: string
+  readonly valueType?: string | number | undefined
+  readonly placeholder?: string
+  // readonly errorMessages?: string
+  // readonly isInvalid?: boolean
+  readonly isDisabled?: boolean
+  readonly onChange?: (value: ChangeEvent<HTMLInputElement>) => void
+  readonly autoComplete?: string
+  // readonly maxLength?: number
 }
 
-const TextBox: React.FC<TextBoxProps> = ({ id, name, disabled = false }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+const TextBox: React.FC<TextBoxProps> = ({
+  isDisabled,
+  onChange,
+  autoComplete,
+  ...props
+}) => {
+  const [isFocused, setIsFocused] = useState(false)
+  const [isActive, setIsActive] = useState(false)
+  const [inputValue, setInputValue] = useState("")
   
   const handleFocus = () => {
-    if (!disabled) {
-      setIsFocused(true);
+    if (!isDisabled) {
+      setIsFocused(true)
     }
-  };
-  
-  const handleBlur = () => {
-    setIsFocused(false);
-    setIsActive(inputValue.trim().length > 0);
   }
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
+  const handleBlur = () => {
+    setIsFocused(false)
+    setIsActive(inputValue.trim().length > 0)
   }
   
   return (
-    <input
-      id={id}
-      name={name}
-      type="text"
-      value={inputValue}
-      onChange={handleChange}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      className={[
-        inputStyles.default,
-        isFocused && !disabled ? inputStyles.focused : "",
-        isActive && !isFocused && !disabled ? inputStyles.active : "",
-        disabled ? inputStyles.disabled : ""
-      ].join(" ")}
-      disabled={disabled}
-      placeholder="test"
-    />
+    <>
+      <AriaInput
+        className={clsx(
+          inputStyles.default,
+          isFocused && !isDisabled ? inputStyles.focused : "",
+          isActive && !isFocused && !isDisabled ? inputStyles.active : "",
+          isDisabled ? inputStyles.disabled : ""
+        )}
+        {...props}
+        disabled={isDisabled}
+        onChange={(event) => {
+          if (!onChange) return
+          onChange(event)
+        }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        autoComplete={autoComplete}
+      >
+      </AriaInput>
+    </>
   )
 }
 
-export default TextBox
+export default namedMemo(TextBox, 'TextBox')

@@ -19,7 +19,9 @@ const SideMenu = () => {
         <p className={styles.Title}>musiqul</p>
       </div>
       <div className={styles.SideMenuItem}>
-        <Button variant={"default"} onClick={() => handleNavigation("/collab/recruitment")}>
+        <Button
+          appearance='primary'
+          onPress={() => handleNavigation("/collab/recruitment")}>
           コラボメンバーを募集する
         </Button>
       </div>

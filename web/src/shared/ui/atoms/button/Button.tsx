@@ -1,22 +1,42 @@
-"use client"
+'use client'
 
-import React from "react";
-import * as styles from "./button.css"
+import React, {ReactNode} from 'react'
+import * as styles from './button.css'
+import {Button as AriaButton} from 'react-aria-components'
+import {clsx} from 'clsx';
 
-type ButtonProps = {
-  variant: "default" | "success" | "danger";
-  children: React.ReactNode;
-  onClick: () => void;
+type Props = {
+  readonly children: ReactNode
+  readonly appearance?: 'primary'
+  readonly isDisabled?: boolean
+  readonly className?: string
+  readonly type?: 'button' | 'submit'
+  readonly onPress?: () => void
 }
 
-const Button: React.FC<ButtonProps> = ({ variant, children, onClick }) => {
+const Button: React.FC<Props> = ({
+  children,
+  appearance,
+  isDisabled = false,
+  className,
+  type = 'button',
+  onPress,
+  ...props
+}) => {
   return (
-    <button
-      className={`${styles.buttonBase} ${styles.buttonVariants[variant]}`}
-      onClick={onClick}
+    <AriaButton
+      className={clsx(
+        styles.baseStyle,
+        appearance && [styles.appearances[appearance]],
+        className
+      )}
+      isDisabled={isDisabled}
+      type={type}
+      onPress={onPress}
+      {...props}
     >
       {children}
-    </button>
+    </AriaButton>
   );
 }
 

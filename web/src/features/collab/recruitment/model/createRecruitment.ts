@@ -4,7 +4,7 @@ import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
 /**
  * Creating a New Recruitment Entry
  *
- * @param recruitment Recruitment Status Component
+ * @param recruitment RecruitmentSchema Component
  */
 export const createRecruitment = async (
   recruitment: RecruitmentSchema
@@ -19,13 +19,13 @@ export const createRecruitment = async (
     deadline: recruitment.deadline,
     requiredGenerations: recruitment.requiredGenerations,
     requiredGender: recruitment.requiredGender,
-    // map形式
+    // TODO Define below type of map
     // recruitedInstruments: string[],
   }
   
   const result = await (postRecruitment(newRecruit))
 
-  // TODO　エラーの処理記述
+  // TODO　Document the error handling in the implementation
   
   return {
     ...recruitment,

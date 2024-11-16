@@ -1,7 +1,8 @@
-import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
-import {atom} from "jotai/vanilla/atom";
-import {useCallback} from "react";
-import {useAtom} from "jotai/react/useAtom";
+'use client'
+
+import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model"
+import {atom, useAtom } from "jotai"
+import {useCallback} from "react"
 
 export const useRecruitment = () => {
   

@@ -3,7 +3,7 @@ import api from "@/shared/lib/axios";
 
 // 移行中
 
-export type CreateRecruitmentRequest = {
+export type DeprecatedCreateRecruitmentRequest = {
   owner: string,
   // ownerInstruments: string[],
   songTitle: string,
@@ -18,12 +18,12 @@ export type CreateRecruitmentRequest = {
 }
 
 
-export const createRecruitment = async (event: FormEvent<HTMLFormElement>) => {
+export const deprecatedCreateRecruitment = async (event: FormEvent<HTMLFormElement>) => {
   // フォームデータの取得
   const formData = new FormData(event.currentTarget);
   
   // Recruitment型に翻訳
-  const recruitmentData: CreateRecruitmentRequest = {
+  const recruitmentData: DeprecatedCreateRecruitmentRequest = {
     owner: formData.get("owner") as string,
     // ownerInstruments: (formData.get("ownerInstruments") as string).split(","), // カンマ区切りで配列に
     songTitle: formData.get("songTitle") as string,

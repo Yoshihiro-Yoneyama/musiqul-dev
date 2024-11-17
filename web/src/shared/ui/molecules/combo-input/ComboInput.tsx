@@ -33,18 +33,19 @@ const ComboInput: React.FC<ComboInputProps> = ({ id, name, options1, options2, d
   return (
     <div id={id} aria-label={name}>
       <Selector
-        name={`${name}-1`}
-        options={options1}
-        onChange={handleChange("selector1")}
         selectedValue={selectedValues.selector1}
-        disabled={disabled}
+        options={options1}
+        defaultOptionLabel='Please select'
+        isDisabled={disabled}
+        onChange={handleChange("selector1")}
+        
       />
       <Selector
-        name={`${name}-2`}
-        options={options2}
+        selectedValue={selectedValues.selector1}
+        options={options1}
+        defaultOptionLabel='Please select'
+        isDisabled={disabled}
         onChange={handleChange("selector2")}
-        selectedValue={selectedValues.selector2}
-        disabled={disabled}
       />
     </div>
   );

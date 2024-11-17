@@ -17,15 +17,17 @@ type Option = {
 }
 
 const options: Option[] = [
-  {value: '', label: ''},
-  {value: 'Rock', label: 'ロック'},
-  {value: 'Jazz', label: 'ジャズ'},
-  {value: 'Pop', label: 'ポップ'},
+  {value: 'selectedValue1', label: 'selected value1'},
+  {value: 'selectedValue2', label: 'selected value2'},
+  {value: 'selectedValue3', label: 'selected value3'},
 ];
 
-export const Story = () => (
-  <div>
-    <Selector name={"test"} onChange={() => {
-    }} selectedValue={""} options={options} disabled={false}/>
-  </div>
-)
+export const Default: Story = {
+  args: {
+    selectedValue: '',
+    options: options,
+    defaultOptionLabel: 'Please select',
+    isDisabled: false,
+    onChange: () => {},
+  }
+}

@@ -11,6 +11,7 @@ const meta: Meta<typeof InputSelector> = {
 } satisfies Meta<typeof InputSelector>
 
 export default meta
+
 type Story = StoryObj<typeof meta>;
 
 type Option = {
@@ -19,22 +20,21 @@ type Option = {
 }
 
 const options: Option[] = [
-  {value: '', label: ''},
-  {value: 'test1', label: 'テスト1'},
-  {value: 'test2', label: 'テスト2'},
-  {value: 'test3', label: 'テスト3'},
+  {value: 'selectedValue1', label: 'selected value1'},
+  {value: 'selectedValue2', label: 'selected value2'},
+  {value: 'selectedValue3', label: 'selected value3'},
 ];
 
-export const Story = () => {
-  <div>
-    <InputSelector
-      name={"test"}
-      title={"テスト"}
-      selectedValue={""}
-      options={options}
-      onChange={() => {
-      }}
-      disabled={false}
-      displayedRequired={false}/>
-  </div>
+export const Default: Story = {
+  args: {
+    title: "selected value",
+    displayedRequired: false,
+    selectorProps: {
+      selectedValue: '',
+      options: options,
+      defaultOptionLabel: 'Please select',
+      isDisabled: false,
+      onChange: () => {},
+    },
+  }
 }

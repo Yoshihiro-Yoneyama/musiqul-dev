@@ -3,24 +3,20 @@
 import * as styles from "./InputSelector.css";
 import React from "react";
 import Required from "@/shared/ui/atoms/required/Required";
-import Selector from "@/shared/ui/atoms/selector/Selector";
+import Selector, {SelectorProps} from "@/shared/ui/atoms/selector/Selector";
 
-type Option = {
-  value: string;
-  label: string;
-};
-
-type selectorProps = {
-  title: string,
-  name: string,
-  options: Option[],
-  onChange: (value: string) => void;
-  selectedValue: string,
-  disabled: boolean,
-  displayedRequired: boolean,
+type Props = {
+  title: string
+  displayedRequired: boolean
+  selectorProps: SelectorProps
 }
 
-const InputSelector: React.FC<selectorProps> = ({title, name, options, onChange, selectedValue, disabled, displayedRequired}) => {
+const InputSelector: React.FC<Props> = ({
+  title,
+  displayedRequired,
+  selectorProps,
+  ...props
+}) => {
   return (
     <div className={styles.selectorContainer}>
       <div className={styles.titleContainer}>
@@ -28,11 +24,13 @@ const InputSelector: React.FC<selectorProps> = ({title, name, options, onChange,
         <Required displayed={displayedRequired}/>
       </div>
       <Selector
-        name={name}
-        options={options}
-        onChange={onChange}
-        selectedValue={selectedValue}
-        disabled={disabled}/>
+        selectedValue={selectorProps.selectedValue}
+        options={selectorProps.options}
+        defaultOptionLabel={selectorProps.defaultOptionLabel}
+        isDisabled={selectorProps.isDisabled}
+        onChange={selectorProps.onChange}
+        {...props}
+      />
     </div>
   )
 }

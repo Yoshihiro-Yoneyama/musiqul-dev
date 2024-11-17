@@ -1,6 +1,6 @@
 'use client'
 
-import React, {FC, useState} from 'react'
+import React, {ChangeEvent, FC, useState} from 'react'
 import {selectorStyles} from '@/shared/ui/atoms/selector/Selector.css'
 import {clsx} from "clsx";
 
@@ -43,7 +43,7 @@ const Selector: FC<SelectorProps> = ({
     setIsActive(selectedValue.trim().length > 0)
   }
   
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedId = event.target.value
     setSelectedValue(selectedId)
     if (onChange) onChange(selectedId)

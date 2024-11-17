@@ -7,68 +7,22 @@ import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
 import ComboInput from "@/shared/ui/molecules/combo-input/ComboInput";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
-import React, {FC, useCallback, useState} from "react";
+import React, {ChangeEvent, FC, useCallback, useState} from "react";
 import {TextField} from "@mui/material";
 import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
+import InputForm from "@/shared/ui/molecules/input-form/InputForm";
+import {
+  CheckboxOption,
+  recruitedInstruments,
+  requiredGenders,
+  requiredGenerationOptions, requiredNumberOfInstruments
+} from "@/features/collab/recruitment/model/options";
 
 type Props = {
   onPress?: () => void
   isDisabled: boolean
 }
-
-type SelectorOption = {
-  value: string;
-  label: string;
-}
-
-const genres: SelectorOption[] = [
-  {value: '', label: ''},
-  {value: 'ROCK', label: 'ロック'},
-  {value: 'JAZZ', label: 'ジャズ'},
-  {value: 'POP', label: 'ポップ'},
-];
-
-const requiredNumberOfInstruments: SelectorOption[] = [
-  {value: '0', label: '0'},
-  {value: '1', label: '1'},
-  {value: '2', label: '2'},
-  {value: '3', label: '3'},
-  {value: '4', label: '4'},
-  {value: '5', label: '5'},
-  {value: '6', label: '6'},
-  {value: '7', label: '7'},
-  {value: '8', label: '8'},
-  {value: '9', label: '9'},
-  {value: '10', label: '10'},
-]
-
-const recruitedInstruments: SelectorOption[] = [
-  {value: '', label: ''},
-  {value: 'VOCAL', label: 'ボーカル'},
-  {value: 'GITTER', label: 'ギター'},
-  {value: 'ELECTRIC_BASE', label: 'エレキベース'},
-];
-
-type CheckboxOption = {
-  value: string;
-  label: string;
-};
-
-const requiredGenders: CheckboxOption[] = [
-  {value: 'MALE_ONLY', label: '男性'},
-  {value: 'MALE_ONLY', label: '女性'},
-  {value: 'ALL', label: '不問'},
-];
-
-const requiredGenerationOptions: CheckboxOption[] = [
-  {value: 'TEEN', label: '10代'},
-  {value: 'TWENTIES', label: '20代'},
-  {value: 'THIRTIES', label: '30代'},
-  {value: 'FORTIES', label: '40代'},
-  {value: 'FIFTIES', label: '50代'},
-  {value: 'MORE_THAN_SIXTIES', label: '60代以上'},
-]
 
 const CreateRecruitmentForm = (props: Props) => {
   const [songTitle, setSongTitle] = useState('')
@@ -79,28 +33,22 @@ const CreateRecruitmentForm = (props: Props) => {
   const [requiredGenerations, setRequiredGenerations] = useState<CheckboxOption[]>([])
   const [requiredGender, setRequiredGender] = useState('')
   
-  // const updateRecruitment = (updates: Partial<RecruitmentSchema>) => {
-  //   const newItem: RecruitmentSchema = {
-  //     owner,
-  //     songTitle,
-  //     artist,
-  //     name,
-  //     genre,
-  //     deadline,
-  //     requiredGenerations,
-  //     requiredGender,
-  //   }
-  //   updateRecruitment(newItem)
-  // }
+  const {recruitment, updateRecruitment} = useRecruitment()
   
-  // const handleSongTitleChange = (value: string) => {
-  //   setSongTitle(value)
-  //   updateRecruitment({songTitle: value})
-  // }
-  // const handleArtistChange = (value: string) => {
-  //   setArtist(value)
-  //   updateRecruitment({artist: value})
-  // }
+  const handleSongTitleChange = (value: string) => {
+    setSongTitle(value)
+    updateRecruitment({
+      ...recruitment,
+      songTitle: value
+    })
+  }
+  const handleArtistChange = (value: string) => {
+    setArtist(value)
+    updateRecruitment({
+      ...recruitment,
+      artist: value
+    })
+  }
   // const handleNameChange = (value: string) => {
   //   setName(value)
   //   updateRecruitment({name: value})
@@ -117,19 +65,21 @@ const CreateRecruitmentForm = (props: Props) => {
   //   setRequiredGenerations(values)
   //   updateRecruitment({requiredGenerations: values})
   // }
-  // const handleRequiredGender = (value: string) => {
-  //   setRequiredGender(value)
-  //   updateRecruitment({requiredGender: value})
-  // }
+  const handleRequiredGender = (value: string) => {
+    setRequiredGender(value);
+    updateRecruitment({
+      ...recruitment, // 現在の状態を展開
+      requiredGender: value || '', // 必要なプロパティを上書き
+    });
+  };
   
-  const {recruitment, updateRecruitment} = useRecruitment()
+
   const [submitting, setSubmitting] = useState(false)
   
   /**
    * handler of confirm
    */
   const handleSubmit = useCallback(async () => {
-    
     // Defence duplicate submission
     if (submitting) return
     setSubmitting(true)
@@ -137,12 +87,26 @@ const CreateRecruitmentForm = (props: Props) => {
       props.onPress()
     }
     
-    updateRecruitment(recruitment)
+    // RecruitmentSchema形式にデータを整形
+    const initRecruitment = {
+      owner: 'UUID',
+      songTitle: songTitle,
+      artist: artist,
+      name: name,
+      genre: genre,
+      deadline: deadline,
+      requiredGenerations: requiredGenerations,
+      requiredGender: requiredGender,
+    }
     
-    // TODO Document the error handling
-    const processedRecruitment = await createRecruitment(recruitment)
+    // Update the recruitment state
+    updateRecruitment(initRecruitment)
     
     try {
+      // TODO Document the error handling
+      const processedRecruitment = await createRecruitment(initRecruitment); // APIリクエスト
+      console.log('Recruitment created:', processedRecruitment);
+      
       setSongTitle('')
       setArtist('')
       setName('')
@@ -150,6 +114,8 @@ const CreateRecruitmentForm = (props: Props) => {
       setDeadline('')
       setRequiredGenerations([])
       setRequiredGender('')
+    } catch (error) {
+      console.error('Error creating recruitment:', error);
     } finally {
       setSubmitting(false)
     }
@@ -164,50 +130,47 @@ const CreateRecruitmentForm = (props: Props) => {
   ])
   
   return (
-    // <form onSubmit={event => createRecruitment(event)}>
     <>
       <div className={styles.itemsSetVertical}>
         <div className={styles.itemsSetHorizontal}>
-          {/*<InputForm*/}
-          {/*  id={"songTitle"}*/}
-          {/*  name={"songTitle"}*/}
-          {/*  title={"曲名"}*/}
-          {/*  disabled={false}*/}
-          {/*  displayedRequired={false}*/}
-          {/*/>*/}
-          {/*<InputForm*/}
-          {/*  id={"artist"}*/}
-          {/*  name={"artist"}*/}
-          {/*  title={"アーティスト名"}*/}
-          {/*  disabled={false}*/}
-          {/*  displayedRequired={false}*/}
-          {/*/>*/}
-          {/*<InputForm id={"name"} name={"name"} title={"コラボ名"} disabled={false} displayedRequired={true}/>*/}
-          <TextField
-            label="曲名"
-            name="songTitle"
-            value={songTitle}
-            onChange={(e => setSongTitle(e.target.value))}
+          <InputForm
+            title="曲名"
+            displayedRequired={false}
+            textBoxProps={
+              {
+                name: "songTitle",
+                isDisabled: false,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => handleSongTitleChange(e.target.value),
+              }
+            }
           />
-          <TextField
-            label="アーティスト名"
-            name="artist"
-            value={artist}
-            onChange={(e => setArtist(e.target.value))}
+          <InputForm
+            title="アーティスト名"
+            displayedRequired={false}
+            textBoxProps={
+              {
+                name: "artist",
+                isDisabled: false,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => handleArtistChange(e.target.value),
+              }
+            }
           />
         </div>
         {/*選択解除後も文字を白で表示したい*/}
         {/*ドロップダウンリストの下矢印を白で表示したい*/}
         <div className={styles.itemsSetHorizontal}>
-          <InputSelector
-            title={"ジャンル"}
-            name={"genre"}
-            options={genres.map(value => value)}
-            onChange={() => {}}
-            selectedValue={""}
-            disabled={false}
-            displayedRequired={true}
-          />
+          {/* ジャンルは一旦チェックボックスで作る */}
+          {/*<InputSelector*/}
+          {/*  title={"ジャンル"}*/}
+          {/*  displayedRequired={true}*/}
+          {/*  selectorProps={*/}
+          {/*    {*/}
+          {/*      selectedValue: recruitment.genre.,*/}
+          {/*      options: genres,*/}
+          {/*      isDisabled: false,*/}
+          {/*    }*/}
+          {/*  }*/}
+          {/*/>*/}
           <TextField
             label="コラボ名"
             name="name"
@@ -229,11 +192,24 @@ const CreateRecruitmentForm = (props: Props) => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          <Checkbox
-            id={'requiredGenders'}
-            title={'性別'}
-            name={'requiredGenders'}
-            options={requiredGenders}
+          {/*<Checkbox*/}
+          {/*  id={'requiredGenders'}*/}
+          {/*  title={'性別'}*/}
+          {/*  name={'requiredGenders'}*/}
+          {/*  options={requiredGenders}*/}
+          {/*/>*/}
+          <InputSelector
+            title={"性別"}
+            displayedRequired={true}
+            selectorProps={
+              {
+                selectedValue: recruitment.requiredGender,
+                options: requiredGenders,
+                defaultOptionLabel: '選択してください。',
+                isDisabled: false,
+                onChange: handleRequiredGender,
+              }
+            }
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
@@ -283,8 +259,7 @@ const CreateRecruitmentForm = (props: Props) => {
         </div>
       </div>
     </>
-  // </form>
-)
+  )
 }
 
 export default CreateRecruitmentForm;

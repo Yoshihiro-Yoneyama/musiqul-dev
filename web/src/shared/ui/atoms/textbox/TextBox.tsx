@@ -40,6 +40,17 @@ const TextBox: React.FC<TextBoxProps> = ({
     setIsActive(inputValue.trim().length > 0)
   }
   
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // Do nothing if input is disabled
+    if (isDisabled) return
+    
+    // Update Local State
+    setInputValue(event.target.value)
+    
+    // Call onChange to notify the parent component
+    if (onChange) onChange(event)
+  }
+  
   return (
     <>
       <AriaInput
@@ -49,15 +60,13 @@ const TextBox: React.FC<TextBoxProps> = ({
           isActive && !isFocused && !isDisabled ? inputStyles.active : "",
           isDisabled ? inputStyles.disabled : ""
         )}
-        {...props}
+        value={inputValue}
         disabled={isDisabled}
-        onChange={(event) => {
-          if (!onChange) return
-          onChange(event)
-        }}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onChange={handleChange}
         autoComplete={autoComplete}
+        {...props}
       >
       </AriaInput>
     </>

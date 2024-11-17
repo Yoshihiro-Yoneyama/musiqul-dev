@@ -1,4 +1,6 @@
-import React, {ChangeEvent} from "react";
+'use client'
+
+import React from "react";
 import Required from "@/shared/ui/atoms/required/Required";
 import TextBox, {TextBoxProps} from "@/shared/ui/atoms/textbox/TextBox";
 import * as styles from "./InputForm.css";
@@ -25,6 +27,8 @@ const InputForm: React.FC<Props> = ({
       <TextBox
         name={textBoxProps.name}
         isDisabled={textBoxProps.isDisabled}
+        onChange={textBoxProps.onChange}
+        {...props}
       />
     </div>
   )

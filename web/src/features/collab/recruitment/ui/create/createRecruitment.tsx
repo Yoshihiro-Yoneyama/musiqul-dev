@@ -33,26 +33,29 @@ const CreateRecruitmentForm = (props: Props) => {
   const [requiredGenerations, setRequiredGenerations] = useState<CheckboxOption[]>([])
   const [requiredGender, setRequiredGender] = useState('')
   
-  const {recruitment, updateRecruitment} = useRecruitment()
+  const {updatedRecruitment, updateRecruitment} = useRecruitment()
   
   const handleSongTitleChange = (value: string) => {
     setSongTitle(value)
     updateRecruitment({
-      ...recruitment,
-      songTitle: value
+      ...updatedRecruitment,
+      songTitle: value || '',
     })
   }
   const handleArtistChange = (value: string) => {
     setArtist(value)
     updateRecruitment({
-      ...recruitment,
-      artist: value
+      ...updatedRecruitment,
+      artist: value || '',
     })
   }
-  // const handleNameChange = (value: string) => {
-  //   setName(value)
-  //   updateRecruitment({name: value})
-  // }
+  const handleNameChange = (value: string) => {
+    setName(value)
+    updateRecruitment({
+      ...updatedRecruitment,
+      name: value || '',
+    })
+  }
   // const handleGenre = (values: string[]) => {
   //   setGenre(values)
   //   updateRecruitment({genre: values})
@@ -68,7 +71,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const handleRequiredGender = (value: string) => {
     setRequiredGender(value);
     updateRecruitment({
-      ...recruitment, // 現在の状態を展開
+      ...updatedRecruitment, // 現在の状態を展開
       requiredGender: value || '', // 必要なプロパティを上書き
     });
   };
@@ -88,23 +91,23 @@ const CreateRecruitmentForm = (props: Props) => {
     }
     
     // RecruitmentSchema形式にデータを整形
-    const initRecruitment = {
-      owner: 'UUID',
-      songTitle: songTitle,
-      artist: artist,
-      name: name,
-      genre: genre,
-      deadline: deadline,
-      requiredGenerations: requiredGenerations,
-      requiredGender: requiredGender,
-    }
+    // const initRecruitment = {
+    //   owner: 'UUID',
+    //   songTitle: songTitle,
+    //   artist: artist,
+    //   name: name,
+    //   genre: genre,
+    //   deadline: deadline,
+    //   requiredGenerations: requiredGenerations,
+    //   requiredGender: requiredGender,
+    // }
     
     // Update the recruitment state
-    updateRecruitment(initRecruitment)
+    updateRecruitment(updatedRecruitment)
     
     try {
       // TODO Document the error handling
-      const processedRecruitment = await createRecruitment(initRecruitment); // APIリクエスト
+      const processedRecruitment = await createRecruitment(updatedRecruitment); // APIリクエスト
       console.log('Recruitment created:', processedRecruitment);
       
       setSongTitle('')
@@ -140,7 +143,7 @@ const CreateRecruitmentForm = (props: Props) => {
               {
                 name: "songTitle",
                 isDisabled: false,
-                onChange: (e: ChangeEvent<HTMLInputElement>) => handleSongTitleChange(e.target.value),
+                onChange: handleSongTitleChange
               }
             }
           />
@@ -151,7 +154,7 @@ const CreateRecruitmentForm = (props: Props) => {
               {
                 name: "artist",
                 isDisabled: false,
-                onChange: (e: ChangeEvent<HTMLInputElement>) => handleArtistChange(e.target.value),
+                onChange: handleArtistChange
               }
             }
           />
@@ -171,11 +174,16 @@ const CreateRecruitmentForm = (props: Props) => {
           {/*    }*/}
           {/*  }*/}
           {/*/>*/}
-          <TextField
-            label="コラボ名"
-            name="name"
-            value={name}
-            onChange={(e => setName(e.target.value))}
+          <InputForm
+            title="コラボ名"
+            displayedRequired={false}
+            textBoxProps={
+              {
+                name: "name",
+                isDisabled: false,
+                onChange: handleNameChange
+              }
+            }
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
@@ -203,7 +211,7 @@ const CreateRecruitmentForm = (props: Props) => {
             displayedRequired={true}
             selectorProps={
               {
-                selectedValue: recruitment.requiredGender,
+                selectedValue: updatedRecruitment.requiredGender,
                 options: requiredGenders,
                 defaultOptionLabel: '選択してください。',
                 isDisabled: false,

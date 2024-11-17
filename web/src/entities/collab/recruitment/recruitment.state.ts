@@ -27,7 +27,7 @@ export const useRecruitment = () => {
   )
   
   return {
-    recruitment: recruitment,
+    updatedRecruitment: recruitment,
     updateRecruitment,
   }
 }

@@ -9,12 +9,13 @@ import namedMemo from "@/shared/hooks/namedMemo";
 export type TextBoxProps = {
   readonly name?: string
   readonly type?: string
+  readonly inputValue?: string
   readonly valueType?: string | number | undefined
   readonly placeholder?: string
   // readonly errorMessages?: string
   // readonly isInvalid?: boolean
   readonly isDisabled?: boolean
-  readonly onChange?: (value: ChangeEvent<HTMLInputElement>) => void
+  readonly onChange: (value: string) => void
   readonly autoComplete?: string
   // readonly maxLength?: number
 }
@@ -27,7 +28,7 @@ const TextBox: React.FC<TextBoxProps> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false)
   const [isActive, setIsActive] = useState(false)
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState('')
   
   const handleFocus = () => {
     if (!isDisabled) {
@@ -44,11 +45,12 @@ const TextBox: React.FC<TextBoxProps> = ({
     // Do nothing if input is disabled
     if (isDisabled) return
     
+    const value = event.target.value
     // Update Local State
-    setInputValue(event.target.value)
+    setInputValue(value)
     
     // Call onChange to notify the parent component
-    if (onChange) onChange(event)
+    if (onChange) onChange(value)
   }
   
   return (

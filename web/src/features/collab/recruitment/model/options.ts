@@ -36,7 +36,6 @@ export type CheckboxOption = {
 };
 
 export const genres: CheckboxOption[] = [
-  {value: '', label: ''},
   {value: 'ROCK', label: 'ロック'},
   {value: 'JAZZ', label: 'ジャズ'},
   {value: 'POP', label: 'ポップ'},

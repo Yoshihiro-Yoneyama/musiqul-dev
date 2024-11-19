@@ -1,4 +1,4 @@
-import {CreateRecruitmentPage} from "@/pages/collab/recruitment/createRecruitmentPage";
+import {CreateRecruitmentPage} from "@/pages/collab/recruitment/CreateRecruitmentPage";
 
 const Page = () => {
   return (

@@ -7,16 +7,17 @@ import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
 import ComboInput from "@/shared/ui/molecules/combo-input/ComboInput";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
-import React, {ChangeEvent, FC, useCallback, useState} from "react";
-import {TextField} from "@mui/material";
+import React, {useCallback, useState} from "react";
 import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import {
   CheckboxOption,
+  genres,
   recruitedInstruments,
   requiredGenders,
-  requiredGenerationOptions, requiredNumberOfInstruments
+  requiredGenerationOptions,
+  requiredNumberOfInstruments
 } from "@/features/collab/recruitment/model/options";
 
 type Props = {
@@ -90,18 +91,6 @@ const CreateRecruitmentForm = (props: Props) => {
       props.onPress()
     }
     
-    // RecruitmentSchema形式にデータを整形
-    // const initRecruitment = {
-    //   owner: 'UUID',
-    //   songTitle: songTitle,
-    //   artist: artist,
-    //   name: name,
-    //   genre: genre,
-    //   deadline: deadline,
-    //   requiredGenerations: requiredGenerations,
-    //   requiredGender: requiredGender,
-    // }
-    
     // Update the recruitment state
     updateRecruitment(updatedRecruitment)
     
@@ -131,6 +120,13 @@ const CreateRecruitmentForm = (props: Props) => {
     requiredGenerations,
     requiredGender,
   ])
+  
+  const checkboxProps = {
+    defaultSelected: false, // デフォルトでチェックされた状態
+    onChange: (isSelected: boolean) => {
+      console.log(`Checkbox is now ${isSelected ? 'checked' : 'unchecked'}`);
+    },
+  };
   
   return (
     <>
@@ -163,17 +159,10 @@ const CreateRecruitmentForm = (props: Props) => {
         {/*ドロップダウンリストの下矢印を白で表示したい*/}
         <div className={styles.itemsSetHorizontal}>
           {/* ジャンルは一旦チェックボックスで作る */}
-          {/*<InputSelector*/}
-          {/*  title={"ジャンル"}*/}
-          {/*  displayedRequired={true}*/}
-          {/*  selectorProps={*/}
-          {/*    {*/}
-          {/*      selectedValue: recruitment.genre.,*/}
-          {/*      options: genres,*/}
-          {/*      isDisabled: false,*/}
-          {/*    }*/}
-          {/*  }*/}
-          {/*/>*/}
+          <Checkbox
+            props={checkboxProps}
+            options={genres}
+          />
           <InputForm
             title="コラボ名"
             displayedRequired={false}
@@ -193,19 +182,11 @@ const CreateRecruitmentForm = (props: Props) => {
         <p className={styles.headline2}>応募するメンバー</p>
         <div className={styles.itemsSetHorizontal}>
           <Checkbox
-            id={'requiredGenerations'}
-            title={'年齢'}
-            name={'requiredGenerations'}
+            props={checkboxProps}
             options={requiredGenerationOptions}
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          {/*<Checkbox*/}
-          {/*  id={'requiredGenders'}*/}
-          {/*  title={'性別'}*/}
-          {/*  name={'requiredGenders'}*/}
-          {/*  options={requiredGenders}*/}
-          {/*/>*/}
           <InputSelector
             title={"性別"}
             displayedRequired={true}

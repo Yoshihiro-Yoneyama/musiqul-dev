@@ -5,9 +5,7 @@ export const itemSetHorizontal = style({
   gap: '2%',
 })
 
-export const checkboxStyles = {
-
-}
+export const checkboxStyles = style({})
 
 export const styleForBetweenLabelAndCheckbox = style({
   margin: '0 10px 0 10px'

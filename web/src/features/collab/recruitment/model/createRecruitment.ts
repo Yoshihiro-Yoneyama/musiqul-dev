@@ -24,7 +24,7 @@ export const createRecruitment = async (
   }
   
   const result = await (postRecruitment(newRecruit))
-
+  
   // TODO　Document the error handling in the implementation
   
   return {

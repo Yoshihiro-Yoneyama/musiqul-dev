@@ -2,7 +2,6 @@
 
 import {Meta, StoryObj} from "@storybook/react";
 import InputSelector from "@/shared/ui/molecules/input-selector/InputSelector";
-import React from "react";
 
 const meta: Meta<typeof InputSelector> = {
   title: "molecules/input-selector/InputSelector",

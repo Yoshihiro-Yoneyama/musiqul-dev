@@ -1,11 +1,8 @@
 'use client'
 
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import * as styles from './Checkbox.css'
-import {
-  Checkbox as AriaCheckbox,
-  type CheckboxProps,
-} from 'react-aria-components'
+import {Checkbox as AriaCheckbox, type CheckboxProps,} from 'react-aria-components'
 import Icon from "@/shared/ui/atoms/icon/Icon";
 
 type Option = {

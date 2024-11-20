@@ -1,7 +1,6 @@
 import {style} from '@vanilla-extract/css';
 import {linearGradient} from '@/shared/ui/util/linearGradient';
 
-
 export const baseStyle = style({
   width: '240px',
   minWidth: '200px',

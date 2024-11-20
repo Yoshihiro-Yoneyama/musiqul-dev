@@ -4,7 +4,9 @@ import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model
 import {atom, useAtom } from "jotai"
 import {useCallback} from "react"
 
-// Define the initial values for recruitment
+/**
+ * Define the initial values for recruitment
+ */
 const recruitmentAtom = atom<RecruitmentSchema>({
   owner: '',
   name: '',
@@ -14,6 +16,9 @@ const recruitmentAtom = atom<RecruitmentSchema>({
   requiredGender: '',
 });
 
+/**
+ * Define the hook to update the recruitment state
+ */
 export const useRecruitment = () => {
   const [recruitment, setRecruitment] = useAtom(recruitmentAtom)
   
@@ -28,6 +33,6 @@ export const useRecruitment = () => {
   
   return {
     updatedRecruitment: recruitment,
-    updateRecruitment,
+    setUpdatedRecruitment: updateRecruitment,
   }
 }

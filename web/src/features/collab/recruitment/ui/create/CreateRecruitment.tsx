@@ -34,55 +34,61 @@ const CreateRecruitmentForm = (props: Props) => {
   const [requiredGenerations, setRequiredGenerations] = useState<CheckboxOption[]>([])
   const [requiredGender, setRequiredGender] = useState('')
   
-  const {updatedRecruitment, updateRecruitment} = useRecruitment()
+  const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
   
   const handleSongTitleChange = (value: string) => {
     setSongTitle(value)
-    updateRecruitment({
+    setUpdatedRecruitment({
       ...updatedRecruitment,
       songTitle: value || '',
     })
   }
   const handleArtistChange = (value: string) => {
     setArtist(value)
-    updateRecruitment({
+    setUpdatedRecruitment({
       ...updatedRecruitment,
       artist: value || '',
     })
   }
   const handleNameChange = (value: string) => {
     setName(value)
-    updateRecruitment({
+    setUpdatedRecruitment({
       ...updatedRecruitment,
       name: value || '',
     })
   }
-  // const handleGenre = (values: string[]) => {
-  //   setGenre(values)
-  //   updateRecruitment({genre: values})
-  // }
+  const handleGenre = (values: string[]) => {
+    setGenre(values)
+    setUpdatedRecruitment({
+      ...updatedRecruitment,
+      genre: values || [],
+    })
+  }
   // const handleDeadline = (value: string) => {
   //   setDeadline(value)
   //   updateRecruitment({deadline: value})
   // }
-  // const handleRequiredGenerations = (values: CheckboxOption[]) => {
-  //   setRequiredGenerations(values)
-  //   updateRecruitment({requiredGenerations: values})
-  // }
+  const handleRequiredGenerations = (values: string[]) => {
+    setRequiredGenerations(values.map(value => {
+      return {value, label: value}
+    }))
+    setUpdatedRecruitment({
+      ...updatedRecruitment,
+      requiredGenerations: values.map(value => {
+        return {value, label: value}
+      }) || [],
+    })
+  }
   const handleRequiredGender = (value: string) => {
     setRequiredGender(value);
-    updateRecruitment({
+    setUpdatedRecruitment({
       ...updatedRecruitment, // 現在の状態を展開
       requiredGender: value || '', // 必要なプロパティを上書き
     });
   };
   
-
   const [submitting, setSubmitting] = useState(false)
   
-  /**
-   * handler of confirm
-   */
   const handleSubmit = useCallback(async () => {
     // Defence duplicate submission
     if (submitting) return
@@ -92,7 +98,7 @@ const CreateRecruitmentForm = (props: Props) => {
     }
     
     // Update the recruitment state
-    updateRecruitment(updatedRecruitment)
+    setUpdatedRecruitment(updatedRecruitment)
     
     try {
       // TODO Document the error handling
@@ -120,13 +126,6 @@ const CreateRecruitmentForm = (props: Props) => {
     requiredGenerations,
     requiredGender,
   ])
-  
-  const checkboxProps = {
-    defaultSelected: false, // デフォルトでチェックされた状態
-    onChange: (isSelected: boolean) => {
-      console.log(`Checkbox is now ${isSelected ? 'checked' : 'unchecked'}`);
-    },
-  };
   
   return (
     <>
@@ -160,8 +159,12 @@ const CreateRecruitmentForm = (props: Props) => {
         <div className={styles.itemsSetHorizontal}>
           {/* ジャンルは一旦チェックボックスで作る */}
           <Checkbox
-            props={checkboxProps}
+            props={{
+              defaultSelected: false,
+            }}
             options={genres}
+            selectedValues={genre}
+            onChange={handleGenre}
           />
           <InputForm
             title="コラボ名"
@@ -182,8 +185,12 @@ const CreateRecruitmentForm = (props: Props) => {
         <p className={styles.headline2}>応募するメンバー</p>
         <div className={styles.itemsSetHorizontal}>
           <Checkbox
-            props={checkboxProps}
+            props={{
+              defaultSelected: false,
+            }}
             options={requiredGenerationOptions}
+            selectedValues={requiredGenerations.map(value => value.value)}
+            onChange={handleRequiredGenerations}
           />
         </div>
         <div className={styles.itemsSetHorizontal}>

@@ -53,11 +53,11 @@ const Checkbox: FC<Props> = ({ props, options, selectedValues, onChange }) => {
               <span className={styles.checkboxStyles}>
                 {option.label}
                 {isIndeterminate ? (
-                  '' // 中間状態がある場合の処理
+                  ''
                 ) : isSelected ? (
-                  <Icon type="squareCheck" /> // チェック状態のアイコン
+                  <Icon type="squareCheck" />
                 ) : (
-                  <Icon type="square" /> // 未チェック状態のアイコン
+                  <Icon type="square" />
                 )}
               </span>
             )}

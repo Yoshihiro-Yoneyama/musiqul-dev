@@ -12,7 +12,6 @@ import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import {
-  CheckboxOption,
   genres,
   recruitedInstruments,
   requiredGenders,
@@ -31,7 +30,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const [name, setName] = useState('')
   const [genre, setGenre] = useState<string[]>([])
   const [deadline, setDeadline] = useState('')
-  const [requiredGenerations, setRequiredGenerations] = useState<CheckboxOption[]>([])
+  const [requiredGenerations, setRequiredGenerations] = useState<string[]>([])
   const [requiredGender, setRequiredGender] = useState('')
   
   const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
@@ -69,14 +68,10 @@ const CreateRecruitmentForm = (props: Props) => {
   //   updateRecruitment({deadline: value})
   // }
   const handleRequiredGenerations = (values: string[]) => {
-    setRequiredGenerations(values.map(value => {
-      return {value, label: value}
-    }))
+    setRequiredGenerations(values)
     setUpdatedRecruitment({
       ...updatedRecruitment,
-      requiredGenerations: values.map(value => {
-        return {value, label: value}
-      }) || [],
+      requiredGenerations: values || [],
     })
   }
   const handleRequiredGender = (value: string) => {
@@ -189,7 +184,7 @@ const CreateRecruitmentForm = (props: Props) => {
               defaultSelected: false,
             }}
             options={requiredGenerationOptions}
-            selectedValues={requiredGenerations.map(value => value.value)}
+            selectedValues={requiredGenerations}
             onChange={handleRequiredGenerations}
           />
         </div>

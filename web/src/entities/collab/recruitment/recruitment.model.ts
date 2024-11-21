@@ -2,7 +2,7 @@ import {z} from "zod";
 
 export const recruitmentSchema = z.object({
   owner: z.string(),
-  // ownerInstruments: string[],
+  ownerInstruments: z.string().array(),
   songTitle: z.string().optional(),
   artist: z.string().optional(),
   name: z.string().min(1),
@@ -10,8 +10,8 @@ export const recruitmentSchema = z.object({
   deadline: z.string(),
   requiredGenerations: z.string().array(),
   requiredGender: z.string(),
-  // map形式
-  // recruitedInstruments: string[],
+  recruitedInstruments: z.map(z.string(), z.number()),
+  memo: z.string().optional(),
 })
 
 export type RecruitmentSchema = z.infer<typeof recruitmentSchema>

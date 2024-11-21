@@ -10,11 +10,14 @@ import {useCallback} from "react"
 const recruitmentAtom = atom<RecruitmentSchema>({
   // Placeholder for the owner
   owner: 'd39c9cdb-759c-479e-94c7-2ddc0a3044e8',
+  ownerInstruments: [],
   name: '',
   genre: [],
   deadline: '',
   requiredGenerations: [],
   requiredGender: '',
+  recruitedInstruments: new Map(),
+  memo: '',
 });
 
 /**

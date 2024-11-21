@@ -6,7 +6,7 @@ export const recruitmentSchema = z.object({
   songTitle: z.string().optional(),
   artist: z.string().optional(),
   name: z.string().min(1),
-  genre: z.string().array(),
+  genres: z.string().array(),
   deadline: z.string(),
   requiredGenerations: z.string().array(),
   requiredGender: z.string(),

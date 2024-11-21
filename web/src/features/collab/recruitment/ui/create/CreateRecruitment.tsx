@@ -60,7 +60,7 @@ const CreateRecruitmentForm = (props: Props) => {
     setGenre(values)
     setUpdatedRecruitment({
       ...updatedRecruitment,
-      genre: values || [],
+      genres: values || [],
     })
   }
   // const handleDeadline = (value: string) => {

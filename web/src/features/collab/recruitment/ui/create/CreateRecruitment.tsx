@@ -12,7 +12,8 @@ import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import {
-  genres,
+  genreOptions,
+  
   recruitedInstruments,
   requiredGenders,
   requiredGenerationOptions,
@@ -28,7 +29,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const [songTitle, setSongTitle] = useState('')
   const [artist, setArtist] = useState('')
   const [name, setName] = useState('')
-  const [genre, setGenre] = useState<string[]>([])
+  const [genres, setGenres] = useState<string[]>([])
   const [deadline, setDeadline] = useState('')
   const [requiredGenerations, setRequiredGenerations] = useState<string[]>([])
   const [requiredGender, setRequiredGender] = useState('')
@@ -56,17 +57,20 @@ const CreateRecruitmentForm = (props: Props) => {
       name: value || '',
     })
   }
-  const handleGenre = (values: string[]) => {
-    setGenre(values)
+  const handleGenres = (values: string[]) => {
+    setGenres(values)
     setUpdatedRecruitment({
       ...updatedRecruitment,
       genres: values || [],
     })
   }
-  // const handleDeadline = (value: string) => {
-  //   setDeadline(value)
-  //   updateRecruitment({deadline: value})
-  // }
+  const handleDeadline = (value: string) => {
+    setDeadline(value)
+    setUpdatedRecruitment({
+      ...updatedRecruitment,
+      deadline: value || '',
+    })
+  }
   const handleRequiredGenerations = (values: string[]) => {
     setRequiredGenerations(values)
     setUpdatedRecruitment({
@@ -77,8 +81,8 @@ const CreateRecruitmentForm = (props: Props) => {
   const handleRequiredGender = (value: string) => {
     setRequiredGender(value);
     setUpdatedRecruitment({
-      ...updatedRecruitment, // 現在の状態を展開
-      requiredGender: value || '', // 必要なプロパティを上書き
+      ...updatedRecruitment,
+      requiredGender: value || '',
     });
   };
   
@@ -103,7 +107,7 @@ const CreateRecruitmentForm = (props: Props) => {
       setSongTitle('')
       setArtist('')
       setName('')
-      setGenre([])
+      setGenres([])
       setDeadline('')
       setRequiredGenerations([])
       setRequiredGender('')
@@ -116,7 +120,7 @@ const CreateRecruitmentForm = (props: Props) => {
     songTitle,
     artist,
     name,
-    genre,
+    genres,
     deadline,
     requiredGenerations,
     requiredGender,
@@ -131,7 +135,6 @@ const CreateRecruitmentForm = (props: Props) => {
             displayedRequired={false}
             textBoxProps={
               {
-                name: "songTitle",
                 isDisabled: false,
                 onChange: handleSongTitleChange
               }
@@ -142,7 +145,6 @@ const CreateRecruitmentForm = (props: Props) => {
             displayedRequired={false}
             textBoxProps={
               {
-                name: "artist",
                 isDisabled: false,
                 onChange: handleArtistChange
               }
@@ -157,16 +159,15 @@ const CreateRecruitmentForm = (props: Props) => {
             props={{
               defaultSelected: false,
             }}
-            options={genres}
-            selectedValues={genre}
-            onChange={handleGenre}
+            options={genreOptions}
+            selectedValues={genres}
+            onChange={handleGenres}
           />
           <InputForm
             title="コラボ名"
             displayedRequired={false}
             textBoxProps={
               {
-                name: "name",
                 isDisabled: false,
                 onChange: handleNameChange
               }
@@ -174,8 +175,16 @@ const CreateRecruitmentForm = (props: Props) => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          <InputCalendar id={"deadline"} title={"募集締切日"} name={"deadline"} disabled={false}
-                         displayedRequired={true}/>
+          <InputCalendar
+            title={"募集締切日"}
+            displayedRequired={true}
+            datePickerProps={
+              {
+                isDisabled: false,
+                onChange: handleDeadline,
+              }
+            }
+          />
         </div>
         <p className={styles.headline2}>応募するメンバー</p>
         <div className={styles.itemsSetHorizontal}>

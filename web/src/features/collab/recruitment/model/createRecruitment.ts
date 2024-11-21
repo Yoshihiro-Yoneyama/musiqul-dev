@@ -11,16 +11,17 @@ export const createRecruitment = async (
 ) => {
   const newRecruit: RecruitmentSchema = {
     owner: recruitment.owner,
-    // ownerInstruments: string[],
+    ownerInstruments: recruitment.ownerInstruments,
     songTitle: recruitment.songTitle,
     artist: recruitment.artist,
     name: recruitment.name,
-    genre: recruitment.genre,
+    genres: recruitment.genres,
     deadline: recruitment.deadline,
     requiredGenerations: recruitment.requiredGenerations,
     requiredGender: recruitment.requiredGender,
     // TODO Define below type of map
-    // recruitedInstruments: string[],
+    recruitedInstruments: recruitment.recruitedInstruments,
+    memo: recruitment.memo,
   }
   
   const result = await (postRecruitment(newRecruit))

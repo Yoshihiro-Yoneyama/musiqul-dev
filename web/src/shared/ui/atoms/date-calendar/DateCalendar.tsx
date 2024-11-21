@@ -2,7 +2,7 @@
 
 import * as styles from '@/shared/ui/atoms/date-calendar/DateCalendar.css';
 import {inputStyles} from '@/shared/ui/util/Input.css'
-import React, {ChangeEvent, useState} from 'react'
+import React, {useState} from 'react'
 import {
   Button,
   Calendar,
@@ -10,7 +10,8 @@ import {
   CalendarGrid,
   DateInput,
   DatePicker as AriaDatePicker,
-  DateSegment, DateValue,
+  DateSegment,
+  DateValue,
   Dialog,
   Group,
   Heading,

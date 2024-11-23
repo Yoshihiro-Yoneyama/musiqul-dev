@@ -31,7 +31,7 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
       request.ownerInstruments.map { r ->
         when (r) {
           CreateRecruitCommandRequest.InstrumentType.VOCAL -> RecruitCommandInput.InstrumentType.VOCAL
-          CreateRecruitCommandRequest.InstrumentType.GITTER -> RecruitCommandInput.InstrumentType.GITTER
+          CreateRecruitCommandRequest.InstrumentType.GUITAR -> RecruitCommandInput.InstrumentType.GUITAR
           CreateRecruitCommandRequest.InstrumentType.ELECTRIC_BASE -> RecruitCommandInput.InstrumentType.ELECTRIC_BASE
           CreateRecruitCommandRequest.InstrumentType.DRUM -> RecruitCommandInput.InstrumentType.DRUM
           CreateRecruitCommandRequest.InstrumentType.KEY_BOARD -> RecruitCommandInput.InstrumentType.KEY_BOARD
@@ -43,7 +43,7 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
       request.recruitedInstruments.entries.associate { e ->
         val instrumentType = when (e.key) {
           CreateRecruitCommandRequest.InstrumentType.VOCAL -> RecruitCommandInput.InstrumentType.VOCAL
-          CreateRecruitCommandRequest.InstrumentType.GITTER -> RecruitCommandInput.InstrumentType.GITTER
+          CreateRecruitCommandRequest.InstrumentType.GUITAR -> RecruitCommandInput.InstrumentType.GUITAR
           CreateRecruitCommandRequest.InstrumentType.ELECTRIC_BASE -> RecruitCommandInput.InstrumentType.ELECTRIC_BASE
           CreateRecruitCommandRequest.InstrumentType.DRUM -> RecruitCommandInput.InstrumentType.DRUM
           CreateRecruitCommandRequest.InstrumentType.KEY_BOARD -> RecruitCommandInput.InstrumentType.KEY_BOARD
@@ -101,7 +101,7 @@ data class CreateRecruitCommandRequest(
 
   enum class InstrumentType {
     VOCAL,
-    GITTER,
+    GUITAR,
     ELECTRIC_BASE,
     DRUM,
     KEY_BOARD,

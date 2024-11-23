@@ -86,7 +86,7 @@ data class RecruitCommandInput(
 
   enum class InstrumentType {
     VOCAL,
-    GITTER,
+    GUITAR,
     ELECTRIC_BASE,
     DRUM,
     KEY_BOARD,

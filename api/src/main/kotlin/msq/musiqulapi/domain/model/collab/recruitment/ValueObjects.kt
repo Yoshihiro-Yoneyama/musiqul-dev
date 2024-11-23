@@ -1,6 +1,5 @@
 package msq.musiqulapi.domain.model.collab.recruitment
 
-import arrow.core.Either
 import msq.musiqulapi.lib.NonEmptyMap
 import java.time.Instant
 import java.util.*
@@ -65,7 +64,7 @@ value class Artist(val value: String) {
 
 enum class Instrument {
   VOCAL,
-  GITTER,
+  GUITAR,
   ELECTRIC_BASE,
   DRUM,
   KEY_BOARD,

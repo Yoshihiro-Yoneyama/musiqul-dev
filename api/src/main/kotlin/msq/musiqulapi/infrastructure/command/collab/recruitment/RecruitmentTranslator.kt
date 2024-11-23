@@ -63,7 +63,7 @@ class RecruitmentTranslator(
     return recruitment.ownerInstruments.map { r ->
       val instrument = when (r) {
         Instrument.VOCAL -> InstrumentType.VOCAL
-        Instrument.GITTER -> InstrumentType.GITTER
+        Instrument.GUITAR -> InstrumentType.GUITAR
         Instrument.ELECTRIC_BASE -> InstrumentType.ELECTRIC_BASE
         Instrument.DRUM -> InstrumentType.DRUM
         Instrument.KEY_BOARD -> InstrumentType.KEY_BOARD
@@ -83,7 +83,7 @@ class RecruitmentTranslator(
     return recruitment.recruitedInstruments.value.map.entries.map { entry ->
       val instrument = when (entry.key) {
         Instrument.VOCAL -> InstrumentType.VOCAL
-        Instrument.GITTER -> InstrumentType.GITTER
+        Instrument.GUITAR -> InstrumentType.GUITAR
         Instrument.ELECTRIC_BASE -> InstrumentType.ELECTRIC_BASE
         Instrument.DRUM -> InstrumentType.DRUM
         Instrument.KEY_BOARD -> InstrumentType.KEY_BOARD

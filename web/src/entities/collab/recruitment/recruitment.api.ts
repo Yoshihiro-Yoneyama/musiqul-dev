@@ -11,7 +11,7 @@ export const postRecruitment = async (
   recruitmentRequest: RecruitmentSchema
 ) => {
   try {
-    await api.post('/recruitment', recruitmentRequest)
+    await api.post('/recruitments', recruitmentRequest)
   } catch (error) {
     if (error instanceof ErrorData && error.data.status === 400) {
       console.error("Error sending recruitment data:", error);

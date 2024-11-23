@@ -8,3 +8,9 @@ export const formatDate = (value: DateValue): string => {
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`; // yyyy-MM-dd形式
 };
+
+export const formatDateToISO = (value: DateValue): string => {
+  // DateValueをJavaScriptのDateオブジェクトに変換
+  const date = value.toDate('UTC'); // タイムゾーンをUTCに指定
+  return date.toISOString(); // ISO 8601形式 (例: 2024-11-30T00:00:00.000Z)
+};

@@ -18,7 +18,7 @@ import {
   Popover
 } from 'react-aria-components'
 import 'react-datepicker/dist/react-datepicker.css'
-import {formatDate} from '@/shared/ui/util/DateFormatter'
+import {formatDateToISO} from '@/shared/ui/util/DateFormatter'
 
 export type DatePickerProps = {
   readonly name?: string
@@ -34,11 +34,11 @@ const DateCalendar: FC<DatePickerProps> = ({
   const [inputValue, setInputValue] = useState('')
   
   const handleChange = (value: DateValue) => {
-  // Do nothing if input is disabled
+    // Do nothing if input is disabled
     if (isDisabled) return
     
     // format ot yyyy-MM-dd
-    const formattedValue = formatDate(value);
+    const formattedValue = formatDateToISO(value);
     
     // Update Local State
     setInputValue(formattedValue)
@@ -75,7 +75,7 @@ const DateCalendar: FC<DatePickerProps> = ({
                 <Button slot="next">▶</Button>
               </header>
               <CalendarGrid>
-                {(date) => <CalendarCell date={date} />}
+                {(date) => <CalendarCell date={date}/>}
               </CalendarGrid>
             </Calendar>
           </Dialog>

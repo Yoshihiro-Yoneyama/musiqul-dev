@@ -10,7 +10,7 @@ CREATE TYPE musiqul_command.music_genre_type AS ENUM (
 
 CREATE TYPE musiqul_command.instrument_type AS ENUM (
     'VOCAL',
-    'GITTER',
+    'GUITAR',
     'ELECTRIC_BASE',
     'DRUM',
     'KEY_BOARD',

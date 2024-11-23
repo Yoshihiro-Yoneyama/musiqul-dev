@@ -20,7 +20,7 @@ export const requiredNumberOfInstruments: SelectorOption[] = [
 export const recruitedInstruments: SelectorOption[] = [
   {value: '', label: ''},
   {value: 'VOCAL', label: 'ボーカル'},
-  {value: 'GITTER', label: 'ギター'},
+  {value: 'GUITAR', label: 'ギター'},
   {value: 'ELECTRIC_BASE', label: 'エレキベース'},
 ];
 

@@ -16,7 +16,10 @@ const recruitmentAtom = atom<RecruitmentSchema>({
   deadline: '',
   requiredGenerations: [],
   requiredGender: '',
-  recruitedInstruments: new Map(),
+  recruitedInstruments: new Map([
+    ['VOCAL', 1],
+    ['GUITAR', 1],
+  ]),
   memo: '',
 });
 

@@ -4,21 +4,13 @@ import * as styles from "./createRecruitment.css";
 import InputSelector from "@/shared/ui/molecules/input-selector/InputSelector";
 import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar";
 import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
-import ComboInput from "@/shared/ui/molecules/combo-input/ComboInput";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
 import React, {useCallback, useState} from "react";
 import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
-import {
-  genreOptions,
-  
-  recruitedInstruments,
-  requiredGenders,
-  requiredGenerationOptions,
-  requiredNumberOfInstruments
-} from "@/features/collab/recruitment/model/options";
+import {genreOptions, requiredGenders, requiredGenerationOptions} from "@/features/collab/recruitment/model/options";
 
 type Props = {
   onPress?: () => void
@@ -33,6 +25,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const [deadline, setDeadline] = useState('')
   const [requiredGenerations, setRequiredGenerations] = useState<string[]>([])
   const [requiredGender, setRequiredGender] = useState('')
+  const [recruitedInstruments, setRecruitedInstruments] = useState(new Map([]))
   
   const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
   
@@ -85,6 +78,13 @@ const CreateRecruitmentForm = (props: Props) => {
       requiredGender: value || '',
     });
   };
+  const handleRecruitedInstruments = (mapValues: Map<string, number>) => {
+    setRecruitedInstruments(mapValues)
+    setUpdatedRecruitment({
+      ...updatedRecruitment,
+      recruitedInstruments: mapValues || new Map([]),
+    })
+  }
   
   const [submitting, setSubmitting] = useState(false)
   
@@ -101,7 +101,7 @@ const CreateRecruitmentForm = (props: Props) => {
     
     try {
       // TODO Document the error handling
-      const processedRecruitment = await createRecruitment(updatedRecruitment); // APIリクエスト
+      const processedRecruitment = await createRecruitment(updatedRecruitment);
       console.log('Recruitment created:', processedRecruitment);
       
       setSongTitle('')
@@ -111,6 +111,7 @@ const CreateRecruitmentForm = (props: Props) => {
       setDeadline('')
       setRequiredGenerations([])
       setRequiredGender('')
+      setRecruitedInstruments(new Map([]))
     } catch (error) {
       console.error('Error creating recruitment:', error);
     } finally {
@@ -124,6 +125,7 @@ const CreateRecruitmentForm = (props: Props) => {
     deadline,
     requiredGenerations,
     requiredGender,
+    recruitedInstruments,
   ])
   
   return (
@@ -210,36 +212,6 @@ const CreateRecruitmentForm = (props: Props) => {
                 onChange: handleRequiredGender,
               }
             }
-          />
-        </div>
-        <div className={styles.itemsSetHorizontal}>
-          {/*選択項目が消える*/}
-          {/*<InputSelector*/}
-          {/*  title={"楽器"}*/}
-          {/*  name={"recruitedInstruments"}*/}
-          {/*  options={recruitedInstruments.map(value => value)}*/}
-          {/*  onChange={handleGenreChange}*/}
-          {/*  selectedValue={genre}*/}
-          {/*  disabled={false}*/}
-          {/*  displayedRequired={true}*/}
-          {/*/>*/}
-          {/*<Selector*/}
-          {/*  name={"numberOfPeople"}*/}
-          {/*  options={[*/}
-          {/*    {value: '0', label: '0'},*/}
-          {/*    {value: '1', label: '1'},*/}
-          {/*  ]}*/}
-          {/*  onChange={handleGenreChange}*/}
-          {/*  selectedValue={genre}*/}
-          {/*/>*/}
-        </div>
-        <div className={styles.itemsSetHorizontal}>
-          <ComboInput
-            id={"recruitedInstruments"}
-            name={"recruitedInstruments"}
-            options1={recruitedInstruments.map(value => value)}
-            options2={requiredNumberOfInstruments.map(value => value)}
-            disabled={false}
           />
         </div>
         <div className={styles.itemsSetHorizontal}>

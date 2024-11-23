@@ -1,7 +1,7 @@
 'use client'
 
 import * as styles from '@/shared/ui/atoms/date-calendar/DateCalendar.css';
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import {
   Button,
   Calendar,
@@ -18,6 +18,7 @@ import {
   Popover
 } from 'react-aria-components'
 import 'react-datepicker/dist/react-datepicker.css'
+import {formatDate} from '@/shared/ui/util/DateFormatter'
 
 export type DatePickerProps = {
   readonly name?: string
@@ -25,7 +26,7 @@ export type DatePickerProps = {
   readonly onChange: (value: string) => void
 }
 
-const DateCalendar: React.FC<DatePickerProps> = ({
+const DateCalendar: FC<DatePickerProps> = ({
   isDisabled,
   onChange,
   ...props
@@ -36,12 +37,14 @@ const DateCalendar: React.FC<DatePickerProps> = ({
   // Do nothing if input is disabled
     if (isDisabled) return
     
-    const stringValue = value.toString()
+    // format ot yyyy-MM-dd
+    const formattedValue = formatDate(value);
+    
     // Update Local State
-    setInputValue(stringValue)
+    setInputValue(formattedValue)
     
     // Call onChange to notify the parent component
-    if (onChange) onChange(stringValue)
+    if (onChange) onChange(formattedValue)
   }
   
   return (

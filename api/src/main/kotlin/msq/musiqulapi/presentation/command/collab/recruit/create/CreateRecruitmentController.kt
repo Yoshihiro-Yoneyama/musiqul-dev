@@ -10,7 +10,7 @@ import java.util.UUID
 
 @RestController
 class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandService) {
-  @PostMapping("/recruitment")
+  @PostMapping("/recruitments")
   fun create(@RequestBody request: CreateRecruitCommandRequest): CreateRecruitmentResponse {
     val input = RecruitCommandInput(
       request.name,

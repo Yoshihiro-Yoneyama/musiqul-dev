@@ -1,7 +1,6 @@
 'use client'
 
 import * as styles from '@/shared/ui/atoms/date-calendar/DateCalendar.css';
-import {inputStyles} from '@/shared/ui/util/Input.css'
 import React, {useState} from 'react'
 import {
   Button,
@@ -14,12 +13,13 @@ import {
   DateValue,
   Dialog,
   Group,
-  Heading,
+  Heading, I18nProvider,
   Label,
   Popover
 } from 'react-aria-components'
 import 'react-datepicker/dist/react-datepicker.css'
 import {clsx} from 'clsx'
+import {createCalendar} from "@internationalized/date";
 
 export type DatePickerProps = {
   readonly name?: string
@@ -59,68 +59,48 @@ const DateCalendar: React.FC<DatePickerProps> = ({
     if (onChange) onChange(stringValue)
   }
   
+  const DateFormatter = new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "long", // 「㎜月」にする場合: "2-digit"
+    day: "2-digit"
+  });
+  
   return (
-    <>
+    <I18nProvider
+      locale={'ja-JP'}
+    >
       <AriaDatePicker
-        className={clsx(
-          inputStyles.default,
-          isFocused && !isDisabled ? inputStyles.focused : '',
-          isActive && !isFocused && !isDisabled ? inputStyles.active : '',
-          isDisabled ? inputStyles.disabled : '',
-          styles.datePicker
-        )}
-        isDisabled={isDisabled}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={handleChange}
         {...props}
+        className={styles.datePicker}
       >
-        <Label>Date</Label>
         <Group className={styles.group}>
           <DateInput className={styles.dateInput}>
-            {(segment) => <DateSegment segment={segment}/>}
+            {(segment) => (
+              <DateSegment
+                segment={segment}
+                
+              />
+            )}
           </DateInput>
-          <Button className={styles.button}>▼</Button>
+          <Button>▼</Button>
         </Group>
         <Popover className={styles.popover}>
           <Dialog>
-            <Calendar>
-              <header>
-                <Button slot='previous' className={styles.button}>◀</Button>
-                <Heading/>
-                <Button slot='next' className={styles.button}>▶</Button>
+            <Calendar className={styles.calendar}>
+              <header className={styles.header}>
+                <Button slot="previous">◀</Button>
+                <Heading className={styles.header}/>
+                <Button slot="next">▶</Button>
               </header>
               <CalendarGrid>
-                {(date) => <CalendarCell date={date}/>}
+                {(date) => <CalendarCell date={date} />}
               </CalendarGrid>
             </Calendar>
           </Dialog>
         </Popover>
-      
       </AriaDatePicker>
-    </>
+    </I18nProvider>
   )
 }
 
 export default DateCalendar
-
-
-
-{/*<DatePicker*/}
-{/*  id={id}*/}
-{/*  name={name}*/}
-{/*  selected={startDate}*/}
-{/*  onChange={(date: Date | null) => setStartDate(date)}*/}
-{/*  onFocus={handleFocus}*/}
-{/*  onBlur={handleBlur}*/}
-{/*  showMonthYearDropdown={true}*/}
-{/*  minDate={new Date('2020-01-01')}*/}
-{/*  maxDate={new Date('2030-12-31')}*/}
-{/*  disabled={disabled}*/}
-{/*  className={[*/}
-{/*    inputStyles.default,*/}
-{/*    isFocused && !disabled ? inputStyles.focused : '',*/}
-{/*    isActive && !isFocused && !disabled ? inputStyles.active : '',*/}
-{/*    disabled ? inputStyles.disabled : ''*/}
-{/*  ].join(' ')}*/}
-{/*/>*/}

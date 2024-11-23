@@ -10,16 +10,13 @@ import {
   DateInput,
   DatePicker as AriaDatePicker,
   DateSegment,
-  DateValue,
   Dialog,
   Group,
-  Heading, I18nProvider,
-  Label,
+  Heading,
+  I18nProvider,
   Popover
 } from 'react-aria-components'
 import 'react-datepicker/dist/react-datepicker.css'
-import {clsx} from 'clsx'
-import {createCalendar} from "@internationalized/date";
 
 export type DatePickerProps = {
   readonly name?: string
@@ -47,24 +44,6 @@ const DateCalendar: React.FC<DatePickerProps> = ({
     setIsActive(inputValue.trim().length > 0)
   }
   
-  const handleChange = (value: DateValue) => {
-  // Do nothing if input is disabled
-    if (isDisabled) return
-    
-    const stringValue = value.toString()
-    // Update Local State
-    setInputValue(stringValue)
-    
-    // Call onChange to notify the parent component
-    if (onChange) onChange(stringValue)
-  }
-  
-  const DateFormatter = new Intl.DateTimeFormat("ja-JP", {
-    year: "numeric",
-    month: "long", // 「㎜月」にする場合: "2-digit"
-    day: "2-digit"
-  });
-  
   return (
     <I18nProvider
       locale={'ja-JP'}
@@ -78,7 +57,6 @@ const DateCalendar: React.FC<DatePickerProps> = ({
             {(segment) => (
               <DateSegment
                 segment={segment}
-                
               />
             )}
           </DateInput>

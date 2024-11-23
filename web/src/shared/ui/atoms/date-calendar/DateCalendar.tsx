@@ -1,7 +1,6 @@
 'use client'
 
 import * as styles from '@/shared/ui/atoms/date-calendar/DateCalendar.css';
-import React, {useState} from 'react'
 import {
   Button,
   Calendar,
@@ -29,21 +28,6 @@ const DateCalendar: React.FC<DatePickerProps> = ({
   onChange,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = useState(false)
-  const [isActive, setIsActive] = useState(false)
-  const [inputValue, setInputValue] = useState('')
-  
-  const handleFocus = () => {
-    if (!isDisabled) {
-      setIsFocused(true)
-    }
-  }
-  
-  const handleBlur = () => {
-    setIsFocused(false)
-    setIsActive(inputValue.trim().length > 0)
-  }
-  
   return (
     <I18nProvider
       locale={'ja-JP'}

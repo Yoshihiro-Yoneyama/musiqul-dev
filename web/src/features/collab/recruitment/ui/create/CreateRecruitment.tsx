@@ -10,7 +10,11 @@ import React, {useCallback, useState} from "react";
 import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
-import {genreOptions, requiredGenders, requiredGenerationOptions} from "@/features/collab/recruitment/model/options";
+import {
+  genreOptions,
+  requiredGenderOptions,
+  requiredGenerationOptions
+} from "@/features/collab/recruitment/model/options";
 
 type Props = {
   onPress?: () => void
@@ -24,7 +28,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const [genres, setGenres] = useState<string[]>([])
   const [deadline, setDeadline] = useState('')
   const [requiredGenerations, setRequiredGenerations] = useState<string[]>([])
-  const [requiredGender, setRequiredGender] = useState('')
+  const [requiredGenders, setRequiredGenders] = useState<string[]>([])
   const [recruitedInstruments, setRecruitedInstruments] = useState(new Map([]))
   
   const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
@@ -71,11 +75,11 @@ const CreateRecruitmentForm = (props: Props) => {
       requiredGenerations: values || [],
     })
   }
-  const handleRequiredGender = (value: string) => {
-    setRequiredGender(value);
+  const handleRequiredGenders = (values: string[]) => {
+    setRequiredGenders(values);
     setUpdatedRecruitment({
       ...updatedRecruitment,
-      requiredGender: value || '',
+      requiredGenders: values || [],
     });
   };
   const handleRecruitedInstruments = (mapValues: Map<string, number>) => {
@@ -110,7 +114,7 @@ const CreateRecruitmentForm = (props: Props) => {
       setGenres([])
       setDeadline('')
       setRequiredGenerations([])
-      setRequiredGender('')
+      setRequiredGenders([])
       setRecruitedInstruments(new Map([]))
     } catch (error) {
       console.error('Error creating recruitment:', error);
@@ -124,7 +128,7 @@ const CreateRecruitmentForm = (props: Props) => {
     genres,
     deadline,
     requiredGenerations,
-    requiredGender,
+    requiredGenders,
     recruitedInstruments,
   ])
   
@@ -200,18 +204,13 @@ const CreateRecruitmentForm = (props: Props) => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          <InputSelector
-            title={"性別"}
-            displayedRequired={true}
-            selectorProps={
-              {
-                selectedValue: updatedRecruitment.requiredGender,
-                options: requiredGenders,
-                defaultOptionLabel: '選択してください。',
-                isDisabled: false,
-                onChange: handleRequiredGender,
-              }
-            }
+          <Checkbox
+            props={{
+              defaultSelected: false,
+            }}
+            options={requiredGenderOptions}
+            selectedValues={requiredGenders}
+            onChange={handleRequiredGenders}
           />
         </div>
         <div className={styles.itemsSetHorizontal}>

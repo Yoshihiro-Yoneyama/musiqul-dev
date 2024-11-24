@@ -9,7 +9,7 @@ export const recruitmentSchema = z.object({
   genres: z.string().array(),
   deadline: z.string(),
   requiredGenerations: z.string().array(),
-  requiredGender: z.string(),
+  requiredGenders: z.string().array(),
   recruitedInstruments: z.map(z.string(), z.number()),
   memo: z.string().optional(),
 })

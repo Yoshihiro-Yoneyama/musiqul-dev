@@ -24,16 +24,16 @@ export const recruitedInstruments: SelectorOption[] = [
   {value: 'ELECTRIC_BASE', label: 'エレキベース'},
 ];
 
-export const requiredGenders: SelectorOption[] = [
-  {value: 'MALE_ONLY', label: '男性'},
-  {value: 'MALE_ONLY', label: '女性'},
-  {value: 'OTHER', label: 'その他'},
-];
-
 export type CheckboxOption = {
   value: string;
   label: string;
 };
+
+export const requiredGenderOptions: SelectorOption[] = [
+  {value: 'MALE_ONLY', label: '男性'},
+  {value: 'FEMALE_ONLY', label: '女性'},
+  {value: 'OTHER', label: 'その他'},
+];
 
 export const genreOptions: CheckboxOption[] = [
   {value: 'ROCK', label: 'ロック'},

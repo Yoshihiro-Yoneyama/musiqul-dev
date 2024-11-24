@@ -1,1 +1,0 @@
-ALTER TABLE musiqul_command.recruited_instrument RENAME TO recruitment_recruited_instrument

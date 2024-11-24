@@ -19,10 +19,10 @@ CREATE TYPE musiqul_command.instrument_type AS ENUM (
     'OTHER'
     );
 
-CREATE TYPE musiqul_command.gender_type AS ENUM (
+CREATE TYPE musiqul_command.required_gender_type AS ENUM (
     'MALE_ONLY',
     'FEMALE_ONLY',
-    'ALL'
+    'OTHER'
     );
 
 CREATE TYPE musiqul_command.recruitment_status_type AS ENUM (
@@ -47,11 +47,10 @@ CREATE TABLE musiqul_command.player
 CREATE TABLE musiqul_command.recruitment
 (
     recruitment_id     uuid PRIMARY KEY,
-    name               VARCHAR(100)                            NOT NULL,
     owner_id           uuid                                    NOT NULL REFERENCES musiqul_command.player (player_id),
     song_title         VARCHAR(500)                            NOT NULL,
     artist             VARCHAR(100)                            NOT NULL,
-    required_gender    musiqul_command.gender_type             NOT NULL,
+    name               VARCHAR(100)                            NOT NULL,
     deadline           timestamp                               NOT NULL,
     memo               VARCHAR(2000)                           NOT NULL,
     status             musiqul_command.recruitment_status_type NOT NULL,
@@ -70,6 +69,13 @@ CREATE TABLE musiqul_command.recruitment_owner_instrument
     recruitment_id   uuid REFERENCES musiqul_command.recruitment (recruitment_id),
     owner_instrument musiqul_command.instrument_type NOT NULL,
     UNIQUE (recruitment_id, owner_instrument)
+);
+
+CREATE TABLE musiqul_command.recruitment_required_gender
+(
+    recruitment_id uuid REFERENCES musiqul_command.recruitment (recruitment_id),
+    required_gender musiqul_command.required_gender_type NOT NULL,
+    UNIQUE (recruitment_id, required_gender)
 );
 
 CREATE TABLE musiqul_command.recruitment_required_generation

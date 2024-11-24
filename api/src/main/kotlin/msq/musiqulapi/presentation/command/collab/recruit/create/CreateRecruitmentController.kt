@@ -6,28 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 @RestController
 class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandService) {
   @PostMapping("/recruitments")
   fun create(@RequestBody request: CreateRecruitCommandRequest): CreateRecruitmentResponse {
     val input = RecruitCommandInput(
-      request.name,
       request.owner,
-      request.genres.map { r ->
-        when (r) {
-          CreateRecruitCommandRequest.MusicGenreType.ROCK -> RecruitCommandInput.MusicGenreType.ROCK
-          CreateRecruitCommandRequest.MusicGenreType.J_POP -> RecruitCommandInput.MusicGenreType.J_POP
-          CreateRecruitCommandRequest.MusicGenreType.ANIME -> RecruitCommandInput.MusicGenreType.ANIME
-          CreateRecruitCommandRequest.MusicGenreType.JAZZ -> RecruitCommandInput.MusicGenreType.JAZZ
-          CreateRecruitCommandRequest.MusicGenreType.CLASSIC -> RecruitCommandInput.MusicGenreType.CLASSIC
-          CreateRecruitCommandRequest.MusicGenreType.METAL -> RecruitCommandInput.MusicGenreType.METAL
-          CreateRecruitCommandRequest.MusicGenreType.OTHER -> RecruitCommandInput.MusicGenreType.OTHER
-        }
-      },
-      request.songTitle,
-      request.artist,
       request.ownerInstruments.map { r ->
         when (r) {
           CreateRecruitCommandRequest.InstrumentType.VOCAL -> RecruitCommandInput.InstrumentType.VOCAL
@@ -40,6 +26,38 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
           CreateRecruitCommandRequest.InstrumentType.OTHER -> RecruitCommandInput.InstrumentType.OTHER
         }
       },
+      request.songTitle,
+      request.artist,
+      request.name,
+      request.genres.map { r ->
+        when (r) {
+          CreateRecruitCommandRequest.MusicGenreType.ROCK -> RecruitCommandInput.MusicGenreType.ROCK
+          CreateRecruitCommandRequest.MusicGenreType.J_POP -> RecruitCommandInput.MusicGenreType.J_POP
+          CreateRecruitCommandRequest.MusicGenreType.ANIME -> RecruitCommandInput.MusicGenreType.ANIME
+          CreateRecruitCommandRequest.MusicGenreType.JAZZ -> RecruitCommandInput.MusicGenreType.JAZZ
+          CreateRecruitCommandRequest.MusicGenreType.CLASSIC -> RecruitCommandInput.MusicGenreType.CLASSIC
+          CreateRecruitCommandRequest.MusicGenreType.METAL -> RecruitCommandInput.MusicGenreType.METAL
+          CreateRecruitCommandRequest.MusicGenreType.OTHER -> RecruitCommandInput.MusicGenreType.OTHER
+        }
+      },
+      request.deadline,
+      request.requiredGenerations.map { r ->
+        when (r) {
+          CreateRecruitCommandRequest.RequiredGenerationType.TEEN -> RecruitCommandInput.RequiredGenerationType.TEEN
+          CreateRecruitCommandRequest.RequiredGenerationType.TWENTIES -> RecruitCommandInput.RequiredGenerationType.TWENTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.THIRTIES -> RecruitCommandInput.RequiredGenerationType.THIRTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.FORTIES -> RecruitCommandInput.RequiredGenerationType.FORTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.FIFTIES -> RecruitCommandInput.RequiredGenerationType.FIFTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.MORE_THAN_SIXTIES -> RecruitCommandInput.RequiredGenerationType.MORE_THAN_SIXTIES
+        }
+      }.toSet(),
+      request.requiredGenders.map { r ->
+        when (r) {
+          CreateRecruitCommandRequest.RequiredGenderType.MALE_ONLY -> RecruitCommandInput.RequiredGenderType.MALE_ONLY
+          CreateRecruitCommandRequest.RequiredGenderType.FEMALE_ONLY -> RecruitCommandInput.RequiredGenderType.FEMALE_ONLY
+          CreateRecruitCommandRequest.RequiredGenderType.OTHER -> RecruitCommandInput.RequiredGenderType.OTHER
+        }
+      }.toSet(),
       request.recruitedInstruments.entries.associate { e ->
         val instrumentType = when (e.key) {
           CreateRecruitCommandRequest.InstrumentType.VOCAL -> RecruitCommandInput.InstrumentType.VOCAL
@@ -53,22 +71,6 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
         }
         instrumentType to e.value
       },
-      request.requiredGenerations.map { r ->
-        when (r) {
-          CreateRecruitCommandRequest.RequiredGeneration.TEEN -> RecruitCommandInput.RequiredGeneration.TEEN
-          CreateRecruitCommandRequest.RequiredGeneration.TWENTIES -> RecruitCommandInput.RequiredGeneration.TWENTIES
-          CreateRecruitCommandRequest.RequiredGeneration.THIRTIES -> RecruitCommandInput.RequiredGeneration.THIRTIES
-          CreateRecruitCommandRequest.RequiredGeneration.FORTIES -> RecruitCommandInput.RequiredGeneration.FORTIES
-          CreateRecruitCommandRequest.RequiredGeneration.FIFTIES -> RecruitCommandInput.RequiredGeneration.FIFTIES
-          CreateRecruitCommandRequest.RequiredGeneration.MORE_THAN_SIXTIES -> RecruitCommandInput.RequiredGeneration.MORE_THAN_SIXTIES
-        }
-      }.toSet(),
-      when (request.requiredGender) {
-        CreateRecruitCommandRequest.GenderType.MALE_ONLY -> RecruitCommandInput.GenderType.MALE_ONLY
-        CreateRecruitCommandRequest.GenderType.FEMALE_ONLY -> RecruitCommandInput.GenderType.FEMALE_ONLY
-        CreateRecruitCommandRequest.GenderType.ALL -> RecruitCommandInput.GenderType.ALL
-      },
-      request.deadline,
       request.memo
     )
     val output = recruitmentCommandService.recruit(input)
@@ -77,16 +79,16 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
 }
 
 data class CreateRecruitCommandRequest(
-  val name: String,
   val owner: UUID,
-  val genres: List<MusicGenreType>,
+  val ownerInstruments: List<InstrumentType>,
   val songTitle: String,
   val artist: String,
-  val ownerInstruments: List<InstrumentType>,
-  val recruitedInstruments: Map<InstrumentType, Short>,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: GenderType,
+  val name: String,
+  val genres: List<MusicGenreType>,
   val deadline: Instant,
+  val requiredGenerations: Set<RequiredGenerationType>,
+  val requiredGenders: Set<RequiredGenderType>,
+  val recruitedInstruments: Map<InstrumentType, Short>,
   val memo: String
 ) {
   enum class MusicGenreType {
@@ -110,7 +112,7 @@ data class CreateRecruitCommandRequest(
     OTHER
   }
 
-  enum class RequiredGeneration {
+  enum class RequiredGenerationType {
     TEEN,
     TWENTIES,
     THIRTIES,
@@ -119,10 +121,10 @@ data class CreateRecruitCommandRequest(
     MORE_THAN_SIXTIES,
   }
 
-  enum class GenderType {
+  enum class RequiredGenderType {
     MALE_ONLY,
     FEMALE_ONLY,
-    ALL
+    OTHER
   }
 }
 

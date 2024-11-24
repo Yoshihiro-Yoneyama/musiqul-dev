@@ -21,30 +21,37 @@ class RecruitCommandService(
   fun recruit(input: RecruitCommandInput): RecruitCommandOutput {
     val recruitCommand = RecruitCommand(
       PlayerId.reconstruct(input.owner),
+      input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
       SongTitle(input.songTitle),
       Artist(input.artist),
       RecruitmentName(input.name),
       input.genre.map { g -> MusicGenre.valueOf(g.name) },
-      input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
+      DeadLine(input.deadline),
+      input.requiredGenerations
+        .map { r ->
+          when (r) {
+            RecruitCommandInput.RequiredGenerationType.TEEN -> RequiredGeneration.TEEN
+            RecruitCommandInput.RequiredGenerationType.TWENTIES -> RequiredGeneration.TWENTIES
+            RecruitCommandInput.RequiredGenerationType.THIRTIES -> RequiredGeneration.THIRTIES
+            RecruitCommandInput.RequiredGenerationType.FORTIES -> RequiredGeneration.FORTIES
+            RecruitCommandInput.RequiredGenerationType.FIFTIES -> RequiredGeneration.FIFTIES
+            RecruitCommandInput.RequiredGenerationType.MORE_THAN_SIXTIES -> RequiredGeneration.MORE_THAN_SIXTIES
+          }
+        }
+        .toSet(),
+      input.requiredGenders.map { gender ->
+        when (gender) {
+          RecruitCommandInput.RequiredGenderType.MALE_ONLY -> RequiredGender.MALE_ONLY
+          RecruitCommandInput.RequiredGenderType.FEMALE_ONLY -> RequiredGender.FEMALE_ONLY
+          RecruitCommandInput.RequiredGenderType.OTHER -> RequiredGender.OTHER
+        }
+      }
+        .toSet(),
       RequiredInstrumentsAndCounts(
         NonEmptyMap(
           input.recruitedInstruments.entries.associate { e -> Pair(Instrument.valueOf(e.key.name), e.value) }
         )
       ),
-      input.requiredGenerations
-        .map { r ->
-          when (r) {
-            RecruitCommandInput.RequiredGeneration.TEEN -> RequiredGeneration.TEEN
-            RecruitCommandInput.RequiredGeneration.TWENTIES -> RequiredGeneration.TWENTIES
-            RecruitCommandInput.RequiredGeneration.THIRTIES -> RequiredGeneration.THIRTIES
-            RecruitCommandInput.RequiredGeneration.FORTIES -> RequiredGeneration.FORTIES
-            RecruitCommandInput.RequiredGeneration.FIFTIES -> RequiredGeneration.FIFTIES
-            RecruitCommandInput.RequiredGeneration.MORE_THAN_SIXTIES -> RequiredGeneration.MORE_THAN_SIXTIES
-          }
-        }
-        .toSet(),
-      RequiredGender.valueOf(input.requiredGender.name),
-      DeadLine(input.deadline),
       Memo(input.memo)
     )
     val recruitment = Recruitment.recruit(
@@ -62,19 +69,19 @@ class RecruitCommandService(
 }
 
 data class RecruitCommandInput(
-  val name: String,
   val owner: UUID,
-  val genre: List<MusicGenreType>,
+  val ownerInstruments: List<InstrumentType>,
   val songTitle: String,
   val artist: String,
-  val ownerInstruments: List<InstrumentType>,
-  val recruitedInstruments: Map<InstrumentType, Short>,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: GenderType,
+  val name: String,
+  val genre: List<MusicGenreType>,
   val deadline: Instant,
+  val requiredGenerations: Set<RequiredGenerationType>,
+  val requiredGenders: Set<RequiredGenderType>,
+  val recruitedInstruments: Map<InstrumentType, Short>,
   val memo: String
 ) {
-    enum class MusicGenreType {
+  enum class MusicGenreType {
     ROCK,
     J_POP,
     ANIME,
@@ -95,7 +102,7 @@ data class RecruitCommandInput(
     OTHER
   }
 
-  enum class RequiredGeneration {
+  enum class RequiredGenerationType {
     TEEN,
     TWENTIES,
     THIRTIES,
@@ -104,10 +111,10 @@ data class RecruitCommandInput(
     MORE_THAN_SIXTIES,
   }
 
-  enum class GenderType {
+  enum class RequiredGenderType {
     MALE_ONLY,
     FEMALE_ONLY,
-    ALL
+    OTHER
   }
 }
 

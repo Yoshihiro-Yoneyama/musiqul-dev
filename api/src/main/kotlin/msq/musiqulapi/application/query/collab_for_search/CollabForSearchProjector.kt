@@ -18,14 +18,15 @@ class CollabForSearchProjector(
   fun putRecruitment(event: RecruitedEvent) {
     val recruitmentReadModel = Recruitment(
       event.id.value,
-      event.name.value,
       event.owner.value,
-      event.genres.map(MusicGenre::name),
+      event.name.value,
       event.songTitle.value,
       event.artist.value,
+      event.genres.map(MusicGenre::name),
+      event.deadline.value,
       event.requiredGenerations.map(RequiredGeneration::name),
+      event.requiredGender.map(RequiredGender::name),
       event.recruitedInstruments.value.map.keys.map(Instrument::name),
-      event.requiredGender.name
     )
     println("**************イベント検知****************")
 
@@ -41,14 +42,15 @@ class CollabForSearchProjector(
       .map { recruitment ->
         Recruitment(
           event.id.value,
-          event.name.value,
           recruitment.owner.value,
-          event.genres.map(MusicGenre::name),
           event.songTitle.value,
           event.artist.value,
+          event.name.value,
+          event.genres.map(MusicGenre::name),
+          event.deadline.value,
           event.requiredGenerations.map(RequiredGeneration::name),
+          event.requiredGenders.map(RequiredGender::name),
           event.recruitedInstruments.value.map.keys.map(Instrument::name),
-          event.requiredGender.name
         )
       }
       .fold(

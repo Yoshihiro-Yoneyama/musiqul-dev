@@ -3,10 +3,7 @@ package msq.musiqulapi.infrastructure.command.collab.recruitment
 import msq.musiqulapi.domain.model.collab.recruitment.*
 import msq.musiqulapi.infrastructure.mapper.command.collab.recruitment.RecruitmentRecord
 import nu.studer.sample.enums.*
-import nu.studer.sample.tables.references.RECRUITMENT_MUSIC_GENRE
-import nu.studer.sample.tables.references.RECRUITMENT_OWNER_INSTRUMENT
-import nu.studer.sample.tables.references.RECRUITMENT_RECRUITED_INSTRUMENT
-import nu.studer.sample.tables.references.RECRUITMENT_REQUIRED_GENERATION
+import nu.studer.sample.tables.references.*
 import org.jooq.DSLContext
 import org.jooq.Record2
 import org.jooq.Record3
@@ -26,11 +23,6 @@ class RecruitmentTranslator(
       recruitment.owner.value,
       recruitment.songTitle.value,
       recruitment.artist.value,
-      when (recruitment.requiredGender) {
-        RequiredGender.MALE_ONLY -> GenderType.MALE_ONLY
-        RequiredGender.FEMALE_ONLY -> GenderType.FEMALE_ONLY
-        RequiredGender.ALL -> GenderType.ALL
-      },
       LocalDateTime.ofInstant(recruitment.deadline.value, ZoneId.of("UTC")),
       recruitment.memo.value,
       when (recruitment.recruitmentStatus) {
@@ -39,6 +31,26 @@ class RecruitmentTranslator(
       },
       recruitment.deleted
     )
+  }
+
+  fun toRecruitmentOwnerInstrumentRecord(recruitment: Recruitment): List<Record2<UUID?, InstrumentType?>> {
+    return recruitment.ownerInstruments.map { r ->
+      val instrument = when (r) {
+        Instrument.VOCAL -> InstrumentType.VOCAL
+        Instrument.GUITAR -> InstrumentType.GUITAR
+        Instrument.ELECTRIC_BASE -> InstrumentType.ELECTRIC_BASE
+        Instrument.DRUM -> InstrumentType.DRUM
+        Instrument.KEY_BOARD -> InstrumentType.KEY_BOARD
+        Instrument.PIANO -> InstrumentType.PIANO
+        Instrument.VIOLIN -> InstrumentType.VIOLIN
+        Instrument.OTHER -> InstrumentType.OTHER
+      }
+      val record =
+        dslContext.newRecord(RECRUITMENT_OWNER_INSTRUMENT.RECRUITMENT_ID, RECRUITMENT_OWNER_INSTRUMENT.OWNER_INSTRUMENT)
+      record.set(RECRUITMENT_OWNER_INSTRUMENT.RECRUITMENT_ID, recruitment.id.value)
+      record.set(RECRUITMENT_OWNER_INSTRUMENT.OWNER_INSTRUMENT, instrument)
+      record
+    }
   }
 
   fun toRecruitmentMusicGenreRecord(recruitment: Recruitment): List<Record2<UUID?, MusicGenreType?>> {
@@ -59,22 +71,38 @@ class RecruitmentTranslator(
     }
   }
 
-  fun toRecruitmentOwnerInstrumentRecord(recruitment: Recruitment): List<Record2<UUID?, InstrumentType?>> {
-    return recruitment.ownerInstruments.map { r ->
-      val instrument = when (r) {
-        Instrument.VOCAL -> InstrumentType.VOCAL
-        Instrument.GUITAR -> InstrumentType.GUITAR
-        Instrument.ELECTRIC_BASE -> InstrumentType.ELECTRIC_BASE
-        Instrument.DRUM -> InstrumentType.DRUM
-        Instrument.KEY_BOARD -> InstrumentType.KEY_BOARD
-        Instrument.PIANO -> InstrumentType.PIANO
-        Instrument.VIOLIN -> InstrumentType.VIOLIN
-        Instrument.OTHER -> InstrumentType.OTHER
+  fun toRecruitmentRequiredGenerationRecord(recruitment: Recruitment): List<Record2<UUID?, RequiredGenerationType?>> {
+    return recruitment.requiredGenerations.map { r ->
+      val generation = when (r) {
+        RequiredGeneration.TEEN -> RequiredGenerationType.TEEN
+        RequiredGeneration.TWENTIES -> RequiredGenerationType.TWENTIES
+        RequiredGeneration.THIRTIES -> RequiredGenerationType.THIRTIES
+        RequiredGeneration.FORTIES -> RequiredGenerationType.FORTIES
+        RequiredGeneration.FIFTIES -> RequiredGenerationType.FIFTIES
+        RequiredGeneration.MORE_THAN_SIXTIES -> RequiredGenerationType.MORE_THAN_SIXTIES
+      }
+
+      val record = dslContext.newRecord(
+        RECRUITMENT_REQUIRED_GENERATION.RECRUITMENT_ID,
+        RECRUITMENT_REQUIRED_GENERATION.GENERATION_TYPE
+      )
+      record.set(RECRUITMENT_REQUIRED_GENERATION.RECRUITMENT_ID, recruitment.id.value)
+      record.set(RECRUITMENT_REQUIRED_GENERATION.GENERATION_TYPE, generation)
+      record
+    }
+  }
+
+  fun toRequiredGenderType(recruitment: Recruitment): List<Record2<UUID?, RequiredGenderType?>> {
+    return recruitment.requiredGender.map { r ->
+      val gender = when (r) {
+        RequiredGender.MALE_ONLY -> RequiredGenderType.MALE_ONLY
+        RequiredGender.FEMALE_ONLY -> RequiredGenderType.FEMALE_ONLY
+        RequiredGender.OTHER -> RequiredGenderType.OTHER
       }
       val record =
-        dslContext.newRecord(RECRUITMENT_OWNER_INSTRUMENT.RECRUITMENT_ID, RECRUITMENT_OWNER_INSTRUMENT.OWNER_INSTRUMENT)
-      record.set(RECRUITMENT_OWNER_INSTRUMENT.RECRUITMENT_ID, recruitment.id.value)
-      record.set(RECRUITMENT_OWNER_INSTRUMENT.OWNER_INSTRUMENT, instrument)
+        dslContext.newRecord(RECRUITMENT_REQUIRED_GENDER.RECRUITMENT_ID, RECRUITMENT_REQUIRED_GENDER.REQUIRED_GENDER)
+      record.set(RECRUITMENT_REQUIRED_GENDER.RECRUITMENT_ID, recruitment.id.value)
+      record.set(RECRUITMENT_REQUIRED_GENDER.REQUIRED_GENDER, gender)
       record
     }
   }
@@ -100,24 +128,6 @@ class RecruitmentTranslator(
       record.set(RECRUITMENT_RECRUITED_INSTRUMENT.RECRUITMENT_ID, recruitment.id.value)
       record.set(RECRUITMENT_RECRUITED_INSTRUMENT.INSTRUMENT, instrument)
       record.set(RECRUITMENT_RECRUITED_INSTRUMENT.COUNT, entry.value)
-      record
-    }
-  }
-
-  fun toRecruitmentRequiredGenerationRecord(recruitment: Recruitment): List<Record2<UUID?, RequiredGenerationType?>> {
-    return recruitment.requiredGenerations.map { r ->
-      val generation = when(r) {
-        RequiredGeneration.TEEN -> RequiredGenerationType.TEEN
-        RequiredGeneration.TWENTIES -> RequiredGenerationType.TWENTIES
-        RequiredGeneration.THIRTIES -> RequiredGenerationType.THIRTIES
-        RequiredGeneration.FORTIES -> RequiredGenerationType.FORTIES
-        RequiredGeneration.FIFTIES -> RequiredGenerationType.FIFTIES
-        RequiredGeneration.MORE_THAN_SIXTIES -> RequiredGenerationType.MORE_THAN_SIXTIES
-      }
-
-      val record = dslContext.newRecord(RECRUITMENT_REQUIRED_GENERATION.RECRUITMENT_ID, RECRUITMENT_REQUIRED_GENERATION.GENERATION_TYPE)
-      record.set(RECRUITMENT_REQUIRED_GENERATION.RECRUITMENT_ID, recruitment.id.value)
-      record.set(RECRUITMENT_REQUIRED_GENERATION.GENERATION_TYPE, generation)
       record
     }
   }

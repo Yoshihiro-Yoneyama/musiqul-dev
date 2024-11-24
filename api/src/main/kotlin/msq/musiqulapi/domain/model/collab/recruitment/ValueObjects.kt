@@ -88,7 +88,7 @@ enum class RequiredGeneration {
 enum class RequiredGender {
   MALE_ONLY,
   FEMALE_ONLY,
-  ALL
+  OTHER
 }
 
 @JvmInline

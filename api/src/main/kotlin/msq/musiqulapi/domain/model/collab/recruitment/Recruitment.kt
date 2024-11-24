@@ -11,15 +11,15 @@ sealed interface Recruitment {
   val occurredEvents: List<DomainEvent>
   val id: RecruitmentId
   val owner: PlayerId
+  val ownerInstruments: List<Instrument>
   val songTitle: SongTitle //デフォルト空文字列
   val artist: Artist //デフォルト空文字列
   val name: RecruitmentName
   val genres: List<MusicGenre>
-  val ownerInstruments: List<Instrument>
-  val recruitedInstruments: RequiredInstrumentsAndCounts
-  val requiredGenerations: Set<RequiredGeneration>
-  val requiredGender: RequiredGender
   val deadline: DeadLine
+  val requiredGenerations: Set<RequiredGeneration>
+  val requiredGender: Set<RequiredGender>
+  val recruitedInstruments: RequiredInstrumentsAndCounts
   val memo: Memo //デフォルト空文字列
   val recruitmentStatus: RecruitmentStatus
   val deleted: Boolean
@@ -36,30 +36,30 @@ sealed interface Recruitment {
         eventId,
         id,
         command.owner,
+        command.ownerInstruments,
         command.songTitle,
         command.artist,
         command.name,
         command.genres,
-        command.ownerInstruments,
-        command.recruitedInstruments,
+        command.deadline,
         command.requiredGenerations,
         command.requiredGender,
-        command.deadline,
+        command.recruitedInstruments,
         command.memo
       )
       return Data(
         listOf(recruitedEvent),
         id,
         command.owner,
+        command.ownerInstruments,
         command.songTitle,
         command.artist,
         command.name,
         command.genres,
-        command.ownerInstruments,
-        command.recruitedInstruments,
+        command.deadline,
         command.requiredGenerations,
         command.requiredGender,
-        command.deadline,
+        command.recruitedInstruments,
         command.memo,
         RecruitmentStatus.OPEN,
         false
@@ -92,15 +92,15 @@ sealed interface Recruitment {
     override val occurredEvents: List<DomainEvent>,
     override val id: RecruitmentId,
     override val owner: PlayerId,
+    override val ownerInstruments: List<Instrument>,
     override val songTitle: SongTitle, //デフォルト空文字列
     override val artist: Artist, //デフォルト空文字列
     override val name: RecruitmentName,
     override val genres: List<MusicGenre>,
-    override val ownerInstruments: List<Instrument>,
-    override val recruitedInstruments: RequiredInstrumentsAndCounts,
-    override val requiredGenerations: Set<RequiredGeneration>,
-    override val requiredGender: RequiredGender,
     override val deadline: DeadLine,
+    override val requiredGenerations: Set<RequiredGeneration>,
+    override val requiredGender: Set<RequiredGender>,
+    override val recruitedInstruments: RequiredInstrumentsAndCounts,
     override val memo: Memo, //デフォルト空文字列
     override val recruitmentStatus: RecruitmentStatus,
     override val deleted: Boolean
@@ -111,15 +111,15 @@ sealed interface Recruitment {
 // 集約の新規作成に使用する
 data class RecruitCommand(
   val owner: PlayerId,
+  val ownerInstruments: List<Instrument>,
   val songTitle: SongTitle,
   val artist: Artist,
   val name: RecruitmentName,
   val genres: List<MusicGenre>,
-  val ownerInstruments: List<Instrument>,
-  val recruitedInstruments: RequiredInstrumentsAndCounts,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: RequiredGender,
   val deadline: DeadLine,
+  val requiredGenerations: Set<RequiredGeneration>,
+  val requiredGender: Set<RequiredGender>,
+  val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo
 )
 
@@ -127,30 +127,30 @@ data class RecruitedEvent(
   override val eventId: DomainEventId,
   val id: RecruitmentId,
   val owner: PlayerId,
+  val ownerInstruments: List<Instrument>,
   val songTitle: SongTitle,
   val artist: Artist,
   val name: RecruitmentName,
   val genres: List<MusicGenre>,
-  val ownerInstruments: List<Instrument>,
-  val recruitedInstruments: RequiredInstrumentsAndCounts,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: RequiredGender,
   val deadline: DeadLine,
+  val requiredGenerations: Set<RequiredGeneration>,
+  val requiredGender: Set<RequiredGender>,
+  val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo
 ) : DomainEvent
 
 data class RecruitmentEditedEvent(
   override val eventId: DomainEventId,
   val id: RecruitmentId,
-  val name: RecruitmentName,
-  val genres: List<MusicGenre>,
+  val ownerInstruments: List<Instrument>,
   val songTitle: SongTitle,
   val artist: Artist,
-  val ownerInstruments: List<Instrument>,
-  val recruitedInstruments: RequiredInstrumentsAndCounts,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: RequiredGender,
+  val name: RecruitmentName,
+  val genres: List<MusicGenre>,
   val deadline: DeadLine,
+  val requiredGenerations: Set<RequiredGeneration>,
+  val requiredGenders: Set<RequiredGender>,
+  val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo
 ) : DomainEvent
 

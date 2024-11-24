@@ -1,6 +1,5 @@
 package msq.musiqulapi.infrastructure.mapper.command.collab.recruitment
 
-import nu.studer.sample.enums.GenderType
 import nu.studer.sample.enums.RecruitmentStatusType
 import nu.studer.sample.tables.references.RECRUITMENT
 import org.jooq.DSLContext
@@ -19,7 +18,6 @@ class RecruitmentMapper(val dslContext: DSLContext) {
       RECRUITMENT.OWNER_ID,
       RECRUITMENT.SONG_TITLE,
       RECRUITMENT.ARTIST,
-      RECRUITMENT.REQUIRED_GENDER,
       RECRUITMENT.DEADLINE,
       RECRUITMENT.MEMO,
       RECRUITMENT.STATUS,
@@ -31,7 +29,6 @@ class RecruitmentMapper(val dslContext: DSLContext) {
         recruitment.owner,
         recruitment.songTitle,
         recruitment.artist,
-        recruitment.requiredGender,
         recruitment.deadline,
         recruitment.memo,
         recruitment.recruitmentStatus,
@@ -43,7 +40,6 @@ class RecruitmentMapper(val dslContext: DSLContext) {
       .set(RECRUITMENT.OWNER_ID, excluded(RECRUITMENT.OWNER_ID))
       .set(RECRUITMENT.SONG_TITLE, excluded(RECRUITMENT.SONG_TITLE))
       .set(RECRUITMENT.ARTIST, excluded(RECRUITMENT.ARTIST))
-      .set(RECRUITMENT.REQUIRED_GENDER, excluded(RECRUITMENT.REQUIRED_GENDER))
       .set(RECRUITMENT.DEADLINE, excluded(RECRUITMENT.DEADLINE))
       .set(RECRUITMENT.MEMO, excluded(RECRUITMENT.MEMO))
       .set(RECRUITMENT.STATUS, excluded(RECRUITMENT.STATUS))
@@ -58,7 +54,6 @@ data class RecruitmentRecord(
   val owner: UUID,
   val songTitle: String,
   val artist: String,
-  val requiredGender: GenderType,
   val deadline: LocalDateTime,
   val memo: String,
   val recruitmentStatus: RecruitmentStatusType,

@@ -27,7 +27,7 @@ export const recruitedInstruments: SelectorOption[] = [
 export const requiredGenders: SelectorOption[] = [
   {value: 'MALE_ONLY', label: '男性'},
   {value: 'MALE_ONLY', label: '女性'},
-  {value: 'ALL', label: '不問'},
+  {value: 'OTHER', label: 'その他'},
 ];
 
 export type CheckboxOption = {
@@ -38,7 +38,7 @@ export type CheckboxOption = {
 export const genreOptions: CheckboxOption[] = [
   {value: 'ROCK', label: 'ロック'},
   {value: 'JAZZ', label: 'ジャズ'},
-  {value: 'POP', label: 'ポップ'},
+  {value: 'J_POP', label: 'Jポップ'},
 ];
 
 export const requiredGenerationOptions: CheckboxOption[] = [

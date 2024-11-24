@@ -1,7 +1,6 @@
 'use client'
 
 import * as styles from "./createRecruitment.css";
-import InputSelector from "@/shared/ui/molecules/input-selector/InputSelector";
 import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar";
 import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";

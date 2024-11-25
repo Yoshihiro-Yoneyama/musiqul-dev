@@ -17,7 +17,7 @@ export type SelectorProps = {
   /** The options of the selector */
   readonly options: Option[]
   /** The default option label of the selector */
-  readonly defaultOptionLabel: string
+  readonly defaultOptionLabel: any
   /** The flag to disable the selector */
   readonly isDisabled?: boolean
   /** The callback function when the selector is changed */

@@ -6,31 +6,28 @@ import Required from "@/shared/ui/atoms/required/Required";
 import * as styles from "./ComboInput.css";
 
 type Option = {
-  value: string;
-  label: string;
+  readonly value: string;
+  readonly label: string;
 };
 
 type SelectionState = {
-  stringValue: string; // String型の選択肢
-  numberValue: number; // Number型の選択肢
+  readonly stringValue: string; // String型の選択肢
+  readonly numberValue: number; // Number型の選択肢
 };
 
 type ComboInputProps = {
-  title: string,
-  defaultStringOption: string,
-  defaultNumberOption: number,
-  stringOptions: Option[],
-  numberOptions: Option[],
-  disabled: boolean,
+  readonly title: string,
+  readonly defaultStringOption: string,
+  readonly stringOptions: Option[],
+  readonly numberOptions: Option[],
+  // readonly onChange: (value: string) => void
 }
 
 const ComboInput: React.FC<ComboInputProps> = ({
   title,
   defaultStringOption,
-  defaultNumberOption,
   stringOptions,
   numberOptions,
-  disabled
 }) => {
   
   // State to manage the selected values for both selectors
@@ -65,7 +62,6 @@ const ComboInput: React.FC<ComboInputProps> = ({
       {/* Number Selector */}
       <Selector
         options={numberOptions}
-        defaultOptionLabel={defaultNumberOption}
         selectedValue={selections.numberValue.toString()}
         onChange={(value) => handleSelectionChange('numberValue', value)}
       />

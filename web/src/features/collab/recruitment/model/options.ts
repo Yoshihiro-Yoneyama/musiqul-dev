@@ -3,7 +3,7 @@ export type SelectorOption = {
   label: string;
 }
 
-export const requiredNumberOfInstruments: SelectorOption[] = [
+export const requiredNumberOfInstrumentOptions: SelectorOption[] = [
   {value: '0', label: '0'},
   {value: '1', label: '1'},
   {value: '2', label: '2'},
@@ -17,8 +17,7 @@ export const requiredNumberOfInstruments: SelectorOption[] = [
   {value: '10', label: '10'},
 ]
 
-export const recruitedInstruments: SelectorOption[] = [
-  {value: '', label: ''},
+export const recruitedInstrumentOptions: SelectorOption[] = [
   {value: 'VOCAL', label: 'ボーカル'},
   {value: 'GUITAR', label: 'ギター'},
   {value: 'ELECTRIC_BASE', label: 'エレキベース'},

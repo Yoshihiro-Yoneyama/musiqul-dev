@@ -2,58 +2,72 @@
 
 import React, {useState} from "react";
 import Selector from "@/shared/ui/atoms/selector/Selector";
+import Required from "@/shared/ui/atoms/required/Required";
+import * as styles from "./ComboInput.css";
 
 type Option = {
   value: string;
   label: string;
 };
 
+type SelectionState = {
+  stringValue: string; // String型の選択肢
+  numberValue: number; // Number型の選択肢
+};
+
 type ComboInputProps = {
-  id: string,
-  name: string,
-  defaultOptionLabel1: string,
-  defaultOptionLabel2: number,
-  options1: Option[],
-  options2: Option[],
+  title: string,
+  defaultStringOption: string,
+  defaultNumberOption: number,
+  stringOptions: Option[],
+  numberOptions: Option[],
   disabled: boolean,
 }
 
 const ComboInput: React.FC<ComboInputProps> = ({
-  id,
-  name,
-  defaultOptionLabel1,
-  defaultOptionLabel2,
-  options1,
-  options2,
+  title,
+  defaultStringOption,
+  defaultNumberOption,
+  stringOptions,
+  numberOptions,
   disabled
 }) => {
   
   // State to manage the selected values for both selectors
-  const [selectedValues, setSelectedValues] = useState(new Map([]));
+  // 状態を管理（型を厳密に指定）
+  const [selections, setSelections] = useState<SelectionState>({
+    stringValue: '', // 初期値
+    numberValue: 0,  // 初期値
+  });
   
-  const handleChange = (selector: "selector1" | "selector2") => (value: string) => {
-    setSelectedValues(prevValues => ({
-      ...prevValues,
-      [selector]: value,
+  // 選択状態を更新する関数
+  const handleSelectionChange = (key: keyof SelectionState, value: string) => {
+    setSelections((prev) => ({
+      ...prev,
+      [key]: key === 'numberValue' ? Number(value) : value, // 必要に応じて型変換
     }));
   };
   
   return (
-    <div id={id} aria-label={name}>
+    <div className={styles.inputContainer}>
+      <div className={styles.titleContainer}>
+        {title}
+        <Required displayed={false}/>
+      </div>
+      {/* String Selector */}
       <Selector
-        selectedValue={selectedValues.values().next().value}
-        options={options1}
-        defaultOptionLabel={defaultOptionLabel1}
-        isDisabled={disabled}
-        onChange={handleChange("selector1")}
-      
+        options={stringOptions}
+        defaultOptionLabel={defaultStringOption}
+        selectedValue={selections.stringValue}
+        onChange={(value) => handleSelectionChange('stringValue', value)}
       />
+      
+      {/* Number Selector */}
       <Selector
-        selectedValue={selectedValues.values().next().value}
-        options={options2}
-        defaultOptionLabel={defaultOptionLabel2}
-        isDisabled={disabled}
-        onChange={handleChange("selector2")}
+        options={numberOptions}
+        defaultOptionLabel={defaultNumberOption}
+        selectedValue={selections.numberValue.toString()}
+        onChange={(value) => handleSelectionChange('numberValue', value)}
       />
     </div>
   );

@@ -10,10 +10,11 @@ import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import {
-  genreOptions,
+  genreOptions, recruitedInstrumentOptions,
   requiredGenderOptions,
-  requiredGenerationOptions
+  requiredGenerationOptions, requiredNumberOfInstrumentOptions
 } from "@/features/collab/recruitment/model/options";
+import ComboInput from "@/features/collab/recruitment/ui/create/ComboInput";
 
 type Props = {
   onPress?: () => void
@@ -210,6 +211,14 @@ const CreateRecruitmentForm = (props: Props) => {
             options={requiredGenderOptions}
             selectedValues={requiredGenders}
             onChange={handleRequiredGenders}
+          />
+        </div>
+        <div className={styles.itemsSetHorizontal}>
+          <ComboInput
+            title={"楽器"}
+            defaultStringOption={''}
+            stringOptions={recruitedInstrumentOptions}
+            numberOptions={requiredNumberOfInstrumentOptions}
           />
         </div>
         <div className={styles.itemsSetHorizontal}>

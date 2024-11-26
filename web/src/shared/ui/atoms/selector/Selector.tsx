@@ -17,7 +17,7 @@ export type SelectorProps = {
   /** The options of the selector */
   readonly options: Option[]
   /** The default option label of the selector */
-  readonly defaultOptionLabel: any
+  readonly defaultOptionLabel?: any
   /** The flag to disable the selector */
   readonly isDisabled?: boolean
   /** The callback function when the selector is changed */
@@ -66,6 +66,7 @@ const Selector: FC<SelectorProps> = ({
         onBlur={handleBlur}
         disabled={isDisabled}
       >
+        {/* 以下はdefaultOptionLabelが存在するときのみ表示する */}
         <option value="">{defaultOptionLabel}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

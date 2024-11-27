@@ -66,8 +66,9 @@ const Selector: FC<SelectorProps> = ({
         onBlur={handleBlur}
         disabled={isDisabled}
       >
-        {/* 以下はdefaultOptionLabelが存在するときのみ表示する */}
-        <option value="">{defaultOptionLabel}</option>
+        <option value="" disabled hidden>
+          {defaultOptionLabel}
+        </option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

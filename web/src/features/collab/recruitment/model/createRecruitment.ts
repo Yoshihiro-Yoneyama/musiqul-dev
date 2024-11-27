@@ -19,7 +19,6 @@ export const createRecruitment = async (
     deadline: recruitment.deadline,
     requiredGenerations: recruitment.requiredGenerations,
     requiredGenders: recruitment.requiredGenders,
-    // TODO Define below type of map
     recruitedInstruments: recruitment.recruitedInstruments,
     memo: recruitment.memo,
   }

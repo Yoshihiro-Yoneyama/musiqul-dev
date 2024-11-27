@@ -10,9 +10,11 @@ import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import {
-  genreOptions, recruitedInstrumentOptions,
+  genreOptions,
+  recruitedInstrumentOptions,
   requiredGenderOptions,
-  requiredGenerationOptions, requiredNumberOfInstrumentOptions
+  requiredGenerationOptions,
+  requiredNumberOfInstrumentOptions
 } from "@/features/collab/recruitment/model/options";
 import ComboInput from "@/features/collab/recruitment/ui/create/ComboInput";
 
@@ -29,7 +31,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const [deadline, setDeadline] = useState('')
   const [requiredGenerations, setRequiredGenerations] = useState<string[]>([])
   const [requiredGenders, setRequiredGenders] = useState<string[]>([])
-  const [recruitedInstruments, setRecruitedInstruments] = useState(new Map([]))
+  const [recruitedInstruments, setRecruitedInstruments] = useState<Map<string, number>>(new Map());
   
   const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
   
@@ -82,13 +84,20 @@ const CreateRecruitmentForm = (props: Props) => {
       requiredGenders: values || [],
     });
   };
-  const handleRecruitedInstruments = (mapValues: Map<string, number>) => {
-    setRecruitedInstruments(mapValues)
+  
+  //recruitedInstruments: new Map([
+  //     ['VOCAL', 1],
+  //   ])
+  // この形に変換したい
+  const handleComboInputChange = (stringValue: string, numberValue: number) => {
+    const newRecruitedInstruments = new Map([["VOCAL", 19]]);
+    setRecruitedInstruments(newRecruitedInstruments);
     setUpdatedRecruitment({
       ...updatedRecruitment,
-      recruitedInstruments: mapValues || new Map([]),
-    })
+      recruitedInstruments: newRecruitedInstruments || new Map([]),
+    });
   }
+  
   
   const [submitting, setSubmitting] = useState(false)
   
@@ -219,6 +228,9 @@ const CreateRecruitmentForm = (props: Props) => {
             defaultStringOption={''}
             stringOptions={recruitedInstrumentOptions}
             numberOptions={requiredNumberOfInstrumentOptions}
+            onChange={handleComboInputChange}
+            selectedString={recruitedInstruments.keys().next().value || ""} // 現在選択中の楽器
+            selectedNumber={Number(recruitedInstruments.values().next().value || 0)} // 現在選択中の数量
           />
         </div>
         <div className={styles.itemsSetHorizontal}>

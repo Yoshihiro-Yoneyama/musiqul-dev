@@ -90,27 +90,37 @@ const CreateRecruitmentForm = (props: Props) => {
   //   ])
   // この形に変換したい
   const handleComboInputChange = (stringValue: string, numberValue: number) => {
-    const newRecruitedInstruments = new Map([["VOCAL", 19]]);
-    setRecruitedInstruments(newRecruitedInstruments);
-    setUpdatedRecruitment({
-      ...updatedRecruitment,
-      recruitedInstruments: newRecruitedInstruments || new Map([]),
-    });
+    console.log(updatedRecruitment)
+    setRecruitedInstruments((prevRecruitedInstruments) => {
+      const updatedMap = new Map(prevRecruitedInstruments)
+      
+      if (numberValue === 0) {
+        // 数量が0の場合、エントリを削除
+        updatedMap.delete(stringValue)
+      } else {
+        // 新しい値を追加または更新
+        updatedMap.set(stringValue, numberValue)
+      }
+      // updatedRecruitmentの更新
+      setUpdatedRecruitment({
+        ...updatedRecruitment,
+        recruitedInstruments: updatedMap,
+      });
+      return updatedMap
+    })
   }
   
   
   const [submitting, setSubmitting] = useState(false)
   
   const handleSubmit = useCallback(async () => {
+    console.log(updatedRecruitment)
     // Defence duplicate submission
     if (submitting) return
     setSubmitting(true)
     if (props.onPress) {
       props.onPress()
     }
-    
-    // Update the recruitment state
-    setUpdatedRecruitment(updatedRecruitment)
     
     try {
       // TODO Document the error handling
@@ -253,4 +263,4 @@ const CreateRecruitmentForm = (props: Props) => {
   )
 }
 
-export default CreateRecruitmentForm;
+export default CreateRecruitmentForm

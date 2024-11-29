@@ -85,30 +85,26 @@ const CreateRecruitmentForm = (props: Props) => {
     });
   };
   
-  //recruitedInstruments: new Map([
-  //     ['VOCAL', 1],
-  //   ])
-  // この形に変換したい
+
   const handleComboInputChange = (stringValue: string, numberValue: number) => {
-    console.log(updatedRecruitment)
-    setRecruitedInstruments((prevRecruitedInstruments) => {
-      const updatedMap = new Map(prevRecruitedInstruments)
+    setRecruitedInstruments(() => {
+      const updatedMap = new Map();
       
-      if (numberValue === 0) {
-        // 数量が0の場合、エントリを削除
-        updatedMap.delete(stringValue)
-      } else {
-        // 新しい値を追加または更新
-        updatedMap.set(stringValue, numberValue)
+      if (numberValue !== 0) {
+        // Set the new value
+        updatedMap.set(stringValue, numberValue);
       }
-      // updatedRecruitmentの更新
+      
+      // updated the recruitment state
       setUpdatedRecruitment({
         ...updatedRecruitment,
         recruitedInstruments: updatedMap,
-      });
-      return updatedMap
+      })
+      
+      return updatedMap;
     })
   }
+  
   
   
   const [submitting, setSubmitting] = useState(false)

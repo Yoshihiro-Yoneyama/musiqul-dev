@@ -6,18 +6,28 @@ import Required from "@/shared/ui/atoms/required/Required";
 import * as styles from "./ComboInput.css";
 
 type Option = {
-  readonly value: string;
-  readonly label: string;
+  /** valueString */
+  readonly value: string
+  /** labelString */
+  readonly label: string
 };
 
+/** Properties of Combo Input */
 type ComboInputProps = {
-  readonly title: string;
-  readonly defaultStringOption: string;
-  readonly stringOptions: Option[];
-  readonly numberOptions: Option[];
-  readonly onChange: (stringValue: string, numberValue: number) => void; // 親に通知する関数
-  readonly selectedString: string; // 現在の楽器
-  readonly selectedNumber: number; // 現在の数量
+  /** component title */
+  readonly title: string
+  /** default string option */
+  readonly defaultStringOption: string
+  /** string options */
+  readonly stringOptions: Option[]
+  /** number options */
+  readonly numberOptions: Option[]
+  /** callback function */
+  readonly onChange: (stringValue: string, numberValue: number) => void
+  /** selected string */
+  readonly selectedString: string
+  /** selected number */
+  readonly selectedNumber: number
 };
 
 const ComboInput: React.FC<ComboInputProps> = ({
@@ -58,22 +68,20 @@ const ComboInput: React.FC<ComboInputProps> = ({
         {title}
         <Required displayed={false} />
       </div>
-      {/* 楽器名のSelector */}
       <Selector
         options={stringOptions}
         defaultOptionLabel={defaultStringOption}
         selectedValue={selectedString}
-        onChange={handleStringChange} // 楽器名変更時に通知
+        onChange={handleStringChange}
       />
       
-      {/* 数量のSelector */}
       <Selector
         options={numberOptions}
         selectedValue={selectedNumber.toString()}
-        onChange={handleNumberChange} // 数量変更時に通知
+        onChange={handleNumberChange}
       />
     </div>
-  );
-};
+  )
+}
 
 export default ComboInput;

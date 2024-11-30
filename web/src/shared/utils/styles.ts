@@ -1,5 +1,5 @@
-import {theme} from "@/themes";
-import {Responsive, ResponsiveProp} from "@/type/styles";
+import {theme} from "../themes";
+import {Responsive, ResponsiveProp} from "@/shared/type/styles";
 
 // Themeの型
 export type AppTheme = typeof theme

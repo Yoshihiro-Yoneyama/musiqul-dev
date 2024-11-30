@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react";
-import {Responsive} from "@/type/styles";
-import {FontSize} from "@/utils/styles";
+import {Responsive} from "@/shared/type/styles";
+import {FontSize} from "@/shared/utils/styles";
 
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger'

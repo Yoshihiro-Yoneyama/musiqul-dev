@@ -17,6 +17,7 @@ import {
   requiredNumberOfInstrumentOptions
 } from "@/features/collab/recruitment/model/options";
 import ComboInput from "@/features/collab/recruitment/ui/create/ComboInput";
+import TextArea from "@/shared/ui/molecules/input-textarea/TextArea";
 
 type Props = {
   onPress?: () => void
@@ -32,6 +33,7 @@ const CreateRecruitmentForm = (props: Props) => {
   const [requiredGenerations, setRequiredGenerations] = useState<string[]>([])
   const [requiredGenders, setRequiredGenders] = useState<string[]>([])
   const [recruitedInstruments, setRecruitedInstruments] = useState<Map<string, number>>(new Map());
+  const [memo, setMemo] = useState('')
   
   const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
   
@@ -49,6 +51,7 @@ const CreateRecruitmentForm = (props: Props) => {
       artist: value || '',
     })
   }
+
   const handleNameChange = (value: string) => {
     setName(value)
     setUpdatedRecruitment({
@@ -78,14 +81,13 @@ const CreateRecruitmentForm = (props: Props) => {
     })
   }
   const handleRequiredGenders = (values: string[]) => {
-    setRequiredGenders(values);
+    setRequiredGenders(values)
     setUpdatedRecruitment({
       ...updatedRecruitment,
       requiredGenders: values || [],
-    });
-  };
+    })
+  }
   
-
   const handleComboInputChange = (stringValue: string, numberValue: number) => {
     setRecruitedInstruments(() => {
       const updatedMap = new Map();
@@ -104,8 +106,13 @@ const CreateRecruitmentForm = (props: Props) => {
       return updatedMap;
     })
   }
-  
-  
+  const handleMemoChange = (value: string) => {
+    setMemo(value)
+    setUpdatedRecruitment({
+      ...updatedRecruitment,
+      memo: value || ''
+    })
+  }
   
   const [submitting, setSubmitting] = useState(false)
   
@@ -131,6 +138,7 @@ const CreateRecruitmentForm = (props: Props) => {
       setRequiredGenerations([])
       setRequiredGenders([])
       setRecruitedInstruments(new Map([]))
+      setMemo('')
     } catch (error) {
       console.error('Error creating recruitment:', error);
     } finally {
@@ -145,6 +153,7 @@ const CreateRecruitmentForm = (props: Props) => {
     requiredGenerations,
     requiredGenders,
     recruitedInstruments,
+    memo,
   ])
   
   return (
@@ -239,9 +248,19 @@ const CreateRecruitmentForm = (props: Props) => {
             selectedNumber={Number(recruitedInstruments.values().next().value || 0)} // 現在選択中の数量
           />
         </div>
+        <TextArea
+          label={"メモ"}
+          type={"text"}
+          valueType={"string"}
+          placeholder={"メモを入力してください"}
+          isDisabled={false}
+          onChange={(e) => handleMemoChange(e)}
+        />
         <div className={styles.itemsSetHorizontal}>
-          <BorderButton variant={"default"} onClick={() => {
-          }}>
+          <BorderButton
+            variant={"default"}
+            onClick={() => {}}
+          >
             下書きに保存する
           </BorderButton>
           <Button

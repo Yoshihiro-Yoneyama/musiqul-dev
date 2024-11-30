@@ -25,7 +25,6 @@ const InputForm: React.FC<Props> = ({
         <Required displayed={displayedRequired}/>
       </div>
       <TextBox
-        name={textBoxProps.name}
         isDisabled={textBoxProps.isDisabled}
         onChange={textBoxProps.onChange}
         {...props}

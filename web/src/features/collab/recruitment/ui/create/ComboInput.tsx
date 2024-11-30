@@ -45,7 +45,6 @@ const ComboInput: React.FC<ComboInputProps> = ({
   
   // フォーマットされた値を親に通知する
   const notifyChange = (stringValue: string, numberValue: number) => {
-    console.log(stringValue, numberValue);
     if (stringValue && numberValue) {
       onChange(stringValue, numberValue);
     }

@@ -24,6 +24,7 @@ const InputCalendar: React.FC<calendarProps> = ({
         <Required displayed={displayedRequired}/>
       </div>
       <DateCalendar
+        aria-label="日付を選択してください"
         isDisabled={false}
         onChange={datePickerProps.onChange}
         {...props}

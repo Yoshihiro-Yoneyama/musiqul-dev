@@ -51,7 +51,6 @@ const CreateRecruitmentForm = (props: Props) => {
       artist: value || '',
     })
   }
-
   const handleNameChange = (value: string) => {
     setName(value)
     setUpdatedRecruitment({
@@ -254,7 +253,7 @@ const CreateRecruitmentForm = (props: Props) => {
           valueType={"string"}
           placeholder={"メモを入力してください"}
           isDisabled={false}
-          onChange={(e) => handleMemoChange(e)}
+          onChange={handleMemoChange}
         />
         <div className={styles.itemsSetHorizontal}>
           <BorderButton

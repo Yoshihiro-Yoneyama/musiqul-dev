@@ -4,7 +4,7 @@ import React, {ChangeEvent, useState} from "react"
 import {
   Label,
   Text,
-  TextArea,
+  TextArea as AriaTextArea,
   TextField as AriaTextField,
   type TextFieldProps as AriaTextFieldProps
 } from "react-aria-components"
@@ -29,7 +29,7 @@ export type TextBoxProps = {
   readonly maxLength?: number
 } & AriaTextFieldProps
 
-const TextBox: React.FC<TextBoxProps> = ({
+const TextArea: React.FC<TextBoxProps> = ({
   label,
   description,
   isDisabled,
@@ -69,7 +69,7 @@ const TextBox: React.FC<TextBoxProps> = ({
           {label}
         </Label>
       )}
-      <TextArea
+      <AriaTextArea
         aria-label={label}
         className={clsx(
           inputStyles.default,
@@ -79,7 +79,6 @@ const TextBox: React.FC<TextBoxProps> = ({
             : "",
           isDisabled ? inputStyles.disabled : ""
         )}
-        value={inputState.inputValue}
         disabled={isDisabled}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -95,4 +94,4 @@ const TextBox: React.FC<TextBoxProps> = ({
   )
 }
 
-export default namedMemo(TextBox, "TextBox")
+export default namedMemo(TextArea, "TextArea")

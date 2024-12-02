@@ -13,6 +13,9 @@ type Story = StoryObj<typeof BorderButton>
 
 export const Default: Story = {
   args: {
-    variant: "default"
+    appearance: "primary",
+    isDisabled: false,
+    type: "button",
+    
   }
 }

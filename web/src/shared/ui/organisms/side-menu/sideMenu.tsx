@@ -26,7 +26,10 @@ const SideMenu = () => {
         </Button>
       </div>
       <div className={styles.SideMenuItem}>
-        <BorderButton variant={"default"} onClick={() => handleNavigation("/")}>
+        <BorderButton
+          appearance="primary"
+          onPress={() => handleNavigation("/")}
+        >
           コラボに応募する
         </BorderButton>
       </div>

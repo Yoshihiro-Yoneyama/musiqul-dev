@@ -86,25 +86,52 @@ const CreateRecruitmentForm = (props: Props) => {
       requiredGenders: values || [],
     })
   }
-  
-  const handleComboInputChange = (stringValue: string, numberValue: number) => {
-    setRecruitedInstruments(() => {
-      const updatedMap = new Map();
+  const handleComboInputChange = (
+    id: number,
+    stringValue: string,
+    numberValue: number
+  ) => {
+    setInputs((prevInputs) =>
+      prevInputs.map((input) =>
+        input.id === id
+          ? { ...input, selectedString: stringValue, selectedNumber: numberValue }
+          : input
+      )
+    );
+    
+    // 全体の recruitedInstruments 状態も更新
+    setRecruitedInstruments((prevMap) => {
+      const updatedMap = new Map(prevMap);
       
-      if (numberValue !== 0) {
-        // Set the new value
-        updatedMap.set(stringValue, numberValue);
+      if (numberValue === 0) {
+        updatedMap.delete(stringValue); // 数量が0なら削除
+      } else {
+        updatedMap.set(stringValue, numberValue); // 数量を更新
       }
       
-      // updated the recruitment state
       setUpdatedRecruitment({
         ...updatedRecruitment,
         recruitedInstruments: updatedMap,
-      })
+      });
       
       return updatedMap;
-    })
-  }
+    });
+  };
+  
+  
+  const [inputs, setInputs] = useState<
+    { id: number; selectedString: string; selectedNumber: number }[]
+  >([{id: 1, selectedString: "", selectedNumber: 0}]);
+  
+  
+  const handleAddInput = () => {
+    const newId = inputs.length + 1;
+    setInputs([
+      ...inputs,
+      {id: newId, selectedString: "", selectedNumber: 0},
+    ]);
+  };
+  
   const handleMemoChange = (value: string) => {
     setMemo(value)
     setUpdatedRecruitment({
@@ -237,15 +264,23 @@ const CreateRecruitmentForm = (props: Props) => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          <ComboInput
-            title={"楽器"}
-            defaultStringOption={''}
-            stringOptions={recruitedInstrumentOptions}
-            numberOptions={requiredNumberOfInstrumentOptions}
-            onChange={handleComboInputChange}
-            selectedString={recruitedInstruments.keys().next().value || ""} // 現在選択中の楽器
-            selectedNumber={Number(recruitedInstruments.values().next().value || 0)} // 現在選択中の数量
-          />
+          {inputs.map((input) => (
+            <ComboInput
+              key={input.id} // 一意のIDを設定
+              title={"楽器"}
+              defaultStringOption={''}
+              stringOptions={recruitedInstrumentOptions}
+              numberOptions={requiredNumberOfInstrumentOptions}
+              onChange={(stringValue, numberValue) =>
+                handleComboInputChange(input.id, stringValue, numberValue)
+              }
+              selectedString={input.selectedString}
+              selectedNumber={input.selectedNumber}
+            />
+          ))}
+          <button onClick={handleAddInput}>
+            ＋
+          </button>
         </div>
         <TextArea
           label={"メモ"}
@@ -257,8 +292,10 @@ const CreateRecruitmentForm = (props: Props) => {
         />
         <div className={styles.itemsSetHorizontal}>
           <BorderButton
-            variant={"default"}
-            onClick={() => {}}
+            appearance="primary"
+            type="button"
+            onPress={() => {
+            }}
           >
             下書きに保存する
           </BorderButton>

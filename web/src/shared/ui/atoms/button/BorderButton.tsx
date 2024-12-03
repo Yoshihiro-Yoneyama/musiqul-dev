@@ -4,12 +4,6 @@ import React, {ReactNode} from "react";
 import {ButtonContent, ButtonWrapper} from "@/shared/ui/atoms/button/Border.button.css";
 import {Button as AriaButton} from 'react-aria-components'
 
-type ButtonProps = {
-  variant: "default" | "secondary" | "success" | "danger";
-  children: React.ReactNode;
-  onClick: () => void;
-}
-
 type Props = {
   readonly children: ReactNode
   readonly appearance?: 'primary'

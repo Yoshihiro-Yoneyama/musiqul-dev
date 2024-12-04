@@ -191,7 +191,7 @@ const CreateRecruitmentForm = (props: Props) => {
   return (
     <>
       <div className={styles.itemsSetVertical}>
-        <div className={styles.itemsSetVertical}>
+        <div className={styles.itemsSetHorizontal}>
           <Checkbox
             props={{
               defaultSelected: false,

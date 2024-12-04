@@ -25,6 +25,7 @@ type Props = {
 }
 
 const CreateRecruitmentForm = (props: Props) => {
+  const [ownerInstruments, setOwnerInstruments] = useState<string[]>([])
   const [songTitle, setSongTitle] = useState('')
   const [artist, setArtist] = useState('')
   const [name, setName] = useState('')
@@ -37,6 +38,14 @@ const CreateRecruitmentForm = (props: Props) => {
   
   const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment()
   
+  
+  const handleOwnerInstrumentsChange = (values: string[]) => {
+    setOwnerInstruments(values)
+    setUpdatedRecruitment({
+      ...updatedRecruitment,
+      ownerInstruments: values || []
+    })
+  }
   const handleSongTitleChange = (value: string) => {
     setSongTitle(value)
     setUpdatedRecruitment({
@@ -86,15 +95,25 @@ const CreateRecruitmentForm = (props: Props) => {
       requiredGenders: values || [],
     })
   }
+  const [requiredInstrumentInputs, setRequiredInstrumentInputs] = useState<
+    { id: number; selectedString: string; selectedNumber: number }[]
+  >([{id: 1, selectedString: "", selectedNumber: 0}])
+  const handleAddInput = () => {
+    const newId = requiredInstrumentInputs.length + 1
+    setRequiredInstrumentInputs([
+      ...requiredInstrumentInputs,
+      {id: newId, selectedString: "", selectedNumber: 0},
+    ]);
+  };
   const handleComboInputChange = (
     id: number,
     stringValue: string,
     numberValue: number
   ) => {
-    setInputs((prevInputs) =>
+    setRequiredInstrumentInputs((prevInputs) =>
       prevInputs.map((input) =>
         input.id === id
-          ? { ...input, selectedString: stringValue, selectedNumber: numberValue }
+          ? {...input, selectedString: stringValue, selectedNumber: numberValue}
           : input
       )
     );
@@ -116,20 +135,6 @@ const CreateRecruitmentForm = (props: Props) => {
       
       return updatedMap;
     });
-  };
-  
-  
-  const [inputs, setInputs] = useState<
-    { id: number; selectedString: string; selectedNumber: number }[]
-  >([{id: 1, selectedString: "", selectedNumber: 0}]);
-  
-  
-  const handleAddInput = () => {
-    const newId = inputs.length + 1;
-    setInputs([
-      ...inputs,
-      {id: newId, selectedString: "", selectedNumber: 0},
-    ]);
   };
   
   const handleMemoChange = (value: string) => {
@@ -171,6 +176,7 @@ const CreateRecruitmentForm = (props: Props) => {
       setSubmitting(false)
     }
   }, [
+    ownerInstruments,
     songTitle,
     artist,
     name,
@@ -185,6 +191,16 @@ const CreateRecruitmentForm = (props: Props) => {
   return (
     <>
       <div className={styles.itemsSetVertical}>
+        <div className={styles.itemsSetVertical}>
+          <Checkbox
+            props={{
+              defaultSelected: false,
+            }}
+            options={recruitedInstrumentOptions}
+            selectedValues={ownerInstruments}
+            onChange={handleOwnerInstrumentsChange}
+          />
+        </div>
         <div className={styles.itemsSetHorizontal}>
           <InputForm
             title="曲名"
@@ -264,7 +280,7 @@ const CreateRecruitmentForm = (props: Props) => {
           />
         </div>
         <div className={styles.itemsSetHorizontal}>
-          {inputs.map((input) => (
+          {requiredInstrumentInputs.map((input) => (
             <ComboInput
               key={input.id} // 一意のIDを設定
               title={"楽器"}

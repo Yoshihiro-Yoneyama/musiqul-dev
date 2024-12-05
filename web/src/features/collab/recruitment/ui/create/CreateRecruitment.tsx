@@ -6,7 +6,7 @@ import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import Button from "@/shared/ui/atoms/button/Button";
 import React, {useCallback, useState} from "react";
-import {useRecruitment} from "@/entities/collab/recruitment/recruitment.state";
+import {useRecruitment} from "@/features/collab/recruitment/model/recruitment.state";
 import {createRecruitment} from "@/features/collab/recruitment/model/createRecruitment";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 import {

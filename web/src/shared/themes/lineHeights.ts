@@ -1,11 +1,17 @@
-const lineHeights: string[] = [
-  '17px',
-  '19px',
-  '22px',
-  '26px',
-  '28px',
-  '37px',
-  '43px'
-]
+import {createGlobalTheme} from "@vanilla-extract/css";
 
-export default lineHeights
+export const lineHeights = {
+  s: 'calc(1em)',
+  m: 'calc(1em + 0.4rem)',
+  l: 'calc(1em + 0.6rem)',
+}
+
+type ThemeLineHeights = typeof lineHeights
+export type LineHeight = {
+  [T in keyof ThemeLineHeights]: keyof ThemeLineHeights[T]
+}
+const lineHeight
+  = createGlobalTheme(':root', lineHeights)
+
+export default lineHeight
+

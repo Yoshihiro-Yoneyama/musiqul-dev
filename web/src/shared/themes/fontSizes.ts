@@ -1,10 +1,25 @@
-const fontSizes: any = [12, 14, 16, 20, 24, 32]
+import { createGlobalTheme } from "@vanilla-extract/css";
 
-fontSizes.extraSmall = fontSizes[0]
-fontSizes.small = fontSizes[1]
-fontSizes.medium = fontSizes[2]
-fontSizes.mediumLarge = fontSizes[3]
-fontSizes.large = fontSizes[4]
-fontSizes.extraLartge = fontSizes[5]
+export const fontSizes = {
+  xs: '12px',
+  s: '14px',
+  m: '16px',
+  l: '18px',
+  xl: '20px',
+  xl2: '22px',
+  xl3: '24px',
+  xl4: '26px',
+  xl5: '28px',
+  xl6: '30px',
+  xl7: '40px',
+  huge: '80px',
+}
 
-export default fontSizes
+type ThemeFontSizes = typeof fontSizes
+export type FontSize = {
+  [T in keyof ThemeFontSizes]: keyof ThemeFontSizes[T]
+}
+
+const fontSize = createGlobalTheme(':root', fontSizes)
+
+export default fontSize

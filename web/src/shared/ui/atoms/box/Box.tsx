@@ -1,10 +1,5 @@
-import {Space, spaces} from "@/shared/themes/spaces";
-import {
-  createElement,
-  type CSSProperties,
-  type FC,
-  type ReactNode
-} from "react";
+import {spaces} from "@/shared/themes/spaces";
+import {createElement, type CSSProperties, type FC, type ReactNode} from "react";
 import {clsx} from "clsx";
 import * as styles from "@/shared/ui/atoms/box/Box.css";
 import optimizeSpacingValue from "@/shared/function/optimizeSpacingValue";

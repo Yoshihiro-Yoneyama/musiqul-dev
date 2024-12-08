@@ -1,4 +1,4 @@
-import {Space} from "@/shared/themes/spaces";
+import type {Space} from "@/shared/themes/spaces";
 
 type SpacingValues = '0' | Space
 type SpacingValueType = {

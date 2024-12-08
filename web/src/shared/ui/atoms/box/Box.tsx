@@ -10,7 +10,7 @@ import * as styles from "@/shared/ui/atoms/box/Box.css";
 import optimizeSpacingValue from "@/shared/function/optimizeSpacingValue";
 import namedMemo from "@/shared/hooks/namedMemo";
 
-type BoxSpacingProps = '0' | Space
+type BoxSpacingProps = '0' | keyof typeof spaces
 
 export type Props = {
   readonly as?: 'div' | 'section' | 'span' | 'li'

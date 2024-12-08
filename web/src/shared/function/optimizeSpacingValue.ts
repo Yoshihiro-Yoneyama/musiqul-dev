@@ -1,6 +1,6 @@
 import type {Space} from "@/shared/themes/spaces";
 
-type SpacingValues = '0' | Space
+type SpacingValues = '0' | keyof Space
 type SpacingValueType = {
   all?: SpacingValues
   x?: SpacingValues

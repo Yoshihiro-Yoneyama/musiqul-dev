@@ -1,7 +1,7 @@
-import { style, styleVariants} from "@vanilla-extract/css"
-import  color  from "@/shared/themes/colors"
+import {style, styleVariants} from "@vanilla-extract/css"
+import color from "@/shared/themes/colors"
 import lineHeight from "@/shared/themes/lineHeights";
-import fontWeight, {fontWeights} from "@/shared/themes/fontWeights";
+import fontWeight from "@/shared/themes/fontWeights";
 import fontSize from "@/shared/themes/fontSizes";
 
 export const base = style({

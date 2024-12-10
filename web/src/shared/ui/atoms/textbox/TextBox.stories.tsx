@@ -13,7 +13,6 @@ type Story = StoryObj<typeof TextBox>
 
 export const Default: Story = {
   args: {
-    name: 'textbox',
     valueType: 'text',
     placeholder: 'ここに文章を入力してください。',
     

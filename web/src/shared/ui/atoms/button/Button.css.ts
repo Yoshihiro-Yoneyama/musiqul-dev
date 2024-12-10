@@ -1,5 +1,6 @@
 import {style} from '@vanilla-extract/css';
 import {linearGradient} from '@/shared/ui/util/linearGradient';
+import {colors} from "@/shared/themes/colors";
 
 export const baseStyle = style({
   width: '240px',
@@ -21,11 +22,14 @@ export const appearances = {
   primary: style({
     background: linearGradient(
       {
-        colorStops: ['#173673', '#BF2A37'],
+        colorStops: [
+          colors.linerGradientBlue,
+          colors.linerGradientRed,
+        ],
         toDirection: 'to right',
       }
     ),
-    color: '#FFF',
+    color: colors.white,
     borderRadius: '30px',
   }),
 };

@@ -3,6 +3,7 @@
 import React, {FC, ReactNode} from "react";
 import {Modal as AriaModal, ModalOverlay, Dialog} from "react-aria-components";
 import namedMemo from "@/shared/hooks/namedMemo";
+import * as styles from './Modal.css'
 
 export type ModalProps = {
   readonly isOpen: boolean
@@ -25,19 +26,19 @@ const Modal: FC<ModalProps> = ({
     <ModalOverlay
       isDismissable={isDismissable}
       isOpen={isOpen}
-      // className={overlay}
+      className={styles.overlay}
       onOpenChange={onOpenChange}
     >
       <AriaModal>
         <Dialog
-          // className={modal}
+          className={styles.modal}
           aria-label={dialogAriaLabel}
         >
           {({close}) => (
             <>
               {isXClose && (
                 <span
-                  // className={xClose}
+                  className={styles.closeButton}
                   onClick={close}
                   onKeyDown={(
                     event: React.KeyboardEvent<HTMLSpanElement>

@@ -1,6 +1,6 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
 
-export const colors = {
+export const colors = createGlobalTheme(':root', {
   primary: '#3f51b5',
   primaryDark: '#2c387e',
   primaryLight: '#6573c3',
@@ -14,13 +14,4 @@ export const colors = {
   gray: '#6b6b6b',
   black: '#000000',
   white: '#ffffff'
-}
-
-type ThemeColors = typeof colors
-export type Color = {
-  [T in keyof ThemeColors]: keyof ThemeColors[T]
-}
-
-const color = createGlobalTheme(':root', colors)
-
-export default color
+});

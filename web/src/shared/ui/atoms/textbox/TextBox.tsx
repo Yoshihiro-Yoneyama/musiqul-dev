@@ -1,21 +1,21 @@
-"use client"
+'use client'
 
-import React, {ChangeEvent, ReactNode, useState} from "react"
-import {Input as AriaInput} from "react-aria-components"
-import {inputStyles} from "@/shared/ui/util/Input.css"
-import {clsx} from "clsx";
-import namedMemo from "@/shared/hooks/namedMemo";
-import fontSizes from "@/shared/themes/fontSizes";
-import {fontWeights} from "@/shared/themes/fontWeights";
-import {colors} from "@/shared/themes/colors";
-import {lineHeights} from "@/shared/themes/lineHeights";
+import React, {ChangeEvent, ReactNode, useState} from 'react'
+import {Input as AriaInput} from 'react-aria-components'
+import {inputStyles} from '@/shared/ui/util/Input.css'
+import {clsx} from 'clsx'
+import namedMemo from '@/shared/hooks/namedMemo'
+import {fontSize} from '@/shared/themes/fontSize.css'
+import {fontWeight} from '@/shared/themes/fontWeight.css'
+import {color} from '@/shared/themes/color.css'
+import {lineHeight} from '@/shared/themes/lineHeight.css'
 
 export type TextBoxProps = {
   readonly children?: ReactNode
-  readonly size?: keyof typeof fontSizes
-  readonly weight?: keyof typeof fontWeights
-  readonly color?: keyof typeof colors
-  readonly lineHeight?: keyof typeof lineHeights
+  readonly size?: keyof typeof fontSize
+  readonly weight?: keyof typeof fontWeight
+  readonly color?: keyof typeof color
+  readonly lineHeight?: keyof typeof lineHeight
   readonly as?: string
   readonly type?: string
   readonly inputValue?: string
@@ -74,9 +74,9 @@ const TextBox: React.FC<TextBoxProps> = ({
       <AriaInput
         className={clsx(
           inputStyles.default,
-          isFocused && !isDisabled ? inputStyles.focused : "",
-          isActive && !isFocused && !isDisabled ? inputStyles.active : "",
-          isDisabled ? inputStyles.disabled : ""
+          isFocused && !isDisabled ? inputStyles.focused : '',
+          isActive && !isFocused && !isDisabled ? inputStyles.active : '',
+          isDisabled ? inputStyles.disabled : ''
         )}
         value={inputValue}
         disabled={isDisabled}

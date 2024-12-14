@@ -1,6 +1,6 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
 
-export const spaces = {
+export const space = createGlobalTheme(':root', {
   xs2: '4px',
   xs: '8px',
   s: '12px',
@@ -13,13 +13,4 @@ export const spaces = {
   xl5: '56px',
   xl6: '64px',
   xl7: '72px',
-}
-
-type ThemeSpaces = typeof spaces
-export type Space = {
-  [T in keyof ThemeSpaces]: keyof ThemeSpaces[T]
-}
-
-const space = createGlobalTheme(':root', spaces)
-
-export default space
+})

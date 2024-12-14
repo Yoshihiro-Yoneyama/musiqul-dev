@@ -1,11 +1,11 @@
-import {spaces} from "@/shared/themes/spaces";
-import {createElement, type CSSProperties, type FC, type ReactNode} from "react";
-import {clsx} from "clsx";
-import * as styles from "@/shared/ui/atoms/box/Box.css";
-import optimizeSpacingValue from "@/shared/function/optimizeSpacingValue";
-import namedMemo from "@/shared/hooks/namedMemo";
+import {space} from '@/shared/themes/space.css'
+import {createElement, type CSSProperties, type FC, type ReactNode} from 'react'
+import {clsx} from 'clsx'
+import * as styles from '@/shared/ui/atoms/box/Box.css'
+import optimizeSpacingValue from '@/shared/function/optimizeSpacingValue'
+import namedMemo from '@/shared/hooks/namedMemo'
 
-type BoxSpacingProps = '0' | keyof typeof spaces
+type BoxSpacingProps = '0' | keyof typeof space
 
 export type Props = {
   readonly as?: 'div' | 'section' | 'span' | 'li'
@@ -31,7 +31,7 @@ export type Props = {
   readonly pb?: BoxSpacingProps
   readonly pl?: BoxSpacingProps
   readonly pr?: BoxSpacingProps
-  readonly gap?: keyof typeof spaces
+  readonly gap?: keyof typeof space
   readonly children?: ReactNode
   readonly style?: CSSProperties
   readonly className?: string
@@ -93,7 +93,7 @@ const Box: FC<Props> = ({
     right: mr,
     bottom: mb,
     left: ml
-  });
+  })
   
   const padding = optimizeSpacingValue({
     all: p,
@@ -103,7 +103,7 @@ const Box: FC<Props> = ({
     right: pr,
     bottom: pb,
     left: pl
-  });
+  })
   
   return createElement(
     as,
@@ -121,7 +121,7 @@ const Box: FC<Props> = ({
       ),
       style: {
         display,
-        gap: gap ? spaces[gap]: 0,
+        gap: gap ? space[gap]: 0,
         alignItems: align,
         justifyContent: justify,
         flexDirection: flexDirection,

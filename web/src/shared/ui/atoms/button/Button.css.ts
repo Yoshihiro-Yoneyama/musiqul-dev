@@ -1,6 +1,6 @@
 import {style} from '@vanilla-extract/css';
 import {linearGradient} from '@/shared/ui/util/linearGradient';
-import {colors} from "@/shared/themes/colors.css";
+import {color} from "@/shared/themes/color.css";
 
 export const baseStyle = style({
   width: '240px',
@@ -23,13 +23,13 @@ export const appearances = {
     background: linearGradient(
       {
         colorStops: [
-          colors.linerGradientBlue,
-          colors.linerGradientRed,
+          color.linerGradientBlue,
+          color.linerGradientRed,
         ],
         toDirection: 'to right',
       }
     ),
-    color: colors.white,
+    color: color.white,
     borderRadius: '30px',
   }),
 };

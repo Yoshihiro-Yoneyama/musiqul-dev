@@ -3,7 +3,7 @@
 import React, {ReactNode} from 'react'
 import * as styles from './Button.css'
 import {Button as AriaButton} from 'react-aria-components'
-import {clsx} from 'clsx';
+import {clsx} from 'clsx'
 
 type Props = {
   readonly children: ReactNode
@@ -37,7 +37,7 @@ const Button: React.FC<Props> = ({
     >
       {children}
     </AriaButton>
-  );
+  )
 }
 
 export default Button

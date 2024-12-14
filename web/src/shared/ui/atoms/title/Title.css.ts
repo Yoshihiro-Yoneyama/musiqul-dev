@@ -1,8 +1,8 @@
-import {style, styleVariants} from "@vanilla-extract/css"
-import color from "@/shared/themes/colors"
-import lineHeight from "@/shared/themes/lineHeights";
-import fontWeight from "@/shared/themes/fontWeights";
-import fontSize from "@/shared/themes/fontSizes";
+import {style, styleVariants} from '@vanilla-extract/css'
+import {color} from '@/shared/themes/color.css'
+import {lineHeight} from '@/shared/themes/lineHeight.css'
+import {fontWeight} from '@/shared/themes/fontWeight.css'
+import {fontSize} from '@/shared/themes/fontSize.css'
 
 export const base = style({
   color: color.secondaryDark,

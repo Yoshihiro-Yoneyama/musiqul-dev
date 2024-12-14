@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import React, {ReactNode} from "react";
+import React, {ReactNode} from 'react';
 import {ButtonContent, ButtonWrapper} from './BorderButton.css'
 import {Button as AriaButton} from 'react-aria-components'
 

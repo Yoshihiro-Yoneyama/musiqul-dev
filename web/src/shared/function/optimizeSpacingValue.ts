@@ -1,6 +1,6 @@
-import type {Space} from "@/shared/themes/spaces";
+import {space} from '@/shared/themes/space.css'
 
-type SpacingValues = '0' | keyof Space
+type SpacingValues = '0' | keyof typeof space
 type SpacingValueType = {
   all?: SpacingValues
   x?: SpacingValues

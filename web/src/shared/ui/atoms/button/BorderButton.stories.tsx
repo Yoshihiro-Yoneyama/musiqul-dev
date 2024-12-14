@@ -1,5 +1,5 @@
-import {Meta, StoryObj} from "@storybook/react";
-import BorderButton from "@/shared/ui/atoms/button/BorderButton";
+import {Meta, StoryObj} from '@storybook/react';
+import BorderButton from '@/shared/ui/atoms/button/BorderButton';
 
 const meta : Meta<typeof BorderButton> = {
   title: 'atoms/button/BorderButton',
@@ -18,9 +18,9 @@ type Story = StoryObj<typeof BorderButton>
 
 export const Default: Story = {
   args: {
-    appearance: "primary",
+    appearance: 'primary',
     isDisabled: false,
-    type: "button",
+    type: 'button',
     
   }
 }

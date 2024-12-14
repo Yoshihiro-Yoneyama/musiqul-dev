@@ -48,13 +48,14 @@ const Modal: FC<ModalProps> = ({
                       event.key === ' '
                     ) {
                       event.preventDefault()
-                      close
+                      close()
                     }
                   }}
                   role='button'
                   tabIndex={0}
-                ></span>
+                />
               )}
+              {children}
             </>
           )}
         </Dialog>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, {ReactNode} from 'react'
-import * as styles from './button.css'
+import * as styles from './Button.css'
 import {Button as AriaButton} from 'react-aria-components'
 import {clsx} from 'clsx';
 

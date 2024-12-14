@@ -1,6 +1,6 @@
 import {style} from '@vanilla-extract/css';
 import {linearGradient} from '@/shared/ui/util/linearGradient';
-import {colors} from "@/shared/themes/colors";
+import {colors} from "@/shared/themes/colors.css";
 
 export const baseStyle = style({
   width: '240px',

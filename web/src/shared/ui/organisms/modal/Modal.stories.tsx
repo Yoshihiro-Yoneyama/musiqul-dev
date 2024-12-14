@@ -1,5 +1,5 @@
-import {Meta, StoryObj} from "@storybook/react";
-import Modal from "@/shared/ui/organisms/modal/Modal";
+import {Meta, StoryObj} from "@storybook/react"
+import Modal from "@/shared/ui/organisms/modal/Modal"
 
 const meta : Meta<typeof Modal> = {
   title: 'organisms/modal/Modal',
@@ -16,6 +16,5 @@ export const Default: Story = {
     isOpen: true,
     dialogAriaLabel: 'テスト',
     children: 'テスト',
-    
   }
 }

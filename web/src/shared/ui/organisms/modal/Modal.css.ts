@@ -1,8 +1,8 @@
-import { keyframes, style } from '@vanilla-extract/css';
-import boxShadow from "@/shared/themes/boxShadow.css";
-import borderRadius from "@/shared/themes/borderRadius";
-import color from "@/shared/themes/colors";
-import {spaces} from "@/shared/themes/spaces";
+import { keyframes, style } from '@vanilla-extract/css'
+import boxShadow from "@/shared/themes/boxShadow.css"
+import borderRadius from "@/shared/themes/borderRadius.css"
+import {spaces} from "@/shared/themes/spaces.css"
+import {colors} from "@/shared/themes/colors.css";
 
 const modalFade = keyframes({
   '0%': {
@@ -45,7 +45,7 @@ export const overlay = style({
 export const modal = style({
   boxShadow: boxShadow.boxShadow,
   borderRadius: borderRadius.l,
-  color: color.black,
+  color: colors.black,
   outline: 'none',
   width: 'clamp(300px, 50%, 700px)',
   position: 'relative',

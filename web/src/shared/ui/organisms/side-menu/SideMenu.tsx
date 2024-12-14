@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import * as styles from "@/shared/ui/organisms/side-menu/side.menu.css"
+import * as styles from '@/shared/ui/organisms/side-menu/SideMenu.css'
 import Button from "@/shared/ui/atoms/button/Button";
 import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 import React from "react";

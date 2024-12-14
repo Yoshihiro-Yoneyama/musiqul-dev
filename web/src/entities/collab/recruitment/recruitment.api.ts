@@ -1,6 +1,6 @@
 import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
 import api from "@/shared/lib/axios";
-import ErrorData from "@/shared/classes/ErrorData";
+import ErrorData from "@/shared/classes/errorData";
 
 /**
  * Send a new Post Recruitment Request

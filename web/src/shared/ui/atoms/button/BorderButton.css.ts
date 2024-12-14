@@ -1,5 +1,6 @@
 import {style} from "@vanilla-extract/css";
 import {linearGradient} from "@/shared/ui/util/linearGradient";
+import {colors} from "@/shared/themes/colors.css";
 
 export const ButtonWrapper = style({
   width: "240px",
@@ -9,7 +10,10 @@ export const ButtonWrapper = style({
   padding: "1px",  // ボーダーを表現するためのパディング
   borderRadius: "9999px", // 丸角にする
   background: linearGradient({
-    colorStops: ["#173673", "#BF2A37"], // グラデーション色
+    colorStops: [
+      colors.linerGradientBlue,
+      colors.linerGradientRed,
+    ],
     toDirection: "to right",
   }),
   boxShadow: "-4px 7px 5px #000000",  // ボタンに影をつける

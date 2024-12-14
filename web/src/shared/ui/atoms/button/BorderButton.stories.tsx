@@ -4,7 +4,12 @@ import BorderButton from "@/shared/ui/atoms/button/BorderButton";
 const meta : Meta<typeof BorderButton> = {
   title: 'atoms/button/BorderButton',
   component: BorderButton,
-  tags: ['autodocs', 'component']
+  tags: ['autodocs', 'component'],
+  argTypes: {
+    appearance: {
+      description: 'The appearance of the button',
+    },
+  }
 } satisfies Meta<typeof BorderButton>
 
 export default meta

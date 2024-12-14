@@ -1,7 +1,7 @@
 "use client"
 
 import React, {ReactNode} from "react";
-import {ButtonContent, ButtonWrapper} from "@/shared/ui/atoms/button/Border.button.css";
+import {ButtonContent, ButtonWrapper} from './BorderButton.css'
 import {Button as AriaButton} from 'react-aria-components'
 
 type Props = {

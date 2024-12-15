@@ -23,7 +23,7 @@ export const createRecruitment = async (
     memo: recruitment.memo,
   }
   
-  const result = await (postRecruitment(newRecruit))
+  await (postRecruitment(newRecruit))
   
   // TODO　Document the error handling in the implementation
   

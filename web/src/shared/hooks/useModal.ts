@@ -38,3 +38,5 @@ const useModal = () => {
     [isOpen, modalOptions, openModal, closeModal]
   )
 }
+
+export default useModal

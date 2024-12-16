@@ -1,3 +1,5 @@
+'use client'
+
 import {ModalProps} from "@/shared/ui/organisms/modal/Modal";
 import {atom, useAtom} from "jotai";
 import {useCallback, useMemo} from "react";

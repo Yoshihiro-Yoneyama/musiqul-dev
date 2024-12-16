@@ -33,19 +33,19 @@ const DateCalendar: FC<DatePickerProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState('')
   
-  const handleChange = (value: DateValue) => {
-    // Do nothing if input is disabled
-    if (isDisabled) return
+  const handleChange = (value: DateValue | null) => {
+    // If the date picker is disabled or the value is empty, return
+    if (isDisabled || !value) return;
     
-    // format ot yyyy-MM-dd
+    // Update the date by formatting
     const formattedValue = formatDateToISO(value);
     
-    // Update Local State
-    setInputValue(formattedValue)
+    // Update the local state
+    setInputValue(formattedValue);
     
-    // Call onChange to notify the parent component
-    if (onChange) onChange(formattedValue)
-  }
+    // Notify the parent component
+    onChange(formattedValue);
+  };
   
   return (
     <I18nProvider

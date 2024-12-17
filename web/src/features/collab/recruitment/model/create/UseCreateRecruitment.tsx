@@ -1,6 +1,10 @@
-import { useState, useCallback } from "react";
-import { useRecruitment } from "@/features/collab/recruitment/model/create/recruitment.state";
-import { createRecruitment } from "@/features/collab/recruitment/model/create/createRecruitment";
+'use client'
+
+import {useCallback, useState} from "react";
+import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state";
+import {createRecruitment} from "@/features/collab/recruitment/model/create/createRecruitment";
+import useModal from "@/shared/hooks/useModal";
+import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
 
 export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
   const [ownerInstruments, setOwnerInstruments] = useState<string[]>([]);
@@ -15,10 +19,10 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
   const [memo, setMemo] = useState('');
   const [requiredInstrumentInputs, setRequiredInstrumentInputs] = useState<
     { id: number; selectedString: string; selectedNumber: number }[]
-  >([{ id: 1, selectedString: "", selectedNumber: 0 }]);
+  >([{id: 1, selectedString: "", selectedNumber: 0}]);
   const [submitting, setSubmitting] = useState(false);
-  
-  const { updatedRecruitment, setUpdatedRecruitment } = useRecruitment();
+  const {updatedRecruitment, setUpdatedRecruitment} = useRecruitment();
+  const {openModal, closeModal} = useModal();
   
   const handleOwnerInstrumentsChange = (values: string[]) => {
     setOwnerInstruments(values);
@@ -80,7 +84,7 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
     setRequiredInstrumentInputs((prevInputs) =>
       prevInputs.map((input) =>
         input.id === id
-          ? { ...input, selectedString: stringValue, selectedNumber: numberValue }
+          ? {...input, selectedString: stringValue, selectedNumber: numberValue}
           : input
       )
     );
@@ -103,7 +107,7 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
     const newId = requiredInstrumentInputs.length + 1;
     setRequiredInstrumentInputs([
       ...requiredInstrumentInputs,
-      { id: newId, selectedString: "", selectedNumber: 0 },
+      {id: newId, selectedString: "", selectedNumber: 0},
     ]);
   };
   
@@ -115,8 +119,21 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
     })
   }
   
+  const handleOpenModal = () => {
+    console.log("Opening modal with:", updatedRecruitment);
+    openModal({
+      children: (
+        <CreateRecruitmentConfirmModal
+          confirmedRecruitment={updatedRecruitment}
+          onClose={closeModal}
+        />
+      ),
+      dialogAriaLabel: "募集内容の確認",
+    })
+  }
+  
   const handleSubmit = useCallback(async () => {
-    if (submitting) return;
+    if (submitting) return
     setSubmitting(true);
     try {
       await createRecruitment(updatedRecruitment);
@@ -133,11 +150,11 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
       setRecruitedInstruments(new Map([]));
       setMemo('');
     } catch (error) {
-      console.error('Error creating recruitment:', error);
+      console.error('Error creating recruitment:', error)
     } finally {
       setSubmitting(false);
     }
-  }, [updatedRecruitment, submitting, onSubmitSuccess]);
+  }, [updatedRecruitment, submitting, onSubmitSuccess])
   
   return {
     ownerInstruments,
@@ -163,7 +180,8 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
     requiredInstrumentInputs,
     handleAddInput,
     handleComboInputChange,
+    handleOpenModal,
     handleSubmit,
     submitting,
-  };
-};
+  }
+}

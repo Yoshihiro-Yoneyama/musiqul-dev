@@ -15,7 +15,7 @@ import {
   requiredGenerationOptions,
   requiredNumberOfInstrumentOptions,
 } from "@/features/collab/recruitment/model/options";
-import {useCreateRecruitmentForm} from "../../model/create/useCreateRecruitment";
+import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment";
 import React from "react";
 
 type Props = {
@@ -41,7 +41,7 @@ const CreateRecruitmentForm = (props: Props) => {
     handleAddInput,
     handleComboInputChange,
     setMemo,
-    handleSubmit,
+    handleOpenModal,
     submitting,
   } = useCreateRecruitmentForm(props.onPress);
   
@@ -171,7 +171,7 @@ const CreateRecruitmentForm = (props: Props) => {
           <Button
             appearance="primary"
             type="button"
-            onPress={handleSubmit}
+            onPress={handleOpenModal}
             isDisabled={submitting || props.isDisabled}
           >
             内容を確認する→

@@ -28,6 +28,7 @@ export type TextBoxProps = {
   readonly autoComplete?: string
   // readonly maxLength?: number
   readonly testId?: string
+  readonly readOnly?: boolean
 }
 
 const TextBox: React.FC<TextBoxProps> = ({
@@ -40,6 +41,7 @@ const TextBox: React.FC<TextBoxProps> = ({
   isDisabled,
   onChange,
   autoComplete,
+  readOnly,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false)
@@ -84,6 +86,7 @@ const TextBox: React.FC<TextBoxProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         autoComplete={autoComplete}
+        readOnly={readOnly}
         {...props}
       >
       </AriaInput>

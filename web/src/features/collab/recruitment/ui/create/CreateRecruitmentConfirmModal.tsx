@@ -21,7 +21,7 @@ const CreateRecruitmentConfirmModal: FC<Props> = ({
   onClose,
 }) => {
   const handleSubmit = () => {
-    postRecruitment(confirmedRecruitment)
+    postRecruitment(confirmedRecruitment).then(() => {})
   }
   
   return (

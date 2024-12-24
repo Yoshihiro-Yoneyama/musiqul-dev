@@ -17,6 +17,8 @@ import {
 } from "@/features/collab/recruitment/model/options";
 import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment";
 import React from "react";
+import useModal from "@/shared/hooks/useModal";
+import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
 
 type Props = {
   onPress?: () => void;
@@ -24,26 +26,59 @@ type Props = {
 };
 
 const CreateRecruitmentForm = (props: Props) => {
+  const { openModal, closeModal } = useModal()
   const {
     ownerInstruments,
     setOwnerInstruments,
+    songTitle,
     setSongTitle,
+    artist,
     setArtist,
+    name,
     setName,
     genres,
     setGenres,
+    deadline,
     setDeadline,
     requiredGenerations,
     setRequiredGenerations,
     requiredGenders,
     setRequiredGenders,
     requiredInstrumentInputs,
+    setMemo,
+    memo,
     handleAddInput,
     handleComboInputChange,
-    setMemo,
     handleOpenModal,
     submitting,
-  } = useCreateRecruitmentForm(props.onPress);
+  } = useCreateRecruitmentForm(() => {
+    openModal({
+      children: (
+        <CreateRecruitmentConfirmModal
+          confirmedRecruitment={{
+            owner: "",
+            deadline,
+            ownerInstruments,
+            genres,
+            requiredGenerations,
+            requiredGenders,
+            recruitedInstruments: new Map(
+              requiredInstrumentInputs.map((input) => [
+                input.selectedString,
+                input.selectedNumber,
+              ])
+            ),
+            memo,
+            songTitle,
+            artist,
+            name,
+          }}
+          onClose={closeModal} // モーダル閉じる処理を渡す
+        />
+      ),
+      dialogAriaLabel: "募集内容の確認",
+    })
+  })
   
   return (
     <div className={styles.itemsSetVertical}>

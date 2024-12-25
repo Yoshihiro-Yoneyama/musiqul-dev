@@ -28,10 +28,11 @@ export const overlay = style({
   left: 0,
   width: '100vm',
   height: '100vh',
-  backgroundColor: 'rgba(0 0 0 / .5)',
+  backgroundColor: 'rgba(0 0 0 / .75)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  zIndex: 100,
   selectors: {
     '&[data-entering]': {
       animation: `${modalFade} 200ms`,
@@ -43,21 +44,44 @@ export const overlay = style({
 })
 
 export const modal = style({
-  boxShadow: boxShadow.boxShadow,
-  borderRadius: borderRadius.l,
-  color: color.black,
-  outline: 'none',
-  width: 'clamp(300px, 50%, 700px)',
   position: 'relative',
+  borderRadius: borderRadius.l,
+  background: color.white,
+  outline: 'none',
+  maxWidth: 500,
+  padding: space.xl,
   selectors: {
-    '&[data-entering]': {
-      animation: `${modalZoom} 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275)`,
-    },}
+     '&[data-entering]': {
+       animation: `${modalZoom} 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275)`,
+     },
+  }
 })
 
 export const closeButton = style({
+  display: 'block',
   position: 'absolute',
-  right: 0,
-  top: 0,
-  padding: space.s,
+  width: 40,
+  height: 40,
+  top: space.xs,
+  right: space.xs,
+  background: color.white,
+  cursor: 'pointer',
+  selectors: {
+    '&::before, &::after': {
+      content: '',
+      position: 'absolute',
+      borderRadius: borderRadius.s,
+      top: '50%',
+      left: '50%',
+      background: color.primary,
+      width: 4,
+      height: 20,
+    },
+    '&::before': {
+      transform: 'translate(-50%,-50%) rotate(45deg)',
+    },
+    '&::after': {
+      transform: 'translate(-50%,-50%) rotate(-45deg)',
+    },
+  }
 })

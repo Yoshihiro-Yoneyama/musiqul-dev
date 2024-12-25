@@ -16,9 +16,10 @@ import {
   requiredNumberOfInstrumentOptions,
 } from "@/features/collab/recruitment/model/options";
 import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment";
-import React from "react";
+import React, {useCallback} from "react";
 import useModal from "@/shared/hooks/useModal";
 import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
+import Modal from "@/shared/ui/organisms/modal/Modal";
 
 type Props = {
   onPress?: () => void;
@@ -79,6 +80,20 @@ const CreateRecruitmentForm = (props: Props) => {
       dialogAriaLabel: "募集内容の確認",
     })
   })
+  
+  const handleModal = useCallback(() => {
+    return (
+      <Modal
+        isOpen={true}
+        onOpenChange={() => {}}
+        isDismissable={true}
+        dialogAriaLabel={"モーダル"}
+        isXClose={true}
+        children={"モーダル"}
+      />
+    )
+  }, [])
+  
   
   return (
     <div className={styles.itemsSetVertical}>

@@ -20,7 +20,7 @@ const Modal: FC<ModalProps> = ({
   children,
   dialogAriaLabel,
   isXClose = false,
-  isDismissable = false
+  isDismissable = true
 }) => {
   return (
     <ModalOverlay
@@ -30,10 +30,7 @@ const Modal: FC<ModalProps> = ({
       onOpenChange={onOpenChange}
     >
       <AriaModal>
-        <Dialog
-          className={styles.modal}
-          aria-label={dialogAriaLabel}
-        >
+        <Dialog className={styles.modal} aria-label={dialogAriaLabel}>
           {({close}) => (
             <>
               {isXClose && (

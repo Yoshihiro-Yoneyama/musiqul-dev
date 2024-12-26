@@ -27,7 +27,8 @@ type Props = {
 };
 
 const CreateRecruitmentForm = (props: Props) => {
-  const { openModal, closeModal } = useModal()
+  const { isOpen, modalOptions, openModal, closeModal } = useModal();
+  
   const {
     ownerInstruments,
     setOwnerInstruments,
@@ -50,7 +51,6 @@ const CreateRecruitmentForm = (props: Props) => {
     memo,
     handleAddInput,
     handleComboInputChange,
-    handleOpenModal,
     submitting,
   } = useCreateRecruitmentForm(() => {
     openModal({
@@ -78,22 +78,8 @@ const CreateRecruitmentForm = (props: Props) => {
         />
       ),
       dialogAriaLabel: "募集内容の確認",
-    })
-  })
-  
-  const handleModal = useCallback(() => {
-    return (
-      <Modal
-        isOpen={true}
-        onOpenChange={() => {}}
-        isDismissable={true}
-        dialogAriaLabel={"モーダル"}
-        isXClose={true}
-        children={"モーダル"}
-      />
-    )
-  }, [])
-  
+    });
+  });
   
   return (
     <div className={styles.itemsSetVertical}>
@@ -221,16 +207,33 @@ const CreateRecruitmentForm = (props: Props) => {
           <Button
             appearance="primary"
             type="button"
-            onPress={handleOpenModal}
             isDisabled={submitting || props.isDisabled}
+            onPress={() => {
+              openModal({
+                children: "モーダルの内容",
+                dialogAriaLabel: "内容を確認する",
+              });
+            }}
           >
             内容を確認する→
           </Button>
           <br/>
         </div>
       </div>
+      {/* モーダル */}
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={closeModal}
+          isDismissable={true}
+          dialogAriaLabel={modalOptions.dialogAriaLabel}
+        >
+          {modalOptions.children}
+        </Modal>
+      )}
     </div>
   );
 };
 
 export default CreateRecruitmentForm;
+

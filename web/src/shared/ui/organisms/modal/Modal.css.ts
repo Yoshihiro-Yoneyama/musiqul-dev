@@ -1,7 +1,6 @@
 import { keyframes, style } from '@vanilla-extract/css'
 import {space} from "@/shared/themes/space.css"
 import {color} from "@/shared/themes/color.css";
-import {boxShadow} from "@/shared/themes/boxShadow.css";
 import {borderRadius} from "@/shared/themes/borderRadius.css";
 
 const modalFade = keyframes({
@@ -26,7 +25,7 @@ export const overlay = style({
   position: 'fixed',
   top: 0,
   left: 0,
-  width: '100vm',
+  width: '100vw',
   height: '100vh',
   backgroundColor: 'rgba(0 0 0 / .75)',
   display: 'flex',

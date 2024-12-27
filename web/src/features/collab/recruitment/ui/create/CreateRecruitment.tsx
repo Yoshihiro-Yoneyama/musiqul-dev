@@ -20,15 +20,23 @@ import React, {useCallback} from "react";
 import useModal from "@/shared/hooks/useModal";
 import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
 import Modal from "@/shared/ui/organisms/modal/Modal";
+import Box from "@/shared/ui/atoms/box/Box";
+import TextBox from "@/shared/ui/atoms/textbox/TextBox";
+import ModalContent from "@/shared/ui/organisms/modal/ModalContent";
+import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
+import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
 
 type Props = {
-  onPress?: () => void;
-  isDisabled: boolean;
+  readonly onPress?: () => void;
+  readonly isDisabled: boolean;
+  readonly confirmedRecruitment: RecruitmentSchema;
 };
 
 const CreateRecruitmentForm = (props: Props) => {
   const { isOpen, modalOptions, openModal, closeModal } = useModal();
-  
+  const handleSubmit = () => {
+    postRecruitment(props.confirmedRecruitment).then(() => {})
+  }
   const {
     ownerInstruments,
     setOwnerInstruments,
@@ -228,7 +236,60 @@ const CreateRecruitmentForm = (props: Props) => {
           isDismissable={true}
           dialogAriaLabel={modalOptions.dialogAriaLabel}
         >
-          {modalOptions.children}
+          <ModalContent
+            title="募集内容の確認"
+            closeButtonLabel="戻る"
+            onChanged={handleSubmit}
+          >
+            <Box>
+              test
+              {/*<TextBox size="s">*/}
+              {/*  自分の楽器: {props.confirmedRecruitment.ownerInstruments.join(', ')}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  曲名: {props.confirmedRecruitment.songTitle}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  アーティスト: {props.confirmedRecruitment.artist}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  募集名: {props.confirmedRecruitment.name}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  ジャンル: {props.confirmedRecruitment.genres.join(', ')}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  締め切り: {props.confirmedRecruitment.deadline}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  世代: {props.confirmedRecruitment.requiredGenerations.join(', ')}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  性別: {props.confirmedRecruitment.requiredGenders.join(', ')}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  募集楽器: {Array.from(props.confirmedRecruitment.recruitedInstruments).map(([key, value]) => `${key}: ${value}`).join(', ')}*/}
+              {/*</TextBox>*/}
+              {/*<TextBox size="s">*/}
+              {/*  備考: {props.confirmedRecruitment.memo}*/}
+              {/*</TextBox>*/}
+            </Box>
+            <Box>
+              <BorderButton
+                appearance="primary"
+                type="button"
+              >
+                戻る
+              </BorderButton>
+              <Button
+                appearance="primary"
+                type="button"
+                onPress={handleSubmit}
+              >
+                登録する
+              </Button>
+            </Box>
+          </ModalContent>
         </Modal>
       )}
     </div>

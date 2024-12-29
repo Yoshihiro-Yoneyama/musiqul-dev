@@ -35,10 +35,10 @@ export const orientation = {
   })
 }
 
-export const testArea = style({
+export const textArea = {
   border: 'solid 1px #ccc',
   width: '100%',
-})
+}
 
 export const label = style({
   color: color.primary,

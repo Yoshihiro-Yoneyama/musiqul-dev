@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
-import TextField from "@/shared/ui/atoms/text-field/TextField";
+import TextField from "@/shared/ui/molecules/text-field/TextField";
 
 const meta: Meta<typeof TextField> = {
   title: 'atoms/text-field/TextField',

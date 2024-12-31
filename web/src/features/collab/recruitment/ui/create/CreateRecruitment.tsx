@@ -16,7 +16,7 @@ import {
   requiredNumberOfInstrumentOptions,
 } from "@/features/collab/recruitment/model/options";
 import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment";
-import React, {useCallback} from "react";
+import React from "react";
 import useModal from "@/shared/hooks/useModal";
 import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
 import Modal from "@/shared/ui/organisms/modal/Modal";
@@ -25,17 +25,21 @@ import TextBox from "@/shared/ui/atoms/textbox/TextBox";
 import ModalContent from "@/shared/ui/organisms/modal/ModalContent";
 import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
 import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
+import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state";
+import Text from "@/shared/ui/atoms/text/Text";
 
 type Props = {
   readonly onPress?: () => void;
   readonly isDisabled: boolean;
-  readonly confirmedRecruitment: RecruitmentSchema;
+  readonly confirmedRecruitment?: RecruitmentSchema;
 };
 
 const CreateRecruitmentForm = (props: Props) => {
-  const { isOpen, modalOptions, openModal, closeModal } = useModal();
+  const {updatedRecruitment} = useRecruitment()
+  const {isOpen, modalOptions, openModal, closeModal} = useModal();
   const handleSubmit = () => {
-    postRecruitment(props.confirmedRecruitment).then(() => {})
+    postRecruitment(updatedRecruitment).then(() => {
+    })
   }
   const {
     ownerInstruments,
@@ -117,8 +121,6 @@ const CreateRecruitmentForm = (props: Props) => {
           }}
         />
       </div>
-      
-      
       <div className={styles.itemsSetVertical}>
         {/*選択解除後も文字を白で表示したい*/}
         {/*ドロップダウンリストの下矢印を白で表示したい*/}
@@ -242,37 +244,56 @@ const CreateRecruitmentForm = (props: Props) => {
             onChanged={handleSubmit}
           >
             <Box>
-              test
-              {/*<TextBox size="s">*/}
-              {/*  自分の楽器: {props.confirmedRecruitment.ownerInstruments.join(', ')}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  曲名: {props.confirmedRecruitment.songTitle}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  アーティスト: {props.confirmedRecruitment.artist}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  募集名: {props.confirmedRecruitment.name}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  ジャンル: {props.confirmedRecruitment.genres.join(', ')}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  締め切り: {props.confirmedRecruitment.deadline}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  世代: {props.confirmedRecruitment.requiredGenerations.join(', ')}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  性別: {props.confirmedRecruitment.requiredGenders.join(', ')}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  募集楽器: {Array.from(props.confirmedRecruitment.recruitedInstruments).map(([key, value]) => `${key}: ${value}`).join(', ')}*/}
-              {/*</TextBox>*/}
-              {/*<TextBox size="s">*/}
-              {/*  備考: {props.confirmedRecruitment.memo}*/}
-              {/*</TextBox>*/}
+              <Text
+                size="s"
+              >
+                自分の楽器: {updatedRecruitment.ownerInstruments.join(', ')}
+              </Text>
+              <Text
+                size="s"
+              >
+                曲名: {updatedRecruitment.songTitle}
+              </Text>
+              <Text
+                size="s"
+              >
+                アーティスト: {updatedRecruitment.artist}
+              </Text>
+              <Text
+                size="s"
+              >
+                コラボ名: {updatedRecruitment.name}
+              </Text>
+              <Text
+                size="s"
+              >
+                ジャンル: {updatedRecruitment.genres.join(', ')}
+              </Text>
+              <Text
+                size="s"
+              >
+                締め切り: {updatedRecruitment.deadline}
+              </Text>
+              <Text
+                size="s"
+              >
+                世代: {updatedRecruitment.requiredGenerations.join(', ')}
+              </Text>
+              <Text
+                size="s"
+              >
+                性別: {updatedRecruitment.requiredGenders.join(', ')}
+              </Text>
+              <Text
+                size="s"
+              >
+                応募楽器: {Array.from(updatedRecruitment.recruitedInstruments).map(([key, value]) => `${key}: ${value}`).join(', ')}
+              </Text>
+              <Text
+                size="s"
+              >
+                メモ: {updatedRecruitment.memo}
+              </Text>
             </Box>
             <Box>
               <BorderButton

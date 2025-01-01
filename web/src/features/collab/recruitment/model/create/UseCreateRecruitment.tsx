@@ -125,8 +125,8 @@ export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
     openModal({
       children: (
         <CreateRecruitmentConfirmModal
-          confirmedRecruitment={updatedRecruitment}
           onClose={closeModal}
+          updatedRecruitment={updatedRecruitment}
         />
       ),
       dialogAriaLabel: "募集内容の確認",

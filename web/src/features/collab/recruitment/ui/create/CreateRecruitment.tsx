@@ -18,15 +18,14 @@ import {
 import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment";
 import React from "react";
 import useModal from "@/shared/hooks/useModal";
-import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
 import Modal from "@/shared/ui/organisms/modal/Modal";
 import Box from "@/shared/ui/atoms/box/Box";
-import TextBox from "@/shared/ui/atoms/textbox/TextBox";
 import ModalContent from "@/shared/ui/organisms/modal/ModalContent";
 import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
 import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
 import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state";
 import Text from "@/shared/ui/atoms/text/Text";
+import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
 
 type Props = {
   readonly onPress?: () => void;
@@ -44,15 +43,11 @@ const CreateRecruitmentForm = (props: Props) => {
   const {
     ownerInstruments,
     setOwnerInstruments,
-    songTitle,
     setSongTitle,
-    artist,
     setArtist,
-    name,
     setName,
     genres,
     setGenres,
-    deadline,
     setDeadline,
     requiredGenerations,
     setRequiredGenerations,
@@ -60,38 +55,10 @@ const CreateRecruitmentForm = (props: Props) => {
     setRequiredGenders,
     requiredInstrumentInputs,
     setMemo,
-    memo,
     handleAddInput,
     handleComboInputChange,
     submitting,
-  } = useCreateRecruitmentForm(() => {
-    openModal({
-      children: (
-        <CreateRecruitmentConfirmModal
-          confirmedRecruitment={{
-            owner: "",
-            deadline,
-            ownerInstruments,
-            genres,
-            requiredGenerations,
-            requiredGenders,
-            recruitedInstruments: new Map(
-              requiredInstrumentInputs.map((input) => [
-                input.selectedString,
-                input.selectedNumber,
-              ])
-            ),
-            memo,
-            songTitle,
-            artist,
-            name,
-          }}
-          onClose={closeModal} // モーダル閉じる処理を渡す
-        />
-      ),
-      dialogAriaLabel: "募集内容の確認",
-    });
-  });
+  } = useCreateRecruitmentForm();
   
   return (
     <div className={styles.itemsSetVertical}>
@@ -238,79 +205,10 @@ const CreateRecruitmentForm = (props: Props) => {
           isDismissable={true}
           dialogAriaLabel={modalOptions.dialogAriaLabel}
         >
-          <ModalContent
-            title="募集内容の確認"
-            closeButtonLabel="戻る"
-            onChanged={handleSubmit}
-          >
-            <Box>
-              <Text
-                size="s"
-              >
-                自分の楽器: {updatedRecruitment.ownerInstruments.join(', ')}
-              </Text>
-              <Text
-                size="s"
-              >
-                曲名: {updatedRecruitment.songTitle}
-              </Text>
-              <Text
-                size="s"
-              >
-                アーティスト: {updatedRecruitment.artist}
-              </Text>
-              <Text
-                size="s"
-              >
-                コラボ名: {updatedRecruitment.name}
-              </Text>
-              <Text
-                size="s"
-              >
-                ジャンル: {updatedRecruitment.genres.join(', ')}
-              </Text>
-              <Text
-                size="s"
-              >
-                締め切り: {updatedRecruitment.deadline}
-              </Text>
-              <Text
-                size="s"
-              >
-                世代: {updatedRecruitment.requiredGenerations.join(', ')}
-              </Text>
-              <Text
-                size="s"
-              >
-                性別: {updatedRecruitment.requiredGenders.join(', ')}
-              </Text>
-              <Text
-                size="s"
-              >
-                応募楽器: {Array.from(updatedRecruitment.recruitedInstruments).map(([key, value]) => `${key}: ${value}`).join(', ')}
-              </Text>
-              <Text
-                size="s"
-              >
-                メモ: {updatedRecruitment.memo}
-              </Text>
-            </Box>
-            <Box>
-              <BorderButton
-                appearance="primary"
-                type="button"
-              >
-                戻る
-              </BorderButton>
-              <Button
-                appearance="primary"
-                type="button"
-                onPress={handleSubmit}
-              >
-                登録する
-              </Button>
-            </Box>
-          </ModalContent>
+          <CreateRecruitmentConfirmModal
+            onClose={closeModal}
+            updatedRecruitment={updatedRecruitment}
+          />
         </Modal>
       )}
     </div>

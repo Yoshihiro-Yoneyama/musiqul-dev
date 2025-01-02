@@ -4,8 +4,6 @@ import React, {FC} from "react";
 import ModalContent from "@/shared/ui/organisms/modal/ModalContent";
 import Box from "@/shared/ui/atoms/box/Box";
 import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
-import BorderButton from "@/shared/ui/atoms/button/BorderButton";
-import Button from "@/shared/ui/atoms/button/Button";
 import namedMemo from "@/shared/hooks/namedMemo";
 import Text from "@/shared/ui/atoms/text/Text";
 import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
@@ -15,7 +13,6 @@ type Props = {
   readonly updatedRecruitment: RecruitmentSchema
 }
 
-// TODO このコンポーネントでModalを呼び出していないことが怪しい
 const CreateRecruitmentConfirmModal: FC<Props> = ({
   updatedRecruitment,
   onClose,
@@ -85,21 +82,6 @@ const CreateRecruitmentConfirmModal: FC<Props> = ({
           >
             メモ: {updatedRecruitment.memo}
           </Text>
-        </Box>
-        <Box>
-          {/*<BorderButton*/}
-          {/*  appearance="primary"*/}
-          {/*  type="button"*/}
-          {/*>*/}
-          {/*  戻る*/}
-          {/*</BorderButton>*/}
-          {/*<Button*/}
-          {/*  appearance="primary"*/}
-          {/*  type="button"*/}
-          {/*  onPress={handleSubmit}*/}
-          {/*>*/}
-          {/*  登録する*/}
-          {/*</Button>*/}
         </Box>
       </ModalContent>
     </>

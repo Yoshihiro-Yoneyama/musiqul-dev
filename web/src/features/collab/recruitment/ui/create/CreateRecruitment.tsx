@@ -1,45 +1,37 @@
-'use client';
+'use client'
 
-import * as styles from "./createRecruitment.css";
-import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar";
-import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox";
-import BorderButton from "@/shared/ui/atoms/button/BorderButton";
-import Button from "@/shared/ui/atoms/button/Button";
-import InputForm from "@/shared/ui/molecules/input-form/InputForm";
-import ComboInput from "@/features/collab/recruitment/ui/create/ComboInput";
-import TextArea from "@/shared/ui/molecules/input-textarea/TextArea";
+import * as styles from "./createRecruitment.css"
+import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar"
+import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox"
+import BorderButton from "@/shared/ui/atoms/button/BorderButton"
+import Button from "@/shared/ui/atoms/button/Button"
+import InputForm from "@/shared/ui/molecules/input-form/InputForm"
+import ComboInput from "@/features/collab/recruitment/ui/create/ComboInput"
+import TextArea from "@/shared/ui/molecules/input-textarea/TextArea"
 import {
   genreOptions,
   recruitedInstrumentOptions,
   requiredGenderOptions,
   requiredGenerationOptions,
   requiredNumberOfInstrumentOptions,
-} from "@/features/collab/recruitment/model/options";
-import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment";
-import React from "react";
-import useModal from "@/shared/hooks/useModal";
-import Modal from "@/shared/ui/organisms/modal/Modal";
-import Box from "@/shared/ui/atoms/box/Box";
-import ModalContent from "@/shared/ui/organisms/modal/ModalContent";
-import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model";
-import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
-import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state";
-import Text from "@/shared/ui/atoms/text/Text";
-import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
+} from "@/features/collab/recruitment/model/options"
+import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment"
+import React from "react"
+import useModal from "@/shared/hooks/useModal"
+import Modal from "@/shared/ui/organisms/modal/Modal"
+import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model"
+import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state"
+import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal"
 
 type Props = {
-  readonly onPress?: () => void;
-  readonly isDisabled: boolean;
-  readonly confirmedRecruitment?: RecruitmentSchema;
-};
+  readonly onPress?: () => void
+  readonly isDisabled: boolean
+  readonly confirmedRecruitment?: RecruitmentSchema
+}
 
 const CreateRecruitmentForm = (props: Props) => {
   const {updatedRecruitment} = useRecruitment()
-  const {isOpen, modalOptions, openModal, closeModal} = useModal();
-  const handleSubmit = () => {
-    postRecruitment(updatedRecruitment).then(() => {
-    })
-  }
+  const {isOpen, modalOptions, openModal, closeModal} = useModal()
   const {
     ownerInstruments,
     setOwnerInstruments,
@@ -58,7 +50,7 @@ const CreateRecruitmentForm = (props: Props) => {
     handleAddInput,
     handleComboInputChange,
     submitting,
-  } = useCreateRecruitmentForm();
+  } = useCreateRecruitmentForm()
   
   return (
     <div className={styles.itemsSetVertical}>
@@ -148,7 +140,7 @@ const CreateRecruitmentForm = (props: Props) => {
         <div className={styles.itemsSetHorizontal}>
           {requiredInstrumentInputs.map((input) => (
             <ComboInput
-              key={input.id} // 一意のIDを設定
+              key={input.id}
               title={"楽器"}
               defaultStringOption={''}
               stringOptions={recruitedInstrumentOptions}
@@ -189,7 +181,7 @@ const CreateRecruitmentForm = (props: Props) => {
               openModal({
                 children: "モーダルの内容",
                 dialogAriaLabel: "内容を確認する",
-              });
+              })
             }}
           >
             内容を確認する→
@@ -212,8 +204,8 @@ const CreateRecruitmentForm = (props: Props) => {
         </Modal>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CreateRecruitmentForm;
+export default CreateRecruitmentForm
 

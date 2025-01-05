@@ -29,6 +29,20 @@ type Props = {
   readonly confirmedRecruitment?: RecruitmentSchema
 }
 
+const initialRecruitment: RecruitmentSchema = {
+  owner: "",
+  ownerInstruments: [],
+  songTitle: "",
+  artist: "",
+  name: "",
+  genres: [],
+  deadline: "",
+  requiredGenerations: [],
+  requiredGenders: [],
+  recruitedInstruments: new Map(),
+  memo: "",
+};
+
 const CreateRecruitmentForm = (props: Props) => {
   const {updatedRecruitment} = useRecruitment()
   const {isOpen, modalOptions, openModal, closeModal} = useModal()
@@ -197,9 +211,11 @@ const CreateRecruitmentForm = (props: Props) => {
           isDismissable={true}
           dialogAriaLabel={modalOptions.dialogAriaLabel}
         >
+          {/*TODO resetRecruitment*/}
           <CreateRecruitmentConfirmModal
             onClose={closeModal}
             updatedRecruitment={updatedRecruitment}
+            resetRecruitment={() => {}}
           />
         </Modal>
       )}

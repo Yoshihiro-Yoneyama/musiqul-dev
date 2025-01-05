@@ -11,12 +11,25 @@ import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
 type Props = {
   readonly onClose: () => void
   readonly updatedRecruitment: RecruitmentSchema
+  readonly resetRecruitment: () => void
 }
 
 const CreateRecruitmentConfirmModal: FC<Props> = ({
   updatedRecruitment,
   onClose,
+  resetRecruitment,
 }) => {
+  const handleSubmit1 = async () => {
+    try {
+      await postRecruitment(updatedRecruitment)
+      resetRecruitment()
+      onClose()
+    } catch (error) {
+      console.error("Error posting recruitment:", error);
+      alert("募集内容の登録中にエラーが発生しました。もう一度お試しください。");
+    }
+  }
+  
   const handleSubmit = () => {
     // TODO postしたあとにモーダルを閉じて入力内容をクリアする処理を追加する
     postRecruitment(updatedRecruitment).then(() => {

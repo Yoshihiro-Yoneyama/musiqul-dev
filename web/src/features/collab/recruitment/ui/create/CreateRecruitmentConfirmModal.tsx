@@ -19,7 +19,9 @@ const CreateRecruitmentConfirmModal: FC<Props> = ({
 }) => {
   const handleSubmit = () => {
     // TODO postしたあとにモーダルを閉じて入力内容をクリアする処理を追加する
-    postRecruitment(updatedRecruitment).then(() => {})
+    postRecruitment(updatedRecruitment).then(() => {
+      onClose()
+    })
   }
   
   return (

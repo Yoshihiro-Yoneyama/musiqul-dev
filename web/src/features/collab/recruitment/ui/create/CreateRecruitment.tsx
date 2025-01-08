@@ -203,7 +203,6 @@ const CreateRecruitmentForm = (props: Props) => {
           <br/>
         </div>
       </div>
-      {/* モーダル */}
       {isOpen && (
         <Modal
           isOpen={isOpen}

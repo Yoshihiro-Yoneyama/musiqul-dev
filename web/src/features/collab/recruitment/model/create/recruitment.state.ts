@@ -1,7 +1,7 @@
 'use client'
 
 import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model"
-import {atom, useAtom } from "jotai"
+import {atom, useAtom} from "jotai"
 import {useCallback} from "react"
 
 /**

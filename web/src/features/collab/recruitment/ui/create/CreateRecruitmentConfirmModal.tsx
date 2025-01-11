@@ -17,7 +17,6 @@ type Props = {
 const CreateRecruitmentConfirmModal: FC<Props> = ({
   updatedRecruitment,
   onClose,
-  resetRecruitment,
 }) => {
   const handleSubmit = () => {
     // TODO postしたあとにモーダルを閉じて入力内容をクリアする処理を追加する

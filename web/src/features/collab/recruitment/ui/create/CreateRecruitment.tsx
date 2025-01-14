@@ -29,6 +29,7 @@ type Props = {
   readonly confirmedRecruitment?: RecruitmentSchema
 }
 
+// after post recruitment, close modal and clear input
 const initialRecruitment: RecruitmentSchema = {
   owner: "",
   ownerInstruments: [],

@@ -25,6 +25,7 @@ const CreateRecruitmentConfirmModal: FC<Props> = ({
     })
   }
   
+  // TODO モーダルのCSSを調整する
   return (
     <>
       <ModalContent

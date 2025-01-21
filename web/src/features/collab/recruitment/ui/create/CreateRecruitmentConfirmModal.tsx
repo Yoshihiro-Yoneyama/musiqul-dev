@@ -11,7 +11,8 @@ import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
 type Props = {
   readonly onClose: () => void
   readonly updatedRecruitment: RecruitmentSchema
-  readonly resetRecruitment: () => void
+  // TODO リセットが実装されたら？を削除する
+  readonly resetRecruitment?: () => void
 }
 
 const CreateRecruitmentConfirmModal: FC<Props> = ({

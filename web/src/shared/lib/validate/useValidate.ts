@@ -15,6 +15,7 @@ export const useValidation = <T extends ZodSchema>() => {
       if (error instanceof ZodError) {
         error.errors.forEach((e) => {
           const key = e.path.join('.') as keyof ZodInfer<T>
+          errors[key] = e.message
         })
       }
     }

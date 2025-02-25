@@ -7,7 +7,7 @@ export const useValidation = <T extends ZodSchema>() => {
   const [errorMessages, setErrorMessages] = useState<ErrorMessages<ZodInfer<T>>>({})
   
   const validate = useCallback((values: ZodInfer<T>, schema: T) => {
-    const errors: ErrorMessages<Zod.infer<T>> = {}
+    const errors: ErrorMessages<ZodInfer<T>> = {}
     
     try {
       schema.parse(values)

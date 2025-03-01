@@ -1,4 +1,4 @@
-package msq.musiqulapi.application.query.collab_for_search
+package msq.musiqulapi.application.query.colab.collab_for_search
 
 interface CollabForSearchQueryRepository {
 

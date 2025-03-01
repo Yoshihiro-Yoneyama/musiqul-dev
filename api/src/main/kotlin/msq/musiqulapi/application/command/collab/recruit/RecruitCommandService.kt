@@ -1,4 +1,4 @@
-package msq.musiqulapi.application.command.collab.recruitment
+package msq.musiqulapi.application.command.collab.recruit
 
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.player.PlayerId

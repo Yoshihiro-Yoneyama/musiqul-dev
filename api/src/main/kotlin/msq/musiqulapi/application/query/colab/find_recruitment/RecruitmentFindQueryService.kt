@@ -1,4 +1,4 @@
-package msq.musiqulapi.application.query.recruitment
+package msq.musiqulapi.application.query.colab.find_recruitment
 
 import java.util.UUID
 

@@ -1,7 +1,7 @@
 package msq.musiqulapi.presentation.command.collab.recruit.create
 
-import msq.musiqulapi.application.command.collab.recruitment.RecruitCommandInput
-import msq.musiqulapi.application.command.collab.recruitment.RecruitCommandService
+import msq.musiqulapi.application.command.collab.recruit.RecruitCommandInput
+import msq.musiqulapi.application.command.collab.recruit.RecruitCommandService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController

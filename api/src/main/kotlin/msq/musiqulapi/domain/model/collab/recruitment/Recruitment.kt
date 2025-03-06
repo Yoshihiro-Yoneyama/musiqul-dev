@@ -1,5 +1,6 @@
 package msq.musiqulapi.domain.model.collab.recruitment
 
+import msq.musiqulapi.application.command.collab.edit_recruitment.EditRecruitmentCommandInput
 import msq.musiqulapi.domain.DomainEvent
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.player.PlayerId
@@ -67,7 +68,41 @@ sealed interface Recruitment {
     }
   }
 
-  fun edit() {
+  fun edit(
+    eventIdFactory: IdFactory<DomainEventId>,
+    command: RecruitEditedCommand
+    ): Recruitment {
+    val eventId = eventIdFactory.generate()
+    val recruitmentEditedEvent = RecruitmentEditedEvent(
+      eventId,
+      this.id,
+      command.ownerInstruments,
+      command.songTitle,
+      command.artist,
+      command.name,
+      command.genres,
+      command.deadline,
+      command.requiredGenerations,
+      command.requiredGender,
+      command.recruitedInstruments,
+      command.memo
+    )
+
+    return when (this) {
+      is Data -> copy(
+        occurredEvents = this.occurredEvents.plus(recruitmentEditedEvent),
+        ownerInstruments = command.ownerInstruments,
+        songTitle = command.songTitle,
+        artist = command.artist,
+        name = command.name,
+        genres = command.genres,
+        deadline = command.deadline,
+        requiredGenerations = command.requiredGenerations,
+        requiredGender = command.requiredGender,
+        recruitedInstruments = command.recruitedInstruments,
+        memo = command.memo
+      )
+    }
 
   }
 
@@ -111,6 +146,19 @@ sealed interface Recruitment {
 // 集約の新規作成に使用する
 data class RecruitCommand(
   val owner: PlayerId,
+  val ownerInstruments: List<Instrument>,
+  val songTitle: SongTitle,
+  val artist: Artist,
+  val name: RecruitmentName,
+  val genres: List<MusicGenre>,
+  val deadline: DeadLine,
+  val requiredGenerations: Set<RequiredGeneration>,
+  val requiredGender: Set<RequiredGender>,
+  val recruitedInstruments: RequiredInstrumentsAndCounts,
+  val memo: Memo
+)
+
+data class RecruitEditedCommand(
   val ownerInstruments: List<Instrument>,
   val songTitle: SongTitle,
   val artist: Artist,

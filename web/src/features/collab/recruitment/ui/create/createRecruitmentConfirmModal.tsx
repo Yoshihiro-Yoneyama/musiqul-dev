@@ -8,6 +8,8 @@ import namedMemo from "@/shared/hooks/namedMemo";
 import Text from "@/shared/ui/atoms/text/Text";
 import {postRecruitment} from "@/entities/collab/recruitment/recruitment.api";
 
+/** Display a modal for registration confirmation of recruitment information. */
+
 type Props = {
   readonly onClose: () => void
   readonly updatedRecruitment: RecruitmentSchema

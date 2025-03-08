@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import Selector from "@/shared/ui/atoms/selector/Selector";
 import Required from "@/shared/ui/atoms/required/Required";
-import * as styles from "./ComboInput.css";
+import * as styles from "./comboInput.css";
 
 type Option = {
   /** valueString */

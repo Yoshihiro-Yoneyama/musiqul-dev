@@ -1,8 +1,8 @@
 'use client'
 
-import * as styles from './CreateRecruitmentPage.css'
+import * as styles from './createRecruitmentPage.css'
 import React from 'react'
-import CreateRecruitmentForm from '@/features/collab/recruitment/ui/create/CreateRecruitment'
+import CreateRecruitmentForm from '@/features/collab/recruitment/create/ui/createRecruitment'
 
 /**
  * コラボの募集内容を確認するコンポーネント

@@ -6,7 +6,7 @@ import Checkbox from "@/shared/ui/atoms/checkbox/Checkbox"
 import BorderButton from "@/shared/ui/atoms/button/BorderButton"
 import Button from "@/shared/ui/atoms/button/Button"
 import InputForm from "@/shared/ui/molecules/input-form/InputForm"
-import ComboInput from "@/features/collab/recruitment/ui/create/ComboInput"
+import ComboInput from "@/features/collab/recruitment/create/ui/comboInput"
 import TextArea from "@/shared/ui/molecules/input-textarea/TextArea"
 import {
   genreOptions,
@@ -15,13 +15,13 @@ import {
   requiredGenerationOptions,
   requiredNumberOfInstrumentOptions,
 } from "@/features/collab/recruitment/model/options"
-import {useCreateRecruitmentForm} from "../../model/create/UseCreateRecruitment"
+import {useCreateRecruitmentForm} from "@/features/collab/recruitment/create/model/useCreateRecruitment"
 import React from "react"
 import useModal from "@/shared/hooks/useModal"
 import Modal from "@/shared/ui/organisms/modal/Modal"
 import {RecruitmentSchema} from "@/entities/collab/recruitment/recruitment.model"
-import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state"
-import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal"
+import {useRecruitment} from "@/features/collab/recruitment/create/model/recruitment.state"
+import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/create/ui/createRecruitmentConfirmModal"
 
 type Props = {
   readonly onPress?: () => void

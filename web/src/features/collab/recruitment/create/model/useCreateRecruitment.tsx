@@ -1,10 +1,10 @@
 'use client'
 
 import {useCallback, useState} from "react";
-import {useRecruitment} from "@/features/collab/recruitment/model/create/recruitment.state";
-import {createRecruitment} from "@/features/collab/recruitment/model/create/createRecruitment";
+import {useRecruitment} from "@/features/collab/recruitment/create/model/recruitment.state";
+import {createRecruitment} from "@/features/collab/recruitment/create/model/createRecruitment";
 import useModal from "@/shared/hooks/useModal";
-import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/ui/create/CreateRecruitmentConfirmModal";
+import CreateRecruitmentConfirmModal from "@/features/collab/recruitment/create/ui/createRecruitmentConfirmModal";
 
 export const useCreateRecruitmentForm = (onSubmitSuccess?: () => void) => {
   const [ownerInstruments, setOwnerInstruments] = useState<string[]>([]);

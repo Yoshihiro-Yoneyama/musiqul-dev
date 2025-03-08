@@ -3,6 +3,9 @@
 import React from "react"
 import SideMenu from "@/shared/ui/organisms/side-menu/SideMenu"
 import * as styles from "./styles.css"
+import {setZodErrorMap} from "@/shared/lib/validate/customErrorMap";
+
+setZodErrorMap()
 
 export default function RootLayout({
    children,

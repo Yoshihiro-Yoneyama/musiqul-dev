@@ -79,7 +79,7 @@ const CreateRecruitmentForm = (props: Props) => {
       </div>
       <div className={styles.itemsSetHorizontal}>
         <InputForm
-          title="曲名"
+          label="曲名"
           displayedRequired={false}
           textBoxProps={{
             isDisabled: false,
@@ -87,7 +87,7 @@ const CreateRecruitmentForm = (props: Props) => {
           }}
         />
         <InputForm
-          title="アーティスト名"
+          label="アーティスト名"
           displayedRequired={false}
           textBoxProps={{
             isDisabled: false,
@@ -109,7 +109,7 @@ const CreateRecruitmentForm = (props: Props) => {
             onChange={setGenres}
           />
           <InputForm
-            title="コラボ名"
+            label="コラボ名"
             displayedRequired={false}
             textBoxProps={
               {

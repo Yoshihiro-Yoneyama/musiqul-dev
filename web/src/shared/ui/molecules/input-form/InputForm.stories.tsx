@@ -13,7 +13,7 @@ type Story = StoryObj<typeof InputForm>
 
 export const Default: Story = {
   args: {
-    title: 'タイトル',
+    label: 'タイトル',
     displayedRequired: true,
     textBoxProps: {
       placeholder: 'ここに文章を入力してください。',

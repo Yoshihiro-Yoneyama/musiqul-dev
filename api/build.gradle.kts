@@ -3,11 +3,11 @@ import org.jooq.meta.jaxb.ForcedType
 import org.jooq.meta.jaxb.Logging
 
 plugins {
-  id("org.springframework.boot") version "3.2.5"
-  id("io.spring.dependency-management") version "1.1.4"
-  id("nu.studer.jooq") version "8.2.3"
-  kotlin("jvm") version "1.9.23"
-  kotlin("plugin.spring") version "1.9.23"
+  id("org.springframework.boot") version "3.4.3"
+  id("io.spring.dependency-management") version "1.1.7"
+  id("nu.studer.jooq") version "10.1"
+  kotlin("jvm") version "2.1.21"
+  kotlin("plugin.spring") version "2.1.21"
   java
 }
 
@@ -33,21 +33,20 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-jooq")
   jooqGenerator("org.postgresql:postgresql:42.5.4")
   // Arrow Kt
-  implementation("io.arrow-kt:arrow-core:1.2.4")
-  implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
+  implementation("io.arrow-kt:arrow-core:2.0.0-rc.1")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.0.0-rc.1")
   // test
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
-  testImplementation("org.mockito:mockito-inline:5.1.0")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs += "-Xjsr305=strict"
-    jvmTarget = "21"
+  compilerOptions {
+    freeCompilerArgs.add("-Xjsr305=strict")
+    jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
   }
 }
 

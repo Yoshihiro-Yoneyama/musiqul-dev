@@ -1,7 +1,7 @@
 'use client'
 
 import * as styles from '@/shared/ui/atoms/date-calendar/DateCalendar.css';
-import React, {FC, useState} from 'react'
+import React, {FC, useState, useEffect} from 'react'
 import {
   Button,
   Calendar,
@@ -32,6 +32,12 @@ const DateCalendar: FC<DatePickerProps> = ({
   ...props
 }) => {
   const [inputValue, setInputValue] = useState('')
+  const [isClient, setIsClient] = useState(false)
+  
+  // React 19: Ensure client-side only rendering to prevent hydration mismatch
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   
   const handleChange = (value: DateValue | null) => {
     // If the date picker is disabled or the value is empty, return
@@ -46,6 +52,20 @@ const DateCalendar: FC<DatePickerProps> = ({
     // Notify the parent component
     onChange(formattedValue);
   };
+  
+  // Prevent SSR hydration mismatch by rendering placeholder until client loads
+  if (!isClient) {
+    return (
+      <div className={styles.datePicker}>
+        <div className={styles.group}>
+          <div className={styles.dateInput}>
+            <span>日付を選択してください</span>
+          </div>
+          <button disabled>▼</button>
+        </div>
+      </div>
+    )
+  }
   
   return (
     <I18nProvider

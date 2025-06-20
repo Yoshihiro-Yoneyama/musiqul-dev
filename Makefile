@@ -92,3 +92,9 @@ jooq-generate: migrate-up
 lint:
 	@echo "Running web linting..."
 	cd workspace/musiqul-web && npm run lint
+
+# Reset database and regenerate JOOQ classes
+db-reset:
+	docker-compose down db -v
+	docker-compose up -d db
+	@make jooq-generate

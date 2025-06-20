@@ -27,11 +27,15 @@ services:
       - DATASOURCE_URL=jdbc:postgresql://db:5432/msqdb
       - DATASOURCE_USERNAME=pgadmin
       - DATASOURCE_PASSWORD=pgadmin
+      - GRADLE_OPTS=-Dorg.gradle.daemon=false
     volumes:
       - ./workspace/musiqul-api:/app
+      - gradle-cache:/home/gradle/.gradle
     ports:
       - "34962:8080"
     command: ./gradlew clean bootRun -x test
+    depends_on:
+      - db
   web:
     image: node:22
     container_name: web
@@ -50,3 +54,4 @@ services:
 volumes:
   db-data:
     name: db-data
+  gradle-cache:

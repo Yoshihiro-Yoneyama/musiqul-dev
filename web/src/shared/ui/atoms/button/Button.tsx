@@ -12,19 +12,23 @@ type Props = {
   readonly className?: string
   readonly type?: 'button' | 'submit'
   readonly onPress?: () => void
+  readonly ref?: React.Ref<HTMLButtonElement>
 }
 
-const Button: React.FC<Props> = ({
+// React 19: Direct ref prop support instead of forwardRef
+const Button = ({
   children,
   appearance,
   isDisabled = false,
   className,
   type = 'button',
   onPress,
+  ref,
   ...props
-}) => {
+}: Props) => {
   return (
     <AriaButton
+      ref={ref}
       className={clsx(
         styles.baseStyle,
         appearance && [styles.appearances[appearance]],

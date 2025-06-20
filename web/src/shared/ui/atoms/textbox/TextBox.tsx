@@ -4,7 +4,6 @@ import React, {ChangeEvent, ReactNode, useState} from 'react'
 import {Input as AriaInput} from 'react-aria-components'
 import {inputStyles} from '@/shared/ui/util/Input.css'
 import {clsx} from 'clsx'
-import namedMemo from '@/shared/hooks/namedMemo'
 import {fontSize} from '@/shared/themes/fontSize.css'
 import {fontWeight} from '@/shared/themes/fontWeight.css'
 import {color} from '@/shared/themes/color.css'
@@ -29,25 +28,28 @@ export type TextBoxProps = {
   // readonly maxLength?: number
   readonly testId?: string
   readonly readOnly?: boolean
+  readonly ref?: React.Ref<HTMLInputElement>
 }
 
-const TextBox: React.FC<TextBoxProps> = ({
+const TextBox = ({
   children = '',
   size = 'l',
   weight = 'regular',
-  color = 'bodyText',
+  color = 'black',
   lineHeight = 'l',
   as = 'p',
   isDisabled,
   onChange,
   autoComplete,
   readOnly,
+  ref,
   ...props
-}) => {
+}: TextBoxProps) => {
   const [isFocused, setIsFocused] = useState(false)
   const [isActive, setIsActive] = useState(false)
   const [inputValue, setInputValue] = useState('')
   
+  // React 19: React Compiler will optimize these handlers automatically
   const handleFocus = () => {
     if (!isDisabled) {
       setIsFocused(true)
@@ -74,6 +76,7 @@ const TextBox: React.FC<TextBoxProps> = ({
   return (
     <>
       <AriaInput
+        ref={ref}
         className={clsx(
           inputStyles.default,
           isFocused && !isDisabled ? inputStyles.focused : '',
@@ -94,4 +97,5 @@ const TextBox: React.FC<TextBoxProps> = ({
   )
 }
 
-export default namedMemo(TextBox, 'TextBox')
+// React 19: React Compiler handles memoization automatically
+export default TextBox

@@ -2,7 +2,6 @@
 
 import {ModalProps} from "@/shared/ui/organisms/modal/Modal";
 import {atom, useAtom} from "jotai";
-import {useCallback, useMemo} from "react";
 
 type ModalOptions = Omit<ModalProps, 'isOpen' | 'onOpenChange'>
 
@@ -15,30 +14,26 @@ const modalOptionsAtom = atom<ModalOptions>({
   isDismissable: true,
 })
 
+// React 19: React Compiler optimizes this automatically - no need for manual memoization
 const useModal = () => {
   const [isOpen, setIsOpen] = useAtom(isOpenAtom)
   const [modalOptions, setModalOptions] = useAtom(modalOptionsAtom)
   
-  const openModal = useCallback(
-    (options: ModalOptions) => {
-      setModalOptions(options)
-      setIsOpen(true)
-    },
-    [setModalOptions, setIsOpen]
-  )
+  const openModal = (options: ModalOptions) => {
+    setModalOptions(options)
+    setIsOpen(true)
+  }
   
-  const closeModal = useCallback(() => {
+  const closeModal = () => {
     setIsOpen(false)
-  }, [setIsOpen])
+  }
   
-  return useMemo(() => ({
-      isOpen,
-      modalOptions,
-      openModal,
-      closeModal,
-    }),
-    [isOpen, modalOptions, openModal, closeModal]
-  )
+  return {
+    isOpen,
+    modalOptions,
+    openModal,
+    closeModal,
+  }
 }
 
 export default useModal

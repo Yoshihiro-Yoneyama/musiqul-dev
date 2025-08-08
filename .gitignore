@@ -2,5 +2,6 @@
 /shelf/
 # Editor-based HTTP Client requests
 /.idea/
-# CLAUDE.md
+# claude
 CLAUDE.md
+/.claude/

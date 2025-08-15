@@ -7,8 +7,7 @@ import msq.musiqulapi.domain.model.collab.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
 
 sealed interface Recruitment {
-  // イベントをリストで作成する理由？
-  // イベントは複数個発生する可能性があるから
+  // イベントは複数個発生する可能性があるので、Listで保持する
   val occurredEvents: List<DomainEvent>
   val id: RecruitmentId
   val owner: PlayerId

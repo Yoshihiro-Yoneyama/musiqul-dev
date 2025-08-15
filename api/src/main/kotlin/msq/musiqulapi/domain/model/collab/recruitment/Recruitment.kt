@@ -24,7 +24,6 @@ sealed interface Recruitment {
   val recruitmentStatus: RecruitmentStatus
   val deleted: Boolean
 
-  //
   companion object {
     fun recruit(
       eventIdFactory: IdFactory<DomainEventId>,

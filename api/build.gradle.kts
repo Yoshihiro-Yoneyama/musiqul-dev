@@ -57,10 +57,10 @@ tasks.withType<Test> {
 
 // 以下のコマンドはmusiqul-apiを起動する場合はコメントアウトを外す
 // generateJooqを実行する場合はコメントアウトする
-project.gradle.startParameter.excludedTaskNames.add("generatejooq")
+// project.gradle.startParameter.excludedTaskNames.add("generatejooq")
 
 jooq {
-  version.set("3.19.1")  // default (can be omitted)
+  version.set("3.19.19")  // updated to match actual version
   edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)  // default (can be omitted)
 
   configurations {

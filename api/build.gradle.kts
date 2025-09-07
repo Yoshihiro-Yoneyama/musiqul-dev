@@ -27,10 +27,10 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.projectlombok:lombok")
-  implementation("org.postgresql:postgresql")
+  implementation("org.postgresql:postgresql:42.7.7")
   // jooq
   implementation("org.springframework.boot:spring-boot-starter-jooq")
-  jooqGenerator("org.postgresql:postgresql:42.5.4")
+  jooqGenerator("org.postgresql:postgresql:42.7.7")
   // Arrow Kt
   implementation("io.arrow-kt:arrow-core:2.0.0-rc.1")
   implementation("io.arrow-kt:arrow-fx-coroutines:2.0.0-rc.1")

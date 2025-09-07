@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jooq.meta.jaxb.ForcedType
-import org.jooq.meta.jaxb.Logging
 
 plugins {
   id("org.springframework.boot") version "3.4.3"
@@ -41,6 +40,10 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
   testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+  // Testcontainers
+  testImplementation("org.testcontainers:testcontainers")
+  testImplementation("org.testcontainers:postgresql")
+  testImplementation("org.testcontainers:junit-jupiter")
 }
 
 tasks.withType<KotlinCompile> {
@@ -54,32 +57,23 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-
-// 以下のコマンドはmusiqul-apiを起動する場合はコメントアウトを外す
-// generateJooqを実行する場合はコメントアウトする
-// project.gradle.startParameter.excludedTaskNames.add("generatejooq")
-
 jooq {
-  version.set("3.19.19")  // updated to match actual version
-  edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)  // default (can be omitted)
-
+  version.set("3.19.19")
   configurations {
-    create("main") {  // name of the jOOQ configuration
-      generateSchemaSourceOnCompilation.set(true)  // default (can be omitted)
-
+    create("main") {
+      generateSchemaSourceOnCompilation.set(false)
       jooqConfiguration.apply {
-        logging = Logging.WARN
         jdbc.apply {
-          driver = "org.postgresql.Driver"
-          url = "jdbc:postgresql://localhost:34961/msqdb"
-          user = "pgadmin"
-          password = "pgadmin"
+          driver = project.property("jooq.db.driver") as String
+          url = project.property("jooq.db.url") as String
+          user = project.property("jooq.db.user") as String
+          password = project.property("jooq.db.password") as String
         }
         generator.apply {
           name = "org.jooq.codegen.KotlinGenerator"
           database.apply {
             name = "org.jooq.meta.postgres.PostgresDatabase"
-            inputSchema = "musiqul_command"
+            inputSchema = project.property("jooq.schema") as String
             forcedTypes.addAll(listOf(
               ForcedType().apply {
                 name = "varchar"
@@ -93,17 +87,10 @@ jooq {
               }
             ))
           }
-          generate.apply {
-            isDeprecated = false
-            isRecords = true
-            isImmutablePojos = true
-            isFluentSetters = true
-          }
           target.apply {
-            packageName = "nu.studer.sample"
-            directory = "jooq/generated-src/jooq/main"  // default (can be omitted)
+            packageName = project.property("jooq.package") as String
+            directory = project.property("jooq.directory") as String
           }
-          strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
         }
       }
     }

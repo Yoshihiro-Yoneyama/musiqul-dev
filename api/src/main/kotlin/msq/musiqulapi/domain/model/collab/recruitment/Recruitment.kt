@@ -2,7 +2,7 @@ package msq.musiqulapi.domain.model.collab.recruitment
 
 import msq.musiqulapi.domain.DomainEvent
 import msq.musiqulapi.domain.DomainEventId
-import msq.musiqulapi.domain.model.collab.player.PlayerId
+import msq.musiqulapi.domain.model.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
 
 /** 募集 */

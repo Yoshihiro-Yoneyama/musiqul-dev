@@ -1,7 +1,7 @@
 package msq.musiqulapi.application.command.collab.recruit
 
 import msq.musiqulapi.domain.DomainEventId
-import msq.musiqulapi.domain.model.collab.player.PlayerId
+import msq.musiqulapi.domain.model.player.PlayerId
 import msq.musiqulapi.domain.model.collab.recruitment.*
 import msq.musiqulapi.lib.IdFactory
 import msq.musiqulapi.lib.NonEmptyMap
@@ -20,7 +20,7 @@ class RecruitCommandService(
 ) {
   fun recruit(input: RecruitCommandInput): RecruitCommandOutput {
     val recruitCommand = RecruitCommand(
-      PlayerId.reconstruct(input.owner),
+      PlayerId.from(input.owner),
       input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
       SongTitle(input.songTitle),
       Artist(input.artist),

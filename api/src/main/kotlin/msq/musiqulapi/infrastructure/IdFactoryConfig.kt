@@ -1,7 +1,7 @@
 package msq.musiqulapi.infrastructure
 
 import msq.musiqulapi.domain.DomainEventId
-import msq.musiqulapi.domain.model.collab.player.PlayerId
+import msq.musiqulapi.domain.model.player.PlayerId
 import msq.musiqulapi.domain.model.collab.recruitment.RecruitmentId
 import msq.musiqulapi.domain.model.test_task.TaskId
 import msq.musiqulapi.lib.IdFactory
@@ -28,7 +28,7 @@ class IdFactoryConfig {
 
   @Bean
   fun recruitmentIdFactory(): IdFactory<RecruitmentId> {
-    return uuidFactory(RecruitmentId::reconstruct)
+    return uuidFactory(RecruitmentId::from)
   }
 
   @Bean
@@ -38,6 +38,6 @@ class IdFactoryConfig {
 
   @Bean
   fun playerIdFactory(): IdFactory<PlayerId> {
-    return uuidFactory(PlayerId::reconstruct)
+    return uuidFactory(PlayerId::from)
   }
 }

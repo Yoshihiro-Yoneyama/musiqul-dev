@@ -7,6 +7,7 @@ sealed interface Player {
   val id: PlayerId
   val name: PlayerName
   val numOfCollabParticipation: NumOfCollabParticipation
+  val numOfFan: NumOfFan
   val deleted: Boolean
 
 }

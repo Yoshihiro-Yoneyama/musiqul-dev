@@ -26,3 +26,11 @@ value class NumOfCollabParticipation(val value: Int) {
     require(value >= 0) { "Number of collab participation must be non-negative" }
   }
 }
+
+
+@JvmInline
+value class NumOfFan(val value: Int) {
+  init {
+    require(value >= 0) { "Number of fans must be non-negative" }
+  }
+}

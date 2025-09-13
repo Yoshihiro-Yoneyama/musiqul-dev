@@ -19,3 +19,10 @@ value class PlayerName(val value: String) {
     require(value.length <= MAX_LENGTH) { "Player name must be $MAX_LENGTH characters or less" }
   }
 }
+
+@JvmInline
+value class NumOfCollabParticipation(val value: Int) {
+  init {
+    require(value >= 0) { "Number of collab participation must be non-negative" }
+  }
+}

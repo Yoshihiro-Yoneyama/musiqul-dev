@@ -7,16 +7,15 @@ import org.jooq.Record2
 import org.springframework.stereotype.Component
 import java.util.*
 
-
 @Component
 class RecruitmentMusicGenreMapper(val dslContext: DSLContext) {
   fun insert(records: List<Record2<UUID?, MusicGenreType?>>) {
-    dslContext.insertInto(
-      RECRUITMENT_MUSIC_GENRE,
-      RECRUITMENT_MUSIC_GENRE.RECRUITMENT_ID,
-      RECRUITMENT_MUSIC_GENRE.GENRE,
-    )
-      .valuesOfRecords(records)
+    dslContext
+      .insertInto(
+        RECRUITMENT_MUSIC_GENRE,
+        RECRUITMENT_MUSIC_GENRE.RECRUITMENT_ID,
+        RECRUITMENT_MUSIC_GENRE.GENRE,
+      ).valuesOfRecords(records)
       .execute()
   }
 

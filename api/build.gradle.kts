@@ -5,6 +5,8 @@ plugins {
   id("org.springframework.boot") version "3.4.3"
   id("io.spring.dependency-management") version "1.1.7"
   id("nu.studer.jooq") version "10.1"
+
+  id("com.diffplug.spotless") version "7.1.0"
   kotlin("jvm") version "2.1.21"
   kotlin("plugin.spring") version "2.1.21"
   java
@@ -57,6 +59,38 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
+spotless {
+  kotlin {
+    target("src/**/*.kt")
+    targetExclude("jooq/generated-src/**/*.kt", "src/main/kotlin/msq/musiqulapi/presentation/command/collab/recruit/create/CreateRecruitmentController.kt")
+    ktlint("1.5.0").editorConfigOverride(
+      mapOf(
+        "max_line_length" to "100",
+
+        "indent_size" to "2",
+        "ktlint_standard_package-name" to "disabled",
+        "ktlint_standard_no-wildcard-imports" to "disabled",
+        "ktlint_standard_no-empty-file" to "disabled",
+        "ktlint_standard_parameter-list-wrapping" to "enabled",
+        "ktlint_standard_argument-list-wrapping" to "enabled",
+        "ktlint_standard_chain-method-continuation" to "enabled",
+        "ktlint_standard_multiline-expression-wrapping" to "enabled",
+      ),
+    )
+    trimTrailingWhitespace()
+  }
+  kotlinGradle {
+    target("*.gradle.kts")
+    ktlint("1.5.0").editorConfigOverride(
+      mapOf(
+        "indent_size" to "2",
+      ),
+    )
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+}
+
 jooq {
   version.set("3.19.19")
   configurations {
@@ -74,18 +108,20 @@ jooq {
           database.apply {
             name = "org.jooq.meta.postgres.PostgresDatabase"
             inputSchema = project.property("jooq.schema") as String
-            forcedTypes.addAll(listOf(
-              ForcedType().apply {
-                name = "varchar"
-                includeExpression = ".*"
-                includeTypes = "JSONB?"
-              },
-              ForcedType().apply {
-                name = "varchar"
-                includeExpression = ".*"
-                includeTypes = "INET"
-              }
-            ))
+            forcedTypes.addAll(
+              listOf(
+                ForcedType().apply {
+                  name = "varchar"
+                  includeExpression = ".*"
+                  includeTypes = "JSONB?"
+                },
+                ForcedType().apply {
+                  name = "varchar"
+                  includeExpression = ".*"
+                  includeTypes = "INET"
+                },
+              ),
+            )
           }
           target.apply {
             packageName = project.property("jooq.package") as String

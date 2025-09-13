@@ -10,12 +10,12 @@ import java.util.*
 @Component
 class RecruitmentRequiredGenderMapper(val dslContext: DSLContext) {
   fun insert(records: List<Record2<UUID?, RequiredGenderType?>>) {
-    dslContext.insertInto(
-      RECRUITMENT_REQUIRED_GENDER,
-      RECRUITMENT_REQUIRED_GENDER.RECRUITMENT_ID,
-      RECRUITMENT_REQUIRED_GENDER.REQUIRED_GENDER,
-    )
-      .valuesOfRecords(records)
+    dslContext
+      .insertInto(
+        RECRUITMENT_REQUIRED_GENDER,
+        RECRUITMENT_REQUIRED_GENDER.RECRUITMENT_ID,
+        RECRUITMENT_REQUIRED_GENDER.REQUIRED_GENDER,
+      ).valuesOfRecords(records)
       .execute()
   }
 

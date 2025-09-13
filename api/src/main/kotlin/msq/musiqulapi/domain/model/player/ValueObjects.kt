@@ -5,9 +5,7 @@ import java.util.*
 @JvmInline
 value class PlayerId private constructor(val value: UUID) {
   companion object {
-    fun from(id: UUID): PlayerId {
-      return PlayerId(id)
-    }
+    fun from(id: UUID): PlayerId = PlayerId(id)
   }
 }
 

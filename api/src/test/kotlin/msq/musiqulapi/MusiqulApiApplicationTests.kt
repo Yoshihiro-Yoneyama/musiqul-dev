@@ -14,25 +14,26 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @Testcontainers
 class MusiqulApiApplicationTests {
 
-    companion object {
-        @Container
-        @JvmStatic
-        val postgres = PostgreSQLContainer<Nothing>("postgres:16").apply {
-            withDatabaseName("testdb")
-            withUsername("testuser")
-            withPassword("testpass")
-        }
+  companion object {
+    @Container
+    @JvmStatic
+    val postgres =
+      PostgreSQLContainer<Nothing>("postgres:16").apply {
+        withDatabaseName("testdb")
+        withUsername("testuser")
+        withPassword("testpass")
+      }
 
-        @DynamicPropertySource
-        @JvmStatic
-        fun configureProperties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", postgres::getJdbcUrl)
-            registry.add("spring.datasource.username", postgres::getUsername)
-            registry.add("spring.datasource.password", postgres::getPassword)
-        }
+    @DynamicPropertySource
+    @JvmStatic
+    fun configureProperties(registry: DynamicPropertyRegistry) {
+      registry.add("spring.datasource.url", postgres::getJdbcUrl)
+      registry.add("spring.datasource.username", postgres::getUsername)
+      registry.add("spring.datasource.password", postgres::getPassword)
     }
+  }
 
-    @Test
-    fun contextLoads() {
-    }
+  @Test
+  fun contextLoads() {
+  }
 }

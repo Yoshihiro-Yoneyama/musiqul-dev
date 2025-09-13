@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class MusiqulApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<MusiqulApiApplication>(*args)
+  runApplication<MusiqulApiApplication>(*args)
 }

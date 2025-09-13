@@ -10,12 +10,12 @@ import java.util.*
 @Component
 class RecruitmentOwnerInstrumentMapper(val dslContext: DSLContext) {
   fun insert(records: List<Record2<UUID?, InstrumentType?>>) {
-    dslContext.insertInto(
-      RECRUITMENT_OWNER_INSTRUMENT,
-      RECRUITMENT_OWNER_INSTRUMENT.RECRUITMENT_ID,
-      RECRUITMENT_OWNER_INSTRUMENT.OWNER_INSTRUMENT,
-    )
-      .valuesOfRecords(records)
+    dslContext
+      .insertInto(
+        RECRUITMENT_OWNER_INSTRUMENT,
+        RECRUITMENT_OWNER_INSTRUMENT.RECRUITMENT_ID,
+        RECRUITMENT_OWNER_INSTRUMENT.OWNER_INSTRUMENT,
+      ).valuesOfRecords(records)
       .execute()
   }
 

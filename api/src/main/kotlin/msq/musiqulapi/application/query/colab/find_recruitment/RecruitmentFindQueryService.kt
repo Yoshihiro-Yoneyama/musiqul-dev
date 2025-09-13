@@ -6,9 +6,7 @@ interface RecruitmentFindQueryService {
   fun findRecruitment(input: RecruitmentFindInput): RecruitmentFindOutput
 }
 
-data class RecruitmentFindInput(
-  val id: UUID
-)
+data class RecruitmentFindInput(val id: UUID)
 
 data class RecruitmentFindOutput(
   val owner: UUID,
@@ -19,5 +17,3 @@ data class RecruitmentFindOutput(
   val name: String,
   val genres: List<String>,
 )
-
-

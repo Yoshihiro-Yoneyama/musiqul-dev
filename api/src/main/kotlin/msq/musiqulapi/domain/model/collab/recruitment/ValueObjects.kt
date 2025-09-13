@@ -7,9 +7,7 @@ import java.util.*
 @JvmInline
 value class RecruitmentId private constructor(val value: UUID) {
   companion object {
-    fun from(id: UUID): RecruitmentId {
-      return RecruitmentId(id)
-    }
+    fun from(id: UUID): RecruitmentId = RecruitmentId(id)
   }
 }
 
@@ -33,7 +31,7 @@ enum class MusicGenre {
   JAZZ,
   CLASSIC,
   METAL,
-  OTHER
+  OTHER,
 }
 
 @JvmInline
@@ -70,7 +68,7 @@ enum class Instrument {
   KEY_BOARD,
   PIANO,
   VIOLIN,
-  OTHER
+  OTHER,
 }
 
 @JvmInline
@@ -88,7 +86,7 @@ enum class RequiredGeneration {
 enum class RequiredGender {
   MALE_ONLY,
   FEMALE_ONLY,
-  OTHER
+  OTHER,
 }
 
 @JvmInline

@@ -5,7 +5,7 @@ import msq.musiqulapi.application.query.colab.collab_for_search.Recruitment
 import org.springframework.stereotype.Repository
 
 @Repository
-class CollabForSearchQueryRepositoryImpl(): CollabForSearchQueryRepository {
+class CollabForSearchQueryRepositoryImpl : CollabForSearchQueryRepository {
   override fun saveRecruitment(recruitment: Recruitment) {
     println("********Repository********")
   }

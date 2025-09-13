@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-class TaskValueObjectTest{
+class TaskValueObjectTest {
   @Nested
   inner class TaskIdTests {
     @Test

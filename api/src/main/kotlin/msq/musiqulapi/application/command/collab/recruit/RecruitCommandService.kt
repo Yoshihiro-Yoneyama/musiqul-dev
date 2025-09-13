@@ -1,8 +1,8 @@
 package msq.musiqulapi.application.command.collab.recruit
 
 import msq.musiqulapi.domain.DomainEventId
-import msq.musiqulapi.domain.model.player.PlayerId
 import msq.musiqulapi.domain.model.collab.recruitment.*
+import msq.musiqulapi.domain.model.player.PlayerId
 import msq.musiqulapi.lib.IdFactory
 import msq.musiqulapi.lib.NonEmptyMap
 import org.springframework.context.ApplicationEventPublisher
@@ -16,49 +16,53 @@ class RecruitCommandService(
   val recruitmentIdFactory: IdFactory<RecruitmentId>,
   val repository: RecruitmentRepository,
   // ドメインイベント発行
-  val eventPublisher: ApplicationEventPublisher
+  val eventPublisher: ApplicationEventPublisher,
 ) {
   fun recruit(input: RecruitCommandInput): RecruitCommandOutput {
-    val recruitCommand = RecruitCommand(
-      PlayerId.from(input.owner),
-      input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
-      SongTitle(input.songTitle),
-      Artist(input.artist),
-      RecruitmentName(input.name),
-      input.genre.map { g -> MusicGenre.valueOf(g.name) },
-      DeadLine(input.deadline),
-      input.requiredGenerations
-        .map { r ->
-          when (r) {
-            RecruitCommandInput.RequiredGenerationType.TEEN -> RequiredGeneration.TEEN
-            RecruitCommandInput.RequiredGenerationType.TWENTIES -> RequiredGeneration.TWENTIES
-            RecruitCommandInput.RequiredGenerationType.THIRTIES -> RequiredGeneration.THIRTIES
-            RecruitCommandInput.RequiredGenerationType.FORTIES -> RequiredGeneration.FORTIES
-            RecruitCommandInput.RequiredGenerationType.FIFTIES -> RequiredGeneration.FIFTIES
-            RecruitCommandInput.RequiredGenerationType.MORE_THAN_SIXTIES -> RequiredGeneration.MORE_THAN_SIXTIES
-          }
-        }
-        .toSet(),
-      input.requiredGenders.map { gender ->
-        when (gender) {
-          RecruitCommandInput.RequiredGenderType.MALE_ONLY -> RequiredGender.MALE_ONLY
-          RecruitCommandInput.RequiredGenderType.FEMALE_ONLY -> RequiredGender.FEMALE_ONLY
-          RecruitCommandInput.RequiredGenderType.OTHER -> RequiredGender.OTHER
-        }
-      }
-        .toSet(),
-      RequiredInstrumentsAndCounts(
-        NonEmptyMap(
-          input.recruitedInstruments.entries.associate { e -> Pair(Instrument.valueOf(e.key.name), e.value) }
-        )
-      ),
-      Memo(input.memo)
-    )
-    val recruitment = Recruitment.recruit(
-      domainEventIdFactory,
-      recruitmentIdFactory,
-      recruitCommand
-    )
+    val recruitCommand =
+      RecruitCommand(
+        PlayerId.from(input.owner),
+        input.ownerInstruments.map { i -> Instrument.valueOf(i.name) },
+        SongTitle(input.songTitle),
+        Artist(input.artist),
+        RecruitmentName(input.name),
+        input.genre.map { g -> MusicGenre.valueOf(g.name) },
+        DeadLine(input.deadline),
+        input.requiredGenerations
+          .map { r ->
+            when (r) {
+              RecruitCommandInput.RequiredGenerationType.TEEN -> RequiredGeneration.TEEN
+              RecruitCommandInput.RequiredGenerationType.TWENTIES -> RequiredGeneration.TWENTIES
+              RecruitCommandInput.RequiredGenerationType.THIRTIES -> RequiredGeneration.THIRTIES
+              RecruitCommandInput.RequiredGenerationType.FORTIES -> RequiredGeneration.FORTIES
+              RecruitCommandInput.RequiredGenerationType.FIFTIES -> RequiredGeneration.FIFTIES
+              RecruitCommandInput.RequiredGenerationType.MORE_THAN_SIXTIES ->
+                RequiredGeneration.MORE_THAN_SIXTIES
+            }
+          }.toSet(),
+        input.requiredGenders
+          .map { gender ->
+            when (gender) {
+              RecruitCommandInput.RequiredGenderType.MALE_ONLY -> RequiredGender.MALE_ONLY
+              RecruitCommandInput.RequiredGenderType.FEMALE_ONLY -> RequiredGender.FEMALE_ONLY
+              RecruitCommandInput.RequiredGenderType.OTHER -> RequiredGender.OTHER
+            }
+          }.toSet(),
+        RequiredInstrumentsAndCounts(
+          NonEmptyMap(
+            input.recruitedInstruments.entries.associate { e ->
+              Pair(Instrument.valueOf(e.key.name), e.value)
+            },
+          ),
+        ),
+        Memo(input.memo),
+      )
+    val recruitment =
+      Recruitment.recruit(
+        domainEventIdFactory,
+        recruitmentIdFactory,
+        recruitCommand,
+      )
     repository.save(recruitment)
 
     // ドメインイベントを発行する
@@ -79,7 +83,7 @@ data class RecruitCommandInput(
   val requiredGenerations: Set<RequiredGenerationType>,
   val requiredGenders: Set<RequiredGenderType>,
   val recruitedInstruments: Map<InstrumentType, Short>,
-  val memo: String
+  val memo: String,
 ) {
   enum class MusicGenreType {
     ROCK,
@@ -88,7 +92,7 @@ data class RecruitCommandInput(
     JAZZ,
     CLASSIC,
     METAL,
-    OTHER
+    OTHER,
   }
 
   enum class InstrumentType {
@@ -99,7 +103,7 @@ data class RecruitCommandInput(
     KEY_BOARD,
     PIANO,
     VIOLIN,
-    OTHER
+    OTHER,
   }
 
   enum class RequiredGenerationType {
@@ -114,7 +118,7 @@ data class RecruitCommandInput(
   enum class RequiredGenderType {
     MALE_ONLY,
     FEMALE_ONLY,
-    OTHER
+    OTHER,
   }
 }
 

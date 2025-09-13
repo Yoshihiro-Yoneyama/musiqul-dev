@@ -20,7 +20,4 @@ data class Recruitment(
 
 // This class is designed to retrieve individual player information.
 @JvmRecord
-data class RecruitmentOwner(
-  val ownerId: UUID,
-  val ownerName: String?,
-)
+data class RecruitmentOwner(val ownerId: UUID, val ownerName: String?)

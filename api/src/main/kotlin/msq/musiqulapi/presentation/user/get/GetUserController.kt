@@ -6,15 +6,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class GetUserController {
   @GetMapping("api/user")
-  fun get(): GetUserResponse {
-    return GetUserResponse(
-      userId = "123",
-      userName = "userName",
-    )
-  }
+  fun get(): GetUserResponse = GetUserResponse(
+    userId = "123",
+    userName = "userName",
+  )
 }
 
-data class GetUserResponse(
-  val userId: String,
-  val userName: String,
-)
+data class GetUserResponse(val userId: String, val userName: String)

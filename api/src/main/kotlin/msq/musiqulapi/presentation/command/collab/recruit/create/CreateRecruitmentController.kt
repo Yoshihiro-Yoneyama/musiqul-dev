@@ -16,14 +16,22 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
       request.owner,
       request.ownerInstruments.map { r ->
         when (r) {
-          CreateRecruitCommandRequest.InstrumentType.VOCAL -> RecruitCommandInput.InstrumentType.VOCAL
-          CreateRecruitCommandRequest.InstrumentType.GUITAR -> RecruitCommandInput.InstrumentType.GUITAR
-          CreateRecruitCommandRequest.InstrumentType.ELECTRIC_BASE -> RecruitCommandInput.InstrumentType.ELECTRIC_BASE
-          CreateRecruitCommandRequest.InstrumentType.DRUM -> RecruitCommandInput.InstrumentType.DRUM
-          CreateRecruitCommandRequest.InstrumentType.KEY_BOARD -> RecruitCommandInput.InstrumentType.KEY_BOARD
-          CreateRecruitCommandRequest.InstrumentType.PIANO -> RecruitCommandInput.InstrumentType.PIANO
-          CreateRecruitCommandRequest.InstrumentType.VIOLIN -> RecruitCommandInput.InstrumentType.VIOLIN
-          CreateRecruitCommandRequest.InstrumentType.OTHER -> RecruitCommandInput.InstrumentType.OTHER
+          CreateRecruitCommandRequest.InstrumentType.VOCAL ->
+            RecruitCommandInput.InstrumentType.VOCAL
+          CreateRecruitCommandRequest.InstrumentType.GUITAR ->
+            RecruitCommandInput.InstrumentType.GUITAR
+          CreateRecruitCommandRequest.InstrumentType.ELECTRIC_BASE ->
+            RecruitCommandInput.InstrumentType.ELECTRIC_BASE
+          CreateRecruitCommandRequest.InstrumentType.DRUM ->
+            RecruitCommandInput.InstrumentType.DRUM
+          CreateRecruitCommandRequest.InstrumentType.KEY_BOARD ->
+            RecruitCommandInput.InstrumentType.KEY_BOARD
+          CreateRecruitCommandRequest.InstrumentType.PIANO ->
+            RecruitCommandInput.InstrumentType.PIANO
+          CreateRecruitCommandRequest.InstrumentType.VIOLIN ->
+            RecruitCommandInput.InstrumentType.VIOLIN
+          CreateRecruitCommandRequest.InstrumentType.OTHER ->
+            RecruitCommandInput.InstrumentType.OTHER
         }
       },
       request.songTitle,
@@ -43,7 +51,8 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
       request.deadline,
       request.requiredGenerations.map { r ->
         when (r) {
-          CreateRecruitCommandRequest.RequiredGenerationType.TEEN -> RecruitCommandInput.RequiredGenerationType.TEEN
+          CreateRecruitCommandRequest.RequiredGenerationType.TEEN ->
+            RecruitCommandInput.RequiredGenerationType.TEEN
           CreateRecruitCommandRequest.RequiredGenerationType.TWENTIES -> RecruitCommandInput.RequiredGenerationType.TWENTIES
           CreateRecruitCommandRequest.RequiredGenerationType.THIRTIES -> RecruitCommandInput.RequiredGenerationType.THIRTIES
           CreateRecruitCommandRequest.RequiredGenerationType.FORTIES -> RecruitCommandInput.RequiredGenerationType.FORTIES
@@ -62,7 +71,8 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
         val instrumentType = when (e.key) {
           CreateRecruitCommandRequest.InstrumentType.VOCAL -> RecruitCommandInput.InstrumentType.VOCAL
           CreateRecruitCommandRequest.InstrumentType.GUITAR -> RecruitCommandInput.InstrumentType.GUITAR
-          CreateRecruitCommandRequest.InstrumentType.ELECTRIC_BASE -> RecruitCommandInput.InstrumentType.ELECTRIC_BASE
+          CreateRecruitCommandRequest.InstrumentType.ELECTRIC_BASE ->
+            RecruitCommandInput.InstrumentType.ELECTRIC_BASE
           CreateRecruitCommandRequest.InstrumentType.DRUM -> RecruitCommandInput.InstrumentType.DRUM
           CreateRecruitCommandRequest.InstrumentType.KEY_BOARD -> RecruitCommandInput.InstrumentType.KEY_BOARD
           CreateRecruitCommandRequest.InstrumentType.PIANO -> RecruitCommandInput.InstrumentType.PIANO
@@ -71,8 +81,8 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
         }
         instrumentType to e.value
       },
-      request.memo
-    )
+      request.memo,
+      )
     val output = recruitmentCommandService.recruit(input)
     return CreateRecruitmentResponse(output.id)
   }
@@ -89,7 +99,7 @@ data class CreateRecruitCommandRequest(
   val requiredGenerations: Set<RequiredGenerationType>,
   val requiredGenders: Set<RequiredGenderType>,
   val recruitedInstruments: Map<InstrumentType, Short>,
-  val memo: String
+  val memo: String,
 ) {
   enum class MusicGenreType {
     ROCK,
@@ -98,7 +108,7 @@ data class CreateRecruitCommandRequest(
     JAZZ,
     CLASSIC,
     METAL,
-    OTHER
+    OTHER,
   }
 
   enum class InstrumentType {
@@ -109,7 +119,7 @@ data class CreateRecruitCommandRequest(
     KEY_BOARD,
     PIANO,
     VIOLIN,
-    OTHER
+    OTHER,
   }
 
   enum class RequiredGenerationType {
@@ -124,10 +134,8 @@ data class CreateRecruitCommandRequest(
   enum class RequiredGenderType {
     MALE_ONLY,
     FEMALE_ONLY,
-    OTHER
+    OTHER,
   }
 }
 
-data class CreateRecruitmentResponse(
-  val id: UUID
-)
+data class CreateRecruitmentResponse(val id: UUID)

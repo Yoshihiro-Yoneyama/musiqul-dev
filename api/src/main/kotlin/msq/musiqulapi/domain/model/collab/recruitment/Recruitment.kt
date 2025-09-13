@@ -10,32 +10,46 @@ sealed interface Recruitment {
   // イベントは複数個発生する可能性があるので、Listで保持する
   /** 発生したドメインイベントのリスト */
   val occurredEvents: List<DomainEvent>
+
   /** 募集ID */
   val id: RecruitmentId
+
   /** 募集のオーナーID */
   val owner: PlayerId
+
   /** オーナーの使用可能楽器 */
   val ownerInstruments: List<Instrument>
+
   /** 募集の詳細情報 */
   val songTitle: SongTitle // デフォルト空文字列
+
   /** アーティスト名 */
   val artist: Artist // デフォルト空文字列
+
   /** 募集名 */
   val name: RecruitmentName
+
   /** ジャンル */
   val genres: List<MusicGenre>
+
   /** 締め切り日時 */
   val deadline: DeadLine
+
   /** 必須世代 */
   val requiredGenerations: Set<RequiredGeneration>
+
   /** 必須性別 */
   val requiredGender: Set<RequiredGender>
+
   /** 募集楽器とその人数 */
   val recruitedInstruments: RequiredInstrumentsAndCounts
+
   /** メモ */
   val memo: Memo // デフォルト空文字列
+
   /** 募集の状態 */
   val recruitmentStatus: RecruitmentStatus
+
   /** 削除可否 */
   val deleted: Boolean
 

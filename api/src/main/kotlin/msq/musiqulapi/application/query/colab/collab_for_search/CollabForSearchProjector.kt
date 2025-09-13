@@ -9,25 +9,27 @@ import org.springframework.stereotype.Component
 @Component
 class CollabForSearchProjector(
   val recruitmentRepository: RecruitmentRepository,
-  val collabForSearchQueryRepository: CollabForSearchQueryRepository
+  val collabForSearchQueryRepository: CollabForSearchQueryRepository,
 ) {
   /**
    * コラボ募集一覧リードモデルを登録
    */
   @EventListener
   fun putRecruitment(event: RecruitedEvent) {
-    val recruitmentReadModel = Recruitment(
-      event.id.value,
-      event.owner.value,
-      event.name.value,
-      event.songTitle.value,
-      event.artist.value,
-      event.genres.map(MusicGenre::name),
-      event.deadline.value,
-      event.requiredGenerations.map(RequiredGeneration::name),
-      event.requiredGender.map(RequiredGender::name),
-      event.recruitedInstruments.value.map.keys.map(Instrument::name),
-    )
+    val recruitmentReadModel =
+      Recruitment(
+        event.id.value,
+        event.owner.value,
+        event.name.value,
+        event.songTitle.value,
+        event.artist.value,
+        event.genres.map(MusicGenre::name),
+        event.deadline.value,
+        event.requiredGenerations.map(RequiredGeneration::name),
+        event.requiredGender.map(RequiredGender::name),
+        event.recruitedInstruments.value.map.keys
+          .map(Instrument::name),
+      )
     println("**************イベント検知****************")
 
     collabForSearchQueryRepository.saveRecruitment(recruitmentReadModel)
@@ -38,7 +40,8 @@ class CollabForSearchProjector(
    */
   @EventListener
   fun editRecruitmentReadModel(event: RecruitmentEditedEvent) {
-    recruitmentRepository.findById(event.id)
+    recruitmentRepository
+      .findById(event.id)
       .map { recruitment ->
         Recruitment(
           event.id.value,
@@ -50,15 +53,16 @@ class CollabForSearchProjector(
           event.deadline.value,
           event.requiredGenerations.map(RequiredGeneration::name),
           event.requiredGenders.map(RequiredGender::name),
-          event.recruitedInstruments.value.map.keys.map(Instrument::name),
+          event.recruitedInstruments.value.map.keys
+            .map(Instrument::name),
         )
-      }
-      .fold(
-        { error -> throw RuntimeException(error.error) },  // Left の場合は例外をスロー
-        { recruitmentReadModel -> collabForSearchQueryRepository.saveRecruitment(recruitmentReadModel) }
+      }.fold(
+        { error -> throw RuntimeException(error.error) }, // Left の場合は例外をスロー
+        { recruitmentReadModel ->
+          collabForSearchQueryRepository.saveRecruitment(recruitmentReadModel)
+        },
       )
   }
-
 
 //  @EventListener
 //  fun deleteRecruitmentReadModel(event: RecruitmentClosedEvent) {

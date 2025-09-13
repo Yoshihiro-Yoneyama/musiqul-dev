@@ -11,19 +11,19 @@ import java.util.*
 @Component
 class RecruitmentMapper(val dslContext: DSLContext) {
   fun upsert(recruitment: RecruitmentRecord) {
-    dslContext.insertInto(
-      RECRUITMENT,
-      RECRUITMENT.RECRUITMENT_ID,
-      RECRUITMENT.NAME,
-      RECRUITMENT.OWNER_ID,
-      RECRUITMENT.SONG_TITLE,
-      RECRUITMENT.ARTIST,
-      RECRUITMENT.DEADLINE,
-      RECRUITMENT.MEMO,
-      RECRUITMENT.STATUS,
-      RECRUITMENT.DELETED,
-    )
-      .values(
+    dslContext
+      .insertInto(
+        RECRUITMENT,
+        RECRUITMENT.RECRUITMENT_ID,
+        RECRUITMENT.NAME,
+        RECRUITMENT.OWNER_ID,
+        RECRUITMENT.SONG_TITLE,
+        RECRUITMENT.ARTIST,
+        RECRUITMENT.DEADLINE,
+        RECRUITMENT.MEMO,
+        RECRUITMENT.STATUS,
+        RECRUITMENT.DELETED,
+      ).values(
         recruitment.id,
         recruitment.name,
         recruitment.owner,
@@ -32,9 +32,8 @@ class RecruitmentMapper(val dslContext: DSLContext) {
         recruitment.deadline,
         recruitment.memo,
         recruitment.recruitmentStatus,
-        recruitment.deleted
-      )
-      .onConflict(RECRUITMENT.RECRUITMENT_ID)
+        recruitment.deleted,
+      ).onConflict(RECRUITMENT.RECRUITMENT_ID)
       .doUpdate()
       .set(RECRUITMENT.NAME, excluded(RECRUITMENT.NAME))
       .set(RECRUITMENT.OWNER_ID, excluded(RECRUITMENT.OWNER_ID))
@@ -57,5 +56,5 @@ data class RecruitmentRecord(
   val deadline: LocalDateTime,
   val memo: String,
   val recruitmentStatus: RecruitmentStatusType,
-  val deleted: Boolean
+  val deleted: Boolean,
 )

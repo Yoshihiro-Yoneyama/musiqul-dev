@@ -10,7 +10,7 @@ class Task private constructor(
   val description: TaskDescription,
   val status: TaskStatus,
   val due: TaskDue,
-  val finishedDate: TaskFinishedDate?
+  val finishedDate: TaskFinishedDate?,
 ) {
   companion object {
     fun create(
@@ -18,15 +18,13 @@ class Task private constructor(
       title: TaskTitle,
       description: TaskDescription,
       due: TaskDue,
-    ): Task {
-      return Task(
-        idFactory.generate(),
-        title,
-        description,
-        TaskStatus.UNDONE,
-        due,
-        null
-      )
-    }
+    ): Task = Task(
+      idFactory.generate(),
+      title,
+      description,
+      TaskStatus.UNDONE,
+      due,
+      null,
+    )
   }
 }

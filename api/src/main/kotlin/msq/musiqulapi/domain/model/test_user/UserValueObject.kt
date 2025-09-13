@@ -20,9 +20,7 @@ value class MailAddress(val value: String) {
 @Value(staticConstructor = "of")
 value class UserId(val value: String) {
   companion object {
-    fun generate(): UserId {
-      return UserId(UUID.randomUUID().toString())
-    }
+    fun generate(): UserId = UserId(UUID.randomUUID().toString())
   }
 }
 

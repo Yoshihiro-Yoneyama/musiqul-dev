@@ -31,7 +31,7 @@ data class EditRecruitmentCommandInput(
   val requiredGenerations: Set<RequiredGenerationType>,
   val requiredGenders: Set<RequiredGenderType>,
   val recruitedInstruments: Map<InstrumentType, Short>,
-  val memo: String
+  val memo: String,
 )
 
 data class EditRecruitmentOutput(val id: UUID)

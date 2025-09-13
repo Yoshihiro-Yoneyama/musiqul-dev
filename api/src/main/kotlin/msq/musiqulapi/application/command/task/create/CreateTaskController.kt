@@ -1,10 +1,5 @@
 package msq.musiqulapi.application.command.task.create
 
-class CreateTaskController {
-}
+class CreateTaskController
 
-data class CreateTaskRequest(
-    val title: String,
-    val description: String,
-    val deadline: String,
-)
+data class CreateTaskRequest(val title: String, val description: String, val deadline: String)

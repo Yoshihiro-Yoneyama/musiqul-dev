@@ -10,9 +10,7 @@ private const val TASK_DESCRIPTION_MAX_LENGTH = 300
 @JvmInline
 value class TaskId private constructor(val value: UUID) {
   companion object {
-    fun reconstruct(id: UUID): TaskId {
-      return TaskId(id)
-    }
+    fun reconstruct(id: UUID): TaskId = TaskId(id)
   }
 }
 
@@ -38,19 +36,24 @@ value class TaskDescription(val value: String) {
 
 enum class TaskStatus(val value: String) {
   UNDONE("undone"),
-  DONE("done");
+  DONE("done"),
+  ;
 
   companion object {
     fun TaskStatus.done(): TaskStatus {
       if (this != UNDONE) {
-        throw IllegalStateException("Cannot mark a task as done unless it is currently undone.")
+        throw IllegalStateException(
+          "Cannot mark a task as done unless it is currently undone.",
+        )
       }
       return DONE
     }
 
     fun TaskStatus.undone(): TaskStatus {
       if (this != DONE) {
-        throw IllegalStateException("Cannot mark a task as undone unless it is currently done.")
+        throw IllegalStateException(
+          "Cannot mark a task as undone unless it is currently done.",
+        )
       }
       return UNDONE
     }

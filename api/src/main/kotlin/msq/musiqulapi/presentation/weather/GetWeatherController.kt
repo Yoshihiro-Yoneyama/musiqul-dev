@@ -22,19 +22,13 @@ class GetWeatherController(val factory: IdFactory<TaskId>) {
   }
 }
 
-data class GetWeatherResponse(
-  val weatherId: String,
-  val label: String,
-  val title: String,
-)
+data class GetWeatherResponse(val weatherId: String, val label: String, val title: String)
 
 fun koukai(print: () -> String) {
   print()
 }
 
-fun print(): String {
- return "aaa";
-}
+fun print(): String = "aaa"
 
 fun koukai2(kannsuu: (str: String) -> Int): Int {
   val v = "a"
@@ -42,6 +36,9 @@ fun koukai2(kannsuu: (str: String) -> Int): Int {
 }
 
 fun kannsuu(str: String): String {
-  if (str == "a") return "aaa"
-  else return "bbb"
+  if (str == "a") {
+    return "aaa"
+  } else {
+    return "bbb"
+  }
 }

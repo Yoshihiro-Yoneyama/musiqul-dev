@@ -4,7 +4,7 @@ import msq.musiqulapi.application.query.colab.find_recruitment.RecruitmentFindIn
 import msq.musiqulapi.application.query.colab.find_recruitment.RecruitmentFindOutput
 import msq.musiqulapi.application.query.colab.find_recruitment.RecruitmentFindQueryService
 
-class RecruitmentFindQueryServiceImpl: RecruitmentFindQueryService {
+class RecruitmentFindQueryServiceImpl : RecruitmentFindQueryService {
   override fun findRecruitment(input: RecruitmentFindInput): RecruitmentFindOutput {
     TODO("Not yet implemented")
   }

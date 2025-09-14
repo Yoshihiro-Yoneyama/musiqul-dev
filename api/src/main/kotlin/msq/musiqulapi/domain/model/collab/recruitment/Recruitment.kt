@@ -3,6 +3,10 @@ package msq.musiqulapi.domain.model.collab.recruitment
 import msq.musiqulapi.domain.DomainEvent
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.player.PlayerId
+import msq.musiqulapi.domain.model.util.Gender
+import msq.musiqulapi.domain.model.util.Generation
+import msq.musiqulapi.domain.model.util.Instrument
+import msq.musiqulapi.domain.model.util.MusicGenre
 import msq.musiqulapi.lib.IdFactory
 
 /** 募集 */
@@ -36,10 +40,10 @@ sealed interface Recruitment {
   val deadline: DeadLine
 
   /** 必須世代 */
-  val requiredGenerations: Set<RequiredGeneration>
+  val requiredGenerations: Set<Generation>
 
   /** 必須性別 */
-  val requiredGender: Set<RequiredGender>
+  val gender: Set<Gender>
 
   /** 募集楽器とその人数 */
   val recruitedInstruments: RequiredInstrumentsAndCounts
@@ -82,7 +86,7 @@ sealed interface Recruitment {
           command.genres,
           command.deadline,
           command.requiredGenerations,
-          command.requiredGender,
+          command.gender,
           command.recruitedInstruments,
           command.memo,
         )
@@ -97,7 +101,7 @@ sealed interface Recruitment {
         command.genres,
         command.deadline,
         command.requiredGenerations,
-        command.requiredGender,
+        command.gender,
         command.recruitedInstruments,
         command.memo,
         RecruitmentStatus.OPEN,
@@ -126,7 +130,7 @@ sealed interface Recruitment {
         command.genres,
         command.deadline,
         command.requiredGenerations,
-        command.requiredGender,
+        command.gender,
         command.recruitedInstruments,
         command.memo,
       )
@@ -142,7 +146,7 @@ sealed interface Recruitment {
           genres = command.genres,
           deadline = command.deadline,
           requiredGenerations = command.requiredGenerations,
-          requiredGender = command.requiredGender,
+          gender = command.gender,
           recruitedInstruments = command.recruitedInstruments,
           memo = command.memo,
         )
@@ -183,8 +187,8 @@ sealed interface Recruitment {
     override val name: RecruitmentName,
     override val genres: List<MusicGenre>,
     override val deadline: DeadLine,
-    override val requiredGenerations: Set<RequiredGeneration>,
-    override val requiredGender: Set<RequiredGender>,
+    override val requiredGenerations: Set<Generation>,
+    override val gender: Set<Gender>,
     override val recruitedInstruments: RequiredInstrumentsAndCounts,
     override val memo: Memo, // デフォルト空文字列
     override val recruitmentStatus: RecruitmentStatus,
@@ -201,8 +205,8 @@ data class RecruitCommand(
   val name: RecruitmentName,
   val genres: List<MusicGenre>,
   val deadline: DeadLine,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: Set<RequiredGender>,
+  val requiredGenerations: Set<Generation>,
+  val gender: Set<Gender>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo,
 )
@@ -215,8 +219,8 @@ data class RecruitEditedCommand(
   val name: RecruitmentName,
   val genres: List<MusicGenre>,
   val deadline: DeadLine,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: Set<RequiredGender>,
+  val requiredGenerations: Set<Generation>,
+  val gender: Set<Gender>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo,
 )
@@ -232,8 +236,8 @@ data class RecruitedEvent(
   val name: RecruitmentName,
   val genres: List<MusicGenre>,
   val deadline: DeadLine,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGender: Set<RequiredGender>,
+  val requiredGenerations: Set<Generation>,
+  val gender: Set<Gender>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo,
 ) : DomainEvent
@@ -248,8 +252,8 @@ data class RecruitmentEditedEvent(
   val name: RecruitmentName,
   val genres: List<MusicGenre>,
   val deadline: DeadLine,
-  val requiredGenerations: Set<RequiredGeneration>,
-  val requiredGenders: Set<RequiredGender>,
+  val requiredGenerations: Set<Generation>,
+  val genders: Set<Gender>,
   val recruitedInstruments: RequiredInstrumentsAndCounts,
   val memo: Memo,
 ) : DomainEvent

@@ -1,11 +1,17 @@
 package msq.musiqulapi.application.query.colab.collab_for_search
 
 import msq.musiqulapi.domain.model.collab.recruitment.*
+import msq.musiqulapi.domain.model.util.Generation
+import msq.musiqulapi.domain.model.util.Instrument
+import msq.musiqulapi.domain.model.util.MusicGenre
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 
 // TODO リードモデルの永続化を行なうロジックを追加する
 
+/**
+ * コラボ募集一覧リードモデルを登録・更新するプロジェクター
+ */
 @Component
 class CollabForSearchProjector(
   val recruitmentRepository: RecruitmentRepository,
@@ -25,8 +31,8 @@ class CollabForSearchProjector(
         event.artist.value,
         event.genres.map(MusicGenre::name),
         event.deadline.value,
-        event.requiredGenerations.map(RequiredGeneration::name),
-        event.requiredGender.map(RequiredGender::name),
+        event.requiredGenerations.map(Generation::name),
+        event.gender.map(Gender::name),
         event.recruitedInstruments.value.map.keys
           .map(Instrument::name),
       )
@@ -51,8 +57,8 @@ class CollabForSearchProjector(
           event.name.value,
           event.genres.map(MusicGenre::name),
           event.deadline.value,
-          event.requiredGenerations.map(RequiredGeneration::name),
-          event.requiredGenders.map(RequiredGender::name),
+          event.requiredGenerations.map(Generation::name),
+          event.genders.map(Gender::name),
           event.recruitedInstruments.value.map.keys
             .map(Instrument::name),
         )

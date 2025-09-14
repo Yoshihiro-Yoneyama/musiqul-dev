@@ -1,5 +1,6 @@
 package msq.musiqulapi.domain.model.collab.recruitment
 
+import msq.musiqulapi.domain.model.util.Instrument
 import msq.musiqulapi.lib.NonEmptyMap
 import java.time.Instant
 import java.util.*
@@ -22,16 +23,6 @@ value class RecruitmentName(val value: String) {
       "Recruitment name must be $MAX_LENGTH characters or less"
     }
   }
-}
-
-enum class MusicGenre {
-  ROCK,
-  J_POP,
-  ANIME,
-  JAZZ,
-  CLASSIC,
-  METAL,
-  OTHER,
 }
 
 @JvmInline
@@ -60,34 +51,8 @@ value class Artist(val value: String) {
   }
 }
 
-enum class Instrument {
-  VOCAL,
-  GUITAR,
-  ELECTRIC_BASE,
-  DRUM,
-  KEY_BOARD,
-  PIANO,
-  VIOLIN,
-  OTHER,
-}
-
 @JvmInline
 value class RequiredInstrumentsAndCounts(val value: NonEmptyMap<Instrument, Short>)
-
-enum class RequiredGeneration {
-  TEEN,
-  TWENTIES,
-  THIRTIES,
-  FORTIES,
-  FIFTIES,
-  MORE_THAN_SIXTIES,
-}
-
-enum class RequiredGender {
-  MALE_ONLY,
-  FEMALE_ONLY,
-  OTHER,
-}
 
 @JvmInline
 value class DeadLine(val value: Instant)

@@ -1,6 +1,9 @@
 package msq.musiqulapi.infrastructure.command.collab.recruitment
 
 import msq.musiqulapi.domain.model.collab.recruitment.*
+import msq.musiqulapi.domain.model.util.Generation
+import msq.musiqulapi.domain.model.util.Instrument
+import msq.musiqulapi.domain.model.util.MusicGenre
 import msq.musiqulapi.infrastructure.mapper.command.collab.recruitment.RecruitmentRecord
 import nu.studer.sample.enums.*
 import nu.studer.sample.tables.references.*
@@ -81,12 +84,12 @@ class RecruitmentTranslator(private val dslContext: DSLContext) {
   ): List<Record2<UUID?, RequiredGenerationType?>> = recruitment.requiredGenerations.map { r ->
     val generation =
       when (r) {
-        RequiredGeneration.TEEN -> RequiredGenerationType.TEEN
-        RequiredGeneration.TWENTIES -> RequiredGenerationType.TWENTIES
-        RequiredGeneration.THIRTIES -> RequiredGenerationType.THIRTIES
-        RequiredGeneration.FORTIES -> RequiredGenerationType.FORTIES
-        RequiredGeneration.FIFTIES -> RequiredGenerationType.FIFTIES
-        RequiredGeneration.MORE_THAN_SIXTIES -> RequiredGenerationType.MORE_THAN_SIXTIES
+        Generation.TEEN -> RequiredGenerationType.TEEN
+        Generation.TWENTIES -> RequiredGenerationType.TWENTIES
+        Generation.THIRTIES -> RequiredGenerationType.THIRTIES
+        Generation.FORTIES -> RequiredGenerationType.FORTIES
+        Generation.FIFTIES -> RequiredGenerationType.FIFTIES
+        Generation.MORE_THAN_SIXTIES -> RequiredGenerationType.MORE_THAN_SIXTIES
       }
 
     val record =
@@ -100,12 +103,12 @@ class RecruitmentTranslator(private val dslContext: DSLContext) {
   }
 
   fun toRequiredGenderType(recruitment: Recruitment): List<Record2<UUID?, RequiredGenderType?>> =
-    recruitment.requiredGender.map { r ->
+    recruitment.gender.map { r ->
       val gender =
         when (r) {
-          RequiredGender.MALE_ONLY -> RequiredGenderType.MALE_ONLY
-          RequiredGender.FEMALE_ONLY -> RequiredGenderType.FEMALE_ONLY
-          RequiredGender.OTHER -> RequiredGenderType.OTHER
+          Gender.MALE_ONLY -> RequiredGenderType.MALE_ONLY
+          Gender.FEMALE_ONLY -> RequiredGenderType.FEMALE_ONLY
+          Gender.OTHER -> RequiredGenderType.OTHER
         }
       val record =
         dslContext.newRecord(

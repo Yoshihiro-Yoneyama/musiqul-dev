@@ -3,6 +3,7 @@ package msq.musiqulapi.application.command.collab.recruit
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.recruitment.*
 import msq.musiqulapi.domain.model.player.PlayerId
+import msq.musiqulapi.domain.model.util.MusicGenre
 import msq.musiqulapi.lib.IdFactory
 import msq.musiqulapi.lib.NonEmptyMap
 import org.springframework.context.ApplicationEventPublisher
@@ -43,9 +44,9 @@ class RecruitCommandService(
         input.requiredGenders
           .map { gender ->
             when (gender) {
-              RecruitCommandInput.RequiredGenderType.MALE_ONLY -> RequiredGender.MALE_ONLY
-              RecruitCommandInput.RequiredGenderType.FEMALE_ONLY -> RequiredGender.FEMALE_ONLY
-              RecruitCommandInput.RequiredGenderType.OTHER -> RequiredGender.OTHER
+              RecruitCommandInput.RequiredGenderType.MALE_ONLY -> Gender.MALE_ONLY
+              RecruitCommandInput.RequiredGenderType.FEMALE_ONLY -> Gender.FEMALE_ONLY
+              RecruitCommandInput.RequiredGenderType.OTHER -> Gender.OTHER
             }
           }.toSet(),
         RequiredInstrumentsAndCounts(

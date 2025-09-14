@@ -27,10 +27,20 @@ value class NumOfCollabParticipation(val value: Int) {
   }
 }
 
-
 @JvmInline
 value class NumOfFan(val value: Int) {
   init {
     require(value >= 0) { "Number of fans must be non-negative" }
+  }
+}
+
+@JvmInline
+value class Description(val value: String) {
+  companion object {
+    private const val MAX_LENGTH = 500
+  }
+  init {
+    require(value.isEmpty()) { "Description must not be empty" }
+    require(value.length <= MAX_LENGTH) { "Description must be $MAX_LENGTH characters or less" }
   }
 }

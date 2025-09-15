@@ -52,12 +52,12 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
       request.requiredGenerations.map { r ->
         when (r) {
           CreateRecruitCommandRequest.RequiredGenerationType.TEEN ->
-            RecruitCommandInput.RequiredGenerationType.TEEN
-          CreateRecruitCommandRequest.RequiredGenerationType.TWENTIES -> RecruitCommandInput.RequiredGenerationType.TWENTIES
-          CreateRecruitCommandRequest.RequiredGenerationType.THIRTIES -> RecruitCommandInput.RequiredGenerationType.THIRTIES
-          CreateRecruitCommandRequest.RequiredGenerationType.FORTIES -> RecruitCommandInput.RequiredGenerationType.FORTIES
-          CreateRecruitCommandRequest.RequiredGenerationType.FIFTIES -> RecruitCommandInput.RequiredGenerationType.FIFTIES
-          CreateRecruitCommandRequest.RequiredGenerationType.MORE_THAN_SIXTIES -> RecruitCommandInput.RequiredGenerationType.MORE_THAN_SIXTIES
+            RecruitCommandInput.GenerationType.TEEN
+          CreateRecruitCommandRequest.RequiredGenerationType.TWENTIES -> RecruitCommandInput.GenerationType.TWENTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.THIRTIES -> RecruitCommandInput.GenerationType.THIRTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.FORTIES -> RecruitCommandInput.GenerationType.FORTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.FIFTIES -> RecruitCommandInput.GenerationType.FIFTIES
+          CreateRecruitCommandRequest.RequiredGenerationType.MORE_THAN_SIXTIES -> RecruitCommandInput.GenerationType.MORE_THAN_SIXTIES
         }
       }.toSet(),
       request.requiredGenders.map { r ->

@@ -3,6 +3,9 @@ package msq.musiqulapi.application.command.collab.recruit
 import msq.musiqulapi.domain.DomainEventId
 import msq.musiqulapi.domain.model.collab.recruitment.*
 import msq.musiqulapi.domain.model.player.PlayerId
+import msq.musiqulapi.domain.model.util.Gender
+import msq.musiqulapi.domain.model.util.Generation
+import msq.musiqulapi.domain.model.util.Instrument
 import msq.musiqulapi.domain.model.util.MusicGenre
 import msq.musiqulapi.lib.IdFactory
 import msq.musiqulapi.lib.NonEmptyMap
@@ -29,16 +32,16 @@ class RecruitCommandService(
         RecruitmentName(input.name),
         input.genre.map { g -> MusicGenre.valueOf(g.name) },
         DeadLine(input.deadline),
-        input.requiredGenerations
+        input.Generations
           .map { r ->
             when (r) {
-              RecruitCommandInput.RequiredGenerationType.TEEN -> RequiredGeneration.TEEN
-              RecruitCommandInput.RequiredGenerationType.TWENTIES -> RequiredGeneration.TWENTIES
-              RecruitCommandInput.RequiredGenerationType.THIRTIES -> RequiredGeneration.THIRTIES
-              RecruitCommandInput.RequiredGenerationType.FORTIES -> RequiredGeneration.FORTIES
-              RecruitCommandInput.RequiredGenerationType.FIFTIES -> RequiredGeneration.FIFTIES
-              RecruitCommandInput.RequiredGenerationType.MORE_THAN_SIXTIES ->
-                RequiredGeneration.MORE_THAN_SIXTIES
+              RecruitCommandInput.GenerationType.TEEN -> Generation.TEEN
+              RecruitCommandInput.GenerationType.TWENTIES -> Generation.TWENTIES
+              RecruitCommandInput.GenerationType.THIRTIES -> Generation.THIRTIES
+              RecruitCommandInput.GenerationType.FORTIES -> Generation.FORTIES
+              RecruitCommandInput.GenerationType.FIFTIES -> Generation.FIFTIES
+              RecruitCommandInput.GenerationType.MORE_THAN_SIXTIES ->
+                Generation.MORE_THAN_SIXTIES
             }
           }.toSet(),
         input.requiredGenders
@@ -81,7 +84,7 @@ data class RecruitCommandInput(
   val name: String,
   val genre: List<MusicGenreType>,
   val deadline: Instant,
-  val requiredGenerations: Set<RequiredGenerationType>,
+  val Generations: Set<GenerationType>,
   val requiredGenders: Set<RequiredGenderType>,
   val recruitedInstruments: Map<InstrumentType, Short>,
   val memo: String,
@@ -107,7 +110,7 @@ data class RecruitCommandInput(
     OTHER,
   }
 
-  enum class RequiredGenerationType {
+  enum class GenerationType {
     TEEN,
     TWENTIES,
     THIRTIES,

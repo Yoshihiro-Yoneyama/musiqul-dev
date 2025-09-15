@@ -1,6 +1,7 @@
 package msq.musiqulapi.infrastructure.command.collab.recruitment
 
 import msq.musiqulapi.domain.model.collab.recruitment.*
+import msq.musiqulapi.domain.model.util.Gender
 import msq.musiqulapi.domain.model.util.Generation
 import msq.musiqulapi.domain.model.util.Instrument
 import msq.musiqulapi.domain.model.util.MusicGenre

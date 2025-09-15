@@ -28,7 +28,7 @@ data class EditRecruitmentCommandInput(
   val name: String,
   val genre: List<MusicGenreType>,
   val deadline: Instant,
-  val requiredGenerations: Set<RequiredGenerationType>,
+  val requiredGenerations: Set<GenerationType>,
   val requiredGenders: Set<RequiredGenderType>,
   val recruitedInstruments: Map<InstrumentType, Short>,
   val memo: String,

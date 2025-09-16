@@ -24,13 +24,13 @@ help:
 # Initial setup
 setup:
 	@echo "Setting up project..."
-	docker-compose pull
+	docker compose pull
 	cd workspace/musiqul-web && npm install
 
 # Build all services
 build:
 	@echo "Building all services..."
-	docker-compose build
+	docker compose build
 
 # Run tests
 test:
@@ -42,12 +42,12 @@ test:
 # Start all services in background
 start:
 	@echo "Starting all services..."
-	docker-compose up -d
+	docker compose up -d
 
 # Stop all services
 stop:
 	@echo "Stopping all services..."
-	docker-compose down
+	docker compose down
 
 # Clean build artifacts
 clean:
@@ -58,7 +58,7 @@ clean:
 # Development environment
 dev: migrate-up
 	@echo "Starting development environment..."
-	docker-compose up
+	docker compose up
 
 # API development
 dev-api:
@@ -73,15 +73,15 @@ dev-web:
 # Database migrations
 migrate-up:
 	@echo "Running database migrations..."
-	docker-compose run --rm flyway migrate
+	docker compose run --rm flyway migrate
 
 migrate-info:
 	@echo "Checking migration status..."
-	docker-compose run --rm flyway info
+	docker compose run --rm flyway info
 
 migrate-clean:
 	@echo "Cleaning database..."
-	docker-compose run --rm flyway clean
+	docker compose run --rm flyway clean
 
 # JOOQ code generation
 jooq-generate: migrate-up
@@ -95,6 +95,6 @@ lint:
 
 # Reset database and regenerate JOOQ classes
 db-reset:
-	docker-compose down db -v
-	docker-compose up -d db
+	docker compose down db -v
+	docker compose up -d db
 	@make jooq-generate

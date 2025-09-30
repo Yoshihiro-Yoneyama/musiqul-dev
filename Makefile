@@ -88,7 +88,7 @@ jooq-generate: migrate-up
 	@echo "Generating JOOQ classes from database..."
 	cd workspace/musiqul-api && ./gradlew generateJooq
 
-# Linting
+# Linting　テスト
 lint:
 	@echo "Running web linting..."
 	cd workspace/musiqul-web && npm run lint

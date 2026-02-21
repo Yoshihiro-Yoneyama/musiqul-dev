@@ -32,7 +32,7 @@ class RecruitCommandService(
         RecruitmentName(input.name),
         input.genre.map { g -> MusicGenre.valueOf(g.name) },
         DeadLine(input.deadline),
-        input.Generations
+        input.generations
           .map { r ->
             when (r) {
               RecruitCommandInput.GenerationType.TEEN -> Generation.TEEN
@@ -84,7 +84,7 @@ data class RecruitCommandInput(
   val name: String,
   val genre: List<MusicGenreType>,
   val deadline: Instant,
-  val Generations: Set<GenerationType>,
+  val generations: Set<GenerationType>,
   val requiredGenders: Set<RequiredGenderType>,
   val recruitedInstruments: Map<InstrumentType, Short>,
   val memo: String,

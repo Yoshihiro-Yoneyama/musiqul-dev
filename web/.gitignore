@@ -9,6 +9,10 @@
 # testing
 /coverage
 
+# playwright
+/playwright-report
+/test-results
+
 # next.js
 /.next/
 /out/
@@ -39,4 +43,7 @@ next-env.d.ts
 /.idea
 
 *storybook.log
+
+CLAUDE.md
+.claude/*
 

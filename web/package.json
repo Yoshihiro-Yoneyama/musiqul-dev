@@ -8,6 +8,9 @@
     "build": "tsc --noEmit && next build",
     "start": "tsc --noEmit && next start",
     "lint": "next lint",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -45,6 +48,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@chromatic-com/storybook": "^3.2.2",
     "@mdx-js/react": "^3.0.1",
+    "@playwright/test": "^1.58.2",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",

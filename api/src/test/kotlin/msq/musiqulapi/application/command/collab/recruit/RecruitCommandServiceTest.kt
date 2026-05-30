@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:function-naming")
+
 package msq.musiqulapi.application.command.collab.recruit
 
 import msq.musiqulapi.domain.DomainEventId

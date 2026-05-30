@@ -28,6 +28,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
+  implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("org.projectlombok:lombok")
   implementation("org.postgresql:postgresql:42.7.7")
   // jooq

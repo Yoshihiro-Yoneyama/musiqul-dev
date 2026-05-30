@@ -1,7 +1,7 @@
 package msq.musiqulapi.presentation.auth
 
-import msq.musiqulapi.domain.model.user_account.Email
-import msq.musiqulapi.domain.model.user_account.UserAccountRepository
+import msq.musiqulapi.domain.model.player_account.Email
+import msq.musiqulapi.domain.model.player_account.PlayerAccountRepository
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -13,14 +13,14 @@ import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 
 /**
- * メールアドレス + パスワードでユーザーを認証する。
+ * メールアドレス + パスワードでプレイヤーを認証する。
  * 認証の成否に関わらず BadCredentialsException(401) に集約し、
  * アカウント存在有無を区別させない。
  * JOOQ リポジトリはブロッキングのため boundedElastic で実行する。
  */
 @Component
-class UserAccountAuthenticationManager(
-  private val userAccountRepository: UserAccountRepository,
+class PlayerAccountAuthenticationManager(
+  private val playerAccountRepository: PlayerAccountRepository,
   private val passwordEncoder: PasswordEncoder,
 ) : ReactiveAuthenticationManager {
 
@@ -37,7 +37,7 @@ class UserAccountAuthenticationManager(
         }
 
       val account =
-        userAccountRepository.findByEmail(email)
+        playerAccountRepository.findByEmail(email)
           ?: throw BadCredentialsException("Invalid credentials")
 
       if (!passwordEncoder.matches(rawPassword, account.passwordHash.value)) {

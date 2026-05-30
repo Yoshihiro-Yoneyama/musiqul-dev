@@ -1,11 +1,11 @@
-package msq.musiqulapi.domain.model.user_account
+package msq.musiqulapi.domain.model.player_account
 
 import java.util.UUID
 
 @JvmInline
-value class UserAccountId private constructor(val value: UUID) {
+value class PlayerAccountId private constructor(val value: UUID) {
   companion object {
-    fun from(id: UUID): UserAccountId = UserAccountId(id)
+    fun from(id: UUID): PlayerAccountId = PlayerAccountId(id)
   }
 }
 

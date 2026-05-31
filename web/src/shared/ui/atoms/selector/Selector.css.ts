@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { color } from "@/shared/themes/color.css";
 
 export const selectorStyles = {
   default: style({
@@ -7,7 +8,7 @@ export const selectorStyles = {
     border: "none",
     width: "280px",
     height: "40px",
-    backgroundColor: "#1F1F1F",
+    backgroundColor: color.fieldBg,
   }),
   hover: style({
     backgroundColor: "rgba(31, 31, 31, 0.7)",

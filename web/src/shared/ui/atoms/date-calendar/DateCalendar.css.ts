@@ -1,4 +1,5 @@
 import {style} from '@vanilla-extract/css'
+import {color} from '@/shared/themes/color.css'
 
 export const datePicker = style({
   display: 'flex',
@@ -37,10 +38,24 @@ export const button = style({
 })
 
 export const dateInput = style({
-  padding: '4px 2.5rem 4px 8px',
+  padding: '0 8px',
   display: 'flex',
-  color: '#000000',
-  background: '#FFFFFF'
+  alignItems: 'center',
+  boxSizing: 'border-box',
+  width: '280px',
+  height: '40px',
+  borderRadius: '4px',
+  color: color.white,
+  background: color.fieldBg,
+})
+
+export const toggleButton = style({
+  height: '40px',
+  marginLeft: '-2rem',
+  border: 'none',
+  background: 'transparent',
+  color: color.white,
+  cursor: 'pointer',
 })
 
 export const popover = style({

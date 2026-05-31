@@ -1,9 +1,10 @@
-import {CreateRecruitmentPage} from "@/views/collab/recruitment/createRecruitmentPage";
+import {CreateRecruitment} from "../../../src/views/collab/recruitment/createRecruitment";
 
 const Page = () => {
   return (
     <>
-      <CreateRecruitmentPage/>
+      test
+      <CreateRecruitment/>
     </>
   )
 }

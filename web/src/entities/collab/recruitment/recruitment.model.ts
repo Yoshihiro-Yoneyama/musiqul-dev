@@ -4,7 +4,7 @@ import {validationErrorMessages as messages} from "@/entities/collab/recruitment
 
 export const recruitmentSchema = z.object({
   owner: z.string(),
-  ownerInstruments: z.string().array(),
+  ownerInstruments: z.string().array().min(1, messages.ownerInstruments.minLength),
   songTitle: z.string({ errorMap: customErrorMap })
     .max(500, messages.songTitle.maxLength)
     .optional(),

@@ -84,7 +84,7 @@ const DateCalendar: FC<DatePickerProps> = ({
               />
             )}
           </DateInput>
-          <Button>▼</Button>
+          <Button className={styles.toggleButton}>▼</Button>
         </Group>
         <Popover className={styles.popover}>
           <Dialog>

@@ -52,9 +52,9 @@ const Checkbox: FC<Props> = ({ props, options, selectedValues, onChange }) => {
                 {isIndeterminate ? (
                   ''
                 ) : isSelected ? (
-                  <Icon type="squareCheck" />
+                  <Icon type="squareCheck" color="#ffffff" />
                 ) : (
-                  <Icon type="square" />
+                  <Icon type="square" color="#ffffff" />
                 )}
               </span>
             )}

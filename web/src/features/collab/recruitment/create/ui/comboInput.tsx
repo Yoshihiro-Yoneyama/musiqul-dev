@@ -16,6 +16,8 @@ type Option = {
 type ComboInputProps = {
   /** component title */
   readonly title: string
+  /** 必須バッジを表示するか */
+  readonly displayedRequired?: boolean
   /** default string option */
   readonly defaultStringOption: string
   /** string options */
@@ -32,6 +34,7 @@ type ComboInputProps = {
 
 const ComboInput: React.FC<ComboInputProps> = ({
   title,
+  displayedRequired = false,
   defaultStringOption,
   stringOptions,
   numberOptions,
@@ -65,7 +68,7 @@ const ComboInput: React.FC<ComboInputProps> = ({
     <div className={styles.inputContainer}>
       <div className={styles.titleContainer}>
         {title}
-        <Required displayed={false} />
+        <Required displayed={displayedRequired} />
       </div>
       <Selector
         options={stringOptions}

@@ -1,15 +1,16 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
-const ConfirmPage = () => {
+const ConfirmContent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  
+
   if (!searchParams) {
     return <div>データがありません。フォームに戻ってください。</div>;
   }
-  
+
   // クエリパラメータからデータを取得
   const songTitle = searchParams.get('songTitle') || '未設定';
   const artist = searchParams.get('artist') || '未設定';
@@ -18,7 +19,7 @@ const ConfirmPage = () => {
   const recruitedInstruments = searchParams.get('recruitedInstruments')
     ? new Map(JSON.parse(searchParams.get('recruitedInstruments')!))
     : new Map();
-  
+
   return (
     <div>
       <h1>確認画面</h1>
@@ -35,6 +36,14 @@ const ConfirmPage = () => {
       <button onClick={() => router.back()}>戻る</button>
       <button onClick={() => console.log('送信処理')}>送信する</button>
     </div>
+  );
+};
+
+const ConfirmPage = () => {
+  return (
+    <Suspense fallback={<div>読み込み中...</div>}>
+      <ConfirmContent />
+    </Suspense>
   );
 };
 

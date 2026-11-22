@@ -56,14 +56,14 @@ clean:
 	cd workspace/musiqul-web && rm -rf .next node_modules/.cache
 
 # Development environment
-dev: migrate-up
+dev:
 	@echo "Starting development environment..."
 	docker compose up
 
 # API development
 dev-api:
 	@echo "Starting API development server..."
-	cd workspace/musiqul-api && ./gradlew bootRun
+	cd workspace/musiqul-api && ./gradlew bootRun --args='--spring.profiles.active=local'
 
 # Web development
 dev-web:
@@ -84,7 +84,7 @@ migrate-clean:
 	docker compose run --rm flyway clean
 
 # JOOQ code generation
-jooq-generate: migrate-up
+jooq-generate:
 	@echo "Generating JOOQ classes from database..."
 	cd workspace/musiqul-api && ./gradlew generateJooq
 

@@ -3,7 +3,7 @@ package msq.musiqulapi.presentation
 import msq.musiqulapi.presentation.auth.LoginAuthenticationConverter
 import msq.musiqulapi.presentation.auth.LoginFailureHandler
 import msq.musiqulapi.presentation.auth.LoginSuccessHandler
-import msq.musiqulapi.presentation.auth.UserAccountAuthenticationManager
+import msq.musiqulapi.presentation.auth.PlayerAccountAuthenticationManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -43,7 +43,7 @@ class SecurityConfig {
     http: ServerHttpSecurity,
     csrfTokenRepository: ServerCsrfTokenRepository,
     securityContextRepository: ServerSecurityContextRepository,
-    authenticationManager: UserAccountAuthenticationManager,
+    authenticationManager: PlayerAccountAuthenticationManager,
     loginAuthenticationConverter: LoginAuthenticationConverter,
     loginSuccessHandler: LoginSuccessHandler,
     loginFailureHandler: LoginFailureHandler,

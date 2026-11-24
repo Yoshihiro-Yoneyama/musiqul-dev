@@ -1,0 +1,1 @@
+CREATE SCHEMA musiqul_query

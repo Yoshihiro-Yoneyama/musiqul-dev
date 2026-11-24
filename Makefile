@@ -25,7 +25,7 @@ help:
 setup:
 	@echo "Setting up project..."
 	docker compose pull
-	cd workspace/musiqul-web && npm install
+	cd web && npm install
 
 # Build all services
 build:
@@ -35,9 +35,9 @@ build:
 # Run tests
 test:
 	@echo "Running API tests..."
-	cd workspace/musiqul-api && ./gradlew test
+	cd api && ./gradlew test
 	@echo "Running web linting..."
-	cd workspace/musiqul-web && npm run lint
+	cd web && npm run lint
 
 # Start all services in background
 start:
@@ -52,8 +52,8 @@ stop:
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."
-	cd workspace/musiqul-api && ./gradlew clean
-	cd workspace/musiqul-web && rm -rf .next node_modules/.cache
+	cd api && ./gradlew clean
+	cd web && rm -rf .next node_modules/.cache
 
 # Development environment
 dev:
@@ -63,12 +63,12 @@ dev:
 # API development
 dev-api:
 	@echo "Starting API development server..."
-	cd workspace/musiqul-api && ./gradlew bootRun --args='--spring.profiles.active=local'
+	cd api && ./gradlew bootRun --args='--spring.profiles.active=local'
 
 # Web development
 dev-web:
 	@echo "Starting web development server..."
-	cd workspace/musiqul-web && npm run dev
+	cd web && npm run dev
 
 # Database migrations
 migrate-up:
@@ -86,12 +86,12 @@ migrate-clean:
 # JOOQ code generation
 jooq-generate:
 	@echo "Generating JOOQ classes from database..."
-	cd workspace/musiqul-api && ./gradlew generateJooq
+	cd api && ./gradlew generateJooq
 
 # Linting
 lint:
 	@echo "Running web linting..."
-	cd workspace/musiqul-web && npm run lint
+	cd web && npm run lint
 
 # Reset database and regenerate JOOQ classes
 db-reset:

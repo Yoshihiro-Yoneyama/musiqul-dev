@@ -6,7 +6,7 @@ plugins {
   id("io.spring.dependency-management") version "1.1.7"
   id("nu.studer.jooq") version "10.1"
 
-  id("com.diffplug.spotless") version "7.1.0"
+  id("com.diffplug.spotless") version "8.12.0"
   kotlin("jvm") version "2.1.21"
   kotlin("plugin.spring") version "2.1.21"
   java
@@ -67,7 +67,7 @@ spotless {
   kotlin {
     target("src/**/*.kt")
     targetExclude("jooq/generated-src/**/*.kt", "src/main/kotlin/msq/musiqulapi/presentation/command/collab/recruit/create/CreateRecruitmentController.kt")
-    ktlint("1.5.0").editorConfigOverride(
+    ktlint("1.8.0").editorConfigOverride(
       mapOf(
         "max_line_length" to "100",
 
@@ -85,7 +85,7 @@ spotless {
   }
   kotlinGradle {
     target("*.gradle.kts")
-    ktlint("1.5.0").editorConfigOverride(
+    ktlint("1.8.0").editorConfigOverride(
       mapOf(
         "indent_size" to "2",
       ),

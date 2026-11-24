@@ -53,6 +53,7 @@
     "@storybook/addon-links": "^10.6.8",
     "@storybook/addon-onboarding": "^10.6.8",
     "@storybook/nextjs": "^10.6.8",
+    "@tailwindcss/postcss": "^4.3.5",
     "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
     "@types/react-content-loader": "^4.0.0",
@@ -64,7 +65,7 @@
     "postcss": "^8.5.33",
     "sass": "^1.108.2",
     "storybook": "^10.6.8",
-    "tailwindcss": "^3.4.19",
+    "tailwindcss": "^4.3.5",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "typescript": "^5.9.3"
   },

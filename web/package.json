@@ -2,6 +2,9 @@
   "name": "musiqul-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "dev": "tsc --noEmit && next dev",
     "dev:fast": "next dev",
@@ -79,5 +82,12 @@
     "@joshwooding/vite-plugin-react-docgen-typescript": {
       "glob": "^14.0.6"
     }
+  },
+  "allowScripts": {
+    "@parcel/watcher": false,
+    "@swc/core": false,
+    "core-js-pure": false,
+    "esbuild": false,
+    "unrs-resolver": false
   }
 }

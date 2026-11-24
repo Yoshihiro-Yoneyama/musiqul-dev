@@ -37,8 +37,6 @@ class CollabForSearchProjector(
         event.recruitedInstruments.value.map.keys
           .map(Instrument::name),
       )
-    println("**************イベント検知****************")
-
     collabForSearchQueryRepository.saveRecruitment(recruitmentReadModel)
   }
 

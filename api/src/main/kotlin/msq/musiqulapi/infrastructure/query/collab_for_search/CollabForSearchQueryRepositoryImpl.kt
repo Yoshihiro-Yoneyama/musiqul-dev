@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 class CollabForSearchQueryRepositoryImpl : CollabForSearchQueryRepository {
   override fun saveRecruitment(recruitment: Recruitment) {
-    println("********Repository********")
+    // TODO リードモデル（musiqul_query.recruitment）への保存を実装する
   }
 }

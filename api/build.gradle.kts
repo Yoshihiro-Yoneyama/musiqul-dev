@@ -45,7 +45,7 @@ dependencies {
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
   // Testcontainers
   testImplementation("org.testcontainers:testcontainers")
   testImplementation("org.testcontainers:postgresql")

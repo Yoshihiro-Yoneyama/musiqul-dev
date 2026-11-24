@@ -38,6 +38,20 @@ web/
     └── shared/     業務に依存しない共通部品：API クライアント、設定、UI キット、ユーティリティ
 ```
 
+ルートの `app/` は Next.js のルーティングだけを担当し、画面の実装は `src/` に置きます。たとえば募集の作成画面は、次のようにつながります。
+
+```mermaid
+flowchart LR
+  URL["/collab/recruitment"] --> R["app/(main)/collab/recruitment/page.tsx<br/>（再エクスポートだけ）"]
+  R --> P["src/pages/create-recruitment"]
+  P --> F["src/features/create-recruitment<br/>入力フォーム、確認、下書き"]
+  F --> E["src/entities/recruitment<br/>型、表示名、createRecruitment()"]
+  E --> S["src/shared/api<br/>request()"]
+  S --> API["api<br/>POST /api/recruitments"]
+```
+
+入力フォームは入力画面と確認画面の 2 つで使うので、`pages` ではなく `features` に置いています。入力画面から確認画面へは、sessionStorage に保存した下書きで内容を渡します（`features/create-recruitment/model/draft.ts`）。
+
 現在のスライス：
 
 | レイヤー | スライス | 内容 |
@@ -49,6 +63,19 @@ web/
 | shared | `api` / `config` / `lib` / `ui` | HTTP クライアントと CSRF トークン、URL と環境変数、日付やフォームの補助関数、UI キットとテーマ |
 
 ## ルール
+
+レイヤーは上から下へ並び、import は下向きにだけ行えます。同じレイヤーのスライスどうしも import できません。
+
+```mermaid
+flowchart TB
+  app["app<br/>レイアウト、スタイル、proxy"] --> pages["pages<br/>画面"]
+  pages --> widgets["widgets<br/>複数の画面で使う UI のまとまり"]
+  widgets --> features["features<br/>ユーザーの操作"]
+  features --> entities["entities<br/>業務上の概念"]
+  entities --> shared["shared<br/>業務に依存しない共通部品"]
+```
+
+上の図では隣のレイヤーだけを矢印でつないでいますが、2 つ以上下のレイヤーを import してもかまいません（例：pages から shared）。
 
 1. **import は上のレイヤーから下のレイヤーへの一方向だけ**：app → pages → widgets → features → entities → shared。同じレイヤーの別スライスも import しない。
 2. **スライスの外からは公開 API（`index.ts`）経由で import する**：`@/entities/recruitment` は可、`@/entities/recruitment/model/recruitment` は不可。shared/ui はコンポーネントごとに `@/shared/ui/button` のように import する。
@@ -67,7 +94,25 @@ web/
 
 ## 認証の流れ
 
+```mermaid
+sequenceDiagram
+  participant B as ブラウザ
+  participant P as proxy<br/>（src/app/proxy）
+  participant A as api
+
+  B->>A: POST /api/login
+  A-->>B: { headerName, token }<br/>Set-Cookie: SESSION（api のオリジン）
+  B->>B: トークンを Cookie msq_csrf に保存（web のオリジン）
+
+  B->>P: 画面を開く（Cookie: msq_csrf）
+  P-->>B: msq_csrf がなければ /login へリダイレクト
+
+  B->>A: POST /api/recruitments<br/>Cookie: SESSION、X-CSRF-TOKEN ヘッダー
+  A-->>B: 200 { id } または 401
+  B->>B: 401 なら msq_csrf を消して /login へ
+```
+
 1. `POST /api/login` に成功すると、API がセッションを作り `{ headerName, token }`（CSRF トークン）を返す
 2. web はこのトークンを Cookie（`msq_csrf`）に保存し、POST などのリクエストのヘッダーに付ける
-3. proxy はこの Cookie の有無でログイン済みかどうかを判定し、未ログインならログイン画面へ移動させる
-4. API が 401 を返したら Cookie を消してログイン画面へ戻す。ログアウト時も Cookie を消す
+3. proxy はこの Cookie の有無でログイン済みかどうかを判定し、未ログインならログイン画面へ移動させる。proxy はセッションの有効性までは確認しない
+4. API が 401 を返したら、`request()`（`@/shared/api`）が Cookie を消して `UnauthorizedError` を投げる。ログイン画面への移動は、エラーを受け取った画面側で行う。ログアウト時も Cookie を消す

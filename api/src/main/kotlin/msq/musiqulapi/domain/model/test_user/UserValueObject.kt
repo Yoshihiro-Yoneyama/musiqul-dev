@@ -1,6 +1,5 @@
 package msq.musiqulapi.domain.model.test_user
 
-import lombok.Value
 import java.util.*
 
 @JvmInline
@@ -17,7 +16,6 @@ value class MailAddress(val value: String) {
 }
 
 @JvmInline
-@Value(staticConstructor = "of")
 value class UserId(val value: String) {
   companion object {
     fun generate(): UserId = UserId(UUID.randomUUID().toString())

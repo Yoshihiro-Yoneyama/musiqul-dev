@@ -1,7 +1,7 @@
 'use client'
 
 import * as styles from '@/shared/ui/atoms/date-calendar/DateCalendar.css';
-import React, {FC, useState, useEffect} from 'react'
+import React, {FC, useState, useSyncExternalStore} from 'react'
 import {
   Button,
   Calendar,
@@ -26,18 +26,17 @@ export type DatePickerProps = {
   readonly onChange: (value: string) => void
 }
 
+const subscribeNoop = () => () => {}
+
 const DateCalendar: FC<DatePickerProps> = ({
   isDisabled,
   onChange,
   ...props
 }) => {
   const [inputValue, setInputValue] = useState('')
-  const [isClient, setIsClient] = useState(false)
-  
   // React 19: Ensure client-side only rendering to prevent hydration mismatch
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  // (サーバーとハイドレーション中は false、ハイドレーション後は true を返す)
+  const isClient = useSyncExternalStore(subscribeNoop, () => true, () => false)
   
   const handleChange = (value: DateValue | null) => {
     // If the date picker is disabled or the value is empty, return

@@ -38,7 +38,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-jooq")
   jooqGenerator("org.postgresql:postgresql:42.7.7")
   // Arrow Kt
-  implementation("io.arrow-kt:arrow-core:2.0.0-rc.1")
+  implementation("io.arrow-kt:arrow-core:2.3.0.1")
   implementation("io.arrow-kt:arrow-fx-coroutines:2.0.0-rc.1")
   // test
   testImplementation("org.springframework.boot:spring-boot-starter-test")

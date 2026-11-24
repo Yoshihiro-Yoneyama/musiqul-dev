@@ -14,7 +14,7 @@ musiqul のフロントエンドです。Next.js（App Router）で作り、ア�
 | `npm run storybook` | shared/ui などのコンポーネントを Storybook で確認する |
 | `npm run test:e2e` | E2E テスト（`make dev` で起動した環境に対して実行する） |
 
-ログインが必要な E2E テストは、ローカルの DB にあるアカウントを環境変数で指定したときだけ実行します。
+ログインが必要な E2E テストは、アカウントを環境変数で指定したときだけ実行します。`make db-reset` で投入されるテスト用アカウント（`db/seed/`、一覧は `db/README.md`）を使えます。
 
 ```bash
 E2E_LOGIN_EMAIL=test@example.com E2E_LOGIN_PASSWORD=password123 npm run test:e2e

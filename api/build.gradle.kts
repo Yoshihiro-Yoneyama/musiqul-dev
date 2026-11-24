@@ -15,8 +15,8 @@ plugins {
 group = "msq"
 version = "0.0.1-SNAPSHOT"
 
-java {
-  sourceCompatibility = JavaVersion.VERSION_21
+kotlin {
+  jvmToolchain(25)
 }
 
 repositories {
@@ -57,7 +57,6 @@ dependencies {
 tasks.withType<KotlinCompile> {
   compilerOptions {
     freeCompilerArgs.add("-Xjsr305=strict")
-    jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
   }
 }
 

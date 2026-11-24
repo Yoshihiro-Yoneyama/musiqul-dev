@@ -41,7 +41,36 @@ docker compose run --rm flyway clean     # make migrate-clean
 make db-reset
 ```
 
-db コンテナとボリューム `db-data` を削除して作り直し、マイグレーションを適用して jOOQ のクラスを再生成します。
+db コンテナとボリューム `db-data` を削除して作り直し、マイグレーションを適用し、テストデータを投入して jOOQ のクラスを再生成します。
+
+## テストデータ
+
+ローカル開発用のテストデータは `db/seed/` に CSV で置き、`make db-reset` で自動的に投入します。空の DB に投入し直すだけなら `make db-seed` でもかまいません（すでに同じデータがある場合は主キーが重複してエラーになるので、`make db-reset` を使ってください）。
+
+`db/migration` とは分けているので、Flyway（本番のマイグレーション）には含まれません。
+
+### ログインできるアカウント
+
+| メールアドレス | パスワード |
+|---|---|
+| test@example.com | password123 |
+
+### CSV の書き方
+
+- ファイル名は `<順番>_<スキーマ>.<テーブル>.csv`（例：`01_musiqul_command.player_account.csv`）。名前順に投入するので、外部キーの参照先のテーブルを先の番号にします
+- 1 行目はヘッダー（列名）です。ヘッダーに書いた列だけを投入し、書かなかった列（`created_at` など）はテーブルの既定値になります
+- すべてのファイルを 1 つのトランザクションで投入するので、1 件でも失敗すると何も投入されません
+- 投入の処理は `db/load-seed.sh` です（db コンテナに `/seed` としてマウントした CSV を `psql` の `\copy` で読み込みます）
+
+### アカウントを追加するとき
+
+`player_account` と `player` の両方に同じ `player_id` の行を追加します。`password_hash` には BCrypt のハッシュを書きます。
+
+```shell
+docker run --rm httpd:alpine htpasswd -nbBC 12 "" 'パスワード' | tr -d ':\n'
+```
+
+追加したアカウントのパスワードは、上の表にも書いてください。
 
 ## PostgreSQL のメジャーバージョンを上げるとき（16 → 19 など）
 

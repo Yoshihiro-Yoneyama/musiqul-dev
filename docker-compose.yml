@@ -9,6 +9,8 @@ services:
       # PostgreSQL 18 以降の公式イメージは /var/lib/postgresql に 1 つだけマウントする
       # （データは /var/lib/postgresql/<メジャーバージョン>/docker に置かれる）
       - db-data:/var/lib/postgresql
+      # テストデータの CSV（make db-seed で投入する）
+      - ./db/seed:/seed:ro
     environment:
       POSTGRES_DB: msqdb
       POSTGRES_USER: pgadmin

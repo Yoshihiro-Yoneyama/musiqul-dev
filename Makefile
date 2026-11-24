@@ -1,7 +1,7 @@
 # musiqul-dev Makefile
 # Common development tasks for the musiqul project
 
-.PHONY: help build test start stop clean setup migrate-up migrate-info migrate-validate migrate-clean db-reset db-dump db-restore dev-api dev-web dev lint jooq-generate
+.PHONY: help build test start stop clean setup migrate-up migrate-info migrate-validate migrate-clean db-seed db-reset db-dump db-restore dev-api dev-web dev lint jooq-generate
 
 # Default target
 help:
@@ -19,7 +19,8 @@ help:
 	@echo "  migrate-info   - Show migration status"
 	@echo "  migrate-validate - Validate applied migrations"
 	@echo "  migrate-clean  - Clean database"
-	@echo "  db-reset       - Recreate the database volume, run migrations and regenerate JOOQ classes"
+	@echo "  db-seed        - Load test data from db/seed/*.csv"
+	@echo "  db-reset       - Recreate the database volume, run migrations, load test data and regenerate JOOQ classes"
 	@echo "  db-dump        - Dump the database to DUMP_FILE (default: msqdb-backup.sql)"
 	@echo "  db-restore     - Restore DUMP_FILE into an empty database"
 	@echo "  jooq-generate  - Generate JOOQ classes from database"
@@ -102,10 +103,15 @@ lint:
 	cd web && npm run lint
 
 # Reset database (recreate the db-data volume), run migrations and regenerate JOOQ classes
+db-seed:
+	@echo "Loading test data..."
+	./db/load-seed.sh
+
 db-reset:
 	docker compose down db -v
 	docker compose up -d --wait db
 	@$(MAKE) migrate-up
+	@$(MAKE) db-seed
 	@$(MAKE) jooq-generate
 
 # Dump / restore the database (e.g. when upgrading the PostgreSQL major version)

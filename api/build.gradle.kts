@@ -4,7 +4,7 @@ import org.jooq.meta.jaxb.ForcedType
 plugins {
   id("org.springframework.boot") version "3.4.3"
   id("io.spring.dependency-management") version "1.1.7"
-  id("nu.studer.jooq") version "10.1"
+  id("nu.studer.jooq") version "10.2.1"
 
   id("com.diffplug.spotless") version "7.1.0"
   kotlin("jvm") version "2.1.21"

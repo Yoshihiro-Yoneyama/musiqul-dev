@@ -1,0 +1,19 @@
+# Flyway の設定（TOML 形式。Flyway 10 以降の標準。旧 flyway.conf から移行）
+# docker compose の flyway サービスでは ./db/conf を /flyway/conf にマウントしており、
+# Flyway は既定の場所（{installDir}/conf/flyway.toml）からこのファイルを自動で読み込む。
+# 接続先などはコマンドライン引数（例：-url=...）で上書きできる。
+
+[environments.default]
+url = "jdbc:postgresql://db/msqdb"
+user = "pgadmin"
+password = "pgadmin"
+# 既定のスキーマ。スキーマ履歴テーブル flyway_schema_history はここに作られる
+schemas = ["flyway"]
+
+[flyway]
+environment = "default"
+# マイグレーション SQL の場所（compose で ./db/migration をマウントしている）
+locations = ["filesystem:/flyway/sql"]
+baselineVersion = "0"
+# 開発用なので clean を許可する（Flyway の既定は true で、clean は禁止）
+cleanDisabled = false

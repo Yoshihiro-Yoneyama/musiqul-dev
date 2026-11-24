@@ -1,5 +1,6 @@
-import type {Preview} from "@storybook/nextjs-vite";
-
+import type { Preview } from "@storybook/nextjs-vite";
+// アプリと同じテーマとグローバルスタイルを適用する
+import "../src/app/styles";
 
 const preview: Preview = {
   parameters: {
@@ -10,11 +11,6 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <Story/>
-    )
-  ]
 };
 
 export default preview;

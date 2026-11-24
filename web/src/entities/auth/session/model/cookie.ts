@@ -1,1 +1,0 @@
-export const IS_LOGGED_IN_COOKIE = "MUSIQUL_IS_LOGGED_IN";

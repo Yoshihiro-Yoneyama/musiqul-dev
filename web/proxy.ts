@@ -1,14 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { CSRF_TOKEN_NAME } from "./src/shared/api/csrf";
-
-export function proxy(request: NextRequest) {
-  const csrfToken = request.cookies.get(CSRF_TOKEN_NAME);
-  if (!csrfToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-  return NextResponse.next();
-}
+// Next.js の proxy（旧 middleware）。実装は src/app/proxy に置く
+export { authProxy as proxy } from "@/app/proxy";
 
 export const config = {
-  matcher: ["/((?!login|_next|favicon).*)"],
+  matcher: ["/((?!_next/|favicon\\.ico).*)"],
 };

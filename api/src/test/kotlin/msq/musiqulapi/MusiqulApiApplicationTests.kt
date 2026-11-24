@@ -18,7 +18,7 @@ class MusiqulApiApplicationTests {
     @Container
     @JvmStatic
     val postgres =
-      PostgreSQLContainer("postgres:16").apply {
+      PostgreSQLContainer("postgres:19-alpine").apply {
         withDatabaseName("testdb")
         withUsername("testuser")
         withPassword("testpass")

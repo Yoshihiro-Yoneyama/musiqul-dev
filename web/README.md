@@ -81,7 +81,7 @@ flowchart TB
 2. **スライスの外からは公開 API（`index.ts`）経由で import する**：`@/entities/recruitment` は可、`@/entities/recruitment/model/recruitment` は不可。shared/ui はコンポーネントごとに `@/shared/ui/button` のように import する。
 3. **セグメントは役割で分ける**：`ui`（コンポーネントとスタイル）、`model`（型・状態・検証）、`api`（API 呼び出し）、`lib`（スライス内の補助関数）、`config`（設定）。
 4. **まずは pages に置く**：1 つの画面でしか使わないものはその画面のスライスに置き、2 か所以上で使うようになった時点で widgets / features / entities に切り出す。
-5. **`app/`（ルート直下）にはロジックを書かない**：`export { XxxPage as default, metadata } from "@/pages/xxx"` のような再エクスポートだけにする。
+5. **`app/`（ルート直下）にはロジックを書かない**：`export { XxxPage as default, metadata } from "@/pages/xxx"` のような再エクスポートだけにする。例外として、`dynamic`・`revalidate`・`runtime` などの Route Segment Config は Next.js がファイルを静的解析して読むため、`app/` の `page.tsx` / `layout.tsx` に直接書く。
 6. **API の仕様は api/（Kotlin）を正とする**：列挙値や文字数の上限は `entities` の model で API のドメインモデルに合わせ、送受信の形式（DTO）は `api` セグメントの中だけで扱う。
 
 1〜4 は Steiger（`npm run lint:fsd`）で検査します。例外は `steiger.config.ts` に理由とともに書きます。

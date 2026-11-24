@@ -11,7 +11,7 @@ import java.util.*
 
 @RestController
 class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandService) {
-  @PostMapping("/recruitments")
+  @PostMapping("/api/recruitments")
   fun create(
     @RequestBody request: CreateRecruitCommandRequest,
     principal: Principal,

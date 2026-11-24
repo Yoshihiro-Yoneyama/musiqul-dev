@@ -1,6 +1,5 @@
 package msq.musiqulapi.presentation.auth
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextImpl
@@ -12,6 +11,7 @@ import org.springframework.security.web.server.csrf.ServerCsrfTokenRepository
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
+import tools.jackson.databind.json.JsonMapper
 
 /**
  * ログイン成功時の処理。
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono
 class LoginSuccessHandler(
   private val securityContextRepository: ServerSecurityContextRepository,
   private val csrfTokenRepository: ServerCsrfTokenRepository,
-  private val objectMapper: ObjectMapper,
+  private val objectMapper: JsonMapper,
 ) : ServerAuthenticationSuccessHandler {
 
   override fun onAuthenticationSuccess(

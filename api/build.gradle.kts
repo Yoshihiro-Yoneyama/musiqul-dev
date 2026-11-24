@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jooq.meta.jaxb.ForcedType
 
 plugins {
-  id("org.springframework.boot") version "3.4.3"
+  id("org.springframework.boot") version "4.2.0"
   id("io.spring.dependency-management") version "1.1.7"
   id("nu.studer.jooq") version "10.1"
 
@@ -23,11 +23,9 @@ repositories {
   mavenCentral()
 }
 
-// Spring Boot 3.4.3 の BOM が指定する Testcontainers 1.20.x は Docker Engine 29 (最小 API 1.40) に接続できないため上書きする
-extra["testcontainers.version"] = "1.21.4"
-
 dependencies {
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+  // Spring Boot 4 では Jackson 3 (groupId: tools.jackson) を使う
+  implementation("tools.jackson.module:jackson-module-kotlin")
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -41,15 +39,19 @@ dependencies {
   implementation("io.arrow-kt:arrow-core:2.0.0-rc.1")
   implementation("io.arrow-kt:arrow-fx-coroutines:2.0.0-rc.1")
   // test
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
+  // Spring Boot 4 では技術ごとのテスト用スターターを使う (いずれも spring-boot-starter-test を含む)
+  testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-security-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-jooq-test")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
   testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
-  // Testcontainers
+  // Testcontainers (2.x でアーティファクト名に testcontainers- が付いた。バージョンは Spring Boot の BOM で管理)
   testImplementation("org.testcontainers:testcontainers")
-  testImplementation("org.testcontainers:postgresql")
-  testImplementation("org.testcontainers:junit-jupiter")
+  testImplementation("org.testcontainers:testcontainers-postgresql")
+  testImplementation("org.testcontainers:testcontainers-junit-jupiter")
 }
 
 tasks.withType<KotlinCompile> {

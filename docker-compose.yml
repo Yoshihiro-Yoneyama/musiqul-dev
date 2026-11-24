@@ -17,8 +17,8 @@ services:
     depends_on:
       - db
     volumes:
-      - ./workspace/musiqul-flyway/migration:/flyway/sql
-      - ./workspace/musiqul-flyway/conf:/flyway/conf
+      - ./db/migration:/flyway/sql
+      - ./db/conf:/flyway/conf
   api:
     image: gradle:8.7.0-jdk21
     container_name: api
@@ -29,7 +29,7 @@ services:
       - DATASOURCE_PASSWORD=pgadmin
       - GRADLE_OPTS=-Dorg.gradle.daemon=false
     volumes:
-      - ./workspace/musiqul-api:/app
+      - ./api:/app
       - gradle-cache:/home/gradle/.gradle
     ports:
       - "34962:8080"
@@ -41,7 +41,7 @@ services:
     container_name: web
     working_dir: /app
     volumes:
-      - ./workspace/musiqul-web:/app
+      - ./web:/app
     ports:
       - "34963:3000"
     environment:

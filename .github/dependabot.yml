@@ -1,4 +1,4 @@
-version: 1
+version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -8,13 +8,19 @@ updates:
       time: "09:00"
       timezone: "Asia/Tokyo"
     rebase-strategy: "disabled" # CIの実行時間削減のため
-    target-branch: "develop"
   - package-ecosystem: "gradle"
-    directory: "/backend"
+    directory: "/api"
     schedule:
       interval: "weekly"
       day: "friday"
       time: "09:00"
       timezone: "Asia/Tokyo"
     rebase-strategy: "disabled" # CIの実行時間削減のため
-    target-branch: "develop"
+  - package-ecosystem: "npm"
+    directory: "/web"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    rebase-strategy: "disabled" # CIの実行時間削減のため

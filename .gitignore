@@ -6,5 +6,3 @@
 CLAUDE.md
 /.claude/
 /.mcp.json
-# old multi-repo checkouts (kept locally during migration)
-/workspace/

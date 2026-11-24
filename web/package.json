@@ -81,6 +81,9 @@
     },
     "@joshwooding/vite-plugin-react-docgen-typescript": {
       "glob": "^14.0.6"
+    },
+    "tsconfck": {
+      "typescript": "$typescript"
     }
   },
   "allowScripts": {

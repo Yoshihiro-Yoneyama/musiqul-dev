@@ -37,13 +37,13 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("org.projectlombok:lombok")
-  implementation("org.postgresql:postgresql:42.7.7")
+  implementation("org.postgresql:postgresql:42.7.15")
   // jooq
   implementation("org.springframework.boot:spring-boot-starter-jooq")
-  jooqGenerator("org.postgresql:postgresql:42.7.7")
+  jooqGenerator("org.postgresql:postgresql:42.7.15")
   // Arrow Kt
-  implementation("io.arrow-kt:arrow-core:2.0.0-rc.1")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.0.0-rc.1")
+  implementation("io.arrow-kt:arrow-core:2.3.0.1")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.3.0.1")
   // test
   // Spring Boot 4 では技術ごとのテスト用スターターを使う (いずれも spring-boot-starter-test を含む)
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
@@ -53,7 +53,7 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
   // Testcontainers (2.x でアーティファクト名に testcontainers- が付いた。バージョンは Spring Boot の BOM で管理)
   testImplementation("org.testcontainers:testcontainers")
   testImplementation("org.testcontainers:testcontainers-postgresql")

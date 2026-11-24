@@ -20,7 +20,7 @@ services:
       - ./db/migration:/flyway/sql
       - ./db/conf:/flyway/conf
   api:
-    image: gradle:8.7.0-jdk21
+    image: gradle:9.9.2-jdk25
     container_name: api
     working_dir: /app
     environment:

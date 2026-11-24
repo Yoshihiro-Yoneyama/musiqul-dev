@@ -2,60 +2,66 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jooq.meta.jaxb.ForcedType
 
 plugins {
-  id("org.springframework.boot") version "3.4.3"
+  id("org.springframework.boot") version "4.2.0"
   id("io.spring.dependency-management") version "1.1.7"
-  id("nu.studer.jooq") version "10.1"
+  id("nu.studer.jooq") version "10.2.1"
 
-  id("com.diffplug.spotless") version "7.1.0"
-  kotlin("jvm") version "2.1.21"
-  kotlin("plugin.spring") version "2.1.21"
+  id("com.diffplug.spotless") version "8.12.0"
+  kotlin("jvm") version "2.4.21"
+  kotlin("plugin.spring") version "2.4.21"
   java
 }
 
 group = "msq"
 version = "0.0.1-SNAPSHOT"
 
-java {
-  sourceCompatibility = JavaVersion.VERSION_21
+kotlin {
+  jvmToolchain(25)
 }
 
 repositories {
   mavenCentral()
 }
 
-// Spring Boot 3.4.3 の BOM が指定する Testcontainers 1.20.x は Docker Engine 29 (最小 API 1.40) に接続できないため上書きする
-extra["testcontainers.version"] = "1.21.4"
+// jOOQ のランタイムとコード生成で同じバージョンを使う。
+// Spring Boot の BOM (jooq.version) も上書きしないと jooqGenerator の org.jooq:jooq が
+// BOM のバージョンに置き換えられ、generateJooq がバージョン不一致で失敗する
+val jooqVersion = "3.21.10"
+extra["jooq.version"] = jooqVersion
 
 dependencies {
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+  // Spring Boot 4 では Jackson 3 (groupId: tools.jackson) を使う
+  implementation("tools.jackson.module:jackson-module-kotlin")
   implementation("org.springframework.boot:spring-boot-starter")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.boot:spring-boot-starter-security")
-  implementation("org.projectlombok:lombok")
-  implementation("org.postgresql:postgresql:42.7.7")
+  implementation("org.postgresql:postgresql:42.7.15")
   // jooq
   implementation("org.springframework.boot:spring-boot-starter-jooq")
-  jooqGenerator("org.postgresql:postgresql:42.7.7")
+  jooqGenerator("org.postgresql:postgresql:42.7.15")
   // Arrow Kt
-  implementation("io.arrow-kt:arrow-core:2.0.0-rc.1")
-  implementation("io.arrow-kt:arrow-fx-coroutines:2.0.0-rc.1")
+  implementation("io.arrow-kt:arrow-core:2.3.0.1")
+  implementation("io.arrow-kt:arrow-fx-coroutines:2.3.0.1")
   // test
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
+  // Spring Boot 4 では技術ごとのテスト用スターターを使う (いずれも spring-boot-starter-test を含む)
+  testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-security-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-jooq-test")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.junit.jupiter:junit-jupiter-api")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
-  // Testcontainers
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:6.4.0")
+  // Testcontainers (2.x でアーティファクト名に testcontainers- が付いた。バージョンは Spring Boot の BOM で管理)
   testImplementation("org.testcontainers:testcontainers")
-  testImplementation("org.testcontainers:postgresql")
-  testImplementation("org.testcontainers:junit-jupiter")
+  testImplementation("org.testcontainers:testcontainers-postgresql")
+  testImplementation("org.testcontainers:testcontainers-junit-jupiter")
 }
 
 tasks.withType<KotlinCompile> {
   compilerOptions {
     freeCompilerArgs.add("-Xjsr305=strict")
-    jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
   }
 }
 
@@ -67,7 +73,7 @@ spotless {
   kotlin {
     target("src/**/*.kt")
     targetExclude("jooq/generated-src/**/*.kt", "src/main/kotlin/msq/musiqulapi/presentation/command/collab/recruit/create/CreateRecruitmentController.kt")
-    ktlint("1.5.0").editorConfigOverride(
+    ktlint("1.8.0").editorConfigOverride(
       mapOf(
         "max_line_length" to "100",
 
@@ -85,7 +91,7 @@ spotless {
   }
   kotlinGradle {
     target("*.gradle.kts")
-    ktlint("1.5.0").editorConfigOverride(
+    ktlint("1.8.0").editorConfigOverride(
       mapOf(
         "indent_size" to "2",
       ),
@@ -96,7 +102,7 @@ spotless {
 }
 
 jooq {
-  version.set("3.19.19")
+  version.set(jooqVersion)
   configurations {
     create("main") {
       generateSchemaSourceOnCompilation.set(false)

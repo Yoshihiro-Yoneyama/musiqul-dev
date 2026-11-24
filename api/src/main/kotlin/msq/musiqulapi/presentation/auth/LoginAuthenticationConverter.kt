@@ -1,6 +1,5 @@
 package msq.musiqulapi.presentation.auth
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.core.io.buffer.DataBufferUtils
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -9,6 +8,7 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
+import tools.jackson.databind.json.JsonMapper
 
 /**
  * POST /api/login の JSON ボディ ({loginId, password}) を
@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono
  * ここでリクエストボディを完全に読み切ってよい。
  */
 @Component
-class LoginAuthenticationConverter(private val objectMapper: ObjectMapper) :
+class LoginAuthenticationConverter(private val objectMapper: JsonMapper) :
   ServerAuthenticationConverter {
 
   override fun convert(exchange: ServerWebExchange): Mono<Authentication> = DataBufferUtils

@@ -1,9 +1,7 @@
 package msq.musiqulapi.domain.model.test_task
 
-import lombok.Value
 import msq.musiqulapi.lib.IdFactory
 
-@Value(staticConstructor = "of")
 class Task private constructor(
   val id: TaskId,
   val title: TaskTitle,

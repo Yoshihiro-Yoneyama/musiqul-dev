@@ -36,10 +36,15 @@ class RecruitCommandService(
           .map { r ->
             when (r) {
               RecruitCommandInput.GenerationType.TEEN -> Generation.TEEN
+
               RecruitCommandInput.GenerationType.TWENTIES -> Generation.TWENTIES
+
               RecruitCommandInput.GenerationType.THIRTIES -> Generation.THIRTIES
+
               RecruitCommandInput.GenerationType.FORTIES -> Generation.FORTIES
+
               RecruitCommandInput.GenerationType.FIFTIES -> Generation.FIFTIES
+
               RecruitCommandInput.GenerationType.MORE_THAN_SIXTIES ->
                 Generation.MORE_THAN_SIXTIES
             }

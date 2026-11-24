@@ -1,7 +1,5 @@
 package msq.musiqulapi.domain.model.test_task
 
-import lombok.NonNull
-import lombok.Value
 import java.util.*
 
 private const val TASK_TITLE_MAX_LENGTH = 50
@@ -15,7 +13,6 @@ value class TaskId private constructor(val value: UUID) {
 }
 
 @JvmInline
-@Value
 value class TaskTitle(val value: String) {
   init {
     require(value.length <= TASK_TITLE_MAX_LENGTH) {
@@ -25,7 +22,6 @@ value class TaskTitle(val value: String) {
 }
 
 @JvmInline
-@Value
 value class TaskDescription(val value: String) {
   init {
     require(value.length <= TASK_DESCRIPTION_MAX_LENGTH) {
@@ -61,12 +57,10 @@ enum class TaskStatus(val value: String) {
 }
 
 @JvmInline
-@Value
-value class TaskDue(@NonNull val value: Date)
+value class TaskDue(val value: Date)
 
 @JvmInline
-@Value
-value class TaskFinishedDate(@NonNull val value: Date) {
+value class TaskFinishedDate(val value: Date) {
   init {
     require(value.after(Date())) { "Task finished date must be in the future" }
   }

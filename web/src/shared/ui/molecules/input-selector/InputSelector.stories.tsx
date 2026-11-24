@@ -1,6 +1,6 @@
 'use client'
 
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 import InputSelector from "@/shared/ui/molecules/input-selector/InputSelector";
 
 const meta: Meta<typeof InputSelector> = {

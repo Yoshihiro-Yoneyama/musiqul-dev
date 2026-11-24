@@ -1,5 +1,5 @@
 import Required from "@/shared/ui/atoms/required/Required";
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Required> = {
   title: "atoms/required/Required",

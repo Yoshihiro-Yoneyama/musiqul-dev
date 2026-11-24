@@ -1,9 +1,9 @@
-import {ZodSchema, ZodError, infer as ZodInfer} from "zod";
+import {ZodType, ZodError, infer as ZodInfer} from "zod";
 import {useCallback, useState} from "react";
 
 type ErrorMessages<T> = Partial<Record<keyof T, string>>
 
-export const useValidation = <T extends ZodSchema>() => {
+export const useValidation = <T extends ZodType>() => {
   const [errorMessages, setErrorMessages] = useState<ErrorMessages<ZodInfer<T>>>({})
   
   const validate = useCallback((values: ZodInfer<T>, schema: T) => {
@@ -13,7 +13,7 @@ export const useValidation = <T extends ZodSchema>() => {
       schema.parse(values)
     } catch (error) {
       if (error instanceof ZodError) {
-        error.errors.forEach((e) => {
+        error.issues.forEach((e) => {
           const key = e.path.join('.') as keyof ZodInfer<T>
           errors[key] = e.message
         })

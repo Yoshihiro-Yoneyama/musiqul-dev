@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 import DateCalendar from "@/shared/ui/atoms/date-calendar/DateCalendar";
 
 const meta : Meta<typeof DateCalendar> = {

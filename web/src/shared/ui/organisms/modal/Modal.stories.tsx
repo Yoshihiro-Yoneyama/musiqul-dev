@@ -1,6 +1,6 @@
-import {Meta, StoryObj} from "@storybook/react"
+import {Meta, StoryObj} from "@storybook/nextjs-vite"
 import Modal from "@/shared/ui/organisms/modal/Modal"
-import {useArgs} from "@storybook/core/preview-api";
+import {useArgs} from "storybook/preview-api";
 import Button from "@/shared/ui/atoms/button/Button";
 import Title from "@/shared/ui/atoms/title/Title";
 import TextBox from "@/shared/ui/atoms/textbox/TextBox";

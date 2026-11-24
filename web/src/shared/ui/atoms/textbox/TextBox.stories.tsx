@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 import TextBox from "@/shared/ui/atoms/textbox/TextBox";
 
 const meta : Meta<typeof TextBox> = {

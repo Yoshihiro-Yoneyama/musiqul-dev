@@ -1,6 +1,11 @@
-import type { StorybookConfig } from "@storybook/nextjs";
-import {VanillaExtractPlugin} from "@vanilla-extract/webpack-plugin";
-import {merge} from "webpack-merge";
+import type { StorybookConfig } from "@storybook/nextjs-vite";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import { fileURLToPath } from "node:url";
+import { mergeConfig } from "vite";
+
+// vanilla-extract は .css.ts を別の Vite コンパイラで評価するため、
+// tsconfig の paths（@/*）を Vite の alias としても明示する
+const srcDir = fileURLToPath(new URL("../src/", import.meta.url));
 
 
 const config: StorybookConfig = {
@@ -8,22 +13,24 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-onboarding",
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
+    "@storybook/addon-docs"
   ],
   framework: {
-    name: "@storybook/nextjs",
+    name: "@storybook/nextjs-vite",
     options: {},
   },
-  
-  webpackFinal: async (config) =>
-    merge(config, {
-      plugins: [new VanillaExtractPlugin()]
+
+  viteFinal: async (config) =>
+    mergeConfig(config, {
+      resolve: {
+        alias: [{ find: /^@\//, replacement: srcDir }],
+      },
+      plugins: [vanillaExtractPlugin()],
     }),
-  
+
   docs: {},
-  
+
   typescript: {
     reactDocgen: "react-docgen-typescript"
   },

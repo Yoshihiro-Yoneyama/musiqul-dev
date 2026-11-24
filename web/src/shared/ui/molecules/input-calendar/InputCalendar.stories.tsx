@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 import InputCalendar from "@/shared/ui/molecules/input-calendar/InputCalendar";
 
 const meta: Meta<typeof InputCalendar> = {

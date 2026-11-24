@@ -4,7 +4,7 @@ import { useValidation } from "@/shared/lib/validate/useValidate";
 import { login } from "@/entities/auth/session/api/login";
 
 const loginSchema = z.object({
-  loginId: z.string().email("メールアドレスの形式が正しくありません"),
+  loginId: z.email("メールアドレスの形式が正しくありません"),
   password: z.string().min(1, "パスワードを入力してください"),
 });
 

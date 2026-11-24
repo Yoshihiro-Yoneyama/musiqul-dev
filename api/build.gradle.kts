@@ -23,6 +23,9 @@ repositories {
   mavenCentral()
 }
 
+// Spring Boot 3.4.3 の BOM が指定する Testcontainers 1.20.x は Docker Engine 29 (最小 API 1.40) に接続できないため上書きする
+extra["testcontainers.version"] = "1.21.4"
+
 dependencies {
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.springframework.boot:spring-boot-starter")

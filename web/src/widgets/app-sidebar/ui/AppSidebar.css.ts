@@ -32,7 +32,7 @@ export const root = style({
 export const brand = style({
   fontSize: vars.font.sizeLg,
   fontWeight: vars.font.weightBold,
-  color: vars.color.primary,
+  color: vars.color.text,
   textDecoration: "none",
 });
 
@@ -55,9 +55,9 @@ export const navLink = style({
   color: vars.color.text,
   textDecoration: "none",
   selectors: {
-    "&:hover": { backgroundColor: vars.color.background },
+    "&:hover": { backgroundColor: vars.color.field },
     "&[aria-current='page']": {
-      backgroundColor: vars.color.background,
+      backgroundColor: vars.color.field,
       color: vars.color.primary,
       fontWeight: vars.font.weightBold,
     },

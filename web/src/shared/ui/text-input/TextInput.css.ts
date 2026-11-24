@@ -7,11 +7,12 @@ export const control = style({
   padding: `${vars.space["2"]} ${vars.space["3"]}`,
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.md,
-  backgroundColor: vars.color.surface,
+  backgroundColor: vars.color.field,
   color: vars.color.text,
   selectors: {
     "&:focus-visible": { outline: `3px solid ${vars.color.focus}`, outlineOffset: "1px" },
     "&[aria-invalid='true']": { borderColor: vars.color.danger },
-    "&:disabled": { opacity: 0.6 },
+    "&:hover:not(:disabled)": { borderColor: vars.color.textMuted },
+    "&:disabled": { opacity: 0.4 },
   },
 });

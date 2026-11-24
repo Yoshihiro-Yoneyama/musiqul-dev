@@ -12,33 +12,35 @@ export const button = recipe({
     fontWeight: vars.font.weightBold,
     textDecoration: "none",
     cursor: "pointer",
-    transition: "background-color 0.15s, border-color 0.15s",
+    transition: "opacity 0.2s",
     selectors: {
+      // 旧実装と同じく、状態は不透明度で表す（Hover 70% / Disabled 40%）
+      "&:hover:not(:disabled)": { opacity: 0.7 },
       "&:focus-visible": { outline: `3px solid ${vars.color.focus}`, outlineOffset: "2px" },
-      "&:disabled, &[aria-disabled='true']": { opacity: 0.55, cursor: "not-allowed" },
+      "&:disabled, &[aria-disabled='true']": { opacity: 0.4, cursor: "not-allowed" },
     },
   },
   variants: {
     variant: {
+      /** グラデーションで塗りつぶしたボタン */
       primary: {
-        backgroundColor: vars.color.primary,
+        background: vars.gradient.brand,
         color: vars.color.onPrimary,
-        selectors: { "&:hover:not(:disabled)": { backgroundColor: vars.color.primaryHover } },
+        borderRadius: "9999px",
       },
+      /** 枠線だけグラデーションのボタン */
       secondary: {
-        backgroundColor: vars.color.surface,
+        background: `linear-gradient(${vars.color.field}, ${vars.color.field}) padding-box, ${vars.gradient.brand} border-box`,
         color: vars.color.text,
-        borderColor: vars.color.border,
-        selectors: { "&:hover:not(:disabled)": { borderColor: vars.color.textMuted } },
+        borderRadius: "9999px",
       },
       ghost: {
         backgroundColor: "transparent",
         color: vars.color.textMuted,
-        selectors: { "&:hover:not(:disabled)": { color: vars.color.text } },
       },
     },
     size: {
-      md: { padding: `${vars.space["2"]} ${vars.space["4"]}`, fontSize: vars.font.sizeMd },
+      md: { padding: `${vars.space["3"]} ${vars.space["6"]}`, fontSize: vars.font.sizeMd },
       sm: { padding: `${vars.space["1"]} ${vars.space["3"]}`, fontSize: vars.font.sizeSm },
     },
     fullWidth: {

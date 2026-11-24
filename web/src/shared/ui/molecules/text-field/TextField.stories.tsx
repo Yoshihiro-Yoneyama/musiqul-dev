@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs";
 import TextField from "@/shared/ui/molecules/text-field/TextField";
 
 const meta: Meta<typeof TextField> = {

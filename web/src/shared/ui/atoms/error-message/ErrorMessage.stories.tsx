@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/nextjs";
 import ErrorMessage from "@/shared/ui/atoms/error-message/ErrorMessage";
 
 const meta : Meta<typeof ErrorMessage> = {

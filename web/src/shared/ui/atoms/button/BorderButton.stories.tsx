@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/nextjs';
 import BorderButton from '@/shared/ui/atoms/button/BorderButton';
 
 const meta : Meta<typeof BorderButton> = {

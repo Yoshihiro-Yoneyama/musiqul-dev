@@ -1,7 +1,7 @@
 import { request } from "@/shared/api";
 import type { NewRecruitment } from "../model/recruitment";
 
-/** POST /recruitments のリクエスト（API の CreateRecruitCommandRequest） */
+/** POST /api/recruitments のリクエスト（API の CreateRecruitCommandRequest） */
 type CreateRecruitmentRequest = {
   name: string;
   songTitle: string;
@@ -25,6 +25,6 @@ export async function createRecruitment(recruitment: NewRecruitment): Promise<{ 
     ) as Record<string, number>,
     deadline: recruitment.deadline.toISOString(),
   };
-  const response = await request<CreateRecruitmentResponse>("/recruitments", { method: "POST", body });
+  const response = await request<CreateRecruitmentResponse>("/api/recruitments", { method: "POST", body });
   return { id: response.id };
 }

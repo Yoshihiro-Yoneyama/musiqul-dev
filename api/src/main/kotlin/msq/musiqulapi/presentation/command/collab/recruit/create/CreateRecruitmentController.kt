@@ -5,15 +5,21 @@ import msq.musiqulapi.application.command.collab.recruit.RecruitCommandService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import java.security.Principal
 import java.time.Instant
 import java.util.*
 
 @RestController
 class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandService) {
   @PostMapping("/recruitments")
-  fun create(@RequestBody request: CreateRecruitCommandRequest): CreateRecruitmentResponse {
+  fun create(
+    @RequestBody request: CreateRecruitCommandRequest,
+    principal: Principal,
+  ): CreateRecruitmentResponse {
+    // 募集のオーナーはクライアントの申告ではなく、ログイン中のプレイヤー
+    // (PlayerAccountAuthenticationManager が principal に player_id を設定している) とする
     val input = RecruitCommandInput(
-      request.owner,
+      UUID.fromString(principal.name),
       request.ownerInstruments.map { r ->
         when (r) {
           CreateRecruitCommandRequest.InstrumentType.VOCAL ->
@@ -89,7 +95,6 @@ class CreateRecruitmentController(val recruitmentCommandService: RecruitCommandS
 }
 
 data class CreateRecruitCommandRequest(
-  val owner: UUID,
   val ownerInstruments: List<InstrumentType>,
   val songTitle: String,
   val artist: String,

@@ -8,6 +8,21 @@
 | [`web/`](web/README.md) | フロントエンド | Next.js 16（App Router）/ React 19 / vanilla-extract | [web/README.md](web/README.md) |
 | [`db/`](db/README.md) | DB のマイグレーションとテストデータ | PostgreSQL 19 / Flyway 13 | [db/README.md](db/README.md) |
 
+## 全体の構成
+
+`make dev` で起動するコンテナと、その間の通信を示します。web（Next.js）は画面を返すだけで、API の呼び出しはブラウザから api へ直接行います。
+
+```mermaid
+flowchart LR
+  B["ブラウザ"] -- "画面 :34963" --> W["web<br/>Next.js"]
+  B -- "API :34962<br/>セッション Cookie + CSRF トークン" --> A["api<br/>Spring Boot"]
+  A -- "jOOQ" --> D[("db<br/>PostgreSQL :34961")]
+  F["flyway<br/>make migrate-up"] -. "マイグレーション" .-> D
+```
+
+- web の proxy は、ログイン時に保存した Cookie の有無だけでログイン済みかどうかを判定します。セッションの検証は api が行います
+- flyway はマイグレーションのときだけ動くコンテナです（`make migrate-up` などで起動）
+
 ## 必要なもの
 
 - Docker（Docker Compose v2）
@@ -24,6 +39,18 @@ make dev        # db / api / web を起動（Ctrl+C で停止。バックグラ�
 ```
 
 jOOQ の生成コード（`api/jooq/generated-src`）は Git で管理していないため、最初に `make db-reset` で生成しないと api がコンパイルできません。
+
+`make db-reset` は次の順に実行します。
+
+```mermaid
+flowchart LR
+  R["db コンテナと<br/>ボリューム db-data を削除"] --> U["db を起動"]
+  U --> M["マイグレーション<br/>（make migrate-up）"]
+  M --> S["テストデータの投入<br/>（make db-seed）"]
+  S --> J["jOOQ のコード生成<br/>（make jooq-generate）"]
+```
+
+> `make db-reset` はボリューム `db-data` を削除するので、ローカルの DB に入っているデータはすべて消えます。残したいデータがあるときは、先に `make db-dump` で保存してください。
 
 起動したら http://localhost:34963 を開き、テスト用のアカウントでログインします。
 

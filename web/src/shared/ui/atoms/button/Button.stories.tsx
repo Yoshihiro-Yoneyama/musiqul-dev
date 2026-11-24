@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/nextjs';
+import {Meta, StoryObj} from '@storybook/nextjs-vite';
 import Button from '@/shared/ui/atoms/button/Button';
 
 const meta : Meta<typeof Button> = {

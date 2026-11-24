@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/nextjs";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 import ModalContent from "@/shared/ui/organisms/modal/ModalContent";
 
 const meta: Meta<typeof ModalContent> = {

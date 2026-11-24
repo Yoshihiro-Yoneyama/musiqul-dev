@@ -1,5 +1,5 @@
 import TextArea from "@/shared/ui/molecules/input-textarea/TextArea";
-import {Meta, StoryObj} from "@storybook/nextjs";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 
 const meta : Meta<typeof TextArea> = {
   title: 'molecules/input-textarea/TextArea',

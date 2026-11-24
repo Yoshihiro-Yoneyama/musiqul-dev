@@ -1,5 +1,5 @@
 import Selector from "@/shared/ui/atoms/selector/Selector";
-import {Meta, StoryObj} from "@storybook/nextjs";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 
 const meta: Meta<typeof Selector> = {
   title: "atoms/selector/Selector",

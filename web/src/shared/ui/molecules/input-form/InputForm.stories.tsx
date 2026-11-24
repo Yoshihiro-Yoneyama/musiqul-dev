@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from "@storybook/nextjs";
+import {Meta, StoryObj} from "@storybook/nextjs-vite";
 import InputForm from "@/shared/ui/molecules/input-form/InputForm";
 
 const meta : Meta<typeof InputForm> = {

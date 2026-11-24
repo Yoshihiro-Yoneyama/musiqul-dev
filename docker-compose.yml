@@ -1,21 +1,30 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:19-alpine
     container_name: db
     restart: unless-stopped
     ports:
       - "34961:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      # PostgreSQL 18 以降の公式イメージは /var/lib/postgresql に 1 つだけマウントする
+      # （データは /var/lib/postgresql/<メジャーバージョン>/docker に置かれる）
+      - db-data:/var/lib/postgresql
     environment:
       POSTGRES_DB: msqdb
       POSTGRES_USER: pgadmin
       POSTGRES_PASSWORD: pgadmin
+    healthcheck:
+      # 初期化中の一時サーバーは TCP を受け付けないため、-h で TCP 経由の応答を確認する
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U pgadmin -d msqdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
   flyway:
-    image: flyway/flyway:10
+    image: flyway/flyway:13
     container_name: flyway
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./db/migration:/flyway/sql
       - ./db/conf:/flyway/conf

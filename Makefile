@@ -1,7 +1,7 @@
 # musiqul-dev Makefile
 # Common development tasks for the musiqul project
 
-.PHONY: help build test start stop clean setup migrate-up migrate-info migrate-clean dev-api dev-web dev lint jooq-generate
+.PHONY: help build test start stop clean setup migrate-up migrate-info migrate-validate migrate-clean db-reset db-dump db-restore dev-api dev-web dev lint jooq-generate
 
 # Default target
 help:
@@ -17,7 +17,11 @@ help:
 	@echo "  dev-web        - Start web development server"
 	@echo "  migrate-up     - Run database migrations"
 	@echo "  migrate-info   - Show migration status"
+	@echo "  migrate-validate - Validate applied migrations"
 	@echo "  migrate-clean  - Clean database"
+	@echo "  db-reset       - Recreate the database volume, run migrations and regenerate JOOQ classes"
+	@echo "  db-dump        - Dump the database to DUMP_FILE (default: msqdb-backup.sql)"
+	@echo "  db-restore     - Restore DUMP_FILE into an empty database"
 	@echo "  jooq-generate  - Generate JOOQ classes from database"
 	@echo "  lint           - Run linting on web project"
 
@@ -79,6 +83,10 @@ migrate-info:
 	@echo "Checking migration status..."
 	docker compose run --rm flyway info
 
+migrate-validate:
+	@echo "Validating migrations..."
+	docker compose run --rm flyway validate
+
 migrate-clean:
 	@echo "Cleaning database..."
 	docker compose run --rm flyway clean
@@ -93,8 +101,20 @@ lint:
 	@echo "Running web linting..."
 	cd web && npm run lint
 
-# Reset database and regenerate JOOQ classes
+# Reset database (recreate the db-data volume), run migrations and regenerate JOOQ classes
 db-reset:
 	docker compose down db -v
-	docker compose up -d db
-	@make jooq-generate
+	docker compose up -d --wait db
+	@$(MAKE) migrate-up
+	@$(MAKE) jooq-generate
+
+# Dump / restore the database (e.g. when upgrading the PostgreSQL major version)
+DUMP_FILE ?= msqdb-backup.sql
+
+db-dump:
+	@echo "Dumping database to $(DUMP_FILE)..."
+	docker compose exec -T db pg_dump -U pgadmin -d msqdb --no-owner > $(DUMP_FILE)
+
+db-restore:
+	@echo "Restoring database from $(DUMP_FILE)..."
+	docker compose exec -T db psql -U pgadmin -d msqdb -v ON_ERROR_STOP=1 -q < $(DUMP_FILE)

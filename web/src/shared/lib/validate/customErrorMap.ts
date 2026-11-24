@@ -1,26 +1,27 @@
 import {z} from "zod";
 
-const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+const customErrorMap: z.core.$ZodErrorMap = (issue) => {
   switch (issue.code) {
-    case z.ZodIssueCode.invalid_type:
-      if (issue.received === z.ZodParsedType.undefined) {
+    case "invalid_type":
+      if (issue.input === undefined) {
         return {message: '必須項目です'}
       } else {
         return {message: '値に誤りがあります'}
       }
-    case z.ZodIssueCode.too_big:
+    case "too_big":
       return {message: `${issue.maximum}文字以内で入力してください`}
-    case z.ZodIssueCode.too_small:
-      if (issue.type === 'array') {
+    case "too_small":
+      if (issue.origin === 'array') {
         return  {message: `${issue.minimum}個以上チェックしてください`}
       }
       return {message: `${issue.minimum}文字以上で入力してください`}
   }
-  return { message: ctx.defaultError }
+  // undefined を返すと Zod の既定のエラーメッセージが使われる
+  return undefined
 }
 
 export const  setZodErrorMap = () => {
-  z.setErrorMap(customErrorMap)
+  z.config({customError: customErrorMap})
 }
 
 export default customErrorMap

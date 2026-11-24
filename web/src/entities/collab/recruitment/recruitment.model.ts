@@ -5,10 +5,10 @@ import {validationErrorMessages as messages} from "@/entities/collab/recruitment
 export const recruitmentSchema = z.object({
   owner: z.string(),
   ownerInstruments: z.string().array().min(1, messages.ownerInstruments.minLength),
-  songTitle: z.string({ errorMap: customErrorMap })
+  songTitle: z.string({ error: customErrorMap })
     .max(500, messages.songTitle.maxLength)
     .optional(),
-  artist: z.string({ errorMap: customErrorMap })
+  artist: z.string({ error: customErrorMap })
     .max(100, messages.artist.maxLength)
     .optional(),
   name: z.string()
@@ -19,7 +19,7 @@ export const recruitmentSchema = z.object({
   requiredGenerations: z.string().array(),
   requiredGenders: z.string().array(),
   recruitedInstruments: z.map(z.string(), z.number()),
-  memo: z.string({ errorMap: customErrorMap })
+  memo: z.string({ error: customErrorMap })
     .max(2000, messages.memo.maxLength)
     .optional(),
 })

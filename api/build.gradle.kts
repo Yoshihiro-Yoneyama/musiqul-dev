@@ -8,7 +8,7 @@ plugins {
 
   id("com.diffplug.spotless") version "7.1.0"
   kotlin("jvm") version "2.1.21"
-  kotlin("plugin.spring") version "2.1.21"
+  kotlin("plugin.spring") version "2.4.21"
   java
 }
 

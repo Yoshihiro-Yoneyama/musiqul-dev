@@ -4,7 +4,7 @@ import org.jooq.meta.jaxb.ForcedType
 plugins {
   id("org.springframework.boot") version "4.2.0"
   id("io.spring.dependency-management") version "1.1.7"
-  id("nu.studer.jooq") version "10.1"
+  id("nu.studer.jooq") version "10.2.1"
 
   id("com.diffplug.spotless") version "8.12.0"
   kotlin("jvm") version "2.4.21"
@@ -22,6 +22,12 @@ kotlin {
 repositories {
   mavenCentral()
 }
+
+// jOOQ のランタイムとコード生成で同じバージョンを使う。
+// Spring Boot の BOM (jooq.version) も上書きしないと jooqGenerator の org.jooq:jooq が
+// BOM のバージョンに置き換えられ、generateJooq がバージョン不一致で失敗する
+val jooqVersion = "3.21.10"
+extra["jooq.version"] = jooqVersion
 
 dependencies {
   // Spring Boot 4 では Jackson 3 (groupId: tools.jackson) を使う
@@ -97,7 +103,7 @@ spotless {
 }
 
 jooq {
-  version.set("3.19.19")
+  version.set(jooqVersion)
   configurations {
     create("main") {
       generateSchemaSourceOnCompilation.set(false)

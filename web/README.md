@@ -57,7 +57,7 @@ web/
 5. **`app/`（ルート直下）にはロジックを書かない**：`export { XxxPage as default, metadata } from "@/pages/xxx"` のような再エクスポートだけにする。例外として、`dynamic`・`revalidate`・`runtime` などの Route Segment Config は Next.js がファイルを静的解析して読むため、`app/` の `page.tsx` / `layout.tsx` に直接書く。
 6. **API の仕様は api/（Kotlin）を正とする**：列挙値や文字数の上限は `entities` の model で API のドメインモデルに合わせ、送受信の形式（DTO）は `api` セグメントの中だけで扱う。
 
-1〜4 は Steiger（`npm run lint:fsd`）で検査します。例外は `steiger.config.ts` に理由とともに書きます。
+1〜4 は Steiger（`npm run lint:fsd`）で検査します。例外は `steiger.config.ts` に理由とともに書きます。5 は ESLint（`npm run lint`）の `no-restricted-syntax` で検査します（`eslint.config.mjs`）。
 
 ## 技術
 
